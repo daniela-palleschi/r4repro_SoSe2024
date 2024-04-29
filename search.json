@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "R for Reproducibility",
+    "section": "",
+    "text": "Preface\nThis web-book is the companion to the course ‘Open Science Practices: Implementing a Reproducible Workflow in R’ (and other iterations) given by Daniela Palleschi at the Humboldt-Universität zu Berlin. The tools discussed in this book are specific to the R enviornment, but the concepts are universal and programming language agnostic."
+  },
+  {
+    "objectID": "index.html#aims-of-the-book",
+    "href": "index.html#aims-of-the-book",
+    "title": "R for Reproducibility",
+    "section": "Aims of the book",
+    "text": "Aims of the book\n\nteach students basic concepts of reprodubility and replication in the scope of language research\nintroduce students to create and maintain self-contained analyses projects\nhelp students develop good habits for project management\nteach students how to write up analyses for a paper or thesis\nintroduce students to concepts like version control and containerization"
+  },
+  {
+    "objectID": "index.html#what-you-will-not-learn-in-this-book",
+    "href": "index.html#what-you-will-not-learn-in-this-book",
+    "title": "R for Reproducibility",
+    "section": "What you will not learn in this book",
+    "text": "What you will not learn in this book\n\nhow to analyse data\nhow to fit models\nhow to plot data\nhow to design an experiment"
+  },
+  {
+    "objectID": "index.html#about-this-book",
+    "href": "index.html#about-this-book",
+    "title": "R for Reproducibility",
+    "section": "About this book",
+    "text": "About this book\nThis book was created using a Quarto Book RProject (quarto?). The glossary for each chapter was created using the glossary package (glossary?). The source code for each chapter is viewable by clicking the &lt;&gt; Code button at the top right of the page. The source code for the whole book is also available via GitHub, and is fully reproducible."
+  }
+]
