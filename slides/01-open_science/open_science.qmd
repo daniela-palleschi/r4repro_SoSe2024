@@ -1,0 +1,279 @@
+---
+title: "Open Science"
+subtitle: "What it is and how to do it"
+author: "Daniela Palleschi"
+institute: Humboldt-Universität zu Berlin
+lang: en
+date: 2024-04-16
+format: 
+  revealjs:
+    include-in-header: mathjax.html # for multiple equation hyperrefs
+    code-overflow: wrap
+    theme: [dark]
+    width: 1600
+    height: 900
+    progress: true
+    scrollable: true
+    # smaller: true
+    slide-number: c/t
+    code-link: true
+    # logo: logos/hu_logo.png
+    # css: logo.css
+    incremental: true
+    # number-sections: true
+    toc: false
+    toc-depth: 2
+    toc-title: 'Overview'
+    navigation-mode: linear
+    controls-layout: bottom-right
+    fig-cap-location: top
+    font-size: 0.6em
+    slide-level: 4
+    self-contained: true
+    title-slide-attributes:
+      data-background-image: logos/logos.tif
+      data-background-size: 15%
+      data-background-position: 50% 92%
+    fig-align: center
+    fig-dpi: 300
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, eval = T, echo = F}
+knitr::opts_chunk$set(echo = T, # print chunks?
+                      eval = T, # run chunks?
+                      error = F, # print errors?
+                      warning = F, # print warnings?
+                      message = F, # print messages?
+                      cache = F # cache?; be careful with this!
+                      )
+```
+
+# Learning Objectives {.unnumbered .unlisted}
+
+Today we will learn...
+
+- what Open Science Practices are
+- why they're important
+- which practices you can implement
+
+# Mentimeter {.unnumbered .unlisted}
+
+Go to menti.com and enter 2334 8585, or:
+
+```{r echo = F, fig.env = "figure", out.width="100%", fig.align = "center", set.cap.width=T}
+knitr::include_graphics(here::here("media/mentimeter_qr_code_day1.png"))
+```
+
+# Resources {.unnumbered .unlisted}
+
+- this lecture covers @kathawalla_easing_2021
+- suggests 8 open science practices graduate students can adopt
+  + with three levels: easy, medium, and hard
+
+# What is Open Science?
+
+> “Open science” is an umbrella term used to refer to the concepts of openness, transparency, rigor, reproducibility, replicability, and accumulation of knowledge, which are considered fundamental features of science”
+
+--- @cruwell_seven_2019, p.3
+
+- a movement developed to respond to crisis in scientific research
+  + lack of accessibility, transparency, reproducibility, and replicability of previous research
+- transparency is key to all facets of Open Science
+  + it allows for full evaluation of all stages of science
+  
+- Open Access, software, data, code, materials...
+
+## Systemic problem in science
+
+- the combination of
+  - publication bias
+    + journals favour novel, significant findings
+  - publish or perish
+    + researchers' careers depend on publications
+
+- can/does/did lead to:
+  - HARKing
+    + Hypothesising After Results are Known
+  - p-hacking
+    + (re-)running analyses until a significant effect is found
+  - replication crisis
+    + pervasive failure to replicate previous research
+  
+# Why do Open Science?
+
+- open science is good science
+- it encourages organisation and planning
+  + helpful for future you
+- increases *transparency*
+  + without transparency we cannot inspect evidence ourselves
+  + or ensure the claims match the evidence
+
+- makes our work more robust
+  + so future work stands on solid ground
+
+# How to do Open Science?
+
+- not all-or-nothing
+- there are things I consider the bare minimum
+  + detailed experiment plan, ideally public
+  + openly available materials (e.g., stimuli)
+  + share code and data
+
+- the important thing is to do what you can
+
+# Eight Steps to Open Science
+
+```{r echo = F, fig.env = "figure", out.width="100%", fig.align = "center", set.cap.width=T, fig.cap="Image source: @kathawalla_easing_2021 (all rights reserved)"}
+knitr::include_graphics(here::here("media/Kathawalla_research_cycle.png"))
+```
+
+## Journal Club
+
+- level: Easy
+
+- e.g., [ReproducibiliTea Berlin](https://www.berlin-university-alliance.de/en/commitments/research-quality/quality/faq-trainings/reproducibilitea.html)
+  + discuss topics and share knowledge on Open Science Practices
+
+
+## Project Workflow
+
+- level: Easy
+
+- folder structure
+  + how to sensibly set up your folders
+- contained environments
+  + using RProjects and the `here` package
+- data management
+  + establishing some data storage convention
+- version control
+  + e.g., git, GitHub/GitLab, OSF
+
+## Preprints
+
+- level: Easy
+
+- manuscript version publicly available
+  + prior to peer review
+  + during peer review
+  + after publication
+- allows for a wider audience
+  + earlier feedback
+  + actually *increases* citation count
+- typically found on (psy)arXiv, OSF
+
+## Reproducible Code
+
+- level: Medium
+
+- with open source software (R, RStudio, packages)
+- literate programming
+- dynamic reports with Quarto/Rmarkdown
+- reproducibility goes hand-in-hand with project workflow and data management
+
+- ideally:
+  + avoid GUI (Graphic User Interface with point-and-click, e.g., SPSS)
+  + avoid propreitary software (paid licences, e.g., SPSS, Matlab)
+  + use open software (e.g., R, Python)
+  + use a programming language and include useful comments
+
+## Data sharing
+
+- level: Medium
+
+- publicly sharing your data
+  + including raw data (if possible)
+- allows for reproduction of analyses
+- takes forethought and experience
+- documentation and naming conventions are important
+  + e.g., data dictionaries/codebooks
+
+## Transparent writing
+
+- level: Medium
+
+- transparency regarding
+  + methods/procedure
+  + hypotheses (confirmatory vs. exploratory)
+  + data analyses
+- an experiment plan or lab notebook are key!
+
+## Preregistration
+
+- level: Medium
+
+- a timestamped and (often) public plan of:
+  + research questions
+  + hypotheses
+  + method
+  + analyses
+- clearly state intentions and predictions for *confirmatory* analyses
+  + everything else is exploratory
+- templates available on [AsPredicted](https://aspredicted.org/) and the [OSF](https://help.osf.io/article/158-create-a-preregistration)
+
+## Registered Report
+
+- level: Difficult
+
+- submitting the introduction, methods, analysis plan to a journal before data collection
+  + if accepted: publication regardless of the result
+- a more detailed pre-registration, often with fully written sections
+- much more time consuming before data collection can begin
+  + journal acceptance can take months
+  
+# What we'll cover
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+- Conceptualisation
+  - Project Workflow
+
+- Design
+  - Data sharing
+  - Pre-registration
+
+- Analyses
+  - Reproducible Code
+
+- Reporting
+  - Transparent writing
+
+- Dissemination
+  - Data sharing
+
+- all in the RStudio environment
+:::
+
+::: {.column width="50%"}
+
+```{r echo = F, fig.env = "figure", out.width="60%", fig.align = "center", set.cap.width=T, fig.cap="Image source: @kathawalla_easing_2021 (all rights reserved)"}
+knitr::include_graphics(here::here("media/Kathawalla_research_cycle.png"))
+```
+
+:::
+
+
+::::
+
+# Further resources
+
+- [Open Science Framework (OSF)](https://osf.io/)
+- [OSF Project page for @kathawalla_easing_2021](https://osf.io/w5mbp/wiki/home/)
+
+# Learning objectives 🏁 {.unnumbered .unlisted .uncounted}
+
+Today we learned...
+
+- what Open Science Practices are ✅
+- why they're important ✅
+- which practices you can implement ✅
+
+# References {.unlisted .unnumbered visibility="uncounted"}
+
+::: {#refs custom-style="Bibliography"}
+:::
+
+

@@ -1,0 +1,120 @@
+---
+title: "Open Science Practices: Implementing a Reproducible Analysis Workflow"
+subtitle: "SoSe2024"
+author: "Daniela Palleschi"
+institute: Humboldt-Universität zu Berlin
+lang: en
+date: 2023-04-12
+format: 
+  pdf:
+    output-file: pdf-welcome.pdf
+    toc: true
+    number-sections: false
+    colorlinks: true
+    code-overflow: wrap
+  html:
+    output-file: sheet-welcome.html
+    number-sections: false
+    toc: true
+    code-overflow: wrap
+    code-tools: true
+    self-contained: true
+  revealjs:
+    output-file: slides-welcome.html
+    code-overflow: wrap
+    theme: [dark]
+    width: 1600
+    height: 900
+    progress: true
+    scrollable: true
+    # smaller: true
+    slide-number: c/t
+    code-link: true
+    # logo: logos/hu_logo.png
+    # css: logo.css
+    incremental: true
+    # number-sections: true
+    toc: true
+    toc-depth: 2
+    toc-title: 'Overview'
+    navigation-mode: linear
+    controls-layout: bottom-right
+    fig-cap-location: top
+    font-size: 0.6em
+    slide-level: 4
+    self-contained: true
+    title-slide-attributes: 
+      data-background-image: logos/logos.tif
+      data-background-size: 15%
+      data-background-position: 50% 92%
+editor_options: 
+  chunk_output_type: console
+bibliography: ../../references.bib
+csl: ../../apa.csl
+---
+
+```{r setup, eval = T, echo = F}
+knitr::opts_chunk$set(echo = F, # print chunks?
+                      eval = T, # run chunks?
+                      error = F, # print errors?
+                      warning = F, # print warnings?
+                      message = F, # print messages?
+                      cache = F # cache?; be careful with this!
+                      )
+```
+
+# Welcome!
+
+- the language of instruction is English
+- you will need a laptop in class from May 6h
+- and a recent installation of 
+    + R
+    + RStudio
+    + tinyTex
+    
+# Course Moodle
+
+Course name: Open Science Practices: Implementing a Reproducible Analysis Workflow
+Enrolment Key: r4repro
+
+- course documents are available as HTML slides and PDF
+- a course website will be up and running shortly
+
+## Learning objectives
+
+- learn basic concepts of Open Science in the scope of language research
+  + focus on reproducibile analysis
+- create and maintain self-contained analyses projects
+- develop good habits for project management
+- learn how to transparently write up analyses for a paper or thesis
+- learn about concepts like version control and containerization
+
+## What you will not learn in this book
+
+- how to analyse data
+- how to fit models
+- how to plot data
+- how to design an experiment
+
+- we will not explicitly learn how to do these things, although we will be running simple code to achieve these goals
+  
+## Course credits
+
+- 4 LP
+  + 1LP: participation and readings
+  + 1LP: in-class exercises and preparation
+  + 1LP: 2 in-class quizzes (0.5LP each)
+  + 1LP: a pre-registration (1LP)
+
+# Session Info {.unlisted .unnumbered visibility="uncounted"}
+
+Save your session info at the end of each document. Our results very often depend on the version of R/RStudio/a package we used. This is a great first step towards creating a reproducible workflow!
+
+```{r}
+sessionInfo()
+```
+
+# References {.unlisted .unnumbered visibility="uncounted"}
+
+::: {#refs custom-style="Bibliography"}
+:::

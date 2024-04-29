@@ -1,0 +1,523 @@
+---
+title: "Reproducibility"
+subtitle: "Principles and Practice"
+author: "Daniela Palleschi"
+institute: Humboldt-Universität zu Berlin
+lang: en
+date: 2024-04-30
+format: 
+  pdf:
+    output-file: reproducibility.pdf
+    toc: true
+    colorlinks: true
+    code-overflow: wrap
+    number-sections: true
+  revealjs:
+    output-file: reproducibility_slides.html
+    include-in-header: ../../mathjax.html # for multiple equation hyperrefs
+    code-overflow: wrap
+    theme: [dark]
+    width: 1600
+    height: 900
+    progress: true
+    scrollable: true
+    # smaller: true
+    slide-number: c/t
+    code-link: true
+    # logo: logos/hu_logo.png
+    # css: logo.css
+    incremental: true
+    # number-sections: true
+    toc: false
+    toc-depth: 2
+    toc-title: 'Overview'
+    navigation-mode: linear
+    controls-layout: bottom-right
+    fig-cap-location: top
+    font-size: 0.6em
+    slide-level: 4
+    self-contained: true
+    title-slide-attributes: 
+      data-background-image: logos/logos.tif
+      data-background-size: 15%
+      data-background-position: 50% 92%
+    fig-align: center
+    fig-dpi: 300
+editor_options: 
+  chunk_output_type: console
+bibliography: ../../references.bib
+csl: ../../apa.csl
+---
+
+```{r setup, eval = T, echo = F}
+knitr::opts_chunk$set(echo = T, # print chunks?
+                      eval = T, # run chunks?
+                      error = F, # print errors?
+                      warning = F, # print warnings?
+                      message = F, # print messages?
+                      cache = F # cache?; be careful with this!
+                      )
+```
+
+# Learning Objectives {.unnumbered .unlisted}
+
+Today we will learn about...
+
+-   reproducibility rates in linguistics
+-   FAIR principles
+-   concepts for building a reproducible workflow
+
+# Reproducibility
+
+-   generating the same results with the same data and analysis scripts
+
+    -   seems obvious, but requires organisation and forethought
+
+-   bare minimum: share the code and the data [@laurinavichyute_share_2022]
+
+-   rates of reproducibility vary across fields [@bochynska_reproducible_2023]
+
+    -   open access: 25-65%
+    -   data and analyses sharing: 11-33%
+    -   pre-registrations: 0-3%
+
+-   what constitutes "reproducibility"?
+
+## What should (ideally) be shared?
+
+::: columns
+::: {.column width="50%"}
+-   materials
+    -   protocols
+    -   stimuli
+    -   experiment set-up
+-   documentation
+    -   README
+    -   metadata
+:::
+
+::: {.column width="50%"}
+-   data
+    -   raw
+        -   e.g., text files, audio, video, or images
+    -   processed
+-   analysis code
+    -   pre-processing
+    -   analyses
+:::
+:::
+
+::: columns
+::: {.column width="50%"}
+-   materials are helpful for replication
+    -   but also for inspection of e.g., design
+:::
+
+::: {.column width="50%"}
+-   data and code are necessary for reproducibility
+    -   along with proper documentation of software used
+:::
+:::
+
+## Reproducibility rates in linguistic research {.smaller}
+
+::: columns
+::: {.column width="60%"}
+```{r}
+#| echo: false
+#| out-width: "95%"
+#| fig-align: center
+#| label: fig-bochynska
+#| fig-cap: "Source: @bochynska_reproducible_2023, p. 11 (all rights reserved)"
+magick::image_negate(magick::image_read(here::here("media/bochynska_reproducibility.png")))
+```
+:::
+
+::: {.column width="40%"}
+-   meta-analysis of 519 randomly sampled articles from various linguistic journales
+    -   pre- and post-reproducibility crisis (2008/9, 2018/19) [@bochynska_reproducible_2023]
+    -   differentiated between primary (collected for study) and secondary (pre-existing) data
+-   reported a post-RC increase in shared materials, data, and analyses
+    -   but still low rates of each
+-   higher rates of secondary data sharing, presumably due to publicly available corpora
+-   data shared more often than analyses, pre- and post-RC
+:::
+:::
+
+## Journal of Memory and Language
+
+-   meta-analysis of articles from JML [@laurinavichyute_share_2022]
+    -   before and after an Open Science Policy was introduced in 2019
+
+```{r}
+#| echo: false
+#| out-width: "95%"
+#| fig-align: center
+#| label: fig-laurinavichyute
+#| fig-cap: "Source: @laurinavichyute_share_2022, p. 5 (all rights reserved)"
+magick::image_negate(magick::image_read(here::here("media/laurinavichyute_reproducibility.png")))
+```
+
+-   code and data availability improved
+-   but reproducibility rate ranged from 34-56%, depending on criteria
+-   higher rates compared to field-wide meta-analysis [@bochynska_reproducible_2023]
+
+# FAIR principles {.smaller}
+
+::: {.column width="100%"}
+-   guidelines for sharing digital resources
+-   refers broadly to data, but we'll consider it in terms of analyses
+:::
+
+::: columns
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| out-width: "95%"
+#| fig-align: center
+#| label: fig-FAIR
+#| fig-cap: "Source: [National Library of Medicine](https://www.nlm.nih.gov/oet/ed/cde/tutorial/02-300.html) (all rights reserved)"
+magick::image_negate(magick::image_read(here::here("media/FAIR_nlm_nih.png")))
+```
+:::
+
+::: {.column width="60%"}
+-   findable and accesssible refer to where materials are stored
+    -   in *findable* repositories
+    -   that are *accessible*, i.e., do not require an account
+-   interoperable and reusable emphasise the format of data (and code)
+    -   the importance of future use
+    -   and use beyond your precise computational environment
+-   a great way to test the FAIR principles
+    -   code review!
+    -   i.e., have a colleague try to access your data/run your code
+        -   either via an online repository
+        -   or send them your project folder
+:::
+:::
+
+## Findable {background-image="https://amor.cms.hu-berlin.de/~pallesid/teaching/404_error.png" background-opacity=".2"}
+
+-   refers to data and supplementary materials
+
+-   materials should have a "persistant identifier"
+
+    -   e.g., Digital Object Identifier (DOI) for scholarly articles
+
+-   a digital, long-term storage of data
+
+    -   *not* on a personal or professional website
+    -   GitHub files don't typically have sufficient metadata
+    -   ideally: OSF, Zenodo or some other repository
+
+-   in recent papers, an OSF link is typically provided
+
+-   also: *discoverable*
+
+    -   e.g., in data-specific search engines (Google's Dataset search)
+
+## Accessible {background-image="https://amor.cms.hu-berlin.de/~pallesid/teaching/paywalled-research-screenshot.png" background-opacity=".2"}
+
+-   data (and code) should be
+    -   machine- and human-readable
+    -   available on a trusted repository, e.g., the OSF
+    -   Open Access
+        -   not behind a paywall
+        -   nor require a login
+
+## Interoperable
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+-   data (and code) should
+    -   not dependent on an operating system
+    -   nor entirely on software/package versions
+-   easiest work around:
+    -   document your software versions
+    -   this doesn't automatically facilitate interoperability
+    -   but may help pinpoint where problems are coming from
+
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| out-width: "50%"
+magick::image_negate(magick::image_read(here::here("media/interoperable.png")))
+```
+:::
+
+::::
+
+## Reusable
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+-   data (and code) should
+    -   be reusable for future research
+-   data format should be generic
+    -   i.e., not tied to a specific program
+    -   for tabular data, I recommend `.csv` format
+-   we can swap with 'reproducible' in the context of analyses
+
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+magick::image_read(here::here("media/recycle.png"))
+```
+:::
+
+::::
+
+## Task: finding data
+
+Go to [datasetsearch.research.google.com/](https://datasetsearch.research.google.com/)
+
+-   do a search for data related to a topic of interest to you
+
+-   what type of information does the search provide?
+
+-   what type of links?
+
+-   do you find analysis code, or just data?
+
+-   do the same search at [osf.io](https://osf.io/)
+
+-   and at [zenodo.org/](https://zenodo.org/)
+
+    -   are there the same amount of hits?
+
+# Data and code availability {.smaller}
+
+::: columns
+::: {.column width="40%"}
+-   "data available upon (reasonable) request"
+    -   generally not true
+-   data was not available in 68% of the most cited psychology studies (2006-2016) [@hardwicke_populating_2018]
+    -   a further 18% were available with restrictions
+    -   only 11% available without restriction
+-   data alone is not sufficient
+    -   'Data Analysis' sections are rarely exhaustive/unambiguous
+    -   very difficult to re-create analyses without code
+    -   e.g., is data trimming explicitly defined?
+        -   this will even affect descriptive statistics
+:::
+
+::: {.column width="60%"}
+```{r}
+#| echo: false
+#| out-width: "75%"
+#| fig-align: center
+#| label: fig-hardwicke
+#| fig-cap: "Source: @hardwicke_populating_2018, p. 6 (all rights reserved)"
+magick::image_negate(magick::image_read(here::here("media/Hardwicke_upon-request.png")))
+```
+:::
+:::
+
+## Data and code $\neq$ Reproducibility
+
+-   even including code does not guarantee reproducibility
+
+-   access to data and code do not mean analyses are reproducible
+
+-   what can go wrong? Examples from @laurinavichyute_share_2022
+
+::: columns
+::: {.column width="50%"}
+1.  Data problems
+    -   inaccessible data
+    -   incomplete data (e.g., 2/3 experiments)
+2.  Code problems
+    -   incomplete code
+    -   error messages
+    -   code rot: outdated syntax or environment
+    -   proprietary software
+:::
+
+::: {.column width="50%"}
+3.  Documentation problems
+    -   data difficult to interpret
+    -   no README file/data dictionary
+    -   unclear folder/file/variable naming convention
+    -   manuscript contradicts code
+4.  Unclear terms of use
+    -   no licence specification
+:::
+:::
+
+## Share the code, not just the data
+
+-   Why?
+    + key details are often missing from 'Methods' sections
+-   suggestions for researchers from @laurinavichyute_share_2022
+
+::: columns
+::: {.column width="50%"}
+1.  Share data in usable form
+    -   with pre-processing code
+2.  Use publicly accessible repositories
+    -   e.g., OSF
+3.  Use non-proprietary data formats
+    -   e.g., not `.xls` files (Excel)
+:::
+
+::: {.column width="50%"}
+4.  Provide documentation
+    -   e.g., README, data dictionaries
+5.  Share code *and* data
+    -   they estimate a 38% increase in reproducibility
+6.  Teach data management and computing skills
+    -   that's what this course is for!
+:::
+:::
+
+# Building a reproducible workflow
+
+-   there are different levels of reproducibility
+    -   the *bare minimum* is sharing the code and data
+    -   *and* including session information:
+        -   which operating system was used
+        -   which software/package versions were used
+-   going bigger:
+    -   project-oriented workflow
+    -   project-specific filepaths
+    -   contained in a single project folder
+-   we will be using RProjects to achieve this
+
+## Project management
+
+-   folder structure
+-   project-relative file paths
+-   appropriate documentation
+    -   e.g., README
+-   it's great to map out your project structure early on
+    -   but it will grow as you go along
+    -   reproducible principles facilitate adapting as it grows
+
+## Literate programming
+
+> Instead of imagining that our main task is to instruct a *computer* what to do, let us concentrate rather on explaining to *human beings* what we want a computer to do.
+
+--- @Knuth_literate_1984, p. 97
+
+::: columns
+::: {.column width="100%"}
+-   originally used to refer to writing programs
+-   but also applies to analysis code
+    -   especially if we're aiming for reproducibility
+:::
+
+::: {.column width="50%"}
+-   main concepts:
+
+    -   code is linear [this pre-dates @Knuth_literate_1984]
+    -   informative but concise commenting
+:::
+
+::: {.column width="50%"}
+-   main benefits:
+
+    -   facilitates maintenance
+    -   helpful for future-you, collaborators, etc.
+:::
+:::
+
+## Documentation
+
+-   metadata
+
+    -   project README
+    -   codebook/data dictionary
+
+-   README should contain
+
+    -   a project description
+    -   relevant links
+    -   description of folder structure
+
+-   can be updated as the project develops
+
+-   README.md files in GitHub/Lab are automatically used as a project description
+
+    -   `.md` is a plaintext document
+    -   uses markdown syntax
+
+## Version control
+
+-   git: local tracking
+-   useful for the analysis and writing phases
+    -   but can be tricky for collaboration
+-   GitHub/GitLab: remote tracking
+    -   store your changes to your local git repository
+    -   then push them to your remote repository
+-   safe guards against local hardware/software issues
+    -   lost or damaged computer or local files
+-   and allows for collaboration or sharing
+
+## Persistant (public) storage
+
+-   GitHub/Lab are sub-optimal
+    -   developer-focused
+    -   typically lack thorough documentation/metadata
+    -   not very user-friendly for non-users
+-   OSF, Zenodo
+    -   Open Science-focused
+    -   can be linked to a GitHub/Lab repository
+    -   facilitate thorough documentation
+    -   user-friendly
+
+## Writing
+
+-   dynamic reports with Markdown syntax
+
+    -   e.g., Rmarkdown, Quarto
+    -   integration of data, code, and prose
+        -   facilitates cross-referencing within document
+        -   integration of citation management tools
+        -   supports LaTeX syntax for example sentences and tables
+
+-   `papaja` package for APA-formatted Rmarkdown documents
+
+-   challenge: collaboration
+
+    -   not all collaborators know these tools
+    -   track changes not currently possible
+    
+
+# Setting up a project
+
+-   next week: hands-on
+-   required installations/recent versions of:
+    -   R
+        -   version `4.4.0`, "Puppy Cup"
+        -   check current version with `R.version`
+        -   download/update: <https://cran.r-project.org/bin/macosx/>
+    -   RStudio
+        -   version `2023.12.1.402`, "Ocean Storm"
+        -   Help \> Check for updates
+        -   new install: <https://posit.co/download/rstudio-desktop/>
+
+# Learning objectives 🏁 {.unnumbered .unlisted .uncounted}
+
+Today we learned...
+
+-   reproducibility rates in linguistics ✅
+-   FAIR principles ✅
+-   concepts for building a reproducible workflow ✅
+
+# References {.unlisted .unnumbered visibility="uncounted"}
+
+---
+nocite: |
+  @prinstein_open_2022
+---
+
+::: {#refs custom-style="Bibliography"}
+:::

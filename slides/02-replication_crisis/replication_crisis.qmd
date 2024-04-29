@@ -1,0 +1,457 @@
+---
+title: "The Replication Crisis"
+subtitle: "And what to do about it"
+author: "Daniela Palleschi"
+institute: Humboldt-Universität zu Berlin
+lang: en
+date: 2024-04-23
+format: 
+  pdf:
+    output-file: replication_crisis.pdf
+    toc: true
+    colorlinks: true
+    code-overflow: wrap
+    number-sections: true
+  revealjs:
+    include-in-header: ../../mathjax.html # for multiple equation hyperrefs
+    code-overflow: wrap
+    theme: [dark]
+    width: 1600
+    height: 900
+    progress: true
+    scrollable: true
+    # smaller: true
+    slide-number: c/t
+    code-link: true
+    # logo: logos/hu_logo.png
+    # css: logo.css
+    incremental: true
+    # number-sections: true
+    toc: false
+    toc-depth: 2
+    toc-title: 'Overview'
+    navigation-mode: linear
+    controls-layout: bottom-right
+    fig-cap-location: top
+    font-size: 0.6em
+    slide-level: 4
+    self-contained: true
+    title-slide-attributes: 
+      data-background-image: logos/logos.tif
+      data-background-size: 15%
+      data-background-position: 50% 92%
+    fig-align: center
+    fig-dpi: 300
+editor_options: 
+  chunk_output_type: console
+bibliography: ../../references.bib
+csl: ../../apa.csl
+---
+
+```{r setup, eval = T, echo = F}
+knitr::opts_chunk$set(echo = T, # print chunks?
+                      eval = T, # run chunks?
+                      error = F, # print errors?
+                      warning = F, # print warnings?
+                      message = F, # print messages?
+                      cache = F # cache?; be careful with this!
+                      )
+```
+
+
+
+
+# Learning Objectives {.unnumbered .unlisted}
+
+Today we will learn about...
+
+- the replication crisis
+- replication in language sciences
+- requirements for replication
+
+# Resources {.unnumbered .unlisted}
+
+- this lecture covers @sonning_replication_2021
+
+- introduction article of a special issue of the Journal *Linguistics*
+  + *The replication crisis: Impications for linguistics*
+- contains several articles on the topic, some of which we'll read later
+
+# Replication crisis
+
+- data-based claims turned out to be less reliable than previously believed
+  + statistical claims could not be replicated with new data
+- large-scale replications brought attention to the issue
+  + e.g., @nieuwland_large-scale_2018; @open_science_collaboration_estimating_2015
+- this has also led to distrust in findings in academia and the public
+
+## Most Published Research Findings are False {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+- the issue became more widespread with @ioannidis_why_2005
+  + defined bias in terms of design, analysis, and presentation factors
+  + focussed on issues with *p*-values and statistical power
+
+- @open_science_collaboration_estimating_2015 ran replications of 100 studies
+  + 36% of replications found significant effects
+  + 47% of original effects fell within 95% CIs of replication effect
+- in essence: fewer significant findings and smaller effects in replications
+
+- how is can this be?
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+#| out-width: "95%"
+#| fig-align: left
+#| label: fig-replication
+#| fig-cap: "Source: @open_science_collaboration_estimating_2015 (all rights reserved)"
+magick::image_negate(magick::image_read(here::here("media/Open_Sci_collab_2015_replication-effects.png")))
+```
+
+:::
+
+::::
+
+## The problem with p-values
+
+- issues relating to reported findings:
+  - misuse of misinterpretation of p-values in Null Hypothesis Significant Testing [NHST\; e.g., @ioannidis_why_2005]
+  - study design
+  - improper use of statistical methods
+    + stemming from inadequate teaching
+  - selective reporting
+- in other words, HARKing and p-hacking (whether consciously done or not)
+
+## Solving the problem
+
+- these could be mitigated with Open Science practices
+  + *transparency* in writing, analyses, planning/hypothesising stages
+  + *reproducibility* of analyses
+  + greater value given to *replication* studies
+  + embracing and addressing *uncertainty* [@vasishth_how_2021]
+- in sum: "conscientious practice" [@sonning_replication_2021, p. 1182]
+
+## The garden of forking paths {background-image="https://amor.cms.hu-berlin.de/~pallesid/teaching/forking_paths.jpeg" background-opacity=.5}
+
+- or 'researcher degrees of freedom' [@simmons_false-positive_2011]
+- the problem: there are many plausible ways to analyse any given data set
+- there are many choices researchers make in:
+  + experimental design
+  + data collection
+  + data preprocessing
+  + data analyses
+  + reporting
+- the path we happen to go down can seem pre-determined [@gelman_statistical_nodate]
+  + but can amount to HARKing, *p*-hacking, fishing
+  
+- the fastest solution: share everything and write transparently
+
+# The current state of quantitative linguistics
+
+- there is a trend towards empirical methods throughout linguistics
+  + we should pay attention to methodological discussions in related fields
+- we also find ourselves in a state of methdological crisis
+
+## Kuhn's structure of scientific revoluations
+
+- Thomas Kuhn's *The Theory of Scientifc Revoluations* (1962)
+  + based on socio-historical observation
+  + the evolution of scientificy theory is cycical
+  + crisis leads to revolution
+  
+- also applies to research methodology
+  
+###
+
+::: {.content-visible when-format="revealjs"}
+
+:::: columns
+
+::: {.column width="70%"}
+
+Three recurrent phases:
+  
+1. **Normal science**
+    + conventionally accepted set of procedures
+    + researchers work within this paradigm
+    + minor modifications to account for minor anomalies
+2. **Crisis**
+    + widespread recognition of larger challenges to current paradigm
+    + questioning of conventionally accepted theory
+3. **Revolution**
+    + overthrowing of previous norms in favour of a new paradigm
+    + leads to new normal science
+:::
+
+::: {.column width="30%"}
+```{r eval = T, fig.env = "figure", out.width="100%", fig.align = "center", fig.pos="H", set.cap.width=T, fig.cap="Kuhn's cyclical evolution of scientific theory [Source: @sonning_replication_2021, Figure 1]"}
+#| echo: false
+
+library(magick)
+magick::image_read(here::here("media/Soennig_Werner_2021_Kuhn_Figure1.png"))
+```
+:::
+::::
+
+:::
+
+::: {.content-hidden when-format="revealjs"}
+Three recurrent phases:
+  
+1. **normal science**
+    + little controversy over theoretical underpinnings
+    + researchers work on small problems within a theory
+2. **crisis**
+    + contradictions between theory and evidence
+    + questioning of conventionally accepted theory
+3. **revolution**
+    + overthrowing of previous norms in favour of a new paradigm
+    + leads to new normal science
+
+```{r eval = T, fig.env = "figure", out.width="50%", fig.align = "center", fig.pos="H", set.cap.width=T, fig.cap="Download GitHub repositiory"}
+#| echo: false
+
+library(magick)
+magick::image_read(here::here("media/Soennig_Werner_2021_Kuhn_Figure1.png"))
+```
+:::
+
+## Previous cycles of statistical analyses
+
+- proprietary, point-and-click software (e.g., SPSS)
+  + move to open source programming languages (e.g., R, Python, Julia)
+
+- ANOVAs
+  + move to linear regression
+  + then linear mixed models
+    + random-intercepts only models
+    + maximal models
+    + parsimonious models
+- now a trend towards Bayesian regression
+
+## What do statisticians say?
+
+- @wasserstein_moving_2019: list of Do's and Don't from statisticians
+  + *Don't* base conclusions on *p*-values
+  + *Do* think about ATOM: Accept uncertainty, be Thoughtful, Open, and Modest
+- @wasserstein_asa_2016: the American Statistical Association's statement on *p*-values
+  + *p*-values are often misused and misinterpreted
+  + good statistical practice is part of good scientific practice
+    + as such, relies on good study design and conduct
+    + interpretation in context
+    + complete and transparent reporting
+
+# Overwhelmed? {background-image="https://amor.cms.hu-berlin.de/~pallesid/teaching/oprah_overwhelmed.jpeg" background-opacity=.5}
+
+- we're in a state of crisis with a wealth of possible statistical paths
+  + but no current "gold standard"
+- this can lead to anxiety among researchers
+  + which analysis should I run? am I doing it correctly?
+- just keep in mind ATOM
+  + strive for honesty, not perfection
+
+# Revolution
+
+:::: {.columns}
+
+::: {.column width="60%"}
+- methodological anxiety stems from shifting sands, but leads to revolution
+- revolution usually comes from young newcomers
+  + resistance to change usually comes those with more invested in the prior ways
+- the good news: the revolution is underway
+  + leads to an increase in resources and courses on e.g., multi-level models
+
+- one suggested reform: Open Science!
+:::
+
+::: {.column width="40%"}
+
+```{r}
+#| echo: false
+#| out-width: "95%"
+magick::image_negate(magick::image_read(here::here("media", "revolution.jpeg")))
+```
+
+:::
+
+::::
+
+## The old vs. the new {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+#| out-width: "95%"
+#| fig-align: center
+#| label: fig-soennig_table1
+#| fig-cap: "Source: @sonning_replication_2021"
+magick::image_negate(magick::image_read(here::here("media", "soennig_werner_2021_table1.png")))
+```
+
+:::
+
+::: {.column width="50%"}
+
+- changes refer to not only statistical analyses
+  + but also emphasise transparency
+- ideally, we (as a field) would up our analysis game
+  + but a good first step is moving towards Open Science
+  + share data, code
+  + transparently map out your route in the 'garden of forking paths'
+- these are steps we'll cover in this course
+  + pre-registration
+  + data and code sharing
+  + reproducible workflow
+  + transparent writing
+
+:::
+
+::::
+
+# Simple fixes {background-image="https://amor.cms.hu-berlin.de/~pallesid/teaching/tools.jpeg" background-opacity=.5}
+
+- planning and design
+  + large sample sizes
+  + establish pre-processing/analysis steps a priori
+- methodologically
+  + select variables based on theory and research questions
+  + model non-independence of data points (mixed models)
+  + move towards estimation and away from arbitrary significance thresholds
+- writing
+  + be transparent about choices made
+  
+## Words of comfort
+
+> Less experienced scholars must not fear methodological attacks on their analyses, which are instead seen as informing interim interpretations that may require future modification.
+
+--- @sonning_replication_2021, p. 1199
+
+- in some sub-fields linear mixed models are still not considered the standard
+  + so you're well situated despite the doom around *p*-values
+- moving from frequentist (NHST) framework to the Bayesian framework is relatively painless
+  + in this class we will run a LMM with `lme4` (Frequentist) and with `brms` (Bayesian)
+  
+# Running replications: what to replicate
+
+:::: {.columns}
+
+::: {.column width="50%"}
+- what makes a study 'worth' replicating? 
+  + suggestions from @isager_deciding_nodate:
+    
+  1. value/interest of the topic
+  2. uncertainty about the claim
+  3. quality of proposed replication
+      + or ability to reduce uncertainty
+  4. costs and feasibility
+
+:::
+
+::: {.column width="50%"}
+- what makes a replication study 'worthy' for publication?
+  + theoretical impact of the replicated finding
+  + statistical power of the replication
+:::
+::::
+
+## Replication value
+
+- replication value (RV): "the expected utility of a finding before replication" [@isager_deciding_nodate, p. 6]
+  + (scientific) value of the research claim
+    + importance to the field, to policy, health etc.
+  + the uncertainty of our knowledge about the claim
+    + validity of study design, statistical power, bias, etc.
+
+- replication aims to reduce uncertainty
+  + which also increases utility of the claim
+  
+### Quantifying RV
+
+- how to quantify *value* and *uncertainty*?
+
+- @isager_replication_2021 suggest using...
+  - average yearly citation count to estimate *value*
+    + the more citations, the higher the impact the original study had
+  - and sample size to estimate *uncertainty* ($\frac{1}{\sqrt{n}}$)
+    + the higher the sample size, the more precise the estimate
+    + the lower the sample size, the greater the uncertainty
+    + i.e., $n$ is inversely correlated with *uncertainty*
+
+## $RV_{Cn}$
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+```{r}
+#| echo: false
+#| out-width: "95%"
+#| fig-align: center
+#| label: fig-RVcn
+#| fig-cap: "Source: @isager_replication_2021, p. 25 (all rights reserved)"
+magick::image_negate(magick::image_read(here::here("media/Isager_2021_RVcn.png")))
+```
+
+:::
+
+::: {.column width="40%"}
+
+@isager_replication_2021: 
+
+$$
+RV_{Cn} = value \ x \ uncertainty
+$$
+
+:::
+
+::::
+
+# Student replications {.smaller}
+
+> It is peculiar that undergraduate students can be taught about the perils of underpowered studies in formal statistical instruction and simultaneously be required to perform research that is almost inevitably underpowered
+
+--- @quintana_replication_2021, p. 1117
+
+- a possible solution: student thesis replications
+  + hands-on experience in open science practices
+  + e.g., cumulative replication studies run by multiple groups
+  
+- some resources for students interested in replications
+  + Student Theses Replication Network Linguistics [(STReNeL)](https://blog.junge-sprachwissenschaft.de/2023/01/16/strenel.html)
+  + Collaborative REplications and Education Project [(CREP)](https://osf.io/wfc6u/)
+  + Framework for Open and Reproducible Research Training [(FORRT)](https://forrt.org/)
+  + German Reproducibility Network [(DERN)](https://reproducibilitynetwork.de/)
+
+# Exercise
+
+- Moodle: Quiz 'Kobrok & Roettger (2022)'
+  + scan the article to answer the questions
+  + this is not graded
+
+# Learning objectives 🏁 {.unnumbered .unlisted .uncounted}
+
+Today we learned...
+
+- the replication crisis ✅
+- replication in language sciences ✅
+- requirements for replication ✅
+
+# Important terms {.unnumbered .smaller .uncounted}
+
+
+# References {.unlisted .unnumbered visibility="uncounted"}
+
+::: {#refs custom-style="Bibliography"}
+:::
+
+
