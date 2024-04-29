@@ -6,13 +6,21 @@ institute: Humboldt-Universität zu Berlin
 lang: en
 date: 2024-04-23
 format: 
-  pdf:
-    output-file: replication_crisis.pdf
+  html:
+    output-file: replication-crisis.html
+    number-sections: false
     toc: true
+    code-overflow: wrap
+    code-tools: true
+    self-contained: true
+  pdf:
+    output-file: replication-crisis.pdf
+    toc: true
+    number-sections: false
     colorlinks: true
     code-overflow: wrap
-    number-sections: true
   revealjs:
+    output-file: replication-crisis_slides.html
     include-in-header: ../../mathjax.html # for multiple equation hyperrefs
     code-overflow: wrap
     theme: [dark]

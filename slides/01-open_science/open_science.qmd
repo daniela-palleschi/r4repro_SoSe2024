@@ -6,8 +6,22 @@ institute: Humboldt-Universität zu Berlin
 lang: en
 date: 2024-04-16
 format: 
+  html:
+    output-file: open-science.html
+    number-sections: false
+    toc: true
+    code-overflow: wrap
+    code-tools: true
+    self-contained: true
+  pdf:
+    output-file: open-science.pdf
+    toc: true
+    number-sections: false
+    colorlinks: true
+    code-overflow: wrap
   revealjs:
-    include-in-header: mathjax.html # for multiple equation hyperrefs
+    output-file: open-science_slides.html
+    include-in-header: ../../mathjax.html # for multiple equation hyperrefs
     code-overflow: wrap
     theme: [dark]
     width: 1600
@@ -30,7 +44,7 @@ format:
     font-size: 0.6em
     slide-level: 4
     self-contained: true
-    title-slide-attributes:
+    title-slide-attributes: 
       data-background-image: logos/logos.tif
       data-background-size: 15%
       data-background-position: 50% 92%

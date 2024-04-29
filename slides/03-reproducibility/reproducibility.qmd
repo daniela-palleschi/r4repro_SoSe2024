@@ -6,12 +6,19 @@ institute: Humboldt-Universität zu Berlin
 lang: en
 date: 2024-04-30
 format: 
+  html:
+    output-file: reproducibility.html
+    number-sections: false
+    toc: true
+    code-overflow: wrap
+    code-tools: true
+    self-contained: true
   pdf:
     output-file: reproducibility.pdf
     toc: true
+    number-sections: false
     colorlinks: true
     code-overflow: wrap
-    number-sections: true
   revealjs:
     output-file: reproducibility_slides.html
     include-in-header: ../../mathjax.html # for multiple equation hyperrefs

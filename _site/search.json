@@ -1,0 +1,534 @@
+[
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis.html",
+    "href": "slides/02-replication_crisis/replication-crisis.html",
+    "title": "The Replication Crisis",
+    "section": "",
+    "text": "Today we will learn about…\n\nthe replication crisis\nreplication in language sciences\nrequirements for replication"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis.html#most-published-research-findings-are-false",
+    "href": "slides/02-replication_crisis/replication-crisis.html#most-published-research-findings-are-false",
+    "title": "The Replication Crisis",
+    "section": "Most Published Research Findings are False",
+    "text": "Most Published Research Findings are False\n\n\n\nthe issue became more widespread with Ioannidis (2005)\n\ndefined bias in terms of design, analysis, and presentation factors\nfocussed on issues with p-values and statistical power\n\nOpen Science Collaboration (2015) ran replications of 100 studies\n\n36% of replications found significant effects\n47% of original effects fell within 95% CIs of replication effect\n\nin essence: fewer significant findings and smaller effects in replications\nhow is can this be?\n\n\n\n\n\n\n\nFigure 1: Source: Open Science Collaboration (2015) (all rights reserved)"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis.html#the-problem-with-p-values",
+    "href": "slides/02-replication_crisis/replication-crisis.html#the-problem-with-p-values",
+    "title": "The Replication Crisis",
+    "section": "The problem with p-values",
+    "text": "The problem with p-values\n\nissues relating to reported findings:\n\nmisuse of misinterpretation of p-values in Null Hypothesis Significant Testing (NHST; e.g., Ioannidis, 2005)\nstudy design\nimproper use of statistical methods\n\nstemming from inadequate teaching\n\nselective reporting\n\nin other words, HARKing and p-hacking (whether consciously done or not)"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis.html#solving-the-problem",
+    "href": "slides/02-replication_crisis/replication-crisis.html#solving-the-problem",
+    "title": "The Replication Crisis",
+    "section": "Solving the problem",
+    "text": "Solving the problem\n\nthese could be mitigated with Open Science practices\n\ntransparency in writing, analyses, planning/hypothesising stages\nreproducibility of analyses\ngreater value given to replication studies\nembracing and addressing uncertainty (Vasishth & Gelman, 2021)\n\nin sum: “conscientious practice” (Sönning & Werner, 2021, p. 1182)"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis.html#the-garden-of-forking-paths",
+    "href": "slides/02-replication_crisis/replication-crisis.html#the-garden-of-forking-paths",
+    "title": "The Replication Crisis",
+    "section": "The garden of forking paths",
+    "text": "The garden of forking paths\n\nor ‘researcher degrees of freedom’ (Simmons et al., 2011)\nthe problem: there are many plausible ways to analyse any given data set\nthere are many choices researchers make in:\n\nexperimental design\ndata collection\ndata preprocessing\ndata analyses\nreporting\n\nthe path we happen to go down can seem pre-determined (Gelman & Loken, 2014)\n\nbut can amount to HARKing, p-hacking, fishing\n\nthe fastest solution: share everything and write transparently"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis.html#kuhns-structure-of-scientific-revoluations",
+    "href": "slides/02-replication_crisis/replication-crisis.html#kuhns-structure-of-scientific-revoluations",
+    "title": "The Replication Crisis",
+    "section": "Kuhn’s structure of scientific revoluations",
+    "text": "Kuhn’s structure of scientific revoluations\n\nThomas Kuhn’s The Theory of Scientifc Revoluations (1962)\n\nbased on socio-historical observation\nthe evolution of scientificy theory is cycical\ncrisis leads to revolution\n\nalso applies to research methodology\n\n\n\nThree recurrent phases:\n\nnormal science\n\nlittle controversy over theoretical underpinnings\nresearchers work on small problems within a theory\n\ncrisis\n\ncontradictions between theory and evidence\nquestioning of conventionally accepted theory\n\nrevolution\n\noverthrowing of previous norms in favour of a new paradigm\nleads to new normal science\n\n\n\n\n\n\n\nDownload GitHub repositiory"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis.html#previous-cycles-of-statistical-analyses",
+    "href": "slides/02-replication_crisis/replication-crisis.html#previous-cycles-of-statistical-analyses",
+    "title": "The Replication Crisis",
+    "section": "Previous cycles of statistical analyses",
+    "text": "Previous cycles of statistical analyses\n\nproprietary, point-and-click software (e.g., SPSS)\n\nmove to open source programming languages (e.g., R, Python, Julia)\n\nANOVAs\n\nmove to linear regression\nthen linear mixed models\n\nrandom-intercepts only models\nmaximal models\nparsimonious models\n\n\nnow a trend towards Bayesian regression"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis.html#what-do-statisticians-say",
+    "href": "slides/02-replication_crisis/replication-crisis.html#what-do-statisticians-say",
+    "title": "The Replication Crisis",
+    "section": "What do statisticians say?",
+    "text": "What do statisticians say?\n\nWasserstein et al. (2019): list of Do’s and Don’t from statisticians\n\nDon’t base conclusions on p-values\nDo think about ATOM: Accept uncertainty, be Thoughtful, Open, and Modest\n\nWasserstein & Lazar (2016): the American Statistical Association’s statement on p-values\n\np-values are often misused and misinterpreted\ngood statistical practice is part of good scientific practice\n\nas such, relies on good study design and conduct\ninterpretation in context\ncomplete and transparent reporting"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis.html#the-old-vs.-the-new",
+    "href": "slides/02-replication_crisis/replication-crisis.html#the-old-vs.-the-new",
+    "title": "The Replication Crisis",
+    "section": "The old vs. the new",
+    "text": "The old vs. the new\n\n\n\n\n\n\n\nFigure 2: Source: Sönning & Werner (2021)\n\n\n\n\n\n\nchanges refer to not only statistical analyses\n\nbut also emphasise transparency\n\nideally, we (as a field) would up our analysis game\n\nbut a good first step is moving towards Open Science\nshare data, code\ntransparently map out your route in the ‘garden of forking paths’\n\nthese are steps we’ll cover in this course\n\npre-registration\ndata and code sharing\nreproducible workflow\ntransparent writing"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis.html#words-of-comfort",
+    "href": "slides/02-replication_crisis/replication-crisis.html#words-of-comfort",
+    "title": "The Replication Crisis",
+    "section": "Words of comfort",
+    "text": "Words of comfort\n\nLess experienced scholars must not fear methodological attacks on their analyses, which are instead seen as informing interim interpretations that may require future modification.\n\n— Sönning & Werner (2021), p. 1199\n\nin some sub-fields linear mixed models are still not considered the standard\n\nso you’re well situated despite the doom around p-values\n\nmoving from frequentist (NHST) framework to the Bayesian framework is relatively painless\n\nin this class we will run a LMM with lme4 (Frequentist) and with brms (Bayesian)"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis.html#replication-value",
+    "href": "slides/02-replication_crisis/replication-crisis.html#replication-value",
+    "title": "The Replication Crisis",
+    "section": "Replication value",
+    "text": "Replication value\n\nreplication value (RV): “the expected utility of a finding before replication” (Isager, 2020, p. 6)\n\n(scientific) value of the research claim\n\nimportance to the field, to policy, health etc.\n\nthe uncertainty of our knowledge about the claim\n\nvalidity of study design, statistical power, bias, etc.\n\n\nreplication aims to reduce uncertainty\n\nwhich also increases utility of the claim\n\n\n\nQuantifying RV\n\nhow to quantify value and uncertainty?\nIsager et al. (2021) suggest using…\n\naverage yearly citation count to estimate value\n\nthe more citations, the higher the impact the original study had\n\nand sample size to estimate uncertainty (\\(\\frac{1}{\\sqrt{n}}\\))\n\nthe higher the sample size, the more precise the estimate\nthe lower the sample size, the greater the uncertainty\ni.e., \\(n\\) is inversely correlated with uncertainty"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis.html#rv_cn",
+    "href": "slides/02-replication_crisis/replication-crisis.html#rv_cn",
+    "title": "The Replication Crisis",
+    "section": "\\(RV_{Cn}\\)",
+    "text": "\\(RV_{Cn}\\)\n\n\n\n\n\n\n\nFigure 3: Source: Isager et al. (2021), p. 25 (all rights reserved)\n\n\n\n\n\nIsager et al. (2021):\n\\[\nRV_{Cn} = value \\ x \\ uncertainty\n\\]"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis_slides.html#most-published-research-findings-are-false",
+    "href": "slides/02-replication_crisis/replication-crisis_slides.html#most-published-research-findings-are-false",
+    "title": "The Replication Crisis",
+    "section": "Most Published Research Findings are False",
+    "text": "Most Published Research Findings are False\n\n\n\nthe issue became more widespread with Ioannidis (2005)\n\ndefined bias in terms of design, analysis, and presentation factors\nfocussed on issues with p-values and statistical power\n\nOpen Science Collaboration (2015) ran replications of 100 studies\n\n36% of replications found significant effects\n47% of original effects fell within 95% CIs of replication effect\n\nin essence: fewer significant findings and smaller effects in replications\nhow is can this be?\n\n\n\n\n\n\nFigure 1: Source: Open Science Collaboration (2015) (all rights reserved)"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis_slides.html#the-problem-with-p-values",
+    "href": "slides/02-replication_crisis/replication-crisis_slides.html#the-problem-with-p-values",
+    "title": "The Replication Crisis",
+    "section": "The problem with p-values",
+    "text": "The problem with p-values\n\nissues relating to reported findings:\n\nmisuse of misinterpretation of p-values in Null Hypothesis Significant Testing (NHST; e.g., Ioannidis, 2005)\nstudy design\nimproper use of statistical methods\n\nstemming from inadequate teaching\n\nselective reporting\n\nin other words, HARKing and p-hacking (whether consciously done or not)"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis_slides.html#solving-the-problem",
+    "href": "slides/02-replication_crisis/replication-crisis_slides.html#solving-the-problem",
+    "title": "The Replication Crisis",
+    "section": "Solving the problem",
+    "text": "Solving the problem\n\nthese could be mitigated with Open Science practices\n\ntransparency in writing, analyses, planning/hypothesising stages\nreproducibility of analyses\ngreater value given to replication studies\nembracing and addressing uncertainty (Vasishth & Gelman, 2021)\n\nin sum: “conscientious practice” (Sönning & Werner, 2021, p. 1182)"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis_slides.html#the-garden-of-forking-paths",
+    "href": "slides/02-replication_crisis/replication-crisis_slides.html#the-garden-of-forking-paths",
+    "title": "The Replication Crisis",
+    "section": "The garden of forking paths",
+    "text": "The garden of forking paths\n\nor ‘researcher degrees of freedom’ (Simmons et al., 2011)\nthe problem: there are many plausible ways to analyse any given data set\nthere are many choices researchers make in:\n\nexperimental design\ndata collection\ndata preprocessing\ndata analyses\nreporting\n\nthe path we happen to go down can seem pre-determined (Gelman & Loken, 2014)\n\nbut can amount to HARKing, p-hacking, fishing\n\nthe fastest solution: share everything and write transparently"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis_slides.html#kuhns-structure-of-scientific-revoluations",
+    "href": "slides/02-replication_crisis/replication-crisis_slides.html#kuhns-structure-of-scientific-revoluations",
+    "title": "The Replication Crisis",
+    "section": "Kuhn’s structure of scientific revoluations",
+    "text": "Kuhn’s structure of scientific revoluations\n\nThomas Kuhn’s The Theory of Scientifc Revoluations (1962)\n\nbased on socio-historical observation\nthe evolution of scientificy theory is cycical\ncrisis leads to revolution\n\nalso applies to research methodology"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis_slides.html#previous-cycles-of-statistical-analyses",
+    "href": "slides/02-replication_crisis/replication-crisis_slides.html#previous-cycles-of-statistical-analyses",
+    "title": "The Replication Crisis",
+    "section": "Previous cycles of statistical analyses",
+    "text": "Previous cycles of statistical analyses\n\nproprietary, point-and-click software (e.g., SPSS)\n\nmove to open source programming languages (e.g., R, Python, Julia)\n\nANOVAs\n\nmove to linear regression\nthen linear mixed models\n\nrandom-intercepts only models\nmaximal models\nparsimonious models\n\n\nnow a trend towards Bayesian regression"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis_slides.html#what-do-statisticians-say",
+    "href": "slides/02-replication_crisis/replication-crisis_slides.html#what-do-statisticians-say",
+    "title": "The Replication Crisis",
+    "section": "What do statisticians say?",
+    "text": "What do statisticians say?\n\nWasserstein et al. (2019): list of Do’s and Don’t from statisticians\n\nDon’t base conclusions on p-values\nDo think about ATOM: Accept uncertainty, be Thoughtful, Open, and Modest\n\nWasserstein & Lazar (2016): the American Statistical Association’s statement on p-values\n\np-values are often misused and misinterpreted\ngood statistical practice is part of good scientific practice\n\nas such, relies on good study design and conduct\ninterpretation in context\ncomplete and transparent reporting"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis_slides.html#the-old-vs.-the-new",
+    "href": "slides/02-replication_crisis/replication-crisis_slides.html#the-old-vs.-the-new",
+    "title": "The Replication Crisis",
+    "section": "The old vs. the new",
+    "text": "The old vs. the new\n\n\n\n\n\n\nFigure 2: Source: Sönning & Werner (2021)\n\n\n\n\n\n\n\nchanges refer to not only statistical analyses\n\nbut also emphasise transparency\n\nideally, we (as a field) would up our analysis game\n\nbut a good first step is moving towards Open Science\nshare data, code\ntransparently map out your route in the ‘garden of forking paths’\n\nthese are steps we’ll cover in this course\n\npre-registration\ndata and code sharing\nreproducible workflow\ntransparent writing"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis_slides.html#words-of-comfort",
+    "href": "slides/02-replication_crisis/replication-crisis_slides.html#words-of-comfort",
+    "title": "The Replication Crisis",
+    "section": "Words of comfort",
+    "text": "Words of comfort\n\nLess experienced scholars must not fear methodological attacks on their analyses, which are instead seen as informing interim interpretations that may require future modification.\n\n— Sönning & Werner (2021), p. 1199\n\nin some sub-fields linear mixed models are still not considered the standard\n\nso you’re well situated despite the doom around p-values\n\nmoving from frequentist (NHST) framework to the Bayesian framework is relatively painless\n\nin this class we will run a LMM with lme4 (Frequentist) and with brms (Bayesian)"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis_slides.html#replication-value",
+    "href": "slides/02-replication_crisis/replication-crisis_slides.html#replication-value",
+    "title": "The Replication Crisis",
+    "section": "Replication value",
+    "text": "Replication value\n\nreplication value (RV): “the expected utility of a finding before replication” (Isager, 2020, p. 6)\n\n(scientific) value of the research claim\n\nimportance to the field, to policy, health etc.\n\nthe uncertainty of our knowledge about the claim\n\nvalidity of study design, statistical power, bias, etc.\n\n\nreplication aims to reduce uncertainty\n\nwhich also increases utility of the claim"
+  },
+  {
+    "objectID": "slides/02-replication_crisis/replication-crisis_slides.html#rv_cn",
+    "href": "slides/02-replication_crisis/replication-crisis_slides.html#rv_cn",
+    "title": "The Replication Crisis",
+    "section": "\\(RV_{Cn}\\)",
+    "text": "\\(RV_{Cn}\\)\n\n\n\n\n\n\nFigure 3: Source: Isager et al. (2021), p. 25 (all rights reserved)\n\n\n\n\n\n\nIsager et al. (2021):\n\\[\nRV_{Cn} = value \\ x \\ uncertainty\n\\]"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility.html",
+    "href": "slides/03-reproducibility/reproducibility.html",
+    "title": "Reproducibility",
+    "section": "",
+    "text": "Today we will learn about…\n\nreproducibility rates in linguistics\nFAIR principles\nconcepts for building a reproducible workflow"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility.html#what-should-ideally-be-shared",
+    "href": "slides/03-reproducibility/reproducibility.html#what-should-ideally-be-shared",
+    "title": "Reproducibility",
+    "section": "What should (ideally) be shared?",
+    "text": "What should (ideally) be shared?\n\n\n\nmaterials\n\nprotocols\nstimuli\nexperiment set-up\n\ndocumentation\n\nREADME\nmetadata\n\n\n\n\ndata\n\nraw\n\ne.g., text files, audio, video, or images\n\nprocessed\n\nanalysis code\n\npre-processing\nanalyses\n\n\n\n\n\n\n\nmaterials are helpful for replication\n\nbut also for inspection of e.g., design\n\n\n\n\ndata and code are necessary for reproducibility\n\nalong with proper documentation of software used"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility.html#reproducibility-rates-in-linguistic-research",
+    "href": "slides/03-reproducibility/reproducibility.html#reproducibility-rates-in-linguistic-research",
+    "title": "Reproducibility",
+    "section": "Reproducibility rates in linguistic research",
+    "text": "Reproducibility rates in linguistic research\n\n\n\n\n\n\n\nFigure 1: Source: Bochynska et al. (2023), p. 11 (all rights reserved)\n\n\n\n\n\n\nmeta-analysis of 519 randomly sampled articles from various linguistic journales\n\npre- and post-reproducibility crisis (2008/9, 2018/19) (Bochynska et al., 2023)\ndifferentiated between primary (collected for study) and secondary (pre-existing) data\n\nreported a post-RC increase in shared materials, data, and analyses\n\nbut still low rates of each\n\nhigher rates of secondary data sharing, presumably due to publicly available corpora\ndata shared more often than analyses, pre- and post-RC"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility.html#journal-of-memory-and-language",
+    "href": "slides/03-reproducibility/reproducibility.html#journal-of-memory-and-language",
+    "title": "Reproducibility",
+    "section": "Journal of Memory and Language",
+    "text": "Journal of Memory and Language\n\nmeta-analysis of articles from JML (Laurinavichyute et al., 2022)\n\nbefore and after an Open Science Policy was introduced in 2019\n\n\n\n\n\n\n\nFigure 2: Source: Laurinavichyute et al. (2022), p. 5 (all rights reserved)\n\n\n\n\n\ncode and data availability improved\nbut reproducibility rate ranged from 34-56%, depending on criteria\nhigher rates compared to field-wide meta-analysis (Bochynska et al., 2023)"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility.html#findable",
+    "href": "slides/03-reproducibility/reproducibility.html#findable",
+    "title": "Reproducibility",
+    "section": "Findable",
+    "text": "Findable\n\nrefers to data and supplementary materials\nmaterials should have a “persistant identifier”\n\ne.g., Digital Object Identifier (DOI) for scholarly articles\n\na digital, long-term storage of data\n\nnot on a personal or professional website\nGitHub files don’t typically have sufficient metadata\nideally: OSF, Zenodo or some other repository\n\nin recent papers, an OSF link is typically provided\nalso: discoverable\n\ne.g., in data-specific search engines (Google’s Dataset search)"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility.html#accessible",
+    "href": "slides/03-reproducibility/reproducibility.html#accessible",
+    "title": "Reproducibility",
+    "section": "Accessible",
+    "text": "Accessible\n\ndata (and code) should be\n\nmachine- and human-readable\navailable on a trusted repository, e.g., the OSF\nOpen Access\n\nnot behind a paywall\nnor require a login"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility.html#interoperable",
+    "href": "slides/03-reproducibility/reproducibility.html#interoperable",
+    "title": "Reproducibility",
+    "section": "Interoperable",
+    "text": "Interoperable\n\n\n\ndata (and code) should\n\nnot dependent on an operating system\nnor entirely on software/package versions\n\neasiest work around:\n\ndocument your software versions\nthis doesn’t automatically facilitate interoperability\nbut may help pinpoint where problems are coming from"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility.html#reusable",
+    "href": "slides/03-reproducibility/reproducibility.html#reusable",
+    "title": "Reproducibility",
+    "section": "Reusable",
+    "text": "Reusable\n\n\n\ndata (and code) should\n\nbe reusable for future research\n\ndata format should be generic\n\ni.e., not tied to a specific program\nfor tabular data, I recommend .csv format\n\nwe can swap with ‘reproducible’ in the context of analyses"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility.html#task-finding-data",
+    "href": "slides/03-reproducibility/reproducibility.html#task-finding-data",
+    "title": "Reproducibility",
+    "section": "Task: finding data",
+    "text": "Task: finding data\nGo to datasetsearch.research.google.com/\n\ndo a search for data related to a topic of interest to you\nwhat type of information does the search provide?\nwhat type of links?\ndo you find analysis code, or just data?\ndo the same search at osf.io\nand at zenodo.org/\n\nare there the same amount of hits?"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility.html#data-and-code-neq-reproducibility",
+    "href": "slides/03-reproducibility/reproducibility.html#data-and-code-neq-reproducibility",
+    "title": "Reproducibility",
+    "section": "Data and code \\(\\neq\\) Reproducibility",
+    "text": "Data and code \\(\\neq\\) Reproducibility\n\neven including code does not guarantee reproducibility\naccess to data and code do not mean analyses are reproducible\nwhat can go wrong? Examples from Laurinavichyute et al. (2022)\n\n\n\n\nData problems\n\ninaccessible data\nincomplete data (e.g., 2/3 experiments)\n\nCode problems\n\nincomplete code\nerror messages\ncode rot: outdated syntax or environment\nproprietary software\n\n\n\n\nDocumentation problems\n\ndata difficult to interpret\nno README file/data dictionary\nunclear folder/file/variable naming convention\nmanuscript contradicts code\n\nUnclear terms of use\n\nno licence specification"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility.html#share-the-code-not-just-the-data",
+    "href": "slides/03-reproducibility/reproducibility.html#share-the-code-not-just-the-data",
+    "title": "Reproducibility",
+    "section": "Share the code, not just the data",
+    "text": "Share the code, not just the data\n\nWhy?\n\nkey details are often missing from ‘Methods’ sections\n\nsuggestions for researchers from Laurinavichyute et al. (2022)\n\n\n\n\nShare data in usable form\n\nwith pre-processing code\n\nUse publicly accessible repositories\n\ne.g., OSF\n\nUse non-proprietary data formats\n\ne.g., not .xls files (Excel)\n\n\n\n\nProvide documentation\n\ne.g., README, data dictionaries\n\nShare code and data\n\nthey estimate a 38% increase in reproducibility\n\nTeach data management and computing skills\n\nthat’s what this course is for!"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility.html#project-management",
+    "href": "slides/03-reproducibility/reproducibility.html#project-management",
+    "title": "Reproducibility",
+    "section": "Project management",
+    "text": "Project management\n\nfolder structure\nproject-relative file paths\nappropriate documentation\n\ne.g., README\n\nit’s great to map out your project structure early on\n\nbut it will grow as you go along\nreproducible principles facilitate adapting as it grows"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility.html#literate-programming",
+    "href": "slides/03-reproducibility/reproducibility.html#literate-programming",
+    "title": "Reproducibility",
+    "section": "Literate programming",
+    "text": "Literate programming\n\nInstead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do.\n\n— Knuth (1984), p. 97\n\n\n\noriginally used to refer to writing programs\nbut also applies to analysis code\n\nespecially if we’re aiming for reproducibility\n\n\n\n\nmain concepts:\n\ncode is linear (this pre-dates Knuth, 1984)\ninformative but concise commenting\n\n\n\n\nmain benefits:\n\nfacilitates maintenance\nhelpful for future-you, collaborators, etc."
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility.html#documentation",
+    "href": "slides/03-reproducibility/reproducibility.html#documentation",
+    "title": "Reproducibility",
+    "section": "Documentation",
+    "text": "Documentation\n\nmetadata\n\nproject README\ncodebook/data dictionary\n\nREADME should contain\n\na project description\nrelevant links\ndescription of folder structure\n\ncan be updated as the project develops\nREADME.md files in GitHub/Lab are automatically used as a project description\n\n.md is a plaintext document\nuses markdown syntax"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility.html#version-control",
+    "href": "slides/03-reproducibility/reproducibility.html#version-control",
+    "title": "Reproducibility",
+    "section": "Version control",
+    "text": "Version control\n\ngit: local tracking\nuseful for the analysis and writing phases\n\nbut can be tricky for collaboration\n\nGitHub/GitLab: remote tracking\n\nstore your changes to your local git repository\nthen push them to your remote repository\n\nsafe guards against local hardware/software issues\n\nlost or damaged computer or local files\n\nand allows for collaboration or sharing"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility.html#persistant-public-storage",
+    "href": "slides/03-reproducibility/reproducibility.html#persistant-public-storage",
+    "title": "Reproducibility",
+    "section": "Persistant (public) storage",
+    "text": "Persistant (public) storage\n\nGitHub/Lab are sub-optimal\n\ndeveloper-focused\ntypically lack thorough documentation/metadata\nnot very user-friendly for non-users\n\nOSF, Zenodo\n\nOpen Science-focused\ncan be linked to a GitHub/Lab repository\nfacilitate thorough documentation\nuser-friendly"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility.html#writing",
+    "href": "slides/03-reproducibility/reproducibility.html#writing",
+    "title": "Reproducibility",
+    "section": "Writing",
+    "text": "Writing\n\ndynamic reports with Markdown syntax\n\ne.g., Rmarkdown, Quarto\nintegration of data, code, and prose\n\nfacilitates cross-referencing within document\nintegration of citation management tools\nsupports LaTeX syntax for example sentences and tables\n\n\npapaja package for APA-formatted Rmarkdown documents\nchallenge: collaboration\n\nnot all collaborators know these tools\ntrack changes not currently possible"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#what-should-ideally-be-shared",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#what-should-ideally-be-shared",
+    "title": "Reproducibility",
+    "section": "What should (ideally) be shared?",
+    "text": "What should (ideally) be shared?\n\n\n\nmaterials\n\nprotocols\nstimuli\nexperiment set-up\n\ndocumentation\n\nREADME\nmetadata\n\n\n\n\ndata\n\nraw\n\ne.g., text files, audio, video, or images\n\nprocessed\n\nanalysis code\n\npre-processing\nanalyses\n\n\n\n\n\n\n\nmaterials are helpful for replication\n\nbut also for inspection of e.g., design\n\n\n\n\ndata and code are necessary for reproducibility\n\nalong with proper documentation of software used"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#reproducibility-rates-in-linguistic-research",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#reproducibility-rates-in-linguistic-research",
+    "title": "Reproducibility",
+    "section": "Reproducibility rates in linguistic research",
+    "text": "Reproducibility rates in linguistic research\n\n\n\n\n\n\nFigure 1: Source: Bochynska et al. (2023), p. 11 (all rights reserved)\n\n\n\n\n\n\n\nmeta-analysis of 519 randomly sampled articles from various linguistic journales\n\npre- and post-reproducibility crisis (2008/9, 2018/19) (Bochynska et al., 2023)\ndifferentiated between primary (collected for study) and secondary (pre-existing) data\n\nreported a post-RC increase in shared materials, data, and analyses\n\nbut still low rates of each\n\nhigher rates of secondary data sharing, presumably due to publicly available corpora\ndata shared more often than analyses, pre- and post-RC"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#journal-of-memory-and-language",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#journal-of-memory-and-language",
+    "title": "Reproducibility",
+    "section": "Journal of Memory and Language",
+    "text": "Journal of Memory and Language\n\nmeta-analysis of articles from JML (Laurinavichyute et al., 2022)\n\nbefore and after an Open Science Policy was introduced in 2019\n\n\n\nFigure 2: Source: Laurinavichyute et al. (2022), p. 5 (all rights reserved)\ncode and data availability improved\nbut reproducibility rate ranged from 34-56%, depending on criteria\nhigher rates compared to field-wide meta-analysis (Bochynska et al., 2023)"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#findable",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#findable",
+    "title": "Reproducibility",
+    "section": "Findable",
+    "text": "Findable\n\nrefers to data and supplementary materials\nmaterials should have a “persistant identifier”\n\ne.g., Digital Object Identifier (DOI) for scholarly articles\n\na digital, long-term storage of data\n\nnot on a personal or professional website\nGitHub files don’t typically have sufficient metadata\nideally: OSF, Zenodo or some other repository\n\nin recent papers, an OSF link is typically provided\nalso: discoverable\n\ne.g., in data-specific search engines (Google’s Dataset search)"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#accessible",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#accessible",
+    "title": "Reproducibility",
+    "section": "Accessible",
+    "text": "Accessible\n\ndata (and code) should be\n\nmachine- and human-readable\navailable on a trusted repository, e.g., the OSF\nOpen Access\n\nnot behind a paywall\nnor require a login"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#interoperable",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#interoperable",
+    "title": "Reproducibility",
+    "section": "Interoperable",
+    "text": "Interoperable\n\n\n\ndata (and code) should\n\nnot dependent on an operating system\nnor entirely on software/package versions\n\neasiest work around:\n\ndocument your software versions\nthis doesn’t automatically facilitate interoperability\nbut may help pinpoint where problems are coming from"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#reusable",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#reusable",
+    "title": "Reproducibility",
+    "section": "Reusable",
+    "text": "Reusable\n\n\n\ndata (and code) should\n\nbe reusable for future research\n\ndata format should be generic\n\ni.e., not tied to a specific program\nfor tabular data, I recommend .csv format\n\nwe can swap with ‘reproducible’ in the context of analyses"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#task-finding-data",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#task-finding-data",
+    "title": "Reproducibility",
+    "section": "Task: finding data",
+    "text": "Task: finding data\nGo to datasetsearch.research.google.com/\n\ndo a search for data related to a topic of interest to you\nwhat type of information does the search provide?\nwhat type of links?\ndo you find analysis code, or just data?\ndo the same search at osf.io\nand at zenodo.org/\n\nare there the same amount of hits?"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#data-and-code-neq-reproducibility",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#data-and-code-neq-reproducibility",
+    "title": "Reproducibility",
+    "section": "Data and code \\(\\neq\\) Reproducibility",
+    "text": "Data and code \\(\\neq\\) Reproducibility\n\neven including code does not guarantee reproducibility\naccess to data and code do not mean analyses are reproducible\nwhat can go wrong? Examples from Laurinavichyute et al. (2022)\n\n\n\n\nData problems\n\ninaccessible data\nincomplete data (e.g., 2/3 experiments)\n\nCode problems\n\nincomplete code\nerror messages\ncode rot: outdated syntax or environment\nproprietary software\n\n\n\n\nDocumentation problems\n\ndata difficult to interpret\nno README file/data dictionary\nunclear folder/file/variable naming convention\nmanuscript contradicts code\n\nUnclear terms of use\n\nno licence specification"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#share-the-code-not-just-the-data",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#share-the-code-not-just-the-data",
+    "title": "Reproducibility",
+    "section": "Share the code, not just the data",
+    "text": "Share the code, not just the data\n\nWhy?\n\nkey details are often missing from ‘Methods’ sections\n\nsuggestions for researchers from Laurinavichyute et al. (2022)\n\n\n\n\nShare data in usable form\n\nwith pre-processing code\n\nUse publicly accessible repositories\n\ne.g., OSF\n\nUse non-proprietary data formats\n\ne.g., not .xls files (Excel)\n\n\n\n\nProvide documentation\n\ne.g., README, data dictionaries\n\nShare code and data\n\nthey estimate a 38% increase in reproducibility\n\nTeach data management and computing skills\n\nthat’s what this course is for!"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#project-management",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#project-management",
+    "title": "Reproducibility",
+    "section": "Project management",
+    "text": "Project management\n\nfolder structure\nproject-relative file paths\nappropriate documentation\n\ne.g., README\n\nit’s great to map out your project structure early on\n\nbut it will grow as you go along\nreproducible principles facilitate adapting as it grows"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#literate-programming",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#literate-programming",
+    "title": "Reproducibility",
+    "section": "Literate programming",
+    "text": "Literate programming\n\nInstead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do.\n\n— Knuth (1984), p. 97\n\n\n\noriginally used to refer to writing programs\nbut also applies to analysis code\n\nespecially if we’re aiming for reproducibility\n\n\n\n\nmain concepts:\n\ncode is linear (this pre-dates Knuth, 1984)\ninformative but concise commenting\n\n\n\n\nmain benefits:\n\nfacilitates maintenance\nhelpful for future-you, collaborators, etc."
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#documentation",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#documentation",
+    "title": "Reproducibility",
+    "section": "Documentation",
+    "text": "Documentation\n\nmetadata\n\nproject README\ncodebook/data dictionary\n\nREADME should contain\n\na project description\nrelevant links\ndescription of folder structure\n\ncan be updated as the project develops\nREADME.md files in GitHub/Lab are automatically used as a project description\n\n.md is a plaintext document\nuses markdown syntax"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#version-control",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#version-control",
+    "title": "Reproducibility",
+    "section": "Version control",
+    "text": "Version control\n\ngit: local tracking\nuseful for the analysis and writing phases\n\nbut can be tricky for collaboration\n\nGitHub/GitLab: remote tracking\n\nstore your changes to your local git repository\nthen push them to your remote repository\n\nsafe guards against local hardware/software issues\n\nlost or damaged computer or local files\n\nand allows for collaboration or sharing"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#persistant-public-storage",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#persistant-public-storage",
+    "title": "Reproducibility",
+    "section": "Persistant (public) storage",
+    "text": "Persistant (public) storage\n\nGitHub/Lab are sub-optimal\n\ndeveloper-focused\ntypically lack thorough documentation/metadata\nnot very user-friendly for non-users\n\nOSF, Zenodo\n\nOpen Science-focused\ncan be linked to a GitHub/Lab repository\nfacilitate thorough documentation\nuser-friendly"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#writing",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#writing",
+    "title": "Reproducibility",
+    "section": "Writing",
+    "text": "Writing\n\ndynamic reports with Markdown syntax\n\ne.g., Rmarkdown, Quarto\nintegration of data, code, and prose\n\nfacilitates cross-referencing within document\nintegration of citation management tools\nsupports LaTeX syntax for example sentences and tables\n\n\npapaja package for APA-formatted Rmarkdown documents\nchallenge: collaboration\n\nnot all collaborators know these tools\ntrack changes not currently possible"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "",
+    "section": "",
+    "text": "Code\n\n\n\n\nPreface\nThis web-book contains slides for the 2024 summer semester course ‘Open Science Practices: Implementing a Reproducible Workflow in R’ (and other iterations) given by Daniela Palleschi at the Humboldt-Universität zu Berlin. The tools discussed in this book are specific to the R enviornment, but the concepts are universal and programming language agnostic.\nEach week’s topic is listed in the sidebar in chronological order. Three output formats are available, all with the same content:\n\nHTML page\nPDF of content\nRevealJS slides (optimally formatted)\n\nThe contents were formatted for the slide output. Tables and figures may be too large/small in formats 1 and 2. From the HTML page the other 2 formats can be viewed by clicking on their symbol under ‘Other Formats’ (right sidebar)."
+  },
+  {
+    "objectID": "slides/01-open_science/open-science_slides.html#systemic-problem-in-science",
+    "href": "slides/01-open_science/open-science_slides.html#systemic-problem-in-science",
+    "title": "Open Science",
+    "section": "Systemic problem in science",
+    "text": "Systemic problem in science\n\nthe combination of\n\npublication bias\n\njournals favour novel, significant findings\n\npublish or perish\n\nresearchers’ careers depend on publications\n\n\ncan/does/did lead to:\n\nHARKing\n\nHypothesising After Results are Known\n\np-hacking\n\n(re-)running analyses until a significant effect is found\n\nreplication crisis\n\npervasive failure to replicate previous research"
+  },
+  {
+    "objectID": "slides/01-open_science/open-science_slides.html#journal-club",
+    "href": "slides/01-open_science/open-science_slides.html#journal-club",
+    "title": "Open Science",
+    "section": "Journal Club",
+    "text": "Journal Club\n\nlevel: Easy\ne.g., ReproducibiliTea Berlin\n\ndiscuss topics and share knowledge on Open Science Practices"
+  },
+  {
+    "objectID": "slides/01-open_science/open-science_slides.html#project-workflow",
+    "href": "slides/01-open_science/open-science_slides.html#project-workflow",
+    "title": "Open Science",
+    "section": "Project Workflow",
+    "text": "Project Workflow\n\nlevel: Easy\nfolder structure\n\nhow to sensibly set up your folders\n\ncontained environments\n\nusing RProjects and the here package\n\ndata management\n\nestablishing some data storage convention\n\nversion control\n\ne.g., git, GitHub/GitLab, OSF"
+  },
+  {
+    "objectID": "slides/01-open_science/open-science_slides.html#preprints",
+    "href": "slides/01-open_science/open-science_slides.html#preprints",
+    "title": "Open Science",
+    "section": "Preprints",
+    "text": "Preprints\n\nlevel: Easy\nmanuscript version publicly available\n\nprior to peer review\nduring peer review\nafter publication\n\nallows for a wider audience\n\nearlier feedback\nactually increases citation count\n\ntypically found on (psy)arXiv, OSF"
+  },
+  {
+    "objectID": "slides/01-open_science/open-science_slides.html#reproducible-code",
+    "href": "slides/01-open_science/open-science_slides.html#reproducible-code",
+    "title": "Open Science",
+    "section": "Reproducible Code",
+    "text": "Reproducible Code\n\nlevel: Medium\nwith open source software (R, RStudio, packages)\nliterate programming\ndynamic reports with Quarto/Rmarkdown\nreproducibility goes hand-in-hand with project workflow and data management\nideally:\n\navoid GUI (Graphic User Interface with point-and-click, e.g., SPSS)\navoid propreitary software (paid licences, e.g., SPSS, Matlab)\nuse open software (e.g., R, Python)\nuse a programming language and include useful comments"
+  },
+  {
+    "objectID": "slides/01-open_science/open-science_slides.html#data-sharing",
+    "href": "slides/01-open_science/open-science_slides.html#data-sharing",
+    "title": "Open Science",
+    "section": "Data sharing",
+    "text": "Data sharing\n\nlevel: Medium\npublicly sharing your data\n\nincluding raw data (if possible)\n\nallows for reproduction of analyses\ntakes forethought and experience\ndocumentation and naming conventions are important\n\ne.g., data dictionaries/codebooks"
+  },
+  {
+    "objectID": "slides/01-open_science/open-science_slides.html#transparent-writing",
+    "href": "slides/01-open_science/open-science_slides.html#transparent-writing",
+    "title": "Open Science",
+    "section": "Transparent writing",
+    "text": "Transparent writing\n\nlevel: Medium\ntransparency regarding\n\nmethods/procedure\nhypotheses (confirmatory vs. exploratory)\ndata analyses\n\nan experiment plan or lab notebook are key!"
+  },
+  {
+    "objectID": "slides/01-open_science/open-science_slides.html#preregistration",
+    "href": "slides/01-open_science/open-science_slides.html#preregistration",
+    "title": "Open Science",
+    "section": "Preregistration",
+    "text": "Preregistration\n\nlevel: Medium\na timestamped and (often) public plan of:\n\nresearch questions\nhypotheses\nmethod\nanalyses\n\nclearly state intentions and predictions for confirmatory analyses\n\neverything else is exploratory\n\ntemplates available on AsPredicted and the OSF"
+  },
+  {
+    "objectID": "slides/01-open_science/open-science_slides.html#registered-report",
+    "href": "slides/01-open_science/open-science_slides.html#registered-report",
+    "title": "Open Science",
+    "section": "Registered Report",
+    "text": "Registered Report\n\nlevel: Difficult\nsubmitting the introduction, methods, analysis plan to a journal before data collection\n\nif accepted: publication regardless of the result\n\na more detailed pre-registration, often with fully written sections\nmuch more time consuming before data collection can begin\n\njournal acceptance can take months"
+  },
+  {
+    "objectID": "slides/01-open_science/open-science.html",
+    "href": "slides/01-open_science/open-science.html",
+    "title": "Open Science",
+    "section": "",
+    "text": "Today we will learn…\n\nwhat Open Science Practices are\nwhy they’re important\nwhich practices you can implement"
+  },
+  {
+    "objectID": "slides/01-open_science/open-science.html#systemic-problem-in-science",
+    "href": "slides/01-open_science/open-science.html#systemic-problem-in-science",
+    "title": "Open Science",
+    "section": "Systemic problem in science",
+    "text": "Systemic problem in science\n\nthe combination of\n\npublication bias\n\njournals favour novel, significant findings\n\npublish or perish\n\nresearchers’ careers depend on publications\n\n\ncan/does/did lead to:\n\nHARKing\n\nHypothesising After Results are Known\n\np-hacking\n\n(re-)running analyses until a significant effect is found\n\nreplication crisis\n\npervasive failure to replicate previous research"
+  },
+  {
+    "objectID": "slides/01-open_science/open-science.html#journal-club",
+    "href": "slides/01-open_science/open-science.html#journal-club",
+    "title": "Open Science",
+    "section": "Journal Club",
+    "text": "Journal Club\n\nlevel: Easy\ne.g., ReproducibiliTea Berlin\n\ndiscuss topics and share knowledge on Open Science Practices"
+  },
+  {
+    "objectID": "slides/01-open_science/open-science.html#project-workflow",
+    "href": "slides/01-open_science/open-science.html#project-workflow",
+    "title": "Open Science",
+    "section": "Project Workflow",
+    "text": "Project Workflow\n\nlevel: Easy\nfolder structure\n\nhow to sensibly set up your folders\n\ncontained environments\n\nusing RProjects and the here package\n\ndata management\n\nestablishing some data storage convention\n\nversion control\n\ne.g., git, GitHub/GitLab, OSF"
+  },
+  {
+    "objectID": "slides/01-open_science/open-science.html#preprints",
+    "href": "slides/01-open_science/open-science.html#preprints",
+    "title": "Open Science",
+    "section": "Preprints",
+    "text": "Preprints\n\nlevel: Easy\nmanuscript version publicly available\n\nprior to peer review\nduring peer review\nafter publication\n\nallows for a wider audience\n\nearlier feedback\nactually increases citation count\n\ntypically found on (psy)arXiv, OSF"
+  },
+  {
+    "objectID": "slides/01-open_science/open-science.html#reproducible-code",
+    "href": "slides/01-open_science/open-science.html#reproducible-code",
+    "title": "Open Science",
+    "section": "Reproducible Code",
+    "text": "Reproducible Code\n\nlevel: Medium\nwith open source software (R, RStudio, packages)\nliterate programming\ndynamic reports with Quarto/Rmarkdown\nreproducibility goes hand-in-hand with project workflow and data management\nideally:\n\navoid GUI (Graphic User Interface with point-and-click, e.g., SPSS)\navoid propreitary software (paid licences, e.g., SPSS, Matlab)\nuse open software (e.g., R, Python)\nuse a programming language and include useful comments"
+  },
+  {
+    "objectID": "slides/01-open_science/open-science.html#data-sharing",
+    "href": "slides/01-open_science/open-science.html#data-sharing",
+    "title": "Open Science",
+    "section": "Data sharing",
+    "text": "Data sharing\n\nlevel: Medium\npublicly sharing your data\n\nincluding raw data (if possible)\n\nallows for reproduction of analyses\ntakes forethought and experience\ndocumentation and naming conventions are important\n\ne.g., data dictionaries/codebooks"
+  },
+  {
+    "objectID": "slides/01-open_science/open-science.html#transparent-writing",
+    "href": "slides/01-open_science/open-science.html#transparent-writing",
+    "title": "Open Science",
+    "section": "Transparent writing",
+    "text": "Transparent writing\n\nlevel: Medium\ntransparency regarding\n\nmethods/procedure\nhypotheses (confirmatory vs. exploratory)\ndata analyses\n\nan experiment plan or lab notebook are key!"
+  },
+  {
+    "objectID": "slides/01-open_science/open-science.html#preregistration",
+    "href": "slides/01-open_science/open-science.html#preregistration",
+    "title": "Open Science",
+    "section": "Preregistration",
+    "text": "Preregistration\n\nlevel: Medium\na timestamped and (often) public plan of:\n\nresearch questions\nhypotheses\nmethod\nanalyses\n\nclearly state intentions and predictions for confirmatory analyses\n\neverything else is exploratory\n\ntemplates available on AsPredicted and the OSF"
+  },
+  {
+    "objectID": "slides/01-open_science/open-science.html#registered-report",
+    "href": "slides/01-open_science/open-science.html#registered-report",
+    "title": "Open Science",
+    "section": "Registered Report",
+    "text": "Registered Report\n\nlevel: Difficult\nsubmitting the introduction, methods, analysis plan to a journal before data collection\n\nif accepted: publication regardless of the result\n\na more detailed pre-registration, often with fully written sections\nmuch more time consuming before data collection can begin\n\njournal acceptance can take months"
+  }
+]
