@@ -1,31 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/02-replication_crisis/replication-crisis.html</loc>
-    <lastmod>2024-04-29T19:59:26.481Z</lastmod>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/04-rprojects/rprojects.html</loc>
+    <lastmod>2024-05-06T17:15:16.334Z</lastmod>
   </url>
   <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/02-replication_crisis/replication-crisis_slides.html</loc>
-    <lastmod>2024-04-29T19:59:15.455Z</lastmod>
-  </url>
-  <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/03-reproducibility/reproducibility.html</loc>
-    <lastmod>2024-04-29T19:58:49.477Z</lastmod>
-  </url>
-  <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/03-reproducibility/reproducibility_slides.html</loc>
-    <lastmod>2024-04-29T19:58:33.654Z</lastmod>
-  </url>
-  <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/index.html</loc>
-    <lastmod>2024-04-29T19:58:20.039Z</lastmod>
-  </url>
-  <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/01-open_science/open-science_slides.html</loc>
-    <lastmod>2024-04-29T19:58:56.886Z</lastmod>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/04-rprojects/rprojects_slides.html</loc>
+    <lastmod>2024-05-06T17:15:16.334Z</lastmod>
   </url>
   <url>
     <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/01-open_science/open-science.html</loc>
-    <lastmod>2024-04-29T19:59:04.878Z</lastmod>
+    <lastmod>2024-04-29T19:50:57.898Z</lastmod>
+  </url>
+  <url>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/01-open_science/open-science_slides.html</loc>
+    <lastmod>2024-04-29T19:50:57.898Z</lastmod>
+  </url>
+  <url>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/index.html</loc>
+    <lastmod>2024-04-29T19:55:08.085Z</lastmod>
+  </url>
+  <url>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/session-info.html</loc>
+    <lastmod>2024-05-06T14:17:55.485Z</lastmod>
+  </url>
+  <url>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/03-reproducibility/reproducibility_slides.html</loc>
+    <lastmod>2024-04-29T19:51:08.397Z</lastmod>
+  </url>
+  <url>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/03-reproducibility/reproducibility.html</loc>
+    <lastmod>2024-04-29T19:51:08.397Z</lastmod>
+  </url>
+  <url>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/02-replication_crisis/replication-crisis_slides.html</loc>
+    <lastmod>2024-04-29T19:50:43.285Z</lastmod>
+  </url>
+  <url>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/02-replication_crisis/replication-crisis.html</loc>
+    <lastmod>2024-04-29T19:50:43.285Z</lastmod>
   </url>
 </urlset>
