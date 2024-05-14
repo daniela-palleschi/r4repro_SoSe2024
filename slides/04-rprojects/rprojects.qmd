@@ -198,6 +198,7 @@ knitr::include_graphics(here::here("media", "RStudio_global-options.png"))
 ## Global settings
 
 Change your Global Options so that 
+  
   + **Workspace**: Restore .RData into workspace at startup: NO
   + Save workspace to .RData on exit: Never
 :::

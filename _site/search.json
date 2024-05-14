@@ -59,7 +59,7 @@
     "href": "slides/04-rprojects/rprojects.html#section-1",
     "title": "RProjects",
     "section": "",
-    "text": "Global settings\n\n\n\nChange your Global Options so that + Workspace: Restore .RData into workspace at startup: NO + Save workspace to .RData on exit: Never",
+    "text": "Global settings\n\n\n\nChange your Global Options so that\n\nWorkspace: Restore .RData into workspace at startup: NO\nSave workspace to .RData on exit: Never",
     "crumbs": [
       "D. Palleschi",
       "RProjects"
@@ -186,7 +186,7 @@
     "href": "slides/04-rprojects/rprojects_slides.html#section-1",
     "title": "RProjects",
     "section": "",
-    "text": "Global settings\n\n\nChange your Global Options so that + Workspace: Restore .RData into workspace at startup: NO + Save workspace to .RData on exit: Never"
+    "text": "Global settings\n\n\nChange your Global Options so that\n\nWorkspace: Restore .RData into workspace at startup: NO\nSave workspace to .RData on exit: Never"
   },
   {
     "objectID": "slides/04-rprojects/rprojects_slides.html#spot-the-differences",
@@ -429,7 +429,7 @@
     "href": "session-info.html",
     "title": "Session Info",
     "section": "",
-    "text": "git2r::repository()\n\nLocal:    main /Users/danielapalleschi/Documents/IdSL/Teaching/SoSe24/M.A./r4repro_SoSe2024\nRemote:   main @ origin (git@github.com:daniela-palleschi/r4repro_SoSe2024.git)\nHead:     [feb88a1] 2024-04-29: add mats for site\n\n\n\nsessionInfo()\n\nR version 4.4.0 (2024-04-24)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Ventura 13.2.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Berlin\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nloaded via a namespace (and not attached):\n [1] htmlwidgets_1.6.4 compiler_4.4.0    fastmap_1.1.1     cli_3.6.2        \n [5] htmltools_0.5.8.1 tools_4.4.0       rstudioapi_0.16.0 yaml_2.3.8       \n [9] rmarkdown_2.26    knitr_1.46        git2r_0.33.0      jsonlite_1.8.8   \n[13] xfun_0.43         digest_0.6.35     rlang_1.1.3       renv_1.0.7       \n[17] evaluate_0.23"
+    "text": "git2r::repository()\n\nLocal:    main /Users/danielapalleschi/Documents/IdSL/Teaching/SoSe24/M.A./r4repro_SoSe2024\nRemote:   main @ origin (git@github.com:daniela-palleschi/r4repro_SoSe2024.git)\nHead:     [9da1122] 2024-05-06: update mats for week 4: RProjects\n\n\n\nsessionInfo()\n\nR version 4.4.0 (2024-04-24)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Ventura 13.2.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Berlin\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nloaded via a namespace (and not attached):\n [1] htmlwidgets_1.6.4 compiler_4.4.0    fastmap_1.1.1     cli_3.6.2        \n [5] htmltools_0.5.8.1 tools_4.4.0       rstudioapi_0.16.0 yaml_2.3.8       \n [9] rmarkdown_2.26    knitr_1.46        git2r_0.33.0      jsonlite_1.8.8   \n[13] xfun_0.43         digest_0.6.35     rlang_1.1.3       renv_1.0.7       \n[17] evaluate_0.23"
   },
   {
     "objectID": "slides/03-reproducibility/reproducibility_slides.html#what-should-ideally-be-shared",
@@ -937,6 +937,937 @@
     "crumbs": [
       "D. Palleschi",
       "The Replication Crisis"
+    ]
+  },
+  {
+    "objectID": "slides/05-literate_programming/repro_code.html",
+    "href": "slides/05-literate_programming/repro_code.html",
+    "title": "Writing Reproducible Code",
+    "section": "",
+    "text": "learn what literate programming is\ncreate and render a dynamic report with Quarto\nload data\ninclude a table and figure",
+    "crumbs": [
+      "D. Palleschi",
+      "Writing Reproducible Code"
+    ]
+  },
+  {
+    "objectID": "slides/05-literate_programming/repro_code.html#reproducible-code",
+    "href": "slides/05-literate_programming/repro_code.html#reproducible-code",
+    "title": "Writing Reproducible Code",
+    "section": "",
+    "text": "Regardless of the script type that you are writing (R script, Rmarkdown, Quarto, Python, etc.), - how you write your code is the first step in making it reproducible.\n\nthe first principle is that your code must be linear\n\nthis means code must be written in a linear fashion\nthis is because we typically run a script from top-to-bottom"
+  },
+  {
+    "objectID": "slides/05-literate_programming/repro_code.html#writing-linear-code",
+    "href": "slides/05-literate_programming/repro_code.html#writing-linear-code",
+    "title": "Writing Reproducible Code",
+    "section": "Writing linear code",
+    "text": "Writing linear code\n\nyou need to load a package before you call a function from it\n\nif we’re just working in an R session, before means temporally prior\nwith linear code, before means higher up in the script\n\nsuch pre-requisite code must\n\nbe present in the script\nappear above the first line of code that uses a function from this package\n\nmissing pre-requisite code might not throw an error message\n\nbut might produce output we aren’t expecting\ne.g., forgetting to filter out certain observations\nor forgetting that some observations have been filtered out",
+    "crumbs": [
+      "D. Palleschi",
+      "Writing Reproducible Code"
+    ]
+  },
+  {
+    "objectID": "slides/05-literate_programming/repro_code.html#literate-programming",
+    "href": "slides/05-literate_programming/repro_code.html#literate-programming",
+    "title": "Writing Reproducible Code",
+    "section": "Literate programming",
+    "text": "Literate programming\n\nintroduced in 1992 by Donald Knuth (Knuth, 1984)\nrefers to writing and documenting our code so that humans can understand it\n\nimportant for us: we are (generally) not professional programmers, nor are our peers\n\nwe need to not only know what our code is doing when we look back at it in the future/share it\nthe easiest way: informative comments\n\nthe length and frequency of these comments is your choice",
+    "crumbs": [
+      "D. Palleschi",
+      "Writing Reproducible Code"
+    ]
+  },
+  {
+    "objectID": "slides/05-literate_programming/repro_code.html#example-r-script",
+    "href": "slides/05-literate_programming/repro_code.html#example-r-script",
+    "title": "Writing Reproducible Code",
+    "section": "Example R script",
+    "text": "Example R script\n\n\nExample\n# Analysis script for phoneme paper\n# author: Joe DiMaggio\n# date: Feb. 29, 2024\n# purpose: analyse cleaned dataset\n\n# Set-up ###\n\n# load required packages\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(lme4)\nlibrary(broom.mixed) # tidy model summaries\nlibrary(ggeffects) # model predictions\nlibrary(here) # project-relative file path\n\n# load-in data\ndf_phon &lt;- read_csv(here(\"data\", \"phoneme_tidy_data.csv\"))\n\n# Explore data ###\n\n\n\nbegins with some meta-information about the document, including its purpose\n\naids in knowing which scripts to run in which sequence\n\nthere are three hashtags after some headings (###)\n\nthis is helpful because it structures the outline of the document in RStudio\n\nthe purpose of chunks of code are written above\n\ndescription of specific lines of code are also given",
+    "crumbs": [
+      "D. Palleschi",
+      "Writing Reproducible Code"
+    ]
+  },
+  {
+    "objectID": "slides/05-literate_programming/repro_code.html#session-information",
+    "href": "slides/05-literate_programming/repro_code.html#session-information",
+    "title": "Writing Reproducible Code",
+    "section": "Session Information",
+    "text": "Session Information\n\nR and R package versions are both open source, and are frequently updated\n\nyou might’ve run your code using dplyr version 1.1.0 or later, which introduced the .by per-operation grouping argument\nwhat happens when somebody who has an older version of dplyr tries to run your code?\n\nThey won’t be able to!\n\nthe reverse of this situation is more common:\n\na newer version of a package no longer supports a deprecated function or argument",
+    "crumbs": [
+      "D. Palleschi",
+      "Writing Reproducible Code"
+    ]
+  },
+  {
+    "objectID": "slides/05-literate_programming/repro_code_slides.html#reproducible-code",
+    "href": "slides/05-literate_programming/repro_code_slides.html#reproducible-code",
+    "title": "Writing Reproducible Code",
+    "section": "Reproducible code",
+    "text": "Reproducible code\nRegardless of the script type that you are writing (R script, Rmarkdown, Quarto, Python, etc.), - how you write your code is the first step in making it reproducible.\n\nthe first principle is that your code must be linear\n\nthis means code must be written in a linear fashion\nthis is because we typically run a script from top-to-bottom"
+  },
+  {
+    "objectID": "slides/05-literate_programming/repro_code_slides.html#writing-linear-code",
+    "href": "slides/05-literate_programming/repro_code_slides.html#writing-linear-code",
+    "title": "Writing Reproducible Code",
+    "section": "Writing linear code",
+    "text": "Writing linear code\n\nyou need to load a package before you call a function from it\n\nif we’re just working in an R session, before means temporally prior\nwith linear code, before means higher up in the script\n\nsuch pre-requisite code must\n\nbe present in the script\nappear above the first line of code that uses a function from this package\n\nmissing pre-requisite code might not throw an error message\n\nbut might produce output we aren’t expecting\ne.g., forgetting to filter out certain observations\nor forgetting that some observations have been filtered out"
+  },
+  {
+    "objectID": "slides/05-literate_programming/repro_code_slides.html#literate-programming",
+    "href": "slides/05-literate_programming/repro_code_slides.html#literate-programming",
+    "title": "Writing Reproducible Code",
+    "section": "Literate programming",
+    "text": "Literate programming\n\nintroduced in 1992 by Donald Knuth (Knuth, 1984)\nrefers to writing and documenting our code so that humans can understand it\n\nimportant for us: we are (generally) not professional programmers, nor are our peers\n\nwe need to not only know what our code is doing when we look back at it in the future/share it\nthe easiest way: informative comments\n\nthe length and frequency of these comments is your choice"
+  },
+  {
+    "objectID": "slides/05-literate_programming/repro_code_slides.html#example-r-script",
+    "href": "slides/05-literate_programming/repro_code_slides.html#example-r-script",
+    "title": "Writing Reproducible Code",
+    "section": "Example R script",
+    "text": "Example R script\n\n\nExample\n# Analysis script for phoneme paper\n# author: Joe DiMaggio\n# date: Feb. 29, 2024\n# purpose: analyse cleaned dataset\n\n# Set-up ###\n\n# load required packages\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(lme4)\nlibrary(broom.mixed) # tidy model summaries\nlibrary(ggeffects) # model predictions\nlibrary(here) # project-relative file path\n\n# load-in data\ndf_phon &lt;- read_csv(here(\"data\", \"phoneme_tidy_data.csv\"))\n\n# Explore data ###\n\n\n\nbegins with some meta-information about the document, including its purpose\n\naids in knowing which scripts to run in which sequence\n\nthere are three hashtags after some headings (###)\n\nthis is helpful because it structures the outline of the document in RStudio\n\nthe purpose of chunks of code are written above\n\ndescription of specific lines of code are also given"
+  },
+  {
+    "objectID": "slides/05-literate_programming/repro_code_slides.html#session-information",
+    "href": "slides/05-literate_programming/repro_code_slides.html#session-information",
+    "title": "Writing Reproducible Code",
+    "section": "Session Information",
+    "text": "Session Information\n\nR and R package versions are both open source, and are frequently updated\n\nyou might’ve run your code using dplyr version 1.1.0 or later, which introduced the .by per-operation grouping argument\nwhat happens when somebody who has an older version of dplyr tries to run your code?\n\nThey won’t be able to!\n\nthe reverse of this situation is more common:\n\na newer version of a package no longer supports a deprecated function or argument"
+  },
+  {
+    "objectID": "slides/05-literate_programming/repro_code_slides.html#structure-your-reports",
+    "href": "slides/05-literate_programming/repro_code_slides.html#structure-your-reports",
+    "title": "Writing Reproducible Code",
+    "section": "Structure your reports",
+    "text": "Structure your reports\n\ndescribe the function/purpose at the beginning\ndocument your train of thought and findings throughout the script\n\ne.g., why are you producing this plot, what does it tell you?\n\ngive an overview of the findings/end result at the end\nit’s wise to avoid very long, multi-purpose scripts\n\nrule of thumb: one script per product or purpose\ne.g., data cleaning, exploration, analysis, publiation figures, etc."
+  },
+  {
+    "objectID": "slides/05-literate_programming/repro_code_slides.html#printing-session-info",
+    "href": "slides/05-literate_programming/repro_code_slides.html#printing-session-info",
+    "title": "Writing Reproducible Code",
+    "section": "Printing session info",
+    "text": "Printing session info\n\nso, print your session info at the end of every script!\n\n\nsessionInfo()\n\nR version 4.4.0 (2024-04-24)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Ventura 13.2.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Berlin\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nloaded via a namespace (and not attached):\n [1] htmlwidgets_1.6.4 compiler_4.4.0    fastmap_1.1.1     cli_3.6.2        \n [5] htmltools_0.5.8.1 tools_4.4.0       rstudioapi_0.16.0 yaml_2.3.8       \n [9] rmarkdown_2.26    knitr_1.46        jsonlite_1.8.8    xfun_0.43        \n[13] digest_0.6.35     rlang_1.1.3       renv_1.0.7        evaluate_0.23    \n\n\n\n\n\n\n\n\n\n\nKnuth, D. (1984). Literate programming. The Computer Journal, 27(2), 97–111."
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html",
+    "href": "slides/06-data_cleaning/cleaning.html",
+    "title": "Data cleaning",
+    "section": "",
+    "text": "Today we will…\n\nclean our first dataset\nimplement literate programming principles\nuse helpful tidyverse verbs\ncompare tidyverse to base R\nsave our tidy dataset"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#workflow-bare-minimum",
+    "href": "slides/06-data_cleaning/cleaning.html#workflow-bare-minimum",
+    "title": "Data cleaning",
+    "section": "Workflow bare minimum",
+    "text": "Workflow bare minimum\n\nself-contained project\n\neverything available in one folder\ne.g., RProjects\n\nREADME file\n\na markdown (.md) file\ndescribing the folder/analysis structure\ncan be updated as you build the project\n\n\n\nWinter (2019)"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#rprojects",
+    "href": "slides/06-data_cleaning/cleaning.html#rprojects",
+    "title": "Data cleaning",
+    "section": "RProjects",
+    "text": "RProjects\n\na folder containing\n\nan .RProj file (which opens RStudio)\nall folders/files required for a project\n\nFile &gt; New Project &gt; New Directory &gt; New Project &gt; New Project &gt; Create Project\n\n\nREADME\n\nto create an .md file: File &gt; New File &gt; Markdown File\ncreate informative heading\n\ndescribe project purpose\ndescribe folders/scripts as they currently are\n\nsave/Preview as README.md in the project folder\n\n\n\nhere\n\nhere package\n\nwill always access the project folder\ntry running here() from within a project; what’s the output?\n\n\n\n\nProject folder structure\n\n\n\n\n\nImage source: Winter (2019)"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#checklist",
+    "href": "slides/06-data_cleaning/cleaning.html#checklist",
+    "title": "Data cleaning",
+    "section": "Checklist",
+    "text": "Checklist\n\nRProject\n\n.RProj\nREADME.md\ndata/\nnotes/ (a folder for your qmd files)\n\n\n\nScripts (.qmd/.Rmd)\n\nload libraries at beginning\nsessionInfo() at the end\nchunks run linearly (top-to-bottom)"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#wrangle-defined",
+    "href": "slides/06-data_cleaning/cleaning.html#wrangle-defined",
+    "title": "Data cleaning",
+    "section": "‘wrangle’ defined",
+    "text": "‘wrangle’ defined\n/ˈraŋɡl/\nnoun\na dispute or argument, typically one that is long and complicated. “an insurance wrangle is holding up compensation payments”\nverb\n\nhave a long, complicated dispute or argument. “the bureaucrats continue wrangling over the fine print”\nNORTH AMERICAN round up, herd, or take charge of (livestock). “the horses were wrangled early”"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#wrangler",
+    "href": "slides/06-data_cleaning/cleaning.html#wrangler",
+    "title": "Data cleaning",
+    "section": "Wrangler",
+    "text": "Wrangler\n\n\nJeep Wrangler \n\nWrangler Jeans \n\nCowboys"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#why-tidy-data",
+    "href": "slides/06-data_cleaning/cleaning.html#why-tidy-data",
+    "title": "Data cleaning",
+    "section": "Why tidy data?",
+    "text": "Why tidy data?\n\nhelps future you\n\nand collaborators\n\nfacilitates sharing your data and code (Laurinavichyute et al., 2022)\nin short: facilitates reproducibility!"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#what-does-tidy-data-look-like",
+    "href": "slides/06-data_cleaning/cleaning.html#what-does-tidy-data-look-like",
+    "title": "Data cleaning",
+    "section": "What does tidy data look like?",
+    "text": "What does tidy data look like?\nThree rules (wickham_r_nodate?):\n\nEach variable is a column, each column is a variable\nEach observation is a row, each row is an observation\nEach value is a cell, each cell is a single value\n\n\n\n\n\n\nImage source: (wickham_r_nodate?) (all rights reserved)\n\n\n\n\n\nN.B., how you define a variable or observation is relative to what you want to do\n\nfor now, let’s consider a single trial per participant as an observation"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#section",
+    "href": "slides/06-data_cleaning/cleaning.html#section",
+    "title": "Data cleaning",
+    "section": "",
+    "text": "package versions\n\n\n\n\nyou can check the package version with:\n\n\n\n[1] '2.0.0'\n\n\n\nneed to update?\n\n\nwhat about your other packages?"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#the-magritrr-pipe",
+    "href": "slides/06-data_cleaning/cleaning.html#the-magritrr-pipe",
+    "title": "Data cleaning",
+    "section": "the magritrr pipe %>%",
+    "text": "the magritrr pipe %&gt;%\n\n\ntakes the object before it and feeds it into the next command\n\nthe pipe could be read as “and then”\nN.B., there’s a new pipe in town! The R native |&gt; (Ctrl/Cmd+Shift+M)\n\n\n\n\n\n\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\n\n\n\n\n\n\nImage source: magrittr documentation (all rights reserved)"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#load-our-data",
+    "href": "slides/06-data_cleaning/cleaning.html#load-our-data",
+    "title": "Data cleaning",
+    "section": "load our data",
+    "text": "load our data\n\n\n# A tibble: 4,431 × 28\n   RECORDING_SESSION_LABEL TRIAL_INDEX EYE_USED IA_DWELL_TIME\n   &lt;chr&gt;                         &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;\n 1 px3                               1 RIGHT                0\n 2 px3                               2 RIGHT                0\n 3 px3                               3 RIGHT                0\n 4 px3                               3 RIGHT                0\n 5 px3                               3 RIGHT                0\n 6 px3                               3 RIGHT                0\n 7 px3                               3 RIGHT                0\n 8 px3                               3 RIGHT                0\n 9 px3                               4 RIGHT                0\n10 px3                               5 RIGHT                0\n# ℹ 4,421 more rows\n# ℹ 24 more variables: IA_FIRST_FIXATION_DURATION &lt;dbl&gt;,\n#   IA_FIRST_RUN_DWELL_TIME &lt;dbl&gt;, IA_FIXATION_COUNT &lt;dbl&gt;, IA_ID &lt;dbl&gt;,\n#   IA_LABEL &lt;chr&gt;, IA_REGRESSION_IN &lt;dbl&gt;, IA_REGRESSION_IN_COUNT &lt;dbl&gt;,\n#   IA_REGRESSION_OUT &lt;dbl&gt;, IA_REGRESSION_OUT_COUNT &lt;dbl&gt;,\n#   IA_REGRESSION_PATH_DURATION &lt;dbl&gt;, KeyPress &lt;dbl&gt;, rt &lt;dbl&gt;, bio &lt;chr&gt;,\n#   critical &lt;chr&gt;, gender &lt;chr&gt;, item_id &lt;dbl&gt;, list &lt;dbl&gt;, match &lt;chr&gt;, …\n\n\n\nwas anything added to the Environment pane (top right box in RStudio)?"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#variable-assignment-with--",
+    "href": "slides/06-data_cleaning/cleaning.html#variable-assignment-with--",
+    "title": "Data cleaning",
+    "section": "variable assignment with <-",
+    "text": "variable assignment with &lt;-\n\nobject_name &lt;- code_output_to_be_saved_as_object_name\n\n\nyou should now see the object df_lifetime in the Environment pane"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#section-1",
+    "href": "slides/06-data_cleaning/cleaning.html#section-1",
+    "title": "Data cleaning",
+    "section": "",
+    "text": "A note on annotation\n\n\n\n\nannotate as you go: provide useful comments to describe your code (# comment)\nyou always have at least one collaborator: future you!\n\ncomments\n\n\nFirst we load required libraries."
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#rename",
+    "href": "slides/06-data_cleaning/cleaning.html#rename",
+    "title": "Data cleaning",
+    "section": "rename()",
+    "text": "rename()\n\none of the first things you’ll often want to do is rename some variables\nlet’s start by re-naming some of our variables\n\ne.g., RECORDING_SESSION_LABEL is a long way of saying ‘participant’\n\n\n\nExercise\nChange the following names:\n\n\nEYE_USED to eye\nIA_DWELL_TIME to tt\nIA_FIRST_FIXATION_DURATION to ff\nIA_FIXATION_COUNT to fix_count\nIA_FIRST_RUN_DWELL_TIME to fp\nIA_ID to region_n\nIA_LABEL to region_text\n\n\n\n\nIA_REGRESSION_IN to reg_in\nIA_REGRESSION_IN_COUNT to reg_in_count\nIA_REGRESSION_OUT to reg_out\nIA_REGRESSION_OUT_COUNT to reg_out_count\nIA_REGRESSION_PATH_DURATION to rpd\nname_vital_status to lifetime\n\n\n\n\n [1] \"px\"            \"trial\"         \"eye\"           \"tt\"           \n [5] \"ff\"            \"fp\"            \"fix_count\"     \"region_n\"     \n [9] \"region_text\"   \"reg_in\"        \"reg_in_count\"  \"reg_out\"      \n[13] \"reg_out_count\" \"rpd\"           \"KeyPress\"      \"rt\"           \n[17] \"bio\"           \"critical\"      \"gender\"        \"item_id\"      \n[21] \"list\"          \"match\"         \"condition\"     \"name\"         \n[25] \"lifetime\"      \"tense\"         \"type\"          \"yes_press\""
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#relocate",
+    "href": "slides/06-data_cleaning/cleaning.html#relocate",
+    "title": "Data cleaning",
+    "section": "relocate",
+    "text": "relocate\n\nthe second step thing you might want to do is reorder your variables so the most important/relevant are near the beginning and ordered logically\n\nlet’s order our continuous reading time variables from ‘earliest’ to ‘latest’ measure\n\n\n\n\n [1] \"px\"          \"trial\"       \"region_n\"    \"region_text\" \"eye\"        \n [6] \"ff\"          \"fp\"          \"rpd\"         \"tt\"          \"fix_count\""
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#mutate",
+    "href": "slides/06-data_cleaning/cleaning.html#mutate",
+    "title": "Data cleaning",
+    "section": "mutate()",
+    "text": "mutate()\nMake some change\n\nnew columns\n\n\nchange existing column\n\n\nbut let’s undo that…\n\n\nif_else()\n\ncan be used inside mutate()\n\nchange values based on some logical condition\ncan be used to change an existing column, or create a new one\n\nifelse(condition, output_if_true, output_if_false)\n\n\n\ncase_when()\n\ncan be used inside mutate()\n\nchange values based on multiple logical conditions\ncan be used to change an existing column, or create a new one\n\ncase_when(condition & other_condition | other_condition ~ output, TRUE ~ output_otherwise)\n\nif you don’t include TRUE ~ output then NAs will created\n\n\n\n\nExercise\n\n\nCreate a new variable accept that checks whether the button pressed (KeyPress) equals the button that corresponds to an acceptance (yes_press)\n\nif KeyPress and yes_press are the same, accept should be 1. If not, accept should be 0\nhint: you will need if_else() or case_when()\n\n\n\n\n\nCreate a new variable accuracy where:\n\nif match is yes and accept is 1, accuracy is 1\nif match is no and accept is 0, accuracy is 1\nif match is yes and accept is 0, accuracy is 0\nif match is no and accept is 1, accuracy is 0\n\n\n\n\nthe means and summaries should look like this:\n\n\n\n\n[1] 0.6068608\n\n\n\n\n   0    1 \n1742 2689 \n\n\n\n\n\n\n[1] 0.6267208\n\n\n\n\n   0    1 \n1654 2777 \n\n\n\n\n\nExtra exercise\n\n\nCreate a new variable region, that has the following values based on region_n\n\n\nregion_n 1 is region verb-1\nregion_n 2 is region verb\nregion_n 3 is region verb+1\nregion_n 4 is region verb+2\nregion_n 5 is region verb+3\nregion_n 6 is region verb+4\n\n\n\nfiller verb-1   verb verb+1 verb+2 verb+3 verb+4 \n  1024    639    639    639    639    639    212 \n\n\n\n\n\nNow relocate our new variables so that:\n\n\nregion is before region_n\nKeyPress is after yes_press\n\n\n\n [1] \"px\"            \"trial\"         \"region\"        \"region_n\"     \n [5] \"region_text\"   \"eye\"           \"ff\"            \"fp\"           \n [9] \"rpd\"           \"tt\"            \"fix_count\"     \"reg_in\"       \n[13] \"reg_in_count\"  \"reg_out\"       \"reg_out_count\" \"rt\"           \n[17] \"bio\"           \"critical\"      \"gender\"        \"item_id\"      \n[21] \"list\"          \"match\"         \"condition\"     \"name\"         \n[25] \"lifetime\"      \"tense\"         \"type\"          \"yes_press\"    \n[29] \"KeyPress\"      \"new_column\"    \"newer_column\"  \"accept\"       \n[33] \"accuracy\""
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#group_by-and-ungroup",
+    "href": "slides/06-data_cleaning/cleaning.html#group_by-and-ungroup",
+    "title": "Data cleaning",
+    "section": "group_by() and ungroup()",
+    "text": "group_by() and ungroup()\nGroup data by certain variable(s)\n\nthen perform some mutation\nthen ungroup the data\n\n\n\n[1] 0.26 0.90"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#select",
+    "href": "slides/06-data_cleaning/cleaning.html#select",
+    "title": "Data cleaning",
+    "section": "select()",
+    "text": "select()\n\nkeep only certain column(s)\n\n\n\n\n# A tibble: 4,431 × 1\n   px   \n   &lt;chr&gt;\n 1 px3  \n 2 px3  \n 3 px3  \n 4 px3  \n 5 px3  \n 6 px3  \n 7 px3  \n 8 px3  \n 9 px3  \n10 px3  \n# ℹ 4,421 more rows\n\n\n\n\n\n\n# A tibble: 4,431 × 2\n   px    trial\n   &lt;chr&gt; &lt;dbl&gt;\n 1 px3       1\n 2 px3       2\n 3 px3       3\n 4 px3       3\n 5 px3       3\n 6 px3       3\n 7 px3       3\n 8 px3       3\n 9 px3       4\n10 px3       5\n# ℹ 4,421 more rows"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#select-1",
+    "href": "slides/06-data_cleaning/cleaning.html#select-1",
+    "title": "Data cleaning",
+    "section": "select()",
+    "text": "select()\n\nor remove certain columns\n\n\n\n# A tibble: 4,431 × 32\n   region region_n region_text    eye      ff    fp   rpd    tt fix_count reg_in\n   &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;\n 1 filler        1 He owned innu… RIGHT     0     0     0     0         0      0\n 2 filler        1 She is a moth… RIGHT     0     0     0     0         0      0\n 3 verb-1        1 She            RIGHT     0     0     0     0         0      0\n 4 verb          2 will perform   RIGHT     0     0     0     0         0      0\n 5 verb+1        3 in prestigiou… RIGHT     0     0     0     0         0      0\n 6 verb+2        4 in the future, RIGHT     0     0     0     0         0      0\n 7 verb+3        5 as reported i… RIGHT     0     0     0     0         0      0\n 8 verb+4        6 as reported i… RIGHT     0     0     0     0         0      0\n 9 filler        1 He interviewe… RIGHT     0     0     0     0         0      0\n10 verb-1        1 She            RIGHT     0     0     0     0         0      0\n# ℹ 4,421 more rows\n# ℹ 22 more variables: reg_in_count &lt;dbl&gt;, reg_out &lt;dbl&gt;, reg_out_count &lt;dbl&gt;,\n#   rt &lt;dbl&gt;, bio &lt;chr&gt;, critical &lt;chr&gt;, gender &lt;chr&gt;, item_id &lt;dbl&gt;,\n#   list &lt;dbl&gt;, match &lt;chr&gt;, condition &lt;chr&gt;, name &lt;chr&gt;, lifetime &lt;chr&gt;,\n#   tense &lt;chr&gt;, type &lt;chr&gt;, yes_press &lt;dbl&gt;, KeyPress &lt;dbl&gt;, new_column &lt;chr&gt;,\n#   newer_column &lt;chr&gt;, accept &lt;dbl&gt;, accuracy &lt;dbl&gt;, px_accuracy &lt;dbl&gt;"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#section-2",
+    "href": "slides/06-data_cleaning/cleaning.html#section-2",
+    "title": "Data cleaning",
+    "section": "",
+    "text": "Select criteria\n\n\n\nYou can also use criteria for select:\n\nselect(starts_with(\"x\")) select columns that start with a character string\nselect(ends_with(\"x\")) select columns that end with a character string\nselect(contains(\"x\")) select columns that contain a character string\nselect(num_range(\"prefix\",10:20)) select columns with a prefix followed by a range of values\n\n\n\n\nExercise\nRemove the example variables we created with mutate:\n\nnew_column and newer_column\n\n\n\n [1] \"px\"            \"trial\"         \"region\"        \"region_n\"     \n [5] \"region_text\"   \"eye\"           \"ff\"            \"fp\"           \n [9] \"rpd\"           \"tt\"            \"fix_count\"     \"reg_in\"       \n[13] \"reg_in_count\"  \"reg_out\"       \"reg_out_count\" \"rt\"           \n[17] \"bio\"           \"critical\"      \"gender\"        \"item_id\"      \n[21] \"list\"          \"match\"         \"condition\"     \"name\"         \n[25] \"lifetime\"      \"tense\"         \"type\"          \"yes_press\"    \n[29] \"KeyPress\"      \"accept\"        \"accuracy\"      \"px_accuracy\""
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#filter",
+    "href": "slides/06-data_cleaning/cleaning.html#filter",
+    "title": "Data cleaning",
+    "section": "filter()",
+    "text": "filter()\n\nselect certain rows based on certain criteria (==, !=, &gt;, &lt;, |)\n\nN.B. when testing logical conditions == is needed\n\n\n\n\n# A tibble: 8 × 32\n  px    trial region region_n region_text          eye      ff    fp   rpd    tt\n  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;                &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 px3       1 filler        1 He owned innumerabl… RIGHT     0     0     0     0\n2 px5       1 filler        1 She is a mother of … RIGHT   145  1603  1603  1603\n3 px6       1 filler        1 He is a father of t… RIGHT   147  1224  1224  1224\n4 px2       1 filler        1 She made innumerabl… RIGHT    84  1829  1829  1829\n5 px7       1 filler        1 In the '70s, he own… RIGHT   138  2456  2456  2456\n6 px1       1 filler        1 Beloved morning sho… RIGHT   160  1708  1708  1708\n7 px8       1 filler        1 She was a mother of… RIGHT   220   806   806   806\n8 px4       1 filler        1 In the '70s, he own… LEFT    171  3557  3557  3557\n# ℹ 22 more variables: fix_count &lt;dbl&gt;, reg_in &lt;dbl&gt;, reg_in_count &lt;dbl&gt;,\n#   reg_out &lt;dbl&gt;, reg_out_count &lt;dbl&gt;, rt &lt;dbl&gt;, bio &lt;chr&gt;, critical &lt;chr&gt;,\n#   gender &lt;chr&gt;, item_id &lt;dbl&gt;, list &lt;dbl&gt;, match &lt;chr&gt;, condition &lt;chr&gt;,\n#   name &lt;chr&gt;, lifetime &lt;chr&gt;, tense &lt;chr&gt;, type &lt;chr&gt;, yes_press &lt;dbl&gt;,\n#   KeyPress &lt;dbl&gt;, accept &lt;dbl&gt;, accuracy &lt;dbl&gt;, px_accuracy &lt;dbl&gt;"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#filter-1",
+    "href": "slides/06-data_cleaning/cleaning.html#filter-1",
+    "title": "Data cleaning",
+    "section": "filter()",
+    "text": "filter()\nWhat are these code chunks doing?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLogical operators\n\n\n\n\nsymbols used to describe a logical condition\n== is idential (1 == 1)\n!= is not identical (1 != 2)\n&gt; is greater than (2 &gt; 1)\n&lt; is less than (1 &lt; 2)\n& and also (for multiple conditions)\n| or (for multiple conditions)\n\n\n\n\n\nExercise\n\nCreate a new dataframe df_crit that includes only critical trials\nCreate a new dataframe df_fill that includes only filler trials\n\n\nTip: trial type is stored in the column type\n\n\n\n\n# A tibble: 6 × 1\n  type    \n  &lt;chr&gt;   \n1 critical\n2 critical\n3 critical\n4 critical\n5 critical\n6 critical\n\n\n\n\n\n\n# A tibble: 6 × 1\n  type  \n  &lt;chr&gt; \n1 filler\n2 filler\n3 filler\n4 filler\n5 filler\n6 filler"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#distinct",
+    "href": "slides/06-data_cleaning/cleaning.html#distinct",
+    "title": "Data cleaning",
+    "section": "distinct()",
+    "text": "distinct()\n\n\n\nlike filter(), but for distinct values of a variable\n\n“select rows with distinct values for some row(s)”\n\n\n\n\n\n# A tibble: 8 × 1\n  px   \n  &lt;chr&gt;\n1 px3  \n2 px5  \n3 px6  \n4 px2  \n5 px7  \n6 px1  \n7 px8  \n8 px4  \n\n\n\n\n\n# A tibble: 639 × 2\n   px    name          \n   &lt;chr&gt; &lt;chr&gt;         \n 1 px3   Edith Piaf    \n 2 px3   Aaliyah       \n 3 px3   David Beckham \n 4 px3   Jana Novotna  \n 5 px3   Grace Kelly   \n 6 px3   Nigella Lawson\n 7 px3   Coco Chanel   \n 8 px3   Ben Kingsley  \n 9 px3   Jim Carrey    \n10 px3   Judy Garland  \n# ℹ 629 more rows\n\n\n\n\n\n# A tibble: 639 × 32\n   px    trial region region_n region_text eye      ff    fp   rpd    tt\n   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 px3       3 verb-1        1 She         RIGHT     0     0     0     0\n 2 px3       5 verb-1        1 She         RIGHT     0     0     0     0\n 3 px3       8 verb-1        1 He          RIGHT     0     0     0     0\n 4 px3      10 verb-1        1 She         RIGHT     0     0     0     0\n 5 px3      13 verb-1        1 She         RIGHT     0     0     0     0\n 6 px3      16 verb-1        1 She         RIGHT     0     0     0     0\n 7 px3      18 verb-1        1 She         RIGHT     0     0     0     0\n 8 px3      21 verb-1        1 He          RIGHT     0     0     0     0\n 9 px3      23 verb-1        1 He          RIGHT     0     0     0     0\n10 px3      26 verb-1        1 She         RIGHT     0     0     0     0\n# ℹ 629 more rows\n# ℹ 22 more variables: fix_count &lt;dbl&gt;, reg_in &lt;dbl&gt;, reg_in_count &lt;dbl&gt;,\n#   reg_out &lt;dbl&gt;, reg_out_count &lt;dbl&gt;, rt &lt;dbl&gt;, bio &lt;chr&gt;, critical &lt;chr&gt;,\n#   gender &lt;chr&gt;, item_id &lt;dbl&gt;, list &lt;dbl&gt;, match &lt;chr&gt;, condition &lt;chr&gt;,\n#   name &lt;chr&gt;, lifetime &lt;chr&gt;, tense &lt;chr&gt;, type &lt;chr&gt;, yes_press &lt;dbl&gt;,\n#   KeyPress &lt;dbl&gt;, accept &lt;dbl&gt;, accuracy &lt;dbl&gt;, px_accuracy &lt;dbl&gt;"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#arrange",
+    "href": "slides/06-data_cleaning/cleaning.html#arrange",
+    "title": "Data cleaning",
+    "section": "arrange()",
+    "text": "arrange()\n\n\n\nsort column(s) in ascending or descending order\n\nthis is really just for ease of reading\n\n\n\n\n\n# A tibble: 639 × 4\n   px    trial name            condition\n   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;    \n 1 px1       3 Amy Winehouse   deadPP   \n 2 px1       5 John Wayne      deadPP   \n 3 px1       8 Abraham Lincoln deadPP   \n 4 px1      10 Helen Mirren    livingSF \n 5 px1      13 Paul McCartney  livingSF \n 6 px1      16 Ariana Grande   livingPP \n 7 px1      18 Kate Middleton  livingSF \n 8 px1      21 Johan Cruyff    deadSF   \n 9 px1      23 Marilyn Monroe  deadPP   \n10 px1      26 Biggie Smalls   deadSF   \n# ℹ 629 more rows\n\n\n\n\n\n# A tibble: 639 × 4\n   px    trial name            condition\n   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;    \n 1 px8       3 Whitney Houston deadPP   \n 2 px8       5 Elton John      livingSF \n 3 px8       8 Jackie Chan     livingPP \n 4 px8      10 Romy Schneider  deadPP   \n 5 px8      13 James Cameron   livingSF \n 6 px8      16 Ella Fitzgerald deadSF   \n 7 px8      18 Kathryn Hepburn deadPP   \n 8 px8      21 Kate Middleton  livingPP \n 9 px8      23 Janis Joplin    deadPP   \n10 px8      26 Serena Williams livingSF \n# ℹ 629 more rows"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#separate",
+    "href": "slides/06-data_cleaning/cleaning.html#separate",
+    "title": "Data cleaning",
+    "section": "separate()",
+    "text": "separate()\n\ncreate new columns from a single column\n\n\nopposite: unite()"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#pivot_longer",
+    "href": "slides/06-data_cleaning/cleaning.html#pivot_longer",
+    "title": "Data cleaning",
+    "section": "pivot_longer()",
+    "text": "pivot_longer()\n\ntakes wide data and makes it longer\n\nconverts headers of columns into values of a new column\ncombines the values of those columns into a new condensed column\n\ntakes a few arguments:\n\ncols: which columns do we want to combine into a single column?\nnames_to: what should we call the new column containing the previous column names?\nvalues_to: what should we call the new column containing the values from the previous columns?"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#pivot_longer-1",
+    "href": "slides/06-data_cleaning/cleaning.html#pivot_longer-1",
+    "title": "Data cleaning",
+    "section": "pivot_longer()",
+    "text": "pivot_longer()\n\n\n# A tibble: 2,795 × 8\n   px    trial region type     accept condition measure  time\n   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;\n 1 px5       3 verb   critical      1 livingPP  ff        175\n 2 px5       3 verb   critical      1 livingPP  fp        175\n 3 px5       3 verb   critical      1 livingPP  rpd       175\n 4 px5       3 verb   critical      1 livingPP  tt        321\n 5 px5       3 verb   critical      1 livingPP  rt       4736\n 6 px5       5 verb   critical      1 livingPP  ff        207\n 7 px5       5 verb   critical      1 livingPP  fp        413\n 8 px5       5 verb   critical      1 livingPP  rpd       413\n 9 px5       5 verb   critical      1 livingPP  tt        413\n10 px5       5 verb   critical      1 livingPP  rt       4622\n# ℹ 2,785 more rows\n\n\n\nSource: PsyTeachR"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#pivot_wider",
+    "href": "slides/06-data_cleaning/cleaning.html#pivot_wider",
+    "title": "Data cleaning",
+    "section": "pivot_wider()",
+    "text": "pivot_wider()\n\ntakes long data and makes it wider\ntakes a few arguments:\n\nid_cols: identifying columns\nnames_from: what should we call the new column containing the previous column names?\nnames_prefix:\nvalues_from: new column values"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#pivot_wider-1",
+    "href": "slides/06-data_cleaning/cleaning.html#pivot_wider-1",
+    "title": "Data cleaning",
+    "section": "pivot_wider()",
+    "text": "pivot_wider()\n\n\n# A tibble: 559 × 8\n   px    trial `reg_verb-1` reg_verb `reg_verb+1` `reg_verb+2` `reg_verb+3`\n   &lt;chr&gt; &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;\n 1 px5       3          190      321         1723          672          575\n 2 px5       5            0      413          476          279         2441\n 3 px5       8          246     1892          967          450          981\n 4 px5      10            0      601          932          243          702\n 5 px5      13            0      407         1115            0            0\n 6 px5      16            0     1010         1502          337         1426\n 7 px5      18          238      389         1415          359          584\n 8 px5      21            0      376          584          475         2015\n 9 px5      23          231      215          717          184          255\n10 px5      26          125      347          400          317          981\n# ℹ 549 more rows\n# ℹ 1 more variable: `reg_verb+4` &lt;dbl&gt;\n\n\n\nSource: PsyTeachR"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#important-terms",
+    "href": "slides/06-data_cleaning/cleaning.html#important-terms",
+    "title": "Data cleaning",
+    "section": "Important terms",
+    "text": "Important terms\n\n\n\n\n\n\n\nwrangle\nhave a long dispute\n\n\ndata wrangling\ntidying and transforming your data\n\n\ntidy data\ndata where each column is a variable and each row is an observation\n\n\nthe tidyverse\na group of packages for tidy data\n\n\ndplyr\na package within the tidyverse for data wrangling\n\n\npipe operator (%&gt;% or |&gt;)\noperational function, passes the result of one function/argument to the next\n\n\nlogical operators\ncompare values of two arguments: &, |, ==, !=, &gt;, &lt;"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning.html#important-functions",
+    "href": "slides/06-data_cleaning/cleaning.html#important-functions",
+    "title": "Data cleaning",
+    "section": "Important functions",
+    "text": "Important functions\n\n\n\n\n\n\n\nread_csv()\nread-in a csv as a tibble (from readr package)\n\n\nrename()\nrename variables\n\n\nrelocate()\nmove variables\n\n\nmutate()\nchange or create new variables\n\n\nif_else()\ncondition for `mutate()`\n\n\ncase_when()\nhandle multiple conditions for `mutate()`\n\n\ngroup_by()\ngroup by a certain variable\n\n\nselect()\nkeep (or exclude) certain variables\n\n\nfilter()\nkeep (or exclude) rows based on some criteria\n\n\ndistinct()\nkeep rows with distinct value of given variable(s)\n\n\narrange()\nsort variable(s) in ascending or descending order\n\n\nseparate()\nsplit a variable into multiple variables\n\n\npivot_longer()\nmake wide data longer\n\n\npivot_wider()\nmake long data wider"
+  },
+  {
+    "objectID": "slides/05-literate_programming/repro_code.html#structure-your-reports",
+    "href": "slides/05-literate_programming/repro_code.html#structure-your-reports",
+    "title": "Writing Reproducible Code",
+    "section": "Structure your reports",
+    "text": "Structure your reports\n\ndescribe the function/purpose at the beginning\ndocument your train of thought and findings throughout the script\n\ne.g., why are you producing this plot, what does it tell you?\n\ngive an overview of the findings/end result at the end\nit’s wise to avoid very long, multi-purpose scripts\n\nrule of thumb: one script per product or purpose\ne.g., data cleaning, exploration, analysis, publiation figures, etc.",
+    "crumbs": [
+      "D. Palleschi",
+      "Writing Reproducible Code"
+    ]
+  },
+  {
+    "objectID": "slides/05-literate_programming/repro_code.html#printing-session-info",
+    "href": "slides/05-literate_programming/repro_code.html#printing-session-info",
+    "title": "Writing Reproducible Code",
+    "section": "Printing session info",
+    "text": "Printing session info\n\nso, print your session info at the end of every script!\n\n\nsessionInfo()\n\nR version 4.4.0 (2024-04-24)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Ventura 13.2.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Berlin\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nloaded via a namespace (and not attached):\n [1] htmlwidgets_1.6.4 compiler_4.4.0    fastmap_1.1.1     cli_3.6.2        \n [5] htmltools_0.5.8.1 tools_4.4.0       rstudioapi_0.16.0 yaml_2.3.8       \n [9] rmarkdown_2.26    knitr_1.46        jsonlite_1.8.8    xfun_0.43        \n[13] digest_0.6.35     rlang_1.1.3       renv_1.0.7        evaluate_0.23",
+    "crumbs": [
+      "D. Palleschi",
+      "Writing Reproducible Code"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#workflow-bare-minimum",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#workflow-bare-minimum",
+    "title": "Data wrangling",
+    "section": "Workflow bare minimum",
+    "text": "Workflow bare minimum\n\nself-contained project\n\neverything available in one folder\ne.g., RProjects\n\nREADME file\n\na markdown (.md) file\ndescribing the folder/analysis structure\ncan be updated as you build the project"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#rprojects",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#rprojects",
+    "title": "Data wrangling",
+    "section": "RProjects",
+    "text": "RProjects\n\na folder containing\n\nan .RProj file (which opens RStudio)\nall folders/files required for a project\n\nFile &gt; New Project &gt; New Directory &gt; New Project &gt; New Project &gt; Create Project"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#checklist",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#checklist",
+    "title": "Data wrangling",
+    "section": "Checklist",
+    "text": "Checklist\n\n\nRProject\n\n.RProj\nREADME.md\ndata/\nscripts/ (for analyses)\nnotes/ (if for class notes)\n\n\nScripts (.qmd/.Rmd)\n\nload libraries at beginning\nchunks run linearly (top-to-bottom)\nscript has helpful headings\ncontains text to describe stream of throught\ncode has helpful comments\nsessionInfo() at the end"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#wrangle-defined",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#wrangle-defined",
+    "title": "Data wrangling",
+    "section": "‘wrangle’ defined",
+    "text": "‘wrangle’ defined\n/ˈraŋɡl/\nnoun\na dispute or argument, typically one that is long and complicated. “an insurance wrangle is holding up compensation payments”\nverb\n\nhave a long, complicated dispute or argument. “the bureaucrats continue wrangling over the fine print”\nNORTH AMERICAN round up, herd, or take charge of (livestock). “the horses were wrangled early”"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#wrangler",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#wrangler",
+    "title": "Data wrangling",
+    "section": "Wrangler",
+    "text": "Wrangler\n\nJeep Wrangler \nWrangler Jeans \nCowboys"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#why-tidy-data",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#why-tidy-data",
+    "title": "Data wrangling",
+    "section": "Why tidy data?",
+    "text": "Why tidy data?\n\nhelps future you\n\nand collaborators\n\nfacilitates sharing your data and code (Laurinavichyute et al., 2022)\nin short: facilitates reproducibility!"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#what-does-tidy-data-look-like",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#what-does-tidy-data-look-like",
+    "title": "Data wrangling",
+    "section": "What does tidy data look like?",
+    "text": "What does tidy data look like?\nThree rules (wickham_r_nodate?):\n\nEach variable is a column, each column is a variable\nEach observation is a row, each row is an observation\nEach value is a cell, each cell is a single value\n\n\nImage source: (wickham_r_nodate?) (all rights reserved)\nN.B., how you define a variable or observation is relative to what you want to do\n\nfor now, let’s consider a single trial per participant as an observation"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#section",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#section",
+    "title": "Data wrangling",
+    "section": "",
+    "text": "package versions\n\n\n\nyou can check the package version with:\n\n\npackageVersion(\"tidyverse\")\n\n\n\n[1] '2.0.0'\n\n\n\nneed to update?\n\n\n# update a single package\ninstall.packages(\"tidyverse\")\n\n\nwhat about your other packages?\n\n\n# which packages need updating?\nold.packages()\n# update all old packages\nupdate.packages()"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#the-magritrr-pipe",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#the-magritrr-pipe",
+    "title": "Data wrangling",
+    "section": "the magritrr pipe %>%",
+    "text": "the magritrr pipe %&gt;%\n\n\ntakes the object before it and feeds it into the next command\n\nthe pipe could be read as “and then”\nN.B., there’s a new pipe in town! The R native |&gt; (Ctrl/Cmd+Shift+M)\n\n\n\n\n\n\n# take data frame and then...\niris %&gt;%\n  # print the head\n  head()\n\n\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\n\n\n\n\n\nImage source: magrittr documentation (all rights reserved)"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#load-our-data",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#load-our-data",
+    "title": "Data wrangling",
+    "section": "load our data",
+    "text": "load our data\n\n# load lifetime data\nreadr::read_csv(here::here(\"data/data_lifetime_pilot.csv\")) \n\n\n\n# A tibble: 4,431 × 28\n   RECORDING_SESSION_LABEL TRIAL_INDEX EYE_USED IA_DWELL_TIME\n   &lt;chr&gt;                         &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;\n 1 px3                               1 RIGHT                0\n 2 px3                               2 RIGHT                0\n 3 px3                               3 RIGHT                0\n 4 px3                               3 RIGHT                0\n 5 px3                               3 RIGHT                0\n 6 px3                               3 RIGHT                0\n 7 px3                               3 RIGHT                0\n 8 px3                               3 RIGHT                0\n 9 px3                               4 RIGHT                0\n10 px3                               5 RIGHT                0\n# ℹ 4,421 more rows\n# ℹ 24 more variables: IA_FIRST_FIXATION_DURATION &lt;dbl&gt;,\n#   IA_FIRST_RUN_DWELL_TIME &lt;dbl&gt;, IA_FIXATION_COUNT &lt;dbl&gt;, IA_ID &lt;dbl&gt;,\n#   IA_LABEL &lt;chr&gt;, IA_REGRESSION_IN &lt;dbl&gt;, IA_REGRESSION_IN_COUNT &lt;dbl&gt;,\n#   IA_REGRESSION_OUT &lt;dbl&gt;, IA_REGRESSION_OUT_COUNT &lt;dbl&gt;,\n#   IA_REGRESSION_PATH_DURATION &lt;dbl&gt;, KeyPress &lt;dbl&gt;, rt &lt;dbl&gt;, bio &lt;chr&gt;,\n#   critical &lt;chr&gt;, gender &lt;chr&gt;, item_id &lt;dbl&gt;, list &lt;dbl&gt;, match &lt;chr&gt;, …\n\n\n\nwas anything added to the Environment pane (top right box in RStudio)?"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#variable-assignment-with--",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#variable-assignment-with--",
+    "title": "Data wrangling",
+    "section": "variable assignment with <-",
+    "text": "variable assignment with &lt;-\n\nobject_name &lt;- code_output_to_be_saved_as_object_name\n\n\n# load lifetime data and store it under df_lifetime\ndf_lifetime &lt;- readr::read_csv(here::here(\"data/data_lifetime_pilot.csv\"), \n                               # for special characters\n                               locale = readr::locale(encoding = \"latin1\") \n                               ) \n\n\nyou should now see the object df_lifetime in the Environment pane"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#section-1",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#section-1",
+    "title": "Data wrangling",
+    "section": "",
+    "text": "A note on annotation\n\n\n\nannotate as you go: provide useful comments to describe your code (# comment)\nyou always have at least one collaborator: future you!\n\ncomments\n\n\nFirst we load required libraries.\n\n# load libraries\nlibrary(tidyverse) # for e.g., wrangling and plotting\nlibrary(here) # for file-paths relative to project folder"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#rename",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#rename",
+    "title": "Data wrangling",
+    "section": "rename()",
+    "text": "rename()\n\none of the first things you’ll often want to do is rename some variables\nlet’s start by re-naming some of our variables\n\ne.g., RECORDING_SESSION_LABEL is a long way of saying ‘participant’\n\n\n\n# rename variables\ndf_lifetime &lt;- df_lifetime |&gt; # make df_lifetime from df_lifetime BUT THEN\n  rename(\"px\" = RECORDING_SESSION_LABEL, # rename a variable and (comma = 'and')\n         \"trial\" = TRIAL_INDEX) # another variable"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#relocate",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#relocate",
+    "title": "Data wrangling",
+    "section": "relocate",
+    "text": "relocate\n\nthe second thing you might want to do is reorder your variables so the most important/relevant are near the beginning and ordered logically\n\nlet’s order our continuous reading time variables from ‘earliest’ to ‘latest’ measure\n\n\n\ndf_lifetime &lt;- df_lifetime |&gt;\n  relocate(ff,fp,rpd,tt, .after=\"eye\") |&gt; \n  relocate(region_n, region_text, .after=\"trial\")\n\n\nnames(df_lifetime[1:10])\n\n [1] \"px\"          \"trial\"       \"region_n\"    \"region_text\" \"eye\"        \n [6] \"ff\"          \"fp\"          \"rpd\"         \"tt\"          \"fix_count\""
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#mutate",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#mutate",
+    "title": "Data wrangling",
+    "section": "mutate()",
+    "text": "mutate()\nMutate column(s):\n\n\n\nnew columns\n\n\ndf_lifetime &lt;- df_lifetime |&gt;\n  mutate(new_column = \"new\")\n\n\nwhat will new_column contain?\n\n\ndf_lifetime |&gt; \n  select(px, new_column, trial) |&gt; \n  head() \n\n\n\n# A tibble: 6 × 3\n  px    new_column trial\n  &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;\n1 px3   new            1\n2 px3   new            2\n3 px3   new            3\n4 px3   new            3\n5 px3   new            3\n6 px3   new            3\n\n\n\n\nchange existing column\n\n\ndf_lifetime &lt;- df_lifetime |&gt;\n  mutate(new_column = px,\n         trial = trial + 5)\n\n\nwhat will new_column and trial contain?\n\n\ndf_lifetime |&gt; \n  select(px, new_column, trial) |&gt; \n  head() \n\n\n\n# A tibble: 6 × 3\n  px    new_column trial\n  &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;\n1 px3   px3            6\n2 px3   px3            7\n3 px3   px3            8\n4 px3   px3            8\n5 px3   px3            8\n6 px3   px3            8\n\n\n\n\nbut let’s undo that…\n\n\ndf_lifetime &lt;- df_lifetime |&gt;\n  mutate(trial = trial - 5)\n\n\nwhat will trial contain?\n\n\ndf_lifetime |&gt; \n  select(px, new_column, trial) |&gt; \n  head() \n\n\n\n# A tibble: 6 × 3\n  px    new_column trial\n  &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;\n1 px3   px3            1\n2 px3   px3            2\n3 px3   px3            3\n4 px3   px3            3\n5 px3   px3            3\n6 px3   px3            3"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#group_by-and-ungroup",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#group_by-and-ungroup",
+    "title": "Data wrangling",
+    "section": "group_by() and ungroup()",
+    "text": "group_by() and ungroup()\nGroup data by certain variable(s)\n\nthen perform some mutation\nthen ungroup the data\n\n\ndf_lifetime &lt;- df_lifetime |&gt;\n  group_by(px) |&gt;\n  mutate(px_accuracy = mean(accuracy)) |&gt;\n  ungroup()\n\n\nround(\n  range(df_lifetime$px_accuracy),\n  2)\n\n\n\n[1] 0.26 0.90"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#select",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#select",
+    "title": "Data wrangling",
+    "section": "select()",
+    "text": "select()\n\n\n\nkeep only certain column(s)\noften used to preview changes\nif result is saved as an object (&lt;-) will remove all other columns\n\nso be careful when saving as an already existing object (e.g., df &lt;- df |&gt; select(...))\n\n\n\n\ndf_lifetime |&gt;\n  select(px) |&gt; head(10)\n\n\n\n# A tibble: 10 × 1\n   px   \n   &lt;chr&gt;\n 1 px3  \n 2 px3  \n 3 px3  \n 4 px3  \n 5 px3  \n 6 px3  \n 7 px3  \n 8 px3  \n 9 px3  \n10 px3  \n\n\n\n\ndf_lifetime |&gt;\n  select(px, trial) |&gt; head(10)\n\n\n\n# A tibble: 10 × 2\n   px    trial\n   &lt;chr&gt; &lt;dbl&gt;\n 1 px3       1\n 2 px3       2\n 3 px3       3\n 4 px3       3\n 5 px3       3\n 6 px3       3\n 7 px3       3\n 8 px3       3\n 9 px3       4\n10 px3       5"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#select-1",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#select-1",
+    "title": "Data wrangling",
+    "section": "select()",
+    "text": "select()\n\nor remove certain columns\n\n\ndf_lifetime |&gt;\n  select(-px, -trial)\n\n\n\n# A tibble: 4,431 × 32\n   region region_n region_text    eye      ff    fp   rpd    tt fix_count reg_in\n   &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;\n 1 filler        1 He owned innu… RIGHT     0     0     0     0         0      0\n 2 filler        1 She is a moth… RIGHT     0     0     0     0         0      0\n 3 verb-1        1 She            RIGHT     0     0     0     0         0      0\n 4 verb          2 will perform   RIGHT     0     0     0     0         0      0\n 5 verb+1        3 in prestigiou… RIGHT     0     0     0     0         0      0\n 6 verb+2        4 in the future, RIGHT     0     0     0     0         0      0\n 7 verb+3        5 as reported i… RIGHT     0     0     0     0         0      0\n 8 verb+4        6 as reported i… RIGHT     0     0     0     0         0      0\n 9 filler        1 He interviewe… RIGHT     0     0     0     0         0      0\n10 verb-1        1 She            RIGHT     0     0     0     0         0      0\n# ℹ 4,421 more rows\n# ℹ 22 more variables: reg_in_count &lt;dbl&gt;, reg_out &lt;dbl&gt;, reg_out_count &lt;dbl&gt;,\n#   rt &lt;dbl&gt;, bio &lt;chr&gt;, critical &lt;chr&gt;, gender &lt;chr&gt;, item_id &lt;dbl&gt;,\n#   list &lt;dbl&gt;, match &lt;chr&gt;, condition &lt;chr&gt;, name &lt;chr&gt;, lifetime &lt;chr&gt;,\n#   tense &lt;chr&gt;, type &lt;chr&gt;, yes_press &lt;dbl&gt;, KeyPress &lt;dbl&gt;, new_column &lt;chr&gt;,\n#   newer_column &lt;chr&gt;, accept &lt;dbl&gt;, accuracy &lt;dbl&gt;, px_accuracy &lt;dbl&gt;"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#section-2",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#section-2",
+    "title": "Data wrangling",
+    "section": "",
+    "text": "Select criteria\n\n\nYou can also use criteria for select:\n\nselect(starts_with(\"x\")) select columns that start with a character string\nselect(ends_with(\"x\")) select columns that end with a character string\nselect(contains(\"x\")) select columns that contain a character string\nselect(num_range(\"prefix\",10:20)) select columns with a prefix followed by a range of values"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#filter",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#filter",
+    "title": "Data wrangling",
+    "section": "filter()",
+    "text": "filter()\n\nselect certain rows based on certain criteria\n\nrequires logical operators (==, !=, &gt;, &lt;, |)\nN.B. when testing logical conditions == is needed\n\n\n\ndf_lifetime |&gt;\n  filter(trial == 1)\n\n\n\n# A tibble: 8 × 32\n  px    trial region region_n region_text          eye      ff    fp   rpd    tt\n  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;                &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 px3       1 filler        1 He owned innumerabl… RIGHT     0     0     0     0\n2 px5       1 filler        1 She is a mother of … RIGHT   145  1603  1603  1603\n3 px6       1 filler        1 He is a father of t… RIGHT   147  1224  1224  1224\n4 px2       1 filler        1 She made innumerabl… RIGHT    84  1829  1829  1829\n5 px7       1 filler        1 In the '70s, he own… RIGHT   138  2456  2456  2456\n6 px1       1 filler        1 Beloved morning sho… RIGHT   160  1708  1708  1708\n7 px8       1 filler        1 She was a mother of… RIGHT   220   806   806   806\n8 px4       1 filler        1 In the '70s, he own… LEFT    171  3557  3557  3557\n# ℹ 22 more variables: fix_count &lt;dbl&gt;, reg_in &lt;dbl&gt;, reg_in_count &lt;dbl&gt;,\n#   reg_out &lt;dbl&gt;, reg_out_count &lt;dbl&gt;, rt &lt;dbl&gt;, bio &lt;chr&gt;, critical &lt;chr&gt;,\n#   gender &lt;chr&gt;, item_id &lt;dbl&gt;, list &lt;dbl&gt;, match &lt;chr&gt;, condition &lt;chr&gt;,\n#   name &lt;chr&gt;, lifetime &lt;chr&gt;, tense &lt;chr&gt;, type &lt;chr&gt;, yes_press &lt;dbl&gt;,\n#   KeyPress &lt;dbl&gt;, accept &lt;dbl&gt;, accuracy &lt;dbl&gt;, px_accuracy &lt;dbl&gt;"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#filter-1",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#filter-1",
+    "title": "Data wrangling",
+    "section": "filter()",
+    "text": "filter()\nWhat are these code chunks doing?\n\n\n\ndf_lifetime |&gt;\n  filter(px_accuracy &gt; .5)\n\n\n\ndf_lifetime |&gt;\n  filter(px == \"px3\")\n\n\n\n\n\n\ndf_lifetime |&gt;\n  filter(px == \"px3\" | trial == \"3\")\n\n\n\ndf_lifetime |&gt;\n  filter(px == \"px3\" & trial != \"3\")"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#distinct",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#distinct",
+    "title": "Data wrangling",
+    "section": "distinct()",
+    "text": "distinct()\n\n\n\nlike filter(), but for distinct values of a variable\n\n“select rows with distinct values for some row(s)”\n\n\n\n\ndf_crit |&gt;\n  distinct(px)\n\n\n\n# A tibble: 8 × 1\n  px   \n  &lt;chr&gt;\n1 px3  \n2 px5  \n3 px6  \n4 px2  \n5 px7  \n6 px1  \n7 px8  \n8 px4  \n\n\n\n\ndf_crit |&gt;\n  distinct(px, name)\n\n\n\n# A tibble: 639 × 2\n   px    name          \n   &lt;chr&gt; &lt;chr&gt;         \n 1 px3   Edith Piaf    \n 2 px3   Aaliyah       \n 3 px3   David Beckham \n 4 px3   Jana Novotna  \n 5 px3   Grace Kelly   \n 6 px3   Nigella Lawson\n 7 px3   Coco Chanel   \n 8 px3   Ben Kingsley  \n 9 px3   Jim Carrey    \n10 px3   Judy Garland  \n# ℹ 629 more rows\n\n\n\n\ndf_crit |&gt;\n  distinct(px, name,\n           .keep_all=T)\n\n\n\n# A tibble: 639 × 32\n   px    trial region region_n region_text eye      ff    fp   rpd    tt\n   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 px3       3 verb-1        1 She         RIGHT     0     0     0     0\n 2 px3       5 verb-1        1 She         RIGHT     0     0     0     0\n 3 px3       8 verb-1        1 He          RIGHT     0     0     0     0\n 4 px3      10 verb-1        1 She         RIGHT     0     0     0     0\n 5 px3      13 verb-1        1 She         RIGHT     0     0     0     0\n 6 px3      16 verb-1        1 She         RIGHT     0     0     0     0\n 7 px3      18 verb-1        1 She         RIGHT     0     0     0     0\n 8 px3      21 verb-1        1 He          RIGHT     0     0     0     0\n 9 px3      23 verb-1        1 He          RIGHT     0     0     0     0\n10 px3      26 verb-1        1 She         RIGHT     0     0     0     0\n# ℹ 629 more rows\n# ℹ 22 more variables: fix_count &lt;dbl&gt;, reg_in &lt;dbl&gt;, reg_in_count &lt;dbl&gt;,\n#   reg_out &lt;dbl&gt;, reg_out_count &lt;dbl&gt;, rt &lt;dbl&gt;, bio &lt;chr&gt;, critical &lt;chr&gt;,\n#   gender &lt;chr&gt;, item_id &lt;dbl&gt;, list &lt;dbl&gt;, match &lt;chr&gt;, condition &lt;chr&gt;,\n#   name &lt;chr&gt;, lifetime &lt;chr&gt;, tense &lt;chr&gt;, type &lt;chr&gt;, yes_press &lt;dbl&gt;,\n#   KeyPress &lt;dbl&gt;, accept &lt;dbl&gt;, accuracy &lt;dbl&gt;, px_accuracy &lt;dbl&gt;"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#arrange",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#arrange",
+    "title": "Data wrangling",
+    "section": "arrange()",
+    "text": "arrange()\n\n\n\nsort column(s) in ascending or descending order\n\nthis is really just for ease of reading\n\n\n\n\n# default: ascending order (A-Z)\ndf_crit |&gt;\n  distinct(px, trial, name, condition) |&gt;\n  arrange(px, trial)\n\n\n\n# A tibble: 639 × 4\n   px    trial name            condition\n   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;    \n 1 px1       3 Amy Winehouse   deadPP   \n 2 px1       5 John Wayne      deadPP   \n 3 px1       8 Abraham Lincoln deadPP   \n 4 px1      10 Helen Mirren    livingSF \n 5 px1      13 Paul McCartney  livingSF \n 6 px1      16 Ariana Grande   livingPP \n 7 px1      18 Kate Middleton  livingSF \n 8 px1      21 Johan Cruyff    deadSF   \n 9 px1      23 Marilyn Monroe  deadPP   \n10 px1      26 Biggie Smalls   deadSF   \n# ℹ 629 more rows\n\n\n\n\n# descending order (Z-A)\ndf_crit |&gt;\n  distinct(px, trial, name, condition) |&gt;\n  arrange(desc(px), trial)\n\n\n\n# A tibble: 639 × 4\n   px    trial name            condition\n   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;    \n 1 px8       3 Whitney Houston deadPP   \n 2 px8       5 Elton John      livingSF \n 3 px8       8 Jackie Chan     livingPP \n 4 px8      10 Romy Schneider  deadPP   \n 5 px8      13 James Cameron   livingSF \n 6 px8      16 Ella Fitzgerald deadSF   \n 7 px8      18 Kathryn Hepburn deadPP   \n 8 px8      21 Kate Middleton  livingPP \n 9 px8      23 Janis Joplin    deadPP   \n10 px8      26 Serena Williams livingSF \n# ℹ 629 more rows"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#separate",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#separate",
+    "title": "Data wrangling",
+    "section": "separate()",
+    "text": "separate()\n\ncreate new columns from a single column\n\n\ndf_lifetime &lt;- df_lifetime |&gt;\n  separate(name,\n           sep=\" \",\n           into = c(\"First\",\"Last\"),\n           remove = F, # don't remove original column (name)\n           extra = \"merge\") # if extra chunks, combine in 'Last' (von der...)\n\n\nopposite: unite()"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#pivot_longer",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#pivot_longer",
+    "title": "Data wrangling",
+    "section": "pivot_longer()",
+    "text": "pivot_longer()\n\ntakes wide data and makes it longer\n\nconverts headers of columns into values of a new column\ncombines the values of those columns into a new condensed column\n\ntakes a few arguments:\n\ncols: which columns do we want to combine into a single column?\nnames_to: what should we call the new column containing the previous column names?\nvalues_to: what should we call the new column containing the values from the previous columns?"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#pivot_longer-1",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#pivot_longer-1",
+    "title": "Data wrangling",
+    "section": "pivot_longer()",
+    "text": "pivot_longer()\n\ndf_lifetime |&gt; \n  select(px,trial,region,ff,fp,rpd,tt,rt,type,accept,condition) |&gt;\n  filter(type==\"critical\",region==\"verb\",px!=\"px3\") |&gt;\n  pivot_longer(\n  cols = c(ff,fp,rpd,tt,rt), # columns to make long \n  names_to = \"measure\", # new column name for headers\n  values_to = \"time\" # new column name for values\n)\n\n\n\n# A tibble: 2,795 × 8\n   px    trial region type     accept condition measure  time\n   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;\n 1 px5       3 verb   critical      1 livingPP  ff        175\n 2 px5       3 verb   critical      1 livingPP  fp        175\n 3 px5       3 verb   critical      1 livingPP  rpd       175\n 4 px5       3 verb   critical      1 livingPP  tt        321\n 5 px5       3 verb   critical      1 livingPP  rt       4736\n 6 px5       5 verb   critical      1 livingPP  ff        207\n 7 px5       5 verb   critical      1 livingPP  fp        413\n 8 px5       5 verb   critical      1 livingPP  rpd       413\n 9 px5       5 verb   critical      1 livingPP  tt        413\n10 px5       5 verb   critical      1 livingPP  rt       4622\n# ℹ 2,785 more rows\n\n\n\nSource: PsyTeachR"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#pivot_wider",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#pivot_wider",
+    "title": "Data wrangling",
+    "section": "pivot_wider()",
+    "text": "pivot_wider()\n\ntakes long data and makes it wider\ntakes a few arguments:\n\nid_cols: identifying columns\nnames_from: what should we call the new column containing the previous column names?\nnames_prefix:\nvalues_from: new column values"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#pivot_wider-1",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#pivot_wider-1",
+    "title": "Data wrangling",
+    "section": "pivot_wider()",
+    "text": "pivot_wider()\n\ndf_lifetime |&gt; \n  select(px,trial,region,ff,fp,rpd,tt,rt,type,accept,condition) |&gt;\n  filter(type==\"critical\",px!=\"px3\") |&gt;\n  pivot_wider(\n  id_cols = c(px,trial), # columns to make long \n  names_from = region, # new column name for headers\n  names_prefix = \"reg_\", # new column name for values\n  values_from = tt\n)\n\n\n\n# A tibble: 559 × 8\n   px    trial `reg_verb-1` reg_verb `reg_verb+1` `reg_verb+2` `reg_verb+3`\n   &lt;chr&gt; &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;\n 1 px5       3          190      321         1723          672          575\n 2 px5       5            0      413          476          279         2441\n 3 px5       8          246     1892          967          450          981\n 4 px5      10            0      601          932          243          702\n 5 px5      13            0      407         1115            0            0\n 6 px5      16            0     1010         1502          337         1426\n 7 px5      18          238      389         1415          359          584\n 8 px5      21            0      376          584          475         2015\n 9 px5      23          231      215          717          184          255\n10 px5      26          125      347          400          317          981\n# ℹ 549 more rows\n# ℹ 1 more variable: `reg_verb+4` &lt;dbl&gt;\n\n\n\nSource: PsyTeachR"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#important-terms",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#important-terms",
+    "title": "Data wrangling",
+    "section": "Important terms",
+    "text": "Important terms\n\n\n\n\n\n\n\nwrangle\nhave a long dispute\n\n\ndata wrangling\ntidying and transforming your data\n\n\ntidy data\ndata where each column is a variable and each row is an observation\n\n\nthe tidyverse\na group of packages for tidy data\n\n\ndplyr\na package within the tidyverse for data wrangling\n\n\npipe operator (|&gt; or |&gt;)\noperational function, passes the result of one function/argument to the next\n\n\nlogical operators\ncompare values of two arguments: &, |, ==, !=, &gt;, &lt;"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#important-functions",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#important-functions",
+    "title": "Data wrangling",
+    "section": "Important functions",
+    "text": "Important functions\n\n\n\n\n\n\n\nread_csv()\nread-in a csv as a tibble (from readr package)\n\n\nrename()\nrename variables\n\n\nrelocate()\nmove variables\n\n\nmutate()\nchange or create new variables\n\n\nif_else()\ncondition for `mutate()`\n\n\ncase_when()\nhandle multiple conditions for `mutate()`\n\n\ngroup_by()\ngroup by a certain variable\n\n\nselect()\nkeep (or exclude) certain variables\n\n\nfilter()\nkeep (or exclude) rows based on some criteria\n\n\ndistinct()\nkeep rows with distinct value of given variable(s)\n\n\narrange()\nsort variable(s) in ascending or descending order\n\n\nseparate()\nsplit a variable into multiple variables\n\n\npivot_longer()\nmake wide data longer\n\n\npivot_wider()\nmake long data wider"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#base-r-pipe",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#base-r-pipe",
+    "title": "Data wrangling",
+    "section": "base R pipe |>",
+    "text": "base R pipe |&gt;\n\n\n\ntakes the object before it and feeds it into the next command\n\nthe pipe could be read as “and then”\nthere’s a useful shortcut: Ctrl/Cmd+Shift+M\nN.B., pre-2023 the only pipe was %&gt;% (magrittr package)\n\n\n\n# take data frame and then...\niris |&gt;\n  # print the head\n  head()\n\n\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\n\n\n\n\n\nImage source: magrittr documentation (all rights reserved)"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#section-3",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#section-3",
+    "title": "Data wrangling",
+    "section": "",
+    "text": "Select criteria\n\n\nYou can also use criteria for select:\n\nselect(starts_with(\"x\")) select columns that start with a character string\nselect(ends_with(\"x\")) select columns that end with a character string\nselect(contains(\"x\")) select columns that contain a character string\nselect(num_range(\"prefix\",10:20)) select columns with a prefix followed by a range of values"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#by",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#by",
+    "title": "Data wrangling",
+    "section": ".by",
+    "text": ".by\n\nmutate() also takes .by = as an argument\n\ndoes the same thing as group_by()/ungroup()\nas of dplyr 1.1.0 version (more info)\n\n\n\ndf_lifetime &lt;- df_lifetime |&gt;\n  mutate(px_accuracy = mean(accuracy),\n         .by = px)\n\n\nround(\n  range(df_lifetime$px_accuracy),\n  2)\n\n\n\n[1] 0.26 0.90"
+  },
+  {
+    "objectID": "slides/06-data_cleaning/cleaning_slides.html#select-",
+    "href": "slides/06-data_cleaning/cleaning_slides.html#select-",
+    "title": "Data wrangling",
+    "section": "select(-)",
+    "text": "select(-)\n\nor remove certain columns\n\n\ndf_lifetime |&gt;\n  select(-px, -trial) |&gt; head(10)\n\n\n\n# A tibble: 10 × 34\n   region region_n region_text    eye      ff    fp   rpd    tt fix_count reg_in\n   &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;\n 1 filler        1 He owned innu… RIGHT     0     0     0     0         0      0\n 2 filler        1 She is a moth… RIGHT     0     0     0     0         0      0\n 3 verb-1        1 She            RIGHT     0     0     0     0         0      0\n 4 verb          2 will perform   RIGHT     0     0     0     0         0      0\n 5 verb+1        3 in prestigiou… RIGHT     0     0     0     0         0      0\n 6 verb+2        4 in the future, RIGHT     0     0     0     0         0      0\n 7 verb+3        5 as reported i… RIGHT     0     0     0     0         0      0\n 8 verb+4        6 as reported i… RIGHT     0     0     0     0         0      0\n 9 filler        1 He interviewe… RIGHT     0     0     0     0         0      0\n10 verb-1        1 She            RIGHT     0     0     0     0         0      0\n# ℹ 24 more variables: reg_in_count &lt;dbl&gt;, reg_out &lt;dbl&gt;, reg_out_count &lt;dbl&gt;,\n#   rt &lt;dbl&gt;, bio &lt;chr&gt;, critical &lt;chr&gt;, gender &lt;chr&gt;, item_id &lt;dbl&gt;,\n#   list &lt;dbl&gt;, match &lt;chr&gt;, condition &lt;chr&gt;, name &lt;chr&gt;, First &lt;chr&gt;,\n#   Last &lt;chr&gt;, lifetime &lt;chr&gt;, tense &lt;chr&gt;, type &lt;chr&gt;, yes_press &lt;dbl&gt;,\n#   KeyPress &lt;dbl&gt;, new_column &lt;chr&gt;, newer_column &lt;chr&gt;, accept &lt;dbl&gt;,\n#   accuracy &lt;dbl&gt;, px_accuracy &lt;dbl&gt;"
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html",
+    "href": "slides/06-data_wrangling/cleaning.html",
+    "title": "Data wrangling",
+    "section": "",
+    "text": "Today we will…\n\nclean our first dataset\nimplement literate programming principles\nuse dplyr verbs to wrangle columns and rows\nsave our tidy dataset",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#workflow-bare-minimum",
+    "href": "slides/06-data_wrangling/cleaning.html#workflow-bare-minimum",
+    "title": "Data wrangling",
+    "section": "Workflow bare minimum",
+    "text": "Workflow bare minimum\n\nself-contained project\n\neverything available in one folder\ne.g., RProjects\n\nREADME file\n\na markdown (.md) file\ndescribing the folder/analysis structure\ncan be updated as you build the project",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#rprojects",
+    "href": "slides/06-data_wrangling/cleaning.html#rprojects",
+    "title": "Data wrangling",
+    "section": "RProjects",
+    "text": "RProjects\n\na folder containing\n\nan .RProj file (which opens RStudio)\nall folders/files required for a project\n\nFile &gt; New Project &gt; New Directory &gt; New Project &gt; New Project &gt; Create Project\n\n\nREADME\n\nto create an .md file: File &gt; New File &gt; Markdown File\ncreate informative heading\n\ndescribe project purpose\ndescribe folders/scripts as they currently are\n\nsave/Preview as README.md in the project folder\n\n\n\nhere\n\nhere package\n\nwill always access the project folder\ntry running here() from within a project; what’s the output?\n\n\n\n\nProject folder structure\n\n\n\n\n\nImage source: Winter (2019)",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#checklist",
+    "href": "slides/06-data_wrangling/cleaning.html#checklist",
+    "title": "Data wrangling",
+    "section": "Checklist",
+    "text": "Checklist\n\n\nRProject\n\n.RProj\nREADME.md\ndata/\nscripts/ (for analyses)\nnotes/ (if for class notes)\n\n\nScripts (.qmd/.Rmd)\n\nload libraries at beginning\nchunks run linearly (top-to-bottom)\nscript has helpful headings\ncontains text to describe stream of throught\ncode has helpful comments\nsessionInfo() at the end",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#wrangle-defined",
+    "href": "slides/06-data_wrangling/cleaning.html#wrangle-defined",
+    "title": "Data wrangling",
+    "section": "‘wrangle’ defined",
+    "text": "‘wrangle’ defined\n/ˈraŋɡl/\nnoun\na dispute or argument, typically one that is long and complicated. “an insurance wrangle is holding up compensation payments”\nverb\n\nhave a long, complicated dispute or argument. “the bureaucrats continue wrangling over the fine print”\nNORTH AMERICAN round up, herd, or take charge of (livestock). “the horses were wrangled early”",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#why-tidy-data",
+    "href": "slides/06-data_wrangling/cleaning.html#why-tidy-data",
+    "title": "Data wrangling",
+    "section": "Why tidy data?",
+    "text": "Why tidy data?\n\nhelps future you\n\nand collaborators\n\nfacilitates sharing your data and code (Laurinavichyute et al., 2022)\nin short: facilitates reproducibility!",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#what-does-tidy-data-look-like",
+    "href": "slides/06-data_wrangling/cleaning.html#what-does-tidy-data-look-like",
+    "title": "Data wrangling",
+    "section": "What does tidy data look like?",
+    "text": "What does tidy data look like?\nThree rules (Wickham et al., 2023):\n\nEach variable is a column, each column is a variable\nEach observation is a row, each row is an observation\nEach value is a cell, each cell is a single value\n\n\n\n\n\n\nImage source: Wickham et al. (2023) (all rights reserved)\n\n\n\n\n\nN.B., how you define a variable or observation is relative to what you want to do\n\nfor now, let’s consider a single trial per participant as an observation",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#section",
+    "href": "slides/06-data_wrangling/cleaning.html#section",
+    "title": "Data wrangling",
+    "section": "",
+    "text": "package versions\n\n\n\n\nyou can check the package version with:\n\n\npackageVersion(\"tidyverse\")\n\n[1] '2.0.0'\n\n\n\nneed to update?\n\n\n# update a single package\ninstall.packages(\"tidyverse\")\n\n\nwhat about your other packages?\n\n\n# which packages need updating?\nold.packages()\n# update all old packages\nupdate.packages()",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#base-r-pipe",
+    "href": "slides/06-data_wrangling/cleaning.html#base-r-pipe",
+    "title": "Data wrangling",
+    "section": "base R pipe |>",
+    "text": "base R pipe |&gt;\n\n\n\ntakes the object before it and feeds it into the next command\n\nthe pipe could be read as “and then”\nthere’s a useful shortcut: Ctrl/Cmd+Shift+M\nN.B., pre-2023 the only pipe was %&gt;% (magrittr package)\n\n\n\n# take data frame and then...\niris |&gt;\n  # print the head\n  head()\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\n\n\n\n\n\n\nImage source: magrittr documentation (all rights reserved)",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#load-our-data",
+    "href": "slides/06-data_wrangling/cleaning.html#load-our-data",
+    "title": "Data wrangling",
+    "section": "load our data",
+    "text": "load our data\n\n# load lifetime data\nreadr::read_csv(here::here(\"data/data_lifetime_pilot.csv\")) \n\n# A tibble: 4,431 × 28\n   RECORDING_SESSION_LABEL TRIAL_INDEX EYE_USED IA_DWELL_TIME\n   &lt;chr&gt;                         &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;\n 1 px3                               1 RIGHT                0\n 2 px3                               2 RIGHT                0\n 3 px3                               3 RIGHT                0\n 4 px3                               3 RIGHT                0\n 5 px3                               3 RIGHT                0\n 6 px3                               3 RIGHT                0\n 7 px3                               3 RIGHT                0\n 8 px3                               3 RIGHT                0\n 9 px3                               4 RIGHT                0\n10 px3                               5 RIGHT                0\n# ℹ 4,421 more rows\n# ℹ 24 more variables: IA_FIRST_FIXATION_DURATION &lt;dbl&gt;,\n#   IA_FIRST_RUN_DWELL_TIME &lt;dbl&gt;, IA_FIXATION_COUNT &lt;dbl&gt;, IA_ID &lt;dbl&gt;,\n#   IA_LABEL &lt;chr&gt;, IA_REGRESSION_IN &lt;dbl&gt;, IA_REGRESSION_IN_COUNT &lt;dbl&gt;,\n#   IA_REGRESSION_OUT &lt;dbl&gt;, IA_REGRESSION_OUT_COUNT &lt;dbl&gt;,\n#   IA_REGRESSION_PATH_DURATION &lt;dbl&gt;, KeyPress &lt;dbl&gt;, rt &lt;dbl&gt;, bio &lt;chr&gt;,\n#   critical &lt;chr&gt;, gender &lt;chr&gt;, item_id &lt;dbl&gt;, list &lt;dbl&gt;, match &lt;chr&gt;, …\n\n\n\nwas anything added to the Environment pane (top right box in RStudio)?",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#variable-assignment-with--",
+    "href": "slides/06-data_wrangling/cleaning.html#variable-assignment-with--",
+    "title": "Data wrangling",
+    "section": "variable assignment with <-",
+    "text": "variable assignment with &lt;-\n\nobject_name &lt;- code_output_to_be_saved_as_object_name\n\n\n# load lifetime data and store it under df_lifetime\ndf_lifetime &lt;- readr::read_csv(here::here(\"data/data_lifetime_pilot.csv\"), \n                               # for special characters\n                               locale = readr::locale(encoding = \"latin1\") \n                               ) \n\n\nyou should now see the object df_lifetime in the Environment pane",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#section-1",
+    "href": "slides/06-data_wrangling/cleaning.html#section-1",
+    "title": "Data wrangling",
+    "section": "",
+    "text": "A note on annotation\n\n\n\n\nannotate as you go: provide useful comments to describe your code (# comment)\nyou always have at least one collaborator: future you!\n\ncomments\n\n\nFirst we load required libraries.\n\n# load libraries\nlibrary(tidyverse) # for e.g., wrangling and plotting\nlibrary(here) # for file-paths relative to project folder",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#rename",
+    "href": "slides/06-data_wrangling/cleaning.html#rename",
+    "title": "Data wrangling",
+    "section": "rename()",
+    "text": "rename()\n\none of the first things you’ll often want to do is rename some variables\nlet’s start by re-naming some of our variables\n\ne.g., RECORDING_SESSION_LABEL is a long way of saying ‘participant’\n\n\n\n# rename variables\ndf_lifetime &lt;- df_lifetime |&gt; # make df_lifetime from df_lifetime BUT THEN\n  rename(\"px\" = RECORDING_SESSION_LABEL, # rename a variable and (comma = 'and')\n         \"trial\" = TRIAL_INDEX) # another variable\n\n\nExercise\nChange the following names:\n\n\n\nEYE_USED to eye\nIA_DWELL_TIME to tt\nIA_FIRST_FIXATION_DURATION to ff\nIA_FIXATION_COUNT to fix_count\nIA_FIRST_RUN_DWELL_TIME to fp\nIA_ID to region_n\nIA_LABEL to region_text\n\n\n\nIA_REGRESSION_IN to reg_in\nIA_REGRESSION_IN_COUNT to reg_in_count\nIA_REGRESSION_OUT to reg_out\nIA_REGRESSION_OUT_COUNT to reg_out_count\nIA_REGRESSION_PATH_DURATION to rpd\nname_vital_status to lifetime\n\n\n# the names should then look like this:\nnames(df_lifetime)\n\n [1] \"px\"            \"trial\"         \"eye\"           \"tt\"           \n [5] \"ff\"            \"fp\"            \"fix_count\"     \"region_n\"     \n [9] \"region_text\"   \"reg_in\"        \"reg_in_count\"  \"reg_out\"      \n[13] \"reg_out_count\" \"rpd\"           \"KeyPress\"      \"rt\"           \n[17] \"bio\"           \"critical\"      \"gender\"        \"item_id\"      \n[21] \"list\"          \"match\"         \"condition\"     \"name\"         \n[25] \"lifetime\"      \"tense\"         \"type\"          \"yes_press\"",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#relocate",
+    "href": "slides/06-data_wrangling/cleaning.html#relocate",
+    "title": "Data wrangling",
+    "section": "relocate",
+    "text": "relocate\n\nthe second thing you might want to do is reorder your variables so the most important/relevant are near the beginning and ordered logically\n\nlet’s order our continuous reading time variables from ‘earliest’ to ‘latest’ measure\n\n\n\ndf_lifetime &lt;- df_lifetime |&gt;\n  relocate(ff,fp,rpd,tt, .after=\"eye\") |&gt; \n  relocate(region_n, region_text, .after=\"trial\")\n\n\nnames(df_lifetime[1:10])\n\n [1] \"px\"          \"trial\"       \"region_n\"    \"region_text\" \"eye\"        \n [6] \"ff\"          \"fp\"          \"rpd\"         \"tt\"          \"fix_count\"",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#mutate",
+    "href": "slides/06-data_wrangling/cleaning.html#mutate",
+    "title": "Data wrangling",
+    "section": "mutate()",
+    "text": "mutate()\nMutate column(s):\n\n\n\nnew columns\n\n\ndf_lifetime &lt;- df_lifetime |&gt;\n  mutate(new_column = \"new\")\n\n\nwhat will new_column contain?\n\n\ndf_lifetime |&gt; \n  select(px, new_column, trial) |&gt; \n  head() \n\n# A tibble: 6 × 3\n  px    new_column trial\n  &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;\n1 px3   new            1\n2 px3   new            2\n3 px3   new            3\n4 px3   new            3\n5 px3   new            3\n6 px3   new            3\n\n\n\n\nchange existing column\n\n\ndf_lifetime &lt;- df_lifetime |&gt;\n  mutate(new_column = px,\n         trial = trial + 5)\n\n\nwhat will new_column and trial contain?\n\n\ndf_lifetime |&gt; \n  select(px, new_column, trial) |&gt; \n  head() \n\n# A tibble: 6 × 3\n  px    new_column trial\n  &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;\n1 px3   px3            6\n2 px3   px3            7\n3 px3   px3            8\n4 px3   px3            8\n5 px3   px3            8\n6 px3   px3            8\n\n\n\n\nbut let’s undo that…\n\n\ndf_lifetime &lt;- df_lifetime |&gt;\n  mutate(trial = trial - 5)\n\n\nwhat will trial contain?\n\n\ndf_lifetime |&gt; \n  select(px, new_column, trial) |&gt; \n  head() \n\n# A tibble: 6 × 3\n  px    new_column trial\n  &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;\n1 px3   px3            1\n2 px3   px3            2\n3 px3   px3            3\n4 px3   px3            3\n5 px3   px3            3\n6 px3   px3            3\n\n\n\n\n\nif_else()\n\ncan be used e.g., inside mutate()\n\nchange values based on some logical condition\ncan be used to change an existing column, or create a new one\n\nifelse(condition, output_if_true, output_if_false)\n\n\ndf_lifetime &lt;- df_lifetime |&gt;\n  mutate(new_column = if_else(name==\"Aaliyah\",\"name is Aaliyah\",\"name is not Aaliyah\"))\n\n\n\n\n\n\n\n\n\n\nLogical operators\n\n\n\n\nsymbols used to describe a logical condition\n== is idential (1 == 1)\n!= is not identical (1 != 2)\n&gt; is greater than (2 &gt; 1)\n&lt; is less than (1 &lt; 2)\n& and also (for multiple conditions)\n| or (for multiple conditions)\n\n\n\n\n\ncase_when()\n\ncan be used e.g., inside mutate()\n\nchange values based on multiple logical conditions\nfor cases too complex for ifelse()\ncan be used to change an existing column, or create a new one\n\ncase_when(condition & other_condition | other_condition ~ output, TRUE ~ output_otherwise)\n\nif you don’t include TRUE ~ output then NAs will created\n\n\n\ndf_lifetime &lt;- df_lifetime |&gt;\n  mutate(newer_column = case_when(\n    name==\"Aaliyah\" & trial &gt; 104 ~ \"Aaliyah 2nd half\",\n    name==\"Beyoncé\" & (px == \"px01\" | px == \"px04\") ~ \"Beyoncé px04 or px06\",\n    TRUE ~ \"otherwise\"))\n\n\n\nExercise\n\n\n\nCreate a new variable accept that checks whether the button pressed (KeyPress) equals the button that corresponds to an acceptance (yes_press)\n\nif KeyPress and yes_press are the same, accept should be 1. If not, accept should be 0\nhint: you will need if_else() or case_when()\n\n\n\n\nCreate a new variable accuracy where:\n\nif match is yes and accept is 1, accuracy is 1\nif match is no and accept is 0, accuracy is 1\nif match is yes and accept is 0, accuracy is 0\nif match is no and accept is 1, accuracy is 0\n\n\n\n\nif correct, the means and summaries should look like this:\n\n\n\nmean(df_lifetime$accept)\n\n[1] 0.6068608\n\n\n\nsummary(as_factor(df_lifetime$accept))\n\n   0    1 \n1742 2689 \n\n\n\n\nmean(df_lifetime$accuracy)\n\n[1] 0.6267208\n\n\n\nsummary(as_factor(df_lifetime$accuracy))\n\n   0    1 \n1654 2777 \n\n\n\n\n\n\nExtra exercise\n\n\n\nCreate a new variable region, that has the following values based on region_n\n\n\nregion_n 1 is region verb-1\nregion_n 2 is region verb\nregion_n 3 is region verb+1\nregion_n 4 is region verb+2\nregion_n 5 is region verb+3\nregion_n 6 is region verb+4\n\n\nsummary(as_factor(df_lifetime$region))\n\nfiller verb-1   verb verb+1 verb+2 verb+3 verb+4 \n  1024    639    639    639    639    639    212 \n\n\n\n\nNow relocate our new variables so that:\n\n\nregion is before region_n\nKeyPress is after yes_press\n\n\nnames(df_lifetime)\n\n [1] \"px\"            \"trial\"         \"region\"        \"region_n\"     \n [5] \"region_text\"   \"eye\"           \"ff\"            \"fp\"           \n [9] \"rpd\"           \"tt\"            \"fix_count\"     \"reg_in\"       \n[13] \"reg_in_count\"  \"reg_out\"       \"reg_out_count\" \"rt\"           \n[17] \"bio\"           \"critical\"      \"gender\"        \"item_id\"      \n[21] \"list\"          \"match\"         \"condition\"     \"name\"         \n[25] \"lifetime\"      \"tense\"         \"type\"          \"yes_press\"    \n[29] \"KeyPress\"      \"new_column\"    \"newer_column\"  \"accept\"       \n[33] \"accuracy\"",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#group_by-and-ungroup",
+    "href": "slides/06-data_wrangling/cleaning.html#group_by-and-ungroup",
+    "title": "Data wrangling",
+    "section": "group_by() and ungroup()",
+    "text": "group_by() and ungroup()\nGroup data by certain variable(s)\n\nthen perform some mutation\nthen ungroup the data\n\n\ndf_lifetime &lt;- df_lifetime |&gt;\n  group_by(px) |&gt;\n  mutate(px_accuracy = mean(accuracy)) |&gt;\n  ungroup()\n\n\nround(\n  range(df_lifetime$px_accuracy),\n  2)\n\n[1] 0.26 0.90",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#by",
+    "href": "slides/06-data_wrangling/cleaning.html#by",
+    "title": "Data wrangling",
+    "section": ".by",
+    "text": ".by\n\nmutate() also takes .by = as an argument\n\ndoes the same thing as group_by()/ungroup()\nas of dplyr 1.1.0 version (more info)\n\n\n\ndf_lifetime &lt;- df_lifetime |&gt;\n  mutate(px_accuracy = mean(accuracy),\n         .by = px)\n\n\nround(\n  range(df_lifetime$px_accuracy),\n  2)\n\n[1] 0.26 0.90",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#separate",
+    "href": "slides/06-data_wrangling/cleaning.html#separate",
+    "title": "Data wrangling",
+    "section": "separate()",
+    "text": "separate()\n\ncreate new columns from a single column\n\n\ndf_lifetime &lt;- df_lifetime |&gt;\n  separate(name,\n           sep=\" \",\n           into = c(\"First\",\"Last\"),\n           remove = F, # don't remove original column (name)\n           extra = \"merge\") # if extra chunks, combine in 'Last' (von der...)\n\n\nopposite: unite()",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#select",
+    "href": "slides/06-data_wrangling/cleaning.html#select",
+    "title": "Data wrangling",
+    "section": "select()",
+    "text": "select()\n\n\n\nkeep only certain column(s)\noften used to preview changes\nif result is saved as an object (&lt;-) will remove all other columns\n\nso be careful when saving as an already existing object (e.g., df &lt;- df |&gt; select(...))\n\n\n\n\ndf_lifetime |&gt;\n  select(px) |&gt; head(10)\n\n# A tibble: 10 × 1\n   px   \n   &lt;chr&gt;\n 1 px3  \n 2 px3  \n 3 px3  \n 4 px3  \n 5 px3  \n 6 px3  \n 7 px3  \n 8 px3  \n 9 px3  \n10 px3  \n\n\n\n\ndf_lifetime |&gt;\n  select(px, trial) |&gt; head(10)\n\n# A tibble: 10 × 2\n   px    trial\n   &lt;chr&gt; &lt;dbl&gt;\n 1 px3       1\n 2 px3       2\n 3 px3       3\n 4 px3       3\n 5 px3       3\n 6 px3       3\n 7 px3       3\n 8 px3       3\n 9 px3       4\n10 px3       5",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#select-",
+    "href": "slides/06-data_wrangling/cleaning.html#select-",
+    "title": "Data wrangling",
+    "section": "select(-)",
+    "text": "select(-)\n\nor remove certain columns\n\n\ndf_lifetime |&gt;\n  select(-px, -trial) |&gt; head(10)\n\n# A tibble: 10 × 34\n   region region_n region_text    eye      ff    fp   rpd    tt fix_count reg_in\n   &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;\n 1 filler        1 He owned innu… RIGHT     0     0     0     0         0      0\n 2 filler        1 She is a moth… RIGHT     0     0     0     0         0      0\n 3 verb-1        1 She            RIGHT     0     0     0     0         0      0\n 4 verb          2 will perform   RIGHT     0     0     0     0         0      0\n 5 verb+1        3 in prestigiou… RIGHT     0     0     0     0         0      0\n 6 verb+2        4 in the future, RIGHT     0     0     0     0         0      0\n 7 verb+3        5 as reported i… RIGHT     0     0     0     0         0      0\n 8 verb+4        6 as reported i… RIGHT     0     0     0     0         0      0\n 9 filler        1 He interviewe… RIGHT     0     0     0     0         0      0\n10 verb-1        1 She            RIGHT     0     0     0     0         0      0\n# ℹ 24 more variables: reg_in_count &lt;dbl&gt;, reg_out &lt;dbl&gt;, reg_out_count &lt;dbl&gt;,\n#   rt &lt;dbl&gt;, bio &lt;chr&gt;, critical &lt;chr&gt;, gender &lt;chr&gt;, item_id &lt;dbl&gt;,\n#   list &lt;dbl&gt;, match &lt;chr&gt;, condition &lt;chr&gt;, name &lt;chr&gt;, First &lt;chr&gt;,\n#   Last &lt;chr&gt;, lifetime &lt;chr&gt;, tense &lt;chr&gt;, type &lt;chr&gt;, yes_press &lt;dbl&gt;,\n#   KeyPress &lt;dbl&gt;, new_column &lt;chr&gt;, newer_column &lt;chr&gt;, accept &lt;dbl&gt;,\n#   accuracy &lt;dbl&gt;, px_accuracy &lt;dbl&gt;",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#section-3",
+    "href": "slides/06-data_wrangling/cleaning.html#section-3",
+    "title": "Data wrangling",
+    "section": "",
+    "text": "Select criteria\n\n\n\nYou can also use criteria for select:\n\nselect(starts_with(\"x\")) select columns that start with a character string\nselect(ends_with(\"x\")) select columns that end with a character string\nselect(contains(\"x\")) select columns that contain a character string\nselect(num_range(\"prefix\",10:20)) select columns with a prefix followed by a range of values\n\n\n\n\nExercise\nRemove the example variables we created with mutate:\n\nnew_column, newer_column, First, Last\n\n\n# should look like this after\nnames(df_lifetime)\n\n [1] \"px\"            \"trial\"         \"region\"        \"region_n\"     \n [5] \"region_text\"   \"eye\"           \"ff\"            \"fp\"           \n [9] \"rpd\"           \"tt\"            \"fix_count\"     \"reg_in\"       \n[13] \"reg_in_count\"  \"reg_out\"       \"reg_out_count\" \"rt\"           \n[17] \"bio\"           \"critical\"      \"gender\"        \"item_id\"      \n[21] \"list\"          \"match\"         \"condition\"     \"name\"         \n[25] \"lifetime\"      \"tense\"         \"type\"          \"yes_press\"    \n[29] \"KeyPress\"      \"accept\"        \"accuracy\"      \"px_accuracy\"",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#filter",
+    "href": "slides/06-data_wrangling/cleaning.html#filter",
+    "title": "Data wrangling",
+    "section": "filter()",
+    "text": "filter()\n\nselect certain rows based on certain criteria\n\nrequires logical operators (==, !=, &gt;, &lt;, |)\nN.B. when testing logical conditions == is needed\n\n\n\ndf_lifetime |&gt;\n  filter(trial == 1)\n\n# A tibble: 8 × 32\n  px    trial region region_n region_text          eye      ff    fp   rpd    tt\n  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;                &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 px3       1 filler        1 He owned innumerabl… RIGHT     0     0     0     0\n2 px5       1 filler        1 She is a mother of … RIGHT   145  1603  1603  1603\n3 px6       1 filler        1 He is a father of t… RIGHT   147  1224  1224  1224\n4 px2       1 filler        1 She made innumerabl… RIGHT    84  1829  1829  1829\n5 px7       1 filler        1 In the '70s, he own… RIGHT   138  2456  2456  2456\n6 px1       1 filler        1 Beloved morning sho… RIGHT   160  1708  1708  1708\n7 px8       1 filler        1 She was a mother of… RIGHT   220   806   806   806\n8 px4       1 filler        1 In the '70s, he own… LEFT    171  3557  3557  3557\n# ℹ 22 more variables: fix_count &lt;dbl&gt;, reg_in &lt;dbl&gt;, reg_in_count &lt;dbl&gt;,\n#   reg_out &lt;dbl&gt;, reg_out_count &lt;dbl&gt;, rt &lt;dbl&gt;, bio &lt;chr&gt;, critical &lt;chr&gt;,\n#   gender &lt;chr&gt;, item_id &lt;dbl&gt;, list &lt;dbl&gt;, match &lt;chr&gt;, condition &lt;chr&gt;,\n#   name &lt;chr&gt;, lifetime &lt;chr&gt;, tense &lt;chr&gt;, type &lt;chr&gt;, yes_press &lt;dbl&gt;,\n#   KeyPress &lt;dbl&gt;, accept &lt;dbl&gt;, accuracy &lt;dbl&gt;, px_accuracy &lt;dbl&gt;",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#filter-1",
+    "href": "slides/06-data_wrangling/cleaning.html#filter-1",
+    "title": "Data wrangling",
+    "section": "filter()",
+    "text": "filter()\nWhat are these code chunks doing?\n\n\n\ndf_lifetime |&gt;\n  filter(px_accuracy &gt; .5)\n\n\n\ndf_lifetime |&gt;\n  filter(px == \"px3\")\n\n\n\n\n\n\ndf_lifetime |&gt;\n  filter(px == \"px3\" | trial == \"3\")\n\n\n\ndf_lifetime |&gt;\n  filter(px == \"px3\" & trial != \"3\")\n\n\n\n\nExercise\n\n\n\nCreate a new dataframe df_crit that includes only critical trials\nCreate a new dataframe df_fill that includes only filler trials\n\n\nTip: trial type is stored in the column type\n\n\n\ndf_crit |&gt; select(type) |&gt; head()\n\n# A tibble: 6 × 1\n  type    \n  &lt;chr&gt;   \n1 critical\n2 critical\n3 critical\n4 critical\n5 critical\n6 critical\n\n\n\n\ndf_fill |&gt; select(type) |&gt; head()\n\n# A tibble: 6 × 1\n  type  \n  &lt;chr&gt; \n1 filler\n2 filler\n3 filler\n4 filler\n5 filler\n6 filler",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#distinct",
+    "href": "slides/06-data_wrangling/cleaning.html#distinct",
+    "title": "Data wrangling",
+    "section": "distinct()",
+    "text": "distinct()\n\n\n\nlike filter(), but for distinct values of a variable\n\n“select rows with distinct values for some row(s)”\n\n\n\n\ndf_crit |&gt;\n  distinct(px)\n\n# A tibble: 8 × 1\n  px   \n  &lt;chr&gt;\n1 px3  \n2 px5  \n3 px6  \n4 px2  \n5 px7  \n6 px1  \n7 px8  \n8 px4  \n\n\n\n\ndf_crit |&gt;\n  distinct(px, name)\n\n# A tibble: 639 × 2\n   px    name          \n   &lt;chr&gt; &lt;chr&gt;         \n 1 px3   Edith Piaf    \n 2 px3   Aaliyah       \n 3 px3   David Beckham \n 4 px3   Jana Novotna  \n 5 px3   Grace Kelly   \n 6 px3   Nigella Lawson\n 7 px3   Coco Chanel   \n 8 px3   Ben Kingsley  \n 9 px3   Jim Carrey    \n10 px3   Judy Garland  \n# ℹ 629 more rows\n\n\n\n\ndf_crit |&gt;\n  distinct(px, name,\n           .keep_all=T)\n\n# A tibble: 639 × 32\n   px    trial region region_n region_text eye      ff    fp   rpd    tt\n   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 px3       3 verb-1        1 She         RIGHT     0     0     0     0\n 2 px3       5 verb-1        1 She         RIGHT     0     0     0     0\n 3 px3       8 verb-1        1 He          RIGHT     0     0     0     0\n 4 px3      10 verb-1        1 She         RIGHT     0     0     0     0\n 5 px3      13 verb-1        1 She         RIGHT     0     0     0     0\n 6 px3      16 verb-1        1 She         RIGHT     0     0     0     0\n 7 px3      18 verb-1        1 She         RIGHT     0     0     0     0\n 8 px3      21 verb-1        1 He          RIGHT     0     0     0     0\n 9 px3      23 verb-1        1 He          RIGHT     0     0     0     0\n10 px3      26 verb-1        1 She         RIGHT     0     0     0     0\n# ℹ 629 more rows\n# ℹ 22 more variables: fix_count &lt;dbl&gt;, reg_in &lt;dbl&gt;, reg_in_count &lt;dbl&gt;,\n#   reg_out &lt;dbl&gt;, reg_out_count &lt;dbl&gt;, rt &lt;dbl&gt;, bio &lt;chr&gt;, critical &lt;chr&gt;,\n#   gender &lt;chr&gt;, item_id &lt;dbl&gt;, list &lt;dbl&gt;, match &lt;chr&gt;, condition &lt;chr&gt;,\n#   name &lt;chr&gt;, lifetime &lt;chr&gt;, tense &lt;chr&gt;, type &lt;chr&gt;, yes_press &lt;dbl&gt;,\n#   KeyPress &lt;dbl&gt;, accept &lt;dbl&gt;, accuracy &lt;dbl&gt;, px_accuracy &lt;dbl&gt;",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#arrange",
+    "href": "slides/06-data_wrangling/cleaning.html#arrange",
+    "title": "Data wrangling",
+    "section": "arrange()",
+    "text": "arrange()\n\n\n\nsort column(s) in ascending or descending order\n\nthis is really just for ease of reading\n\n\n\n\n# default: ascending order (A-Z)\ndf_crit |&gt;\n  distinct(px, trial, name, condition) |&gt;\n  arrange(px, trial)\n\n# A tibble: 639 × 4\n   px    trial name            condition\n   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;    \n 1 px1       3 Amy Winehouse   deadPP   \n 2 px1       5 John Wayne      deadPP   \n 3 px1       8 Abraham Lincoln deadPP   \n 4 px1      10 Helen Mirren    livingSF \n 5 px1      13 Paul McCartney  livingSF \n 6 px1      16 Ariana Grande   livingPP \n 7 px1      18 Kate Middleton  livingSF \n 8 px1      21 Johan Cruyff    deadSF   \n 9 px1      23 Marilyn Monroe  deadPP   \n10 px1      26 Biggie Smalls   deadSF   \n# ℹ 629 more rows\n\n\n\n\n# descending order (Z-A)\ndf_crit |&gt;\n  distinct(px, trial, name, condition) |&gt;\n  arrange(desc(px), trial)\n\n# A tibble: 639 × 4\n   px    trial name            condition\n   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;    \n 1 px8       3 Whitney Houston deadPP   \n 2 px8       5 Elton John      livingSF \n 3 px8       8 Jackie Chan     livingPP \n 4 px8      10 Romy Schneider  deadPP   \n 5 px8      13 James Cameron   livingSF \n 6 px8      16 Ella Fitzgerald deadSF   \n 7 px8      18 Kathryn Hepburn deadPP   \n 8 px8      21 Kate Middleton  livingPP \n 9 px8      23 Janis Joplin    deadPP   \n10 px8      26 Serena Williams livingSF \n# ℹ 629 more rows",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#important-terms",
+    "href": "slides/06-data_wrangling/cleaning.html#important-terms",
+    "title": "Data wrangling",
+    "section": "Important terms",
+    "text": "Important terms\n\n\n\n\n\n\n\nwrangle\nhave a long dispute\n\n\ndata wrangling\ntidying and transforming your data\n\n\ntidy data\ndata where each column is a variable and each row is an observation\n\n\nthe tidyverse\na group of packages for tidy data\n\n\ndplyr\na package within the tidyverse for data wrangling\n\n\npipe operator (|&gt; or |&gt;)\noperational function, passes the result of one function/argument to the next\n\n\nlogical operators\ncompare values of two arguments: &, |, ==, !=, &gt;, &lt;",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#important-functions",
+    "href": "slides/06-data_wrangling/cleaning.html#important-functions",
+    "title": "Data wrangling",
+    "section": "Important functions",
+    "text": "Important functions\n\n\n\n\n\n\n\nread_csv()\nread-in a csv as a tibble (from readr package)\n\n\nrename()\nrename variables\n\n\nrelocate()\nmove variables\n\n\nmutate()\nchange or create new variables\n\n\nif_else()\ncondition for `mutate()`\n\n\ncase_when()\nhandle multiple conditions for `mutate()`\n\n\ngroup_by()\ngroup by a certain variable\n\n\nselect()\nkeep (or exclude) certain variables\n\n\nfilter()\nkeep (or exclude) rows based on some criteria\n\n\ndistinct()\nkeep rows with distinct value of given variable(s)\n\n\narrange()\nsort variable(s) in ascending or descending order\n\n\nseparate()\nsplit a variable into multiple variables\n\n\npivot_longer()\nmake wide data longer\n\n\npivot_wider()\nmake long data wider",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/data_tidying/tidying.html",
+    "href": "slides/data_tidying/tidying.html",
+    "title": "Untitled",
+    "section": "",
+    "text": "this is the major step of data tidying\n\nmake each column a variable\nmake each row an observation\nmake each cell a data point\n\nwhat variable and observation mean will depend on what you want to do, and will change at different steps of your analyses\nyou typically want long data\n\nbut our dataset isn’t as long as it could be\n\n\n\n\n\n\n\n\n\n\n\ntakes wide data and makes it longer\n\nconverts headers of columns into values of a new column\ncombines the values of those columns into a new condensed column\n\ntakes a few arguments:\n\ncols: which columns do we want to combine into a single column?\nnames_to: what should we call the new column containing the previous column names?\nvalues_to: what should we call the new column containing the values from the previous columns?\n\n\n\n\n\n\ndf_lifetime |&gt; \n  select(px,trial,region,ff,fp,rpd,tt,rt,type,accept,condition) |&gt;\n  filter(type==\"critical\",region==\"verb\",px!=\"px3\") |&gt;\n  pivot_longer(\n  cols = c(ff,fp,rpd,tt,rt), # columns to make long \n  names_to = \"measure\", # new column name for headers\n  values_to = \"time\" # new column name for values\n)\n\n\nSource: PsyTeachR\n\n\n\n\n\ntakes long data and makes it wider\ntakes a few arguments:\n\nid_cols: identifying columns\nnames_from: what should we call the new column containing the previous column names?\nnames_prefix:\nvalues_from: new column values\n\n\n\n\n\n\ndf_lifetime |&gt; \n  select(px,trial,region,ff,fp,rpd,tt,rt,type,accept,condition) |&gt;\n  filter(type==\"critical\",px!=\"px3\") |&gt;\n  pivot_wider(\n  id_cols = c(px,trial), # columns to make long \n  names_from = region, # new column name for headers\n  names_prefix = \"reg_\", # new column name for values\n  values_from = tt\n)\n\n\nSource: PsyTeachR"
+  },
+  {
+    "objectID": "slides/data_tidying/tidying.html#pivot_longer",
+    "href": "slides/data_tidying/tidying.html#pivot_longer",
+    "title": "Untitled",
+    "section": "",
+    "text": "takes wide data and makes it longer\n\nconverts headers of columns into values of a new column\ncombines the values of those columns into a new condensed column\n\ntakes a few arguments:\n\ncols: which columns do we want to combine into a single column?\nnames_to: what should we call the new column containing the previous column names?\nvalues_to: what should we call the new column containing the values from the previous columns?"
+  },
+  {
+    "objectID": "slides/data_tidying/tidying.html#pivot_longer-1",
+    "href": "slides/data_tidying/tidying.html#pivot_longer-1",
+    "title": "Untitled",
+    "section": "",
+    "text": "df_lifetime |&gt; \n  select(px,trial,region,ff,fp,rpd,tt,rt,type,accept,condition) |&gt;\n  filter(type==\"critical\",region==\"verb\",px!=\"px3\") |&gt;\n  pivot_longer(\n  cols = c(ff,fp,rpd,tt,rt), # columns to make long \n  names_to = \"measure\", # new column name for headers\n  values_to = \"time\" # new column name for values\n)\n\n\nSource: PsyTeachR"
+  },
+  {
+    "objectID": "slides/data_tidying/tidying.html#pivot_wider",
+    "href": "slides/data_tidying/tidying.html#pivot_wider",
+    "title": "Untitled",
+    "section": "",
+    "text": "takes long data and makes it wider\ntakes a few arguments:\n\nid_cols: identifying columns\nnames_from: what should we call the new column containing the previous column names?\nnames_prefix:\nvalues_from: new column values"
+  },
+  {
+    "objectID": "slides/data_tidying/tidying.html#pivot_wider-1",
+    "href": "slides/data_tidying/tidying.html#pivot_wider-1",
+    "title": "Untitled",
+    "section": "",
+    "text": "df_lifetime |&gt; \n  select(px,trial,region,ff,fp,rpd,tt,rt,type,accept,condition) |&gt;\n  filter(type==\"critical\",px!=\"px3\") |&gt;\n  pivot_wider(\n  id_cols = c(px,trial), # columns to make long \n  names_from = region, # new column name for headers\n  names_prefix = \"reg_\", # new column name for values\n  values_from = tt\n)\n\n\nSource: PsyTeachR"
+  },
+  {
+    "objectID": "slides/06-data_wrangling/cleaning.html#wrangler",
+    "href": "slides/06-data_wrangling/cleaning.html#wrangler",
+    "title": "Data wrangling",
+    "section": "Wrangler",
+    "text": "Wrangler\n\n\nJeep Wrangler \n\nWrangler Jeans \n\nCowboys",
+    "crumbs": [
+      "D. Palleschi",
+      "Data wrangling"
     ]
   }
 ]

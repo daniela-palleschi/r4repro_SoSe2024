@@ -5,29 +5,29 @@ website:
   title: "R for Reproducibility"
   twitter-card: true
   navbar:
-    left:
-      - href: index.qmd
-        text: Home
+    right:
+      - icon: home
+        href: https://daniela-palleschi.github.io/
+        text: D. Palleschi
+      - icon: github
+        href: https://github.com/daniela-palleschi/r4repro_SoSe2024
+        aria-label: Source Code
+      - icon: life-preserver
+        href: https://moodle.hu-berlin.de/course/view.php?id=127770
+        aria-label: Course Moodle
   sidebar:
     contents:
       - slides/01-open_science/open_science.qmd
       - slides/02-replication_crisis/replication_crisis.qmd
       - slides/03-reproducibility/reproducibility.qmd
+      - slides/04-rprojects/rprojects.qmd
+      - slides/05-literate_programming/lit_programming.qmd
+      - slides/06-data_wrangling/wrangling.qmd
 
     # - references.qmd
 # 
 # 
-#   navbar:
-#     right:
-#       - icon: home
-#         href: https://daniela-palleschi.github.io/
-#         text: D. Palleschi
-#       - icon: github
-#         href: https://github.com/daniela-palleschi/reg4ling
-#         aria-label: Source Code
-#       - icon: life-preserver
-#         href: https://moodle.hu-berlin.de/course/view.php?id=121978
-#         aria-label: Course Moodle
+  
 
 bibliography: references.bib
 csl: apa.csl
