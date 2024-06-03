@@ -598,177 +598,702 @@
     "text": "Printing session info\n\nso, print your session info at the end of every script!\n\n\nsessionInfo()\n\nR version 4.4.0 (2024-04-24)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Ventura 13.2.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Berlin\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nloaded via a namespace (and not attached):\n [1] compiler_4.4.0    fastmap_1.1.1     cli_3.6.2         htmltools_0.5.8.1\n [5] tools_4.4.0       rstudioapi_0.16.0 yaml_2.3.8        rmarkdown_2.26   \n [9] knitr_1.46        jsonlite_1.8.8    xfun_0.43         digest_0.6.35    \n[13] rlang_1.1.3       renv_1.0.7        evaluate_0.23    \n\n\n\n\n\n\n\n\n\n\nKnuth, D. (1984). Literate programming. The Computer Journal, 27(2), 97–111."
   },
   {
-    "objectID": "slides/01-open_science/open-science.html",
-    "href": "slides/01-open_science/open-science.html",
-    "title": "Open Science",
+    "objectID": "slides/08-data_viz/slides-data_viz.html#summary-of-first-fixation-times",
+    "href": "slides/08-data_viz/slides-data_viz.html#summary-of-first-fixation-times",
+    "title": "Data Visualisation with ggplot2",
+    "section": "Summary of first-fixation times",
+    "text": "Summary of first-fixation times\n\nthis code is from the previous topic\n\n\n# compute summary \nsummary_ff &lt;- df_lifetime |&gt; \n  filter(region==\"verb\") |&gt; \n  group_by(condition, lifetime, tense) %&gt;%\n  summarise(N = n(),\n            mean.ff = mean(ff, na.rm = T),\n            sd = sd(ff, na.rm = T)) %&gt;%\n  # compute standard error, confidence intervals, and lower/upper ci bounds\n  mutate(se = sd / sqrt(N),\n         ci = qt(1 - (0.05 / 2), N - 1) * se,\n         lower.ci = mean.ff - qt(1 - (0.05 / 2), N - 1) * se,\n         upper.ci = mean.ff + qt(1 - (0.05 / 2), N - 1) * se) |&gt; \n  ungroup()"
+  },
+  {
+    "objectID": "slides/08-data_viz/slides-data_viz.html#start-layering",
+    "href": "slides/08-data_viz/slides-data_viz.html#start-layering",
+    "title": "Data Visualisation with ggplot2",
+    "section": "Start layering",
+    "text": "Start layering\n\n\ndf_lifetime |&gt; ggplot(aes(ff)) # aes = 'aesthetic'"
+  },
+  {
+    "objectID": "slides/08-data_viz/slides-data_viz.html#add-labels",
+    "href": "slides/08-data_viz/slides-data_viz.html#add-labels",
+    "title": "Data Visualisation with ggplot2",
+    "section": "Add labels",
+    "text": "Add labels\n\n\ndf_lifetime |&gt; ggplot(aes(ff)) + \n  labs(title = \"Histogram of first fixation times\",\n       x = \"First fixation times (ms)\")"
+  },
+  {
+    "objectID": "slides/08-data_viz/slides-data_viz.html#add",
+    "href": "slides/08-data_viz/slides-data_viz.html#add",
+    "title": "Data Visualisation with ggplot2",
+    "section": "Add",
+    "text": "Add\n\n\ndf_lifetime |&gt; ggplot(aes(ff)) + \n  labs(title = \"Histogram of first fixataion times\",\n       x = \"First fixation times (ms)\") +\n  geom_histogram()\n\n\n\n\nDistribution of first fixation times at the verb region (raw milliseconds)"
+  },
+  {
+    "objectID": "slides/08-data_viz/slides-data_viz.html#add-condition",
+    "href": "slides/08-data_viz/slides-data_viz.html#add-condition",
+    "title": "Data Visualisation with ggplot2",
+    "section": "Add condition",
+    "text": "Add condition\n\n\ndf_lifetime |&gt; ggplot(aes(ff, fill = condition)) + \n  labs(title = \"First fixataion times at the verb region\",\n       x = \"First fixation times (ms)\") +\n  geom_histogram()\n\n\n\n\nDistribution of first fixation times at the verb region (raw milliseconds)\n\n\n\n\n\n\n\nThe colour here is STACKED!! i.e., not layered. Notice the distribution doesn’t change from all grey to coloured"
+  },
+  {
+    "objectID": "slides/08-data_viz/slides-data_viz.html#customisation",
+    "href": "slides/08-data_viz/slides-data_viz.html#customisation",
+    "title": "Data Visualisation with ggplot2",
+    "section": "Customisation",
+    "text": "Customisation\n\nwe can add arguments to our geoms\n\ne.g., transparency: alpha = takes a value between 0 to 1\n\nwe can use theme() to customise font sizes, legend placement, etc.\ntehre are also popular preset themes, such as theme_bw() and theme_minimal()\n\n\ntheme_bw()theme_minimal()\n\n\n\n\ndf_lifetime |&gt; ggplot(aes(ff, fill = condition)) + \n  labs(title = \"Histogram of first fixataion times\",\n       x = \"First fixation times (ms)\") +\n  geom_histogram(alpha=.5) +\n  theme_bw()\n\n\n\n\nDistribution of first fixation times at the verb region (raw milliseconds).\n\n\n\n\n\n\n\n\n\n\ndf_lifetime |&gt; ggplot(aes(ff, fill = condition)) + \n  labs(title = \"Histogram of first fixataion times\",\n       x = \"First fixation times (ms)\") +\n  geom_histogram(alpha=.5) +\n  theme_minimal()\n\n\n\n\nDistribution of first fixation times at the verb region (raw milliseconds)."
+  },
+  {
+    "objectID": "slides/08-data_viz/slides-data_viz.html#density-plots",
+    "href": "slides/08-data_viz/slides-data_viz.html#density-plots",
+    "title": "Data Visualisation with ggplot2",
+    "section": "Density plots",
+    "text": "Density plots\n\nbelow I just replaced geom_histogram() with geom_density()\n\nI also filtered the data to include only values of ff above 0\n\nwhat is plotted along the y-axis? how does this differ from a histogram?\n\n\n\ndf_lifetime |&gt; \n  filter(ff &gt; 0) |&gt; \n  ggplot(aes(ff)) + \n  labs(title = \"Histogram of first fixataion times\",\n       x = \"First fixation times (ms)\") +\n  geom_density() +\n  theme_minimal()\n\n\n\n\nDistribution of first fixation times at the verb region (raw milliseconds)."
+  },
+  {
+    "objectID": "slides/08-data_viz/slides-data_viz.html#grouped-density-plots",
+    "href": "slides/08-data_viz/slides-data_viz.html#grouped-density-plots",
+    "title": "Data Visualisation with ggplot2",
+    "section": "Grouped density plots",
+    "text": "Grouped density plots\n\njust like with histograms, we can look at the density plots of different subsets of the data with aes(fill = )\n\nlike region\n\n\n\n\ndf_lifetime |&gt; \n  filter(ff &gt; 0) |&gt; \n  ggplot(aes(ff, fill = region)) + \n  labs(title = \"Histogram of first fixataion times\",\n       x = \"First fixation times (ms)\") +\n  geom_density(alpha=.5) +\n  theme_minimal()\n\n\n\n\nDistribution of first fixation times at the verb region (raw milliseconds)."
+  },
+  {
+    "objectID": "slides/08-data_viz/slides-data_viz.html#scatterplots",
+    "href": "slides/08-data_viz/slides-data_viz.html#scatterplots",
+    "title": "Data Visualisation with ggplot2",
+    "section": "Scatterplots",
+    "text": "Scatterplots\n\nhistograms and density plots plot a single variable along the x-axis\n\nin most other plots the dependent (measure) variable is plotted along the y-axis by convention\n\nscatterplots plot the relationship between two variables\n\n\n\niris |&gt; \n  ggplot(aes(x=Sepal.Length, y=Sepal.Width)) +\n  geom_point() +\n  labs(title = \"A scatterplot\",\n       x = \"variable X\",\n       y = \"variable Y\")"
+  },
+  {
+    "objectID": "slides/08-data_viz/slides-data_viz.html#bar-plot",
+    "href": "slides/08-data_viz/slides-data_viz.html#bar-plot",
+    "title": "Data Visualisation with ggplot2",
+    "section": "Bar plot",
+    "text": "Bar plot\n\n\n\nshow the distribution of categorical factor levels\n\ni.e., the frequency of observations per level\n\nbe sure to read in accept as a factor!\n\n\n\n\nCode\ndf_lifetime |&gt; \n  distinct(px,trial,.keep_all=T) |&gt; \n  ggplot(aes(x = as.factor(accept) )) +\n  geom_bar() +\n  theme_bw()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ndf_lifetime |&gt; \n  distinct(px,trial,.keep_all=T) |&gt; \n  ggplot(aes(x = as.factor(accept), fill = condition)) +\n  labs(title = \"Binary responses\",\n       x = \"Naturalness response\",\n       fill = \"Condition\") +\n  geom_bar() +\n  theme_bw()"
+  },
+  {
+    "objectID": "slides/08-data_viz/slides-data_viz.html#grouped-bar-plots",
+    "href": "slides/08-data_viz/slides-data_viz.html#grouped-bar-plots",
+    "title": "Data Visualisation with ggplot2",
+    "section": "Grouped bar plots",
+    "text": "Grouped bar plots\n\ndf_lifetime |&gt; \n  distinct(px,trial,.keep_all=T) |&gt; \n  ggplot(aes(x = as.factor(accept), fill = condition)) +\n  labs(title = \"Binary responses\",\n       x = \"Naturalness response\",\n       fill = \"Condition\") +\n  geom_bar(position = \"dodge\") +\n  theme_bw()"
+  },
+  {
+    "objectID": "slides/08-data_viz/slides-data_viz.html#grouped-bar-plots-1",
+    "href": "slides/08-data_viz/slides-data_viz.html#grouped-bar-plots-1",
+    "title": "Data Visualisation with ggplot2",
+    "section": "Grouped bar plots",
+    "text": "Grouped bar plots\n\ndf_lifetime |&gt; \n  distinct(px,trial,.keep_all=T) |&gt; \n  ggplot(aes(x = lifetime, fill = as.factor(accept))) +\n  facet_grid(.~tense) +\n  labs(title = \"Grouped and faceted barplot\",\n       x = \"Lifetime\",\n       fill = \"Response\") +\n  geom_bar(position = \"dodge\") +\n  theme_bw()"
+  },
+  {
+    "objectID": "slides/08-data_viz/slides-data_viz.html#stacked-bar-plots",
+    "href": "slides/08-data_viz/slides-data_viz.html#stacked-bar-plots",
+    "title": "Data Visualisation with ggplot2",
+    "section": "Stacked bar plots",
+    "text": "Stacked bar plots\n\ndf_lifetime |&gt; \n  distinct(px,trial,.keep_all=T) |&gt; \n  ggplot(aes(x = lifetime, fill = as.factor(accept))) +\n  facet_grid(.~tense) +\n  labs(title = \"Stacked and faceted barplot\",\n       x = \"Lifetime\",\n       fill = \"Response\") +\n  geom_bar(position = \"stack\") +\n  theme_bw()"
+  },
+  {
+    "objectID": "slides/08-data_viz/slides-data_viz.html#boxplots",
+    "href": "slides/08-data_viz/slides-data_viz.html#boxplots",
+    "title": "Data Visualisation with ggplot2",
+    "section": "Boxplots",
+    "text": "Boxplots\n\nboxplots provide information about the distribution of a continuous variable\n\nbut includes information like median (dark line) and quartiles (box and whiskers)\nand outliers (dots)\n\nlike scatterplots, require x and y variables\n\nbut one of them needs to be categorical"
+  },
+  {
+    "objectID": "slides/08-data_viz/slides-data_viz.html#section",
+    "href": "slides/08-data_viz/slides-data_viz.html#section",
+    "title": "Data Visualisation with ggplot2",
     "section": "",
-    "text": "Today we will learn…\n\nwhat Open Science Practices are\nwhy they’re important\nwhich practices you can implement",
+    "text": "iris |&gt; \n  ggplot(aes(x = Species, y = Sepal.Length)) +\n  labs(title = \"A scatterplot\",\n       x = \"Categorical variable\",\n       y = \"Continuous variable\") +\n  geom_boxplot()\n\n\n\n\nA scatterplot. Median (50th percentile): thick black lines; interquartile range (IQR; 25th and 75th percentile): box limits; minimum (0th percentile) and maximum (100th percentile) excluding outliers: : whiskers; outliers: points"
+  },
+  {
+    "objectID": "slides/08-data_viz/slides-data_viz.html#boxplot-explained",
+    "href": "slides/08-data_viz/slides-data_viz.html#boxplot-explained",
+    "title": "Data Visualisation with ggplot2",
+    "section": "Boxplot explained",
+    "text": "Boxplot explained\n\nImage source: Winter (2019) (all rights reserved)\nwhiskers: 1.5*IQR from Q1 (lower whisker) or Q3 (upper whisker) outliers: outside that range"
+  },
+  {
+    "objectID": "slides/08-data_viz/slides-data_viz.html#boxplots-1",
+    "href": "slides/08-data_viz/slides-data_viz.html#boxplots-1",
+    "title": "Data Visualisation with ggplot2",
+    "section": "Boxplots",
+    "text": "Boxplots\n\nlet’s change our scatterplot to a boxplot\n\n\n\ndf_lifetime |&gt;\n  filter(ff &gt; 0,\n         region == \"verb\") |&gt;\n  ggplot(aes(x = tense, y = ff)) +\n  labs(title = \"First-fixation duration (verb region)\",\n       x = \"Tense\",\n       y = \"First-fixation duration (ms)\") +\n  geom_boxplot(alpha = .2) +\n  theme_bw()"
+  },
+  {
+    "objectID": "slides/08-data_viz/slides-data_viz.html#interaction-plots",
+    "href": "slides/08-data_viz/slides-data_viz.html#interaction-plots",
+    "title": "Data Visualisation with ggplot2",
+    "section": "Interaction plots",
+    "text": "Interaction plots\n\n\n\ncommon for factorial designs, i.e., comparing categorical predictors\nthere are 2 ways of producing them:\n\nwith your data frame and stat_summary()\nor with a summary table and ggplot geoms geom_point(), geom_errorbar(), and geom_line()\n\nwe’ll need our summary table to plot an interaction plot\n\n\n\n\n\n\n\n\ncondition\nlifetime\ntense\nN\nmean.ff\nsd\nse\nci\nlower.ci\nupper.ci\n\n\n\n\ndeadPP\ndead\nPP\n140\n198.9\n57.9\n4.9\n9.7\n189.2\n208.6\n\n\ndeadSF\ndead\nSF\n139\n194.6\n67.9\n5.8\n11.4\n183.2\n205.9\n\n\nlivingPP\nliving\nPP\n140\n194.2\n77.3\n6.5\n12.9\n181.3\n207.1\n\n\nlivingSF\nliving\nSF\n140\n186.0\n57.6\n4.9\n9.6\n176.4\n195.6\n\n\n\n\n\n\n\n\n\n\nCode\nlibrary(patchwork)\n\ndf_lifetime |&gt; \n  filter(region == \"verb\") |&gt; \n  ggplot(aes(x = lifetime, y = ff, \n                     shape = tense,\n                     group = tense,\n                     color = tense)) +\n  labs(title=\"Interaction plot (`stat_summary()`)\",\n       x = \"Lifetime\",\n       y = \"First fix (ms)\",\n       shape = \"Tense\", group = \"Tense\", color = \"Tense\", linetype = \"Tense\") +\n  stat_summary(fun = \"mean\", geom = \"point\", size = 3, position = position_dodge(0.2)) +\n  stat_summary(fun = \"mean\", geom = \"line\", position = position_dodge(0.2), aes(linetype=tense)) +\n  stat_summary(fun.data = \"mean_cl_normal\", geom = \"errorbar\", width = .2\n               , position = position_dodge(0.2)) +\n  theme_bw() +\n  \nsummary_ff |&gt; \n  ggplot(aes(x = lifetime, y = mean.ff, \n                     shape = tense,\n                     group = tense,\n                     color = tense)) +\n  labs(title=\"Interaction plot (geoms)\",\n       x = \"Lifetime\",\n       y = \"First fix (ms)\",\n       shape = \"Tense\", group = \"Tense\", color = \"Tense\", linetype = \"Tense\") +\n  geom_point(size = 3,\n                position = position_dodge(0.2)) +\n  geom_line(aes(linetype=tense), position = position_dodge(0.2)) +\n  geom_errorbar(aes(ymin = mean.ff - ci,\n                    ymax = mean.ff + ci),\n                width = .2,\n                position = position_dodge(0.2)) +\n  theme_bw() +\n  plot_annotation(tag_levels = \"A\") +\n  plot_layout(guides = \"collect\") &\n  theme(legend.position = \"bottom\")\n\n\n\n\n\nFigure 1: Identical interaction plots produced two ways: feeding a dataset into ggplot() and using stat_summary() (A) or feeding a summary table into ggplot() and using geoms (B)"
+  },
+  {
+    "objectID": "slides/08-data_viz/slides-data_viz.html#ggsave",
+    "href": "slides/08-data_viz/slides-data_viz.html#ggsave",
+    "title": "Data Visualisation with ggplot2",
+    "section": "ggsave()",
+    "text": "ggsave()\n\nthe ggsave() function is useful for saving ggplot objects\n\nwe first have to save one of our figures as an object\nI usually save ggplot objects with the prefix fig_ (short for figure)\n\nmake sure you also have a useful place to store these figures\n\ne.g., a folder called figures\n\n\n\n\nCode\nfig_lifetime_ff &lt;-\nsummary_ff |&gt; \n  ggplot(aes(x = lifetime, y = mean.ff, \n                     shape = tense,\n                     group = tense,\n                     color = tense)) +\n  labs(title=\"Mean first-fixation times (verb region) with 95% CIs\",\n       x = \"Lifetime\",\n       y = \"First fix (ms)\",\n       shape = \"Tense\", group = \"Tense\", color = \"Tense\", linetype = \"Tense\") +\n  geom_point(size = 3,\n                position = position_dodge(0.2)) +\n  geom_line(aes(linetype=tense), position = position_dodge(0.2)) +\n  geom_errorbar(aes(ymin = mean.ff - ci,\n                    ymax = mean.ff + ci),\n                width = .2,\n                position = position_dodge(0.2)) +\n  theme_bw()\n\n\n\nggsave(fig_lifetime_ff, filename = here(\"figures\", \"fig_lifetime_ff.png\"))\n\n\nggsave() has lots of arguments to control width, height, resolution, etc.\n\nto see more, run ?ggsave in the Console\n\nyou can also save as JPG/JPEG, SVG, even PDF by just changing the filename extension"
+  },
+  {
+    "objectID": "slides/08-data_viz/slides-data_viz.html#saverds",
+    "href": "slides/08-data_viz/slides-data_viz.html#saverds",
+    "title": "Data Visualisation with ggplot2",
+    "section": "saveRDS()",
+    "text": "saveRDS()\n\nwe can also save the figure as R code\n\nwhich means we can control the width, height, resolution, etc. later on when we load it in\nuseful if you’ll be writing up your results in R markdown or Quarto\n\n\n\nsaveRDS(fig_lifetime_ff, file = here(\"figures\", \"fig_lifetime_ff.rds\"))"
+  },
+  {
+    "objectID": "slides/08-data_viz/slides-data_viz.html#readrds",
+    "href": "slides/08-data_viz/slides-data_viz.html#readrds",
+    "title": "Data Visualisation with ggplot2",
+    "section": "readRDS()",
+    "text": "readRDS()\n\nyou can’t click on the file to view the figure because it’s R code\n\nyou’d need to load the data into R again\n\n\n\nfig_lifetime_ff &lt;- readRDS(here(\"figures\", \"fig_lifetime_ff.rds\"))"
+  },
+  {
+    "objectID": "slides/08-data_viz/slides-data_viz.html#section-1",
+    "href": "slides/08-data_viz/slides-data_viz.html#section-1",
+    "title": "Data Visualisation with ggplot2",
+    "section": "",
+    "text": "Naming files and saving code\n\n\nYou’ll notice I saved the PNG and RDS files using the same name that the I used for the figure in my script. This is an important point: I want to be able to traceback my figures from the code so I can easily track them. It also helps encourage informative object and file names.\nOf course, saving the code used to save the files in our scripts is also useful because we can easily adjust the saved files (e.g., change figure width or height)"
+  },
+  {
+    "objectID": "slides/08-data_viz/sheet-data_viz.html",
+    "href": "slides/08-data_viz/sheet-data_viz.html",
+    "title": "Data Visualisation with ggplot2",
+    "section": "",
+    "text": "visualise variable distributions\nvisualise summary statistics\nsave figures as rds or as figures",
     "crumbs": [
       "D. Palleschi",
-      "Open Science"
+      "Data Visualisation with `ggplot2`"
     ]
   },
   {
-    "objectID": "slides/01-open_science/open-science.html#systemic-problem-in-science",
-    "href": "slides/01-open_science/open-science.html#systemic-problem-in-science",
-    "title": "Open Science",
-    "section": "Systemic problem in science",
-    "text": "Systemic problem in science\n\nthe combination of\n\npublication bias\n\njournals favour novel, significant findings\n\npublish or perish\n\nresearchers’ careers depend on publications\n\n\ncan/does/did lead to:\n\nHARKing\n\nHypothesising After Results are Known\n\np-hacking\n\n(re-)running analyses until a significant effect is found\n\nreplication crisis\n\npervasive failure to replicate previous research",
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#summary-of-first-fixation-times",
+    "href": "slides/08-data_viz/sheet-data_viz.html#summary-of-first-fixation-times",
+    "title": "Data Visualisation with ggplot2",
+    "section": "2.1 Summary of first-fixation times",
+    "text": "2.1 Summary of first-fixation times\n\nthis code is from the previous topic\n\n\n# compute summary \nsummary_ff &lt;- df_lifetime |&gt; \n  filter(region==\"verb\") |&gt; \n  group_by(condition, lifetime, tense) %&gt;%\n  summarise(N = n(),\n            mean.ff = mean(ff, na.rm = T),\n            sd = sd(ff, na.rm = T)) %&gt;%\n  # compute standard error, confidence intervals, and lower/upper ci bounds\n  mutate(se = sd / sqrt(N),\n         ci = qt(1 - (0.05 / 2), N - 1) * se,\n         lower.ci = mean.ff - qt(1 - (0.05 / 2), N - 1) * se,\n         upper.ci = mean.ff + qt(1 - (0.05 / 2), N - 1) * se) |&gt; \n  ungroup()",
     "crumbs": [
       "D. Palleschi",
-      "Open Science"
+      "Data Visualisation with `ggplot2`"
     ]
   },
   {
-    "objectID": "slides/01-open_science/open-science.html#journal-club",
-    "href": "slides/01-open_science/open-science.html#journal-club",
-    "title": "Open Science",
-    "section": "Journal Club",
-    "text": "Journal Club\n\nlevel: Easy\ne.g., ReproducibiliTea Berlin\n\ndiscuss topics and share knowledge on Open Science Practices",
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#start-layering",
+    "href": "slides/08-data_viz/sheet-data_viz.html#start-layering",
+    "title": "Data Visualisation with ggplot2",
+    "section": "5.1 Start layering",
+    "text": "5.1 Start layering\n\ndf_lifetime |&gt; ggplot(aes(ff)) # aes = 'aesthetic'",
     "crumbs": [
       "D. Palleschi",
-      "Open Science"
+      "Data Visualisation with `ggplot2`"
     ]
   },
   {
-    "objectID": "slides/01-open_science/open-science.html#project-workflow",
-    "href": "slides/01-open_science/open-science.html#project-workflow",
-    "title": "Open Science",
-    "section": "Project Workflow",
-    "text": "Project Workflow\n\nlevel: Easy\nfolder structure\n\nhow to sensibly set up your folders\n\ncontained environments\n\nusing RProjects and the here package\n\ndata management\n\nestablishing some data storage convention\n\nversion control\n\ne.g., git, GitHub/GitLab, OSF",
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#add-labels",
+    "href": "slides/08-data_viz/sheet-data_viz.html#add-labels",
+    "title": "Data Visualisation with ggplot2",
+    "section": "5.2 Add labels",
+    "text": "5.2 Add labels\n\ndf_lifetime |&gt; ggplot(aes(ff)) + \n  labs(title = \"Histogram of first fixation times\",\n       x = \"First fixation times (ms)\")",
     "crumbs": [
       "D. Palleschi",
-      "Open Science"
+      "Data Visualisation with `ggplot2`"
     ]
   },
   {
-    "objectID": "slides/01-open_science/open-science.html#preprints",
-    "href": "slides/01-open_science/open-science.html#preprints",
-    "title": "Open Science",
-    "section": "Preprints",
-    "text": "Preprints\n\nlevel: Easy\nmanuscript version publicly available\n\nprior to peer review\nduring peer review\nafter publication\n\nallows for a wider audience\n\nearlier feedback\nactually increases citation count\n\ntypically found on (psy)arXiv, OSF",
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#add",
+    "href": "slides/08-data_viz/sheet-data_viz.html#add",
+    "title": "Data Visualisation with ggplot2",
+    "section": "5.3 Add",
+    "text": "5.3 Add\n\ndf_lifetime |&gt; ggplot(aes(ff)) + \n  labs(title = \"Histogram of first fixataion times\",\n       x = \"First fixation times (ms)\") +\n  geom_histogram()\n\n\n\n\nDistribution of first fixation times at the verb region (raw milliseconds)",
     "crumbs": [
       "D. Palleschi",
-      "Open Science"
+      "Data Visualisation with `ggplot2`"
     ]
   },
   {
-    "objectID": "slides/01-open_science/open-science.html#reproducible-code",
-    "href": "slides/01-open_science/open-science.html#reproducible-code",
-    "title": "Open Science",
-    "section": "Reproducible Code",
-    "text": "Reproducible Code\n\nlevel: Medium\nwith open source software (R, RStudio, packages)\nliterate programming\ndynamic reports with Quarto/Rmarkdown\nreproducibility goes hand-in-hand with project workflow and data management\nideally:\n\navoid GUI (Graphic User Interface with point-and-click, e.g., SPSS)\navoid propreitary software (paid licences, e.g., SPSS, Matlab)\nuse open software (e.g., R, Python)\nuse a programming language and include useful comments",
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#add-condition",
+    "href": "slides/08-data_viz/sheet-data_viz.html#add-condition",
+    "title": "Data Visualisation with ggplot2",
+    "section": "5.4 Add condition",
+    "text": "5.4 Add condition\n\ndf_lifetime |&gt; ggplot(aes(ff, fill = condition)) + \n  labs(title = \"First fixataion times at the verb region\",\n       x = \"First fixation times (ms)\") +\n  geom_histogram()\n\n\n\n\nDistribution of first fixation times at the verb region (raw milliseconds)\n\n\n\n\n\nThe colour here is STACKED!! i.e., not layered. Notice the distribution doesn’t change from all grey to coloured",
     "crumbs": [
       "D. Palleschi",
-      "Open Science"
+      "Data Visualisation with `ggplot2`"
     ]
   },
   {
-    "objectID": "slides/01-open_science/open-science.html#data-sharing",
-    "href": "slides/01-open_science/open-science.html#data-sharing",
-    "title": "Open Science",
-    "section": "Data sharing",
-    "text": "Data sharing\n\nlevel: Medium\npublicly sharing your data\n\nincluding raw data (if possible)\n\nallows for reproduction of analyses\ntakes forethought and experience\ndocumentation and naming conventions are important\n\ne.g., data dictionaries/codebooks",
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#customisation",
+    "href": "slides/08-data_viz/sheet-data_viz.html#customisation",
+    "title": "Data Visualisation with ggplot2",
+    "section": "5.5 Customisation",
+    "text": "5.5 Customisation\n\nwe can add arguments to our geoms\n\ne.g., transparency: alpha = takes a value between 0 to 1\n\nwe can use theme() to customise font sizes, legend placement, etc.\ntehre are also popular preset themes, such as theme_bw() and theme_minimal()\n\n\ntheme_bw()theme_minimal()\n\n\n\ndf_lifetime |&gt; ggplot(aes(ff, fill = condition)) + \n  labs(title = \"Histogram of first fixataion times\",\n       x = \"First fixation times (ms)\") +\n  geom_histogram(alpha=.5) +\n  theme_bw()\n\n\n\n\nDistribution of first fixation times at the verb region (raw milliseconds).\n\n\n\n\n\n\n\ndf_lifetime |&gt; ggplot(aes(ff, fill = condition)) + \n  labs(title = \"Histogram of first fixataion times\",\n       x = \"First fixation times (ms)\") +\n  geom_histogram(alpha=.5) +\n  theme_minimal()\n\n\n\n\nDistribution of first fixation times at the verb region (raw milliseconds).",
     "crumbs": [
       "D. Palleschi",
-      "Open Science"
+      "Data Visualisation with `ggplot2`"
     ]
   },
   {
-    "objectID": "slides/01-open_science/open-science.html#transparent-writing",
-    "href": "slides/01-open_science/open-science.html#transparent-writing",
-    "title": "Open Science",
-    "section": "Transparent writing",
-    "text": "Transparent writing\n\nlevel: Medium\ntransparency regarding\n\nmethods/procedure\nhypotheses (confirmatory vs. exploratory)\ndata analyses\n\nan experiment plan or lab notebook are key!",
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#density-plots",
+    "href": "slides/08-data_viz/sheet-data_viz.html#density-plots",
+    "title": "Data Visualisation with ggplot2",
+    "section": "6.1 Density plots",
+    "text": "6.1 Density plots\n\nbelow I just replaced geom_histogram() with geom_density()\n\nI also filtered the data to include only values of ff above 0\n\nwhat is plotted along the y-axis? how does this differ from a histogram?\n\n\ndf_lifetime |&gt; \n  filter(ff &gt; 0) |&gt; \n  ggplot(aes(ff)) + \n  labs(title = \"Histogram of first fixataion times\",\n       x = \"First fixation times (ms)\") +\n  geom_density() +\n  theme_minimal()\n\n\n\n\nDistribution of first fixation times at the verb region (raw milliseconds).",
     "crumbs": [
       "D. Palleschi",
-      "Open Science"
+      "Data Visualisation with `ggplot2`"
     ]
   },
   {
-    "objectID": "slides/01-open_science/open-science.html#preregistration",
-    "href": "slides/01-open_science/open-science.html#preregistration",
-    "title": "Open Science",
-    "section": "Preregistration",
-    "text": "Preregistration\n\nlevel: Medium\na timestamped and (often) public plan of:\n\nresearch questions\nhypotheses\nmethod\nanalyses\n\nclearly state intentions and predictions for confirmatory analyses\n\neverything else is exploratory\n\ntemplates available on AsPredicted and the OSF",
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#grouped-density-plots",
+    "href": "slides/08-data_viz/sheet-data_viz.html#grouped-density-plots",
+    "title": "Data Visualisation with ggplot2",
+    "section": "6.2 Grouped density plots",
+    "text": "6.2 Grouped density plots\n\njust like with histograms, we can look at the density plots of different subsets of the data with aes(fill = )\n\nlike region\n\n\n\ndf_lifetime |&gt; \n  filter(ff &gt; 0) |&gt; \n  ggplot(aes(ff, fill = region)) + \n  labs(title = \"Histogram of first fixataion times\",\n       x = \"First fixation times (ms)\") +\n  geom_density(alpha=.5) +\n  theme_minimal()\n\n\n\n\nDistribution of first fixation times at the verb region (raw milliseconds).\n\n\n\n\n\n6.2.1 facet_grid()\n\nthere are a lot of overlapping density curves, let’s try to separate them with facet_grid(x~y)\n\n\ndf_lifetime |&gt; \n  filter(ff &gt; 0) |&gt; \n  ggplot(aes(ff, fill = region)) + \n  facet_grid(.~region) +\n  labs(title = \"Density plot of first fixataion times by region\",\n       x = \"First fixation times (ms)\") +\n  geom_density(alpha=.5) +\n  theme_bw()\n\n\n\n\nDistribution of first fixation times at the verb region (raw milliseconds).\n\n\n\n\n\nhow would you describe the density plots of the different regions?\n\n\n\n6.2.2 re-ordering factors\n\nby default, factors will be ordered alphabetically\n\nbut we don’t always want that\nhere, verb-1 should be before verb\n\n\n\ndf_lifetime &lt;- df_lifetime %&gt;%\n  mutate(region = factor(region, \n                         levels = c(\"verb-1\",\"verb\",\"verb+1\",\"verb+2\",\"verb+3\",\"verb+4\")))\n\nsummary(df_lifetime$region)\n\nverb-1   verb verb+1 verb+2 verb+3 verb+4 \n   559    559    559    559    559    182 \n\n\n\n6.2.2.1 Exercise\n\ncreate a density plot with the fill colour set to condition, but:\n\n\nsubset the data to only include the verb region\nyou can decide if you want to use facets or to have the density curves overlayed\nyour plot should look something like A or B:\n\n\n\n\n\n\n\n\n\n\n\n\n6.2.2.2 Extra exercise\n\nCan you produce these plots?",
     "crumbs": [
       "D. Palleschi",
-      "Open Science"
+      "Data Visualisation with `ggplot2`"
     ]
   },
   {
-    "objectID": "slides/01-open_science/open-science.html#registered-report",
-    "href": "slides/01-open_science/open-science.html#registered-report",
-    "title": "Open Science",
-    "section": "Registered Report",
-    "text": "Registered Report\n\nlevel: Difficult\nsubmitting the introduction, methods, analysis plan to a journal before data collection\n\nif accepted: publication regardless of the result\n\na more detailed pre-registration, often with fully written sections\nmuch more time consuming before data collection can begin\n\njournal acceptance can take months",
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#scatterplots",
+    "href": "slides/08-data_viz/sheet-data_viz.html#scatterplots",
+    "title": "Data Visualisation with ggplot2",
+    "section": "6.3 Scatterplots",
+    "text": "6.3 Scatterplots\n\nhistograms and density plots plot a single variable along the x-axis\n\nin most other plots the dependent (measure) variable is plotted along the y-axis by convention\n\nscatterplots plot the relationship between two variables\n\n\niris |&gt; \n  ggplot(aes(x=Sepal.Length, y=Sepal.Width)) +\n  geom_point() +\n  labs(title = \"A scatterplot\",\n       x = \"variable X\",\n       y = \"variable Y\")\n\n\n\n\n\n\n\n\n\n6.3.1 Scatterplots\n\nthe figure below plots total reading times (verb region) to the verb region (x-axis) and reaction times to the critical sentence (y-axis)\n\nwhat does each point represent?\nhow would you describe the relationship between the two variables?\n\n\n\ndf_lifetime |&gt;\n  filter(ff &gt; 0,\n         region == \"verb\") |&gt;\n  ggplot(aes(x = tt, y = rt)) +\n  labs(title = \"Scatter plot of total reading times (verb region)\nand reaction times (critical sentence)\",\n       x = \"Total reading time (ms)\",\n       y = \"Reaction time (ms)\") +\n  geom_point(alpha = .2) +\n  theme_bw()\n\n\n\n\n\n\n\n\n\n6.3.1.1 Exercise\n\nGenerate a scatterplot of total reading times and reaction times, with:\n\ncolour and shape set to condition\ntip: these both belong in aes()\n\nWhat information does this plot suggest?",
     "crumbs": [
       "D. Palleschi",
-      "Open Science"
+      "Data Visualisation with `ggplot2`"
     ]
   },
   {
-    "objectID": "slides/01-open_science/open-science_slides.html#systemic-problem-in-science",
-    "href": "slides/01-open_science/open-science_slides.html#systemic-problem-in-science",
-    "title": "Open Science",
-    "section": "Systemic problem in science",
-    "text": "Systemic problem in science\n\nthe combination of\n\npublication bias\n\njournals favour novel, significant findings\n\npublish or perish\n\nresearchers’ careers depend on publications\n\n\ncan/does/did lead to:\n\nHARKing\n\nHypothesising After Results are Known\n\np-hacking\n\n(re-)running analyses until a significant effect is found\n\nreplication crisis\n\npervasive failure to replicate previous research"
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#bar-plot",
+    "href": "slides/08-data_viz/sheet-data_viz.html#bar-plot",
+    "title": "Data Visualisation with ggplot2",
+    "section": "6.4 Bar plot",
+    "text": "6.4 Bar plot\n\n\n\nshow the distribution of categorical factor levels\n\ni.e., the frequency of observations per level\n\nbe sure to read in accept as a factor!\n\n\n\n\nCode\ndf_lifetime |&gt; \n  distinct(px,trial,.keep_all=T) |&gt; \n  ggplot(aes(x = as.factor(accept) )) +\n  geom_bar() +\n  theme_bw()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ndf_lifetime |&gt; \n  distinct(px,trial,.keep_all=T) |&gt; \n  ggplot(aes(x = as.factor(accept), fill = condition)) +\n  labs(title = \"Binary responses\",\n       x = \"Naturalness response\",\n       fill = \"Condition\") +\n  geom_bar() +\n  theme_bw()",
+    "crumbs": [
+      "D. Palleschi",
+      "Data Visualisation with `ggplot2`"
+    ]
   },
   {
-    "objectID": "slides/01-open_science/open-science_slides.html#journal-club",
-    "href": "slides/01-open_science/open-science_slides.html#journal-club",
-    "title": "Open Science",
-    "section": "Journal Club",
-    "text": "Journal Club\n\nlevel: Easy\ne.g., ReproducibiliTea Berlin\n\ndiscuss topics and share knowledge on Open Science Practices"
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#grouped-bar-plots",
+    "href": "slides/08-data_viz/sheet-data_viz.html#grouped-bar-plots",
+    "title": "Data Visualisation with ggplot2",
+    "section": "6.5 Grouped bar plots",
+    "text": "6.5 Grouped bar plots\n\ndf_lifetime |&gt; \n  distinct(px,trial,.keep_all=T) |&gt; \n  ggplot(aes(x = as.factor(accept), fill = condition)) +\n  labs(title = \"Binary responses\",\n       x = \"Naturalness response\",\n       fill = \"Condition\") +\n  geom_bar(position = \"dodge\") +\n  theme_bw()\n\n\n\n\n\n\n\n\n\n6.5.1 Exercise\n\nGenerate a grouped bar plot (i.e., dodge) with:\n\na facet grid for tense\nplots lifetime on the x-axis\nand fills the bars based on accept\nchange the labels accordingly\ncustomise as you like\n\n\n\ndf_lifetime |&gt; \n  distinct(px,trial,.keep_all=T) |&gt; \n  ggplot(aes(x = lifetime, fill = as.factor(accept))) +\n  facet_grid(.~tense) +\n  labs(title = \"Binary responses\",\n       x = \"Lifetime\",\n       fill = \"Response\") +\n  geom_bar(position = \"dodge\") +\n  theme_bw()",
+    "crumbs": [
+      "D. Palleschi",
+      "Data Visualisation with `ggplot2`"
+    ]
   },
   {
-    "objectID": "slides/01-open_science/open-science_slides.html#project-workflow",
-    "href": "slides/01-open_science/open-science_slides.html#project-workflow",
-    "title": "Open Science",
-    "section": "Project Workflow",
-    "text": "Project Workflow\n\nlevel: Easy\nfolder structure\n\nhow to sensibly set up your folders\n\ncontained environments\n\nusing RProjects and the here package\n\ndata management\n\nestablishing some data storage convention\n\nversion control\n\ne.g., git, GitHub/GitLab, OSF"
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#grouped-bar-plots-1",
+    "href": "slides/08-data_viz/sheet-data_viz.html#grouped-bar-plots-1",
+    "title": "Data Visualisation with ggplot2",
+    "section": "6.6 Grouped bar plots",
+    "text": "6.6 Grouped bar plots\n\ndf_lifetime |&gt; \n  distinct(px,trial,.keep_all=T) |&gt; \n  ggplot(aes(x = lifetime, fill = as.factor(accept))) +\n  facet_grid(.~tense) +\n  labs(title = \"Grouped and faceted barplot\",\n       x = \"Lifetime\",\n       fill = \"Response\") +\n  geom_bar(position = \"dodge\") +\n  theme_bw()",
+    "crumbs": [
+      "D. Palleschi",
+      "Data Visualisation with `ggplot2`"
+    ]
   },
   {
-    "objectID": "slides/01-open_science/open-science_slides.html#preprints",
-    "href": "slides/01-open_science/open-science_slides.html#preprints",
-    "title": "Open Science",
-    "section": "Preprints",
-    "text": "Preprints\n\nlevel: Easy\nmanuscript version publicly available\n\nprior to peer review\nduring peer review\nafter publication\n\nallows for a wider audience\n\nearlier feedback\nactually increases citation count\n\ntypically found on (psy)arXiv, OSF"
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#stacked-bar-plots",
+    "href": "slides/08-data_viz/sheet-data_viz.html#stacked-bar-plots",
+    "title": "Data Visualisation with ggplot2",
+    "section": "6.7 Stacked bar plots",
+    "text": "6.7 Stacked bar plots\n\ndf_lifetime |&gt; \n  distinct(px,trial,.keep_all=T) |&gt; \n  ggplot(aes(x = lifetime, fill = as.factor(accept))) +\n  facet_grid(.~tense) +\n  labs(title = \"Stacked and faceted barplot\",\n       x = \"Lifetime\",\n       fill = \"Response\") +\n  geom_bar(position = \"stack\") +\n  theme_bw()\n\n\n\n\n\n\n\n\n\n6.7.1 Exercise\n\nChoose the barplot you like best for binary data\nReproduce that barplot, but with reg_in at the verb1 region\n\n\n\n\n\n\n\n\n\n\n\n\n6.7.2 Extra exercise\n\nCreate another bar plot, but for reg_out for all sentence regions\nUse facet_grid()\n\n\nto have facets by region (columns) and by tense (in 2 rows)",
+    "crumbs": [
+      "D. Palleschi",
+      "Data Visualisation with `ggplot2`"
+    ]
   },
   {
-    "objectID": "slides/01-open_science/open-science_slides.html#reproducible-code",
-    "href": "slides/01-open_science/open-science_slides.html#reproducible-code",
-    "title": "Open Science",
-    "section": "Reproducible Code",
-    "text": "Reproducible Code\n\nlevel: Medium\nwith open source software (R, RStudio, packages)\nliterate programming\ndynamic reports with Quarto/Rmarkdown\nreproducibility goes hand-in-hand with project workflow and data management\nideally:\n\navoid GUI (Graphic User Interface with point-and-click, e.g., SPSS)\navoid propreitary software (paid licences, e.g., SPSS, Matlab)\nuse open software (e.g., R, Python)\nuse a programming language and include useful comments"
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#boxplots",
+    "href": "slides/08-data_viz/sheet-data_viz.html#boxplots",
+    "title": "Data Visualisation with ggplot2",
+    "section": "7.1 Boxplots",
+    "text": "7.1 Boxplots\n\nboxplots provide information about the distribution of a continuous variable\n\nbut includes information like median (dark line) and quartiles (box and whiskers)\nand outliers (dots)\n\nlike scatterplots, require x and y variables\n\nbut one of them needs to be categorical",
+    "crumbs": [
+      "D. Palleschi",
+      "Data Visualisation with `ggplot2`"
+    ]
   },
   {
-    "objectID": "slides/01-open_science/open-science_slides.html#data-sharing",
-    "href": "slides/01-open_science/open-science_slides.html#data-sharing",
-    "title": "Open Science",
-    "section": "Data sharing",
-    "text": "Data sharing\n\nlevel: Medium\npublicly sharing your data\n\nincluding raw data (if possible)\n\nallows for reproduction of analyses\ntakes forethought and experience\ndocumentation and naming conventions are important\n\ne.g., data dictionaries/codebooks"
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#section",
+    "href": "slides/08-data_viz/sheet-data_viz.html#section",
+    "title": "Data Visualisation with ggplot2",
+    "section": "7.2 ",
+    "text": "7.2 \n\niris |&gt; \n  ggplot(aes(x = Species, y = Sepal.Length)) +\n  labs(title = \"A scatterplot\",\n       x = \"Categorical variable\",\n       y = \"Continuous variable\") +\n  geom_boxplot()\n\n\n\n\nA scatterplot. Median (50th percentile): thick black lines; interquartile range (IQR; 25th and 75th percentile): box limits; minimum (0th percentile) and maximum (100th percentile) excluding outliers: : whiskers; outliers: points",
+    "crumbs": [
+      "D. Palleschi",
+      "Data Visualisation with `ggplot2`"
+    ]
   },
   {
-    "objectID": "slides/01-open_science/open-science_slides.html#transparent-writing",
-    "href": "slides/01-open_science/open-science_slides.html#transparent-writing",
-    "title": "Open Science",
-    "section": "Transparent writing",
-    "text": "Transparent writing\n\nlevel: Medium\ntransparency regarding\n\nmethods/procedure\nhypotheses (confirmatory vs. exploratory)\ndata analyses\n\nan experiment plan or lab notebook are key!"
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#boxplot-explained",
+    "href": "slides/08-data_viz/sheet-data_viz.html#boxplot-explained",
+    "title": "Data Visualisation with ggplot2",
+    "section": "7.3 Boxplot explained",
+    "text": "7.3 Boxplot explained\n\n\n\n\n\nImage source: Winter (2019) (all rights reserved)",
+    "crumbs": [
+      "D. Palleschi",
+      "Data Visualisation with `ggplot2`"
+    ]
   },
   {
-    "objectID": "slides/01-open_science/open-science_slides.html#preregistration",
-    "href": "slides/01-open_science/open-science_slides.html#preregistration",
-    "title": "Open Science",
-    "section": "Preregistration",
-    "text": "Preregistration\n\nlevel: Medium\na timestamped and (often) public plan of:\n\nresearch questions\nhypotheses\nmethod\nanalyses\n\nclearly state intentions and predictions for confirmatory analyses\n\neverything else is exploratory\n\ntemplates available on AsPredicted and the OSF"
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#boxplots-1",
+    "href": "slides/08-data_viz/sheet-data_viz.html#boxplots-1",
+    "title": "Data Visualisation with ggplot2",
+    "section": "7.4 Boxplots",
+    "text": "7.4 Boxplots\n\nlet’s change our scatterplot to a boxplot\n\n\ndf_lifetime |&gt;\n  filter(ff &gt; 0,\n         region == \"verb\") |&gt;\n  ggplot(aes(x = tense, y = ff)) +\n  labs(title = \"First-fixation duration (verb region)\",\n       x = \"Tense\",\n       y = \"First-fixation duration (ms)\") +\n  geom_boxplot(alpha = .2) +\n  theme_bw()\n\n\n\n\n\n\n\n\n\n7.4.1 Grouped boxplots\n\ndf_lifetime |&gt;\n  filter(ff &gt; 0,\n         region == \"verb\") |&gt;\n  ggplot(aes(x = tense, y = ff, colour = lifetime)) +\n  labs(title = \"First-fixation duration (verb region)\",\n       x = \"Tense\",\n       y = \"First-fixation duration (ms)\") +\n  geom_boxplot(alpha = .2) +\n  theme_bw()\n\n\n\n\n\n\n\n\n\n7.4.1.1 Exercise\n\nCreate a group boxplot (x = tense, fill = lifetime) for\n\n\nfirst-pass reading time (verb region)\nregression path duration (verb region)\ntotal reading time (verb region)\nreaction times (use the distinct() verb to have a single observation per participant and per trial)",
+    "crumbs": [
+      "D. Palleschi",
+      "Data Visualisation with `ggplot2`"
+    ]
   },
   {
-    "objectID": "slides/01-open_science/open-science_slides.html#registered-report",
-    "href": "slides/01-open_science/open-science_slides.html#registered-report",
-    "title": "Open Science",
-    "section": "Registered Report",
-    "text": "Registered Report\n\nlevel: Difficult\nsubmitting the introduction, methods, analysis plan to a journal before data collection\n\nif accepted: publication regardless of the result\n\na more detailed pre-registration, often with fully written sections\nmuch more time consuming before data collection can begin\n\njournal acceptance can take months"
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#interaction-plots",
+    "href": "slides/08-data_viz/sheet-data_viz.html#interaction-plots",
+    "title": "Data Visualisation with ggplot2",
+    "section": "7.5 Interaction plots",
+    "text": "7.5 Interaction plots\n\ncommon for factorial designs, i.e., comparing categorical predictors\nthere are 2 ways of producing them:\n\nwith your data frame and stat_summary()\nor with a summary table and ggplot geoms geom_point(), geom_errorbar(), and geom_line()\n\nwe’ll need our summary table to plot an interaction plot\n\n\n\n\n\n\n\ncondition\nlifetime\ntense\nN\nmean.ff\nsd\nse\nci\nlower.ci\nupper.ci\n\n\n\n\ndeadPP\ndead\nPP\n140\n198.9\n57.9\n4.9\n9.7\n189.2\n208.6\n\n\ndeadSF\ndead\nSF\n139\n194.6\n67.9\n5.8\n11.4\n183.2\n205.9\n\n\nlivingPP\nliving\nPP\n140\n194.2\n77.3\n6.5\n12.9\n181.3\n207.1\n\n\nlivingSF\nliving\nSF\n140\n186.0\n57.6\n4.9\n9.6\n176.4\n195.6\n\n\n\n\n\n\n\n\n\n\nCode\nlibrary(patchwork)\n\ndf_lifetime |&gt; \n  filter(region == \"verb\") |&gt; \n  ggplot(aes(x = lifetime, y = ff, \n                     shape = tense,\n                     group = tense,\n                     color = tense)) +\n  labs(title=\"Interaction plot (`stat_summary()`)\",\n       x = \"Lifetime\",\n       y = \"First fix (ms)\",\n       shape = \"Tense\", group = \"Tense\", color = \"Tense\", linetype = \"Tense\") +\n  stat_summary(fun = \"mean\", geom = \"point\", size = 3, position = position_dodge(0.2)) +\n  stat_summary(fun = \"mean\", geom = \"line\", position = position_dodge(0.2), aes(linetype=tense)) +\n  stat_summary(fun.data = \"mean_cl_normal\", geom = \"errorbar\", width = .2\n               , position = position_dodge(0.2)) +\n  theme_bw() +\n  \nsummary_ff |&gt; \n  ggplot(aes(x = lifetime, y = mean.ff, \n                     shape = tense,\n                     group = tense,\n                     color = tense)) +\n  labs(title=\"Interaction plot (geoms)\",\n       x = \"Lifetime\",\n       y = \"First fix (ms)\",\n       shape = \"Tense\", group = \"Tense\", color = \"Tense\", linetype = \"Tense\") +\n  geom_point(size = 3,\n                position = position_dodge(0.2)) +\n  geom_line(aes(linetype=tense), position = position_dodge(0.2)) +\n  geom_errorbar(aes(ymin = mean.ff - ci,\n                    ymax = mean.ff + ci),\n                width = .2,\n                position = position_dodge(0.2)) +\n  theme_bw() +\n  plot_annotation(tag_levels = \"A\") +\n  plot_layout(guides = \"collect\") &\n  theme(legend.position = \"bottom\")\n\n\n\n\n\n\n\n\nFigure 1: Identical interaction plots produced two ways: feeding a dataset into ggplot() and using stat_summary() (A) or feeding a summary table into ggplot() and using geoms (B)",
+    "crumbs": [
+      "D. Palleschi",
+      "Data Visualisation with `ggplot2`"
+    ]
+  },
+  {
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#ggsave",
+    "href": "slides/08-data_viz/sheet-data_viz.html#ggsave",
+    "title": "Data Visualisation with ggplot2",
+    "section": "9.1 ggsave()",
+    "text": "9.1 ggsave()\n\nthe ggsave() function is useful for saving ggplot objects\n\nwe first have to save one of our figures as an object\nI usually save ggplot objects with the prefix fig_ (short for figure)\n\nmake sure you also have a useful place to store these figures\n\ne.g., a folder called figures\n\n\n\n\nCode\nfig_lifetime_ff &lt;-\nsummary_ff |&gt; \n  ggplot(aes(x = lifetime, y = mean.ff, \n                     shape = tense,\n                     group = tense,\n                     color = tense)) +\n  labs(title=\"Mean first-fixation times (verb region) with 95% CIs\",\n       x = \"Lifetime\",\n       y = \"First fix (ms)\",\n       shape = \"Tense\", group = \"Tense\", color = \"Tense\", linetype = \"Tense\") +\n  geom_point(size = 3,\n                position = position_dodge(0.2)) +\n  geom_line(aes(linetype=tense), position = position_dodge(0.2)) +\n  geom_errorbar(aes(ymin = mean.ff - ci,\n                    ymax = mean.ff + ci),\n                width = .2,\n                position = position_dodge(0.2)) +\n  theme_bw()\n\n\n\nggsave(fig_lifetime_ff, filename = here(\"figures\", \"fig_lifetime_ff.png\"))\n\n\nggsave() has lots of arguments to control width, height, resolution, etc.\n\nto see more, run ?ggsave in the Console\n\nyou can also save as JPG/JPEG, SVG, even PDF by just changing the filename extension",
+    "crumbs": [
+      "D. Palleschi",
+      "Data Visualisation with `ggplot2`"
+    ]
+  },
+  {
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#saverds",
+    "href": "slides/08-data_viz/sheet-data_viz.html#saverds",
+    "title": "Data Visualisation with ggplot2",
+    "section": "9.2 saveRDS()",
+    "text": "9.2 saveRDS()\n\nwe can also save the figure as R code\n\nwhich means we can control the width, height, resolution, etc. later on when we load it in\nuseful if you’ll be writing up your results in R markdown or Quarto\n\n\n\nsaveRDS(fig_lifetime_ff, file = here(\"figures\", \"fig_lifetime_ff.rds\"))",
+    "crumbs": [
+      "D. Palleschi",
+      "Data Visualisation with `ggplot2`"
+    ]
+  },
+  {
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#readrds",
+    "href": "slides/08-data_viz/sheet-data_viz.html#readrds",
+    "title": "Data Visualisation with ggplot2",
+    "section": "9.3 readRDS()",
+    "text": "9.3 readRDS()\n\nyou can’t click on the file to view the figure because it’s R code\n\nyou’d need to load the data into R again\n\n\n\nfig_lifetime_ff &lt;- readRDS(here(\"figures\", \"fig_lifetime_ff.rds\"))",
+    "crumbs": [
+      "D. Palleschi",
+      "Data Visualisation with `ggplot2`"
+    ]
+  },
+  {
+    "objectID": "slides/08-data_viz/sheet-data_viz.html#section-1",
+    "href": "slides/08-data_viz/sheet-data_viz.html#section-1",
+    "title": "Data Visualisation with ggplot2",
+    "section": "9.4 ",
+    "text": "9.4 \n\n\n\n\n\n\nNaming files and saving code\n\n\n\nYou’ll notice I saved the PNG and RDS files using the same name that the I used for the figure in my script. This is an important point: I want to be able to traceback my figures from the code so I can easily track them. It also helps encourage informative object and file names.\nOf course, saving the code used to save the files in our scripts is also useful because we can easily adjust the saved files (e.g., change figure width or height)",
+    "crumbs": [
+      "D. Palleschi",
+      "Data Visualisation with `ggplot2`"
+    ]
+  },
+  {
+    "objectID": "slides/data_tidying/tidying.html",
+    "href": "slides/data_tidying/tidying.html",
+    "title": "Untitled",
+    "section": "",
+    "text": "this is the major step of data tidying\n\nmake each column a variable\nmake each row an observation\nmake each cell a data point\n\nwhat variable and observation mean will depend on what you want to do, and will change at different steps of your analyses\nyou typically want long data\n\nbut our dataset isn’t as long as it could be\n\n\n\n\n\n\n\n\n\n\n\ntakes wide data and makes it longer\n\nconverts headers of columns into values of a new column\ncombines the values of those columns into a new condensed column\n\ntakes a few arguments:\n\ncols: which columns do we want to combine into a single column?\nnames_to: what should we call the new column containing the previous column names?\nvalues_to: what should we call the new column containing the values from the previous columns?\n\n\n\n\n\n\ndf_lifetime |&gt; \n  select(px,trial,region,ff,fp,rpd,tt,rt,type,accept,condition) |&gt;\n  filter(type==\"critical\",region==\"verb\",px!=\"px3\") |&gt;\n  pivot_longer(\n  cols = c(ff,fp,rpd,tt,rt), # columns to make long \n  names_to = \"measure\", # new column name for headers\n  values_to = \"time\" # new column name for values\n)\n\n\nSource: PsyTeachR\n\n\n\n\n\ntakes long data and makes it wider\ntakes a few arguments:\n\nid_cols: identifying columns\nnames_from: what should we call the new column containing the previous column names?\nnames_prefix:\nvalues_from: new column values\n\n\n\n\n\n\ndf_lifetime |&gt; \n  select(px,trial,region,ff,fp,rpd,tt,rt,type,accept,condition) |&gt;\n  filter(type==\"critical\",px!=\"px3\") |&gt;\n  pivot_wider(\n  id_cols = c(px,trial), # columns to make long \n  names_from = region, # new column name for headers\n  names_prefix = \"reg_\", # new column name for values\n  values_from = tt\n)\n\n\nSource: PsyTeachR"
+  },
+  {
+    "objectID": "slides/data_tidying/tidying.html#pivot_longer",
+    "href": "slides/data_tidying/tidying.html#pivot_longer",
+    "title": "Untitled",
+    "section": "",
+    "text": "takes wide data and makes it longer\n\nconverts headers of columns into values of a new column\ncombines the values of those columns into a new condensed column\n\ntakes a few arguments:\n\ncols: which columns do we want to combine into a single column?\nnames_to: what should we call the new column containing the previous column names?\nvalues_to: what should we call the new column containing the values from the previous columns?"
+  },
+  {
+    "objectID": "slides/data_tidying/tidying.html#pivot_longer-1",
+    "href": "slides/data_tidying/tidying.html#pivot_longer-1",
+    "title": "Untitled",
+    "section": "",
+    "text": "df_lifetime |&gt; \n  select(px,trial,region,ff,fp,rpd,tt,rt,type,accept,condition) |&gt;\n  filter(type==\"critical\",region==\"verb\",px!=\"px3\") |&gt;\n  pivot_longer(\n  cols = c(ff,fp,rpd,tt,rt), # columns to make long \n  names_to = \"measure\", # new column name for headers\n  values_to = \"time\" # new column name for values\n)\n\n\nSource: PsyTeachR"
+  },
+  {
+    "objectID": "slides/data_tidying/tidying.html#pivot_wider",
+    "href": "slides/data_tidying/tidying.html#pivot_wider",
+    "title": "Untitled",
+    "section": "",
+    "text": "takes long data and makes it wider\ntakes a few arguments:\n\nid_cols: identifying columns\nnames_from: what should we call the new column containing the previous column names?\nnames_prefix:\nvalues_from: new column values"
+  },
+  {
+    "objectID": "slides/data_tidying/tidying.html#pivot_wider-1",
+    "href": "slides/data_tidying/tidying.html#pivot_wider-1",
+    "title": "Untitled",
+    "section": "",
+    "text": "df_lifetime |&gt; \n  select(px,trial,region,ff,fp,rpd,tt,rt,type,accept,condition) |&gt;\n  filter(type==\"critical\",px!=\"px3\") |&gt;\n  pivot_wider(\n  id_cols = c(px,trial), # columns to make long \n  names_from = region, # new column name for headers\n  names_prefix = \"reg_\", # new column name for values\n  values_from = tt\n)\n\n\nSource: PsyTeachR"
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#variable-names",
+    "href": "slides/07-tables/slides-data_viz.html#variable-names",
+    "title": "Data communication with tables",
+    "section": "Variable names",
+    "text": "Variable names\n\nwe can list the names of all variables in a dataset using names()\n\n\nnames(df_lifetime)\n\n\n\n [1] \"px\"            \"trial\"         \"region\"        \"region_n\"     \n [5] \"region_text\"   \"eye\"           \"ff\"            \"fp\"           \n [9] \"rpd\"           \"tt\"            \"fix_count\"     \"reg_in\"       \n[13] \"reg_in_count\"  \"reg_out\"       \"reg_out_count\" \"rt\"           \n[17] \"bio\"           \"critical\"      \"gender\"        \"item_id\"      \n[21] \"list\"          \"match\"         \"condition\"     \"name\"         \n[25] \"lifetime\"      \"tense\"         \"type\"          \"yes_press\"    \n[29] \"KeyPress\"      \"accept\"        \"accuracy\"      \"px_accuracy\"  \n\n\n\nbut we need to be able to put these names into a single column\n\nwhere each row contains one variable name\nand other columns contain information like description and data class"
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#section",
+    "href": "slides/07-tables/slides-data_viz.html#section",
+    "title": "Data communication with tables",
+    "section": "",
+    "text": "copy the output of dput(coldesc) and assign it to an object\n\ntip: you can reformat the code by highlighting it and using Cmd/Ctrl+Shift+A\n\nor in the menu bar: Code &gt; Reformat Code\n\n\nreplace c() with tibble() to create a dataframe\n\nand fill in the quotations with description of the data\n\n\n\ndict_lifetime &lt;- tibble(\n  px = \"participant ID (factor)\",\n  trial = \"trial number (ordered factor)\",\n  region = \"sentence region (order factor)\",\n  region_n = \"numerical representation of sentence region (ordered factor)\",\n  region_text = \"text presented in the region (string)\",\n  eye = \"which eye was tracking: right or left (binomial)\",\n  ff = \"first-fixation times in milliseconds (continuous, values can be 0&lt;)\",\n  fp = \"first-pass reading times in milliseconds (numeric, values can be 0&lt;)\",\n  rpd = \"regression-path duration in milliseconds (numeric, values can be 0&lt;)\",\n  tt = \"total reading time in milliseconds (numeric, values can be 0&lt;)\",\n  fix_count = \"number of total fixations in the region (count)\",\n  reg_in = \"whether of a regression was made into the regions (binomial: 0 = no, 1 = yes)\",\n  reg_in_count = \"number of fixations into the region (count)\",\n  reg_out = \"whether of a regression was made out of the regions (binomial: 0 = no, 1 = yes)\",\n  reg_out_count = \"number of fixations out of the region (count)\",\n  rt = \"reaction time from critical sentence presentation to button press (continuous, values can be 0&lt;)\",\n  bio = \"lifetime biography context sentence (string)\",\n  critical = \"critical sentence (string)\",\n  gender = \"gender of stimulus subject (binomial: male, female)\",\n  item_id = \"item identification number (critical items: 1-80)\",\n  list = \"experimental list version: base list version (1-4) and whether the yes-button was coded as 4 or 5 (factor: 14, 15, 24, 25, 34, 35, 44, 45)\",\n  match = \"whether the referent-lifetime was congruent with tense\",\n  condition = \"condition: lifetime (dead, alive) + tense (PP, SF) (factor)\",\n  name = \"name of stimulis subject (string)\",\n  lifetime = \"lifetime status of stimulus subject at time of experiment (binomial: dead, alive)\",\n  tense = \"tense used in critical sentence (binomail: PP = present perfect, SF = simple future)\",\n  type = \"sentence type (factor with one level: critical)\",\n  yes_press = \"corresponding coding for the yes-button on Cedrus response box (4 = left button, 5 = right button)\",\n  KeyPress = \"key that was pressed (4 = left button, 5 = right button)\",\n  accept = \"whether the item was accepted, i.e., whether KeyPress equalled yes_press\",\n  accuracy = \"whether the acceptance was accurate (reject for a mismatch, accept for a match)\",\n  px_accuracy = \"participant's overall accuracy score\"\n)"
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#section-1",
+    "href": "slides/07-tables/slides-data_viz.html#section-1",
+    "title": "Data communication with tables",
+    "section": "",
+    "text": "but dict_lifetime doesn’t have the shape we want\n\neach variable name is a column name\nand its description is in the first row\n\n\n\ndict_lifetime\n\n# A tibble: 1 × 32\n  px             trial region region_n region_text eye   ff    fp    rpd   tt   \n  &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;\n1 participant I… tria… sente… numeric… text prese… whic… firs… firs… regr… tota…\n# ℹ 22 more variables: fix_count &lt;chr&gt;, reg_in &lt;chr&gt;, reg_in_count &lt;chr&gt;,\n#   reg_out &lt;chr&gt;, reg_out_count &lt;chr&gt;, rt &lt;chr&gt;, bio &lt;chr&gt;, critical &lt;chr&gt;,\n#   gender &lt;chr&gt;, item_id &lt;chr&gt;, list &lt;chr&gt;, match &lt;chr&gt;, condition &lt;chr&gt;,\n#   name &lt;chr&gt;, lifetime &lt;chr&gt;, tense &lt;chr&gt;, type &lt;chr&gt;, yes_press &lt;chr&gt;,\n#   KeyPress &lt;chr&gt;, accept &lt;chr&gt;, accuracy &lt;chr&gt;, px_accuracy &lt;chr&gt;\n\n\n\nwe want to transpose the data\n\ni.e., rotates the data so that the column names are in a row, with the descriptions in another row"
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#pivot_longer",
+    "href": "slides/07-tables/slides-data_viz.html#pivot_longer",
+    "title": "Data communication with tables",
+    "section": "pivot_longer()",
+    "text": "pivot_longer()\n\ntakes wide data and makes it longer\n\nconverts headers of columns into values of a new column\ncombines the values of those columns into a new condensed column\n\ntakes a few arguments:\n\ncols: which columns do we want to combine into a single column?\nnames_to: what should we call the new column containing the previous column names?\nvalues_to: what should we call the new column containing the values from the previous columns?"
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#save-data-dictionary",
+    "href": "slides/07-tables/slides-data_viz.html#save-data-dictionary",
+    "title": "Data communication with tables",
+    "section": "Save data dictionary",
+    "text": "Save data dictionary\n\nnow we can save our data dictionary just like we would any csv\n\n\nwrite_csv(dict_lifetime, here(\"data\", \"tidy_data_lifetime_pilot_dictionary.csv\"))"
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#tables-as-latex-code",
+    "href": "slides/07-tables/slides-data_viz.html#tables-as-latex-code",
+    "title": "Data communication with tables",
+    "section": "Tables as LaTeX code",
+    "text": "Tables as LaTeX code\n\nyou can add the argument \"latex\" to print LaTeX code for a table in the Console\n\nyou can then cut and paste this code into a LaTeX (or Overleaf) script\n\n\n\ndict_lifetime |&gt; \n  knitr::kable(\"latex\") \n\n\nbut be careful, if you’re rendering to HTML the table won’t be printed if you use \"latex\""
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html",
+    "href": "slides/07-tables/sheet-data_viz.html",
+    "title": "Data communication with tables",
+    "section": "",
+    "text": "create a data dictionary\nproduce formatted tables with the knitr package\nproduce summary tables",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#variable-names",
+    "href": "slides/07-tables/sheet-data_viz.html#variable-names",
+    "title": "Data communication with tables",
+    "section": "3.1 Variable names",
+    "text": "3.1 Variable names\n\nwe can list the names of all variables in a dataset using names()\n\n\nnames(df_lifetime)\n\n [1] \"px\"            \"trial\"         \"region\"        \"region_n\"     \n [5] \"region_text\"   \"eye\"           \"ff\"            \"fp\"           \n [9] \"rpd\"           \"tt\"            \"fix_count\"     \"reg_in\"       \n[13] \"reg_in_count\"  \"reg_out\"       \"reg_out_count\" \"rt\"           \n[17] \"bio\"           \"critical\"      \"gender\"        \"item_id\"      \n[21] \"list\"          \"match\"         \"condition\"     \"name\"         \n[25] \"lifetime\"      \"tense\"         \"type\"          \"yes_press\"    \n[29] \"KeyPress\"      \"accept\"        \"accuracy\"      \"px_accuracy\"  \n\n\n\nbut we need to be able to put these names into a single column\n\nwhere each row contains one variable name\nand other columns contain information like description and data class\n\n\n\n3.1.1 Names to rows\n\n# From day 2 of Lisa DeBruine's [Coding Club: Creating an R Package](https://psyteachr.github.io/intro-r-pkgs/02-data.html#documentation)\n\n# create as many empty strings as we name variable names\ncoldesc &lt;- rep(\"\", ncol(df_lifetime))\n# add variable names to these empty strings\nnames(coldesc) &lt;- names(df_lifetime)\n\n\n# print as code needed to create an object\ndput(coldesc)\n\nc(px = \"\", trial = \"\", region = \"\", region_n = \"\", region_text = \"\", \neye = \"\", ff = \"\", fp = \"\", rpd = \"\", tt = \"\", fix_count = \"\", \nreg_in = \"\", reg_in_count = \"\", reg_out = \"\", reg_out_count = \"\", \nrt = \"\", bio = \"\", critical = \"\", gender = \"\", item_id = \"\", \nlist = \"\", match = \"\", condition = \"\", name = \"\", lifetime = \"\", \ntense = \"\", type = \"\", yes_press = \"\", KeyPress = \"\", accept = \"\", \naccuracy = \"\", px_accuracy = \"\")",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#section",
+    "href": "slides/07-tables/sheet-data_viz.html#section",
+    "title": "Data communication with tables",
+    "section": "3.2 ",
+    "text": "3.2 \n\ncopy the output of dput(coldesc) and assign it to an object\n\ntip: you can reformat the code by highlighting it and using Cmd/Ctrl+Shift+A\n\nor in the menu bar: Code &gt; Reformat Code\n\n\nreplace c() with tibble() to create a dataframe\n\nand fill in the quotations with description of the data\n\n\n\ndict_lifetime &lt;- tibble(\n  px = \"participant ID (factor)\",\n  trial = \"trial number (ordered factor)\",\n  region = \"sentence region (order factor)\",\n  region_n = \"numerical representation of sentence region (ordered factor)\",\n  region_text = \"text presented in the region (string)\",\n  eye = \"which eye was tracking: right or left (binomial)\",\n  ff = \"first-fixation times in milliseconds (continuous, values can be 0&lt;)\",\n  fp = \"first-pass reading times in milliseconds (numeric, values can be 0&lt;)\",\n  rpd = \"regression-path duration in milliseconds (numeric, values can be 0&lt;)\",\n  tt = \"total reading time in milliseconds (numeric, values can be 0&lt;)\",\n  fix_count = \"number of total fixations in the region (count)\",\n  reg_in = \"whether of a regression was made into the regions (binomial: 0 = no, 1 = yes)\",\n  reg_in_count = \"number of fixations into the region (count)\",\n  reg_out = \"whether of a regression was made out of the regions (binomial: 0 = no, 1 = yes)\",\n  reg_out_count = \"number of fixations out of the region (count)\",\n  rt = \"reaction time from critical sentence presentation to button press (continuous, values can be 0&lt;)\",\n  bio = \"lifetime biography context sentence (string)\",\n  critical = \"critical sentence (string)\",\n  gender = \"gender of stimulus subject (binomial: male, female)\",\n  item_id = \"item identification number (critical items: 1-80)\",\n  list = \"experimental list version: base list version (1-4) and whether the yes-button was coded as 4 or 5 (factor: 14, 15, 24, 25, 34, 35, 44, 45)\",\n  match = \"whether the referent-lifetime was congruent with tense\",\n  condition = \"condition: lifetime (dead, alive) + tense (PP, SF) (factor)\",\n  name = \"name of stimulis subject (string)\",\n  lifetime = \"lifetime status of stimulus subject at time of experiment (binomial: dead, alive)\",\n  tense = \"tense used in critical sentence (binomail: PP = present perfect, SF = simple future)\",\n  type = \"sentence type (factor with one level: critical)\",\n  yes_press = \"corresponding coding for the yes-button on Cedrus response box (4 = left button, 5 = right button)\",\n  KeyPress = \"key that was pressed (4 = left button, 5 = right button)\",\n  accept = \"whether the item was accepted, i.e., whether KeyPress equalled yes_press\",\n  accuracy = \"whether the acceptance was accurate (reject for a mismatch, accept for a match)\",\n  px_accuracy = \"participant's overall accuracy score\"\n)",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#section-1",
+    "href": "slides/07-tables/sheet-data_viz.html#section-1",
+    "title": "Data communication with tables",
+    "section": "3.3 ",
+    "text": "3.3 \n\nbut dict_lifetime doesn’t have the shape we want\n\neach variable name is a column name\nand its description is in the first row\n\n\n\ndict_lifetime\n\n# A tibble: 1 × 32\n  px             trial region region_n region_text eye   ff    fp    rpd   tt   \n  &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;\n1 participant I… tria… sente… numeric… text prese… whic… firs… firs… regr… tota…\n# ℹ 22 more variables: fix_count &lt;chr&gt;, reg_in &lt;chr&gt;, reg_in_count &lt;chr&gt;,\n#   reg_out &lt;chr&gt;, reg_out_count &lt;chr&gt;, rt &lt;chr&gt;, bio &lt;chr&gt;, critical &lt;chr&gt;,\n#   gender &lt;chr&gt;, item_id &lt;chr&gt;, list &lt;chr&gt;, match &lt;chr&gt;, condition &lt;chr&gt;,\n#   name &lt;chr&gt;, lifetime &lt;chr&gt;, tense &lt;chr&gt;, type &lt;chr&gt;, yes_press &lt;chr&gt;,\n#   KeyPress &lt;chr&gt;, accept &lt;chr&gt;, accuracy &lt;chr&gt;, px_accuracy &lt;chr&gt;\n\n\n\nwe want to transpose the data\n\ni.e., rotates the data so that the column names are in a row, with the descriptions in another row",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#pivot_longer",
+    "href": "slides/07-tables/sheet-data_viz.html#pivot_longer",
+    "title": "Data communication with tables",
+    "section": "3.4 pivot_longer()",
+    "text": "3.4 pivot_longer()\n\ntakes wide data and makes it longer\n\nconverts headers of columns into values of a new column\ncombines the values of those columns into a new condensed column\n\ntakes a few arguments:\n\ncols: which columns do we want to combine into a single column?\nnames_to: what should we call the new column containing the previous column names?\nvalues_to: what should we call the new column containing the values from the previous columns?",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#section-2",
+    "href": "slides/07-tables/sheet-data_viz.html#section-2",
+    "title": "Data communication with tables",
+    "section": "",
+    "text": "3.4.1 Pivot our data dictionary\n\nthis looks much better!\n\n\ndict_lifetime &lt;-\n  dict_lifetime |&gt; \n  pivot_longer(\n    cols = everything(),\n    names_to = \"variable\",\n    values_to = \"description\"\n  )",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#save-data-dictionary",
+    "href": "slides/07-tables/sheet-data_viz.html#save-data-dictionary",
+    "title": "Data communication with tables",
+    "section": "3.5 Save data dictionary",
+    "text": "3.5 Save data dictionary\n\nnow we can save our data dictionary just like we would any csv\n\n\nwrite_csv(dict_lifetime, here(\"data\", \"tidy_data_lifetime_pilot_dictionary.csv\"))",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#tables-as-latex-code",
+    "href": "slides/07-tables/sheet-data_viz.html#tables-as-latex-code",
+    "title": "Data communication with tables",
+    "section": "4.1 Tables as LaTeX code",
+    "text": "4.1 Tables as LaTeX code\n\nyou can add the argument \"latex\" to print LaTeX code for a table in the Console\n\nyou can then cut and paste this code into a LaTeX (or Overleaf) script\n\n\n\ndict_lifetime |&gt; \n  knitr::kable(\"latex\") \n\n\nbut be careful, if you’re rendering to HTML the table won’t be printed if you use \"latex\"\n\n\n4.1.1 Exercise\n\ninstall the knitr package (install.packages(\"knitr\"))\nprint dict_lifetime, but only for the following variables:\n\npx, trial, region_text, ff, fp, and condition\n\nuse kable() from knitr to print the table\n\n\n\n\n\n\n\n\n\n\nvariable\ndescription\n\n\n\n\npx\nparticipant ID (factor)\n\n\ntrial\ntrial number (ordered factor)\n\n\nregion_text\ntext presented in the region (string)\n\n\nff\nfirst-fixation times in milliseconds (continuous, values can be 0&lt;)\n\n\nfp\nfirst-pass reading times in milliseconds (numeric, values can be 0&lt;)\n\n\ncondition\ncondition: lifetime (dead, alive) + tense (PP, SF) (factor)",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "session-info.html",
+    "href": "session-info.html",
+    "title": "Session Info",
+    "section": "",
+    "text": "git2r::repository()\n\nLocal:    main /Users/danielapalleschi/Documents/IdSL/Teaching/SoSe24/M.A./r4repro_SoSe2024\nRemote:   main @ origin (git@github.com:daniela-palleschi/r4repro_SoSe2024.git)\nHead:     [7332027] 2024-05-14: add slides for lit programming and wrangling\n\n\n\nsessionInfo()\n\nR version 4.4.0 (2024-04-24)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Ventura 13.2.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Berlin\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nloaded via a namespace (and not attached):\n [1] htmlwidgets_1.6.4 compiler_4.4.0    fastmap_1.1.1     cli_3.6.2        \n [5] htmltools_0.5.8.1 tools_4.4.0       rstudioapi_0.16.0 yaml_2.3.8       \n [9] rmarkdown_2.26    knitr_1.46        git2r_0.33.0      jsonlite_1.8.8   \n[13] xfun_0.43         digest_0.6.35     rlang_1.1.3       renv_1.0.7       \n[17] evaluate_0.23"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "",
+    "section": "",
+    "text": "Code\n\n\n\n\n\nPreface\nThis web-book contains slides for the 2024 summer semester course ‘Open Science Practices: Implementing a Reproducible Workflow in R’ (and other iterations) given by Daniela Palleschi at the Humboldt-Universität zu Berlin. The tools discussed in this book are specific to the R enviornment, but the concepts are universal and programming language agnostic.\nEach week’s topic is listed in the sidebar in chronological order. Three output formats are available, all with the same content:\n\nHTML page\nPDF of content\nRevealJS slides (optimally formatted)\n\nThe contents were formatted for the slide output. Tables and figures may be too large/small in formats 1 and 2. From the HTML page the other 2 formats can be viewed by clicking on their symbol under ‘Other Formats’ (right sidebar).\n\n\nReferences"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#what-should-ideally-be-shared",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#what-should-ideally-be-shared",
+    "title": "Reproducibility",
+    "section": "What should (ideally) be shared?",
+    "text": "What should (ideally) be shared?\n\n\n\nmaterials\n\nprotocols\nstimuli\nexperiment set-up\n\ndocumentation\n\nREADME\nmetadata\n\n\n\n\ndata\n\nraw\n\ne.g., text files, audio, video, or images\n\nprocessed\n\nanalysis code\n\npre-processing\nanalyses\n\n\n\n\n\n\n\nmaterials are helpful for replication\n\nbut also for inspection of e.g., design\n\n\n\n\ndata and code are necessary for reproducibility\n\nalong with proper documentation of software used"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#reproducibility-rates-in-linguistic-research",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#reproducibility-rates-in-linguistic-research",
+    "title": "Reproducibility",
+    "section": "Reproducibility rates in linguistic research",
+    "text": "Reproducibility rates in linguistic research\n\n\n\n\n\n\n\nFigure 1: Source: Bochynska et al. (2023), p. 11 (all rights reserved)\n\n\n\n\n\n\n\n\n\n\nmeta-analysis of 519 randomly sampled articles from various linguistic journales\n\npre- and post-reproducibility crisis (2008/9, 2018/19) (Bochynska et al., 2023)\ndifferentiated between primary (collected for study) and secondary (pre-existing) data\n\nreported a post-RC increase in shared materials, data, and analyses\n\nbut still low rates of each\n\nhigher rates of secondary data sharing, presumably due to publicly available corpora\ndata shared more often than analyses, pre- and post-RC"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#journal-of-memory-and-language",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#journal-of-memory-and-language",
+    "title": "Reproducibility",
+    "section": "Journal of Memory and Language",
+    "text": "Journal of Memory and Language\n\nmeta-analysis of articles from JML (Laurinavichyute et al., 2022)\n\nbefore and after an Open Science Policy was introduced in 2019\n\n\n\n\nFigure 2: Source: Laurinavichyute et al. (2022), p. 5 (all rights reserved)\n\ncode and data availability improved\nbut reproducibility rate ranged from 34-56%, depending on criteria\nhigher rates compared to field-wide meta-analysis (Bochynska et al., 2023)"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#findable",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#findable",
+    "title": "Reproducibility",
+    "section": "Findable",
+    "text": "Findable\n\nrefers to data and supplementary materials\nmaterials should have a “persistant identifier”\n\ne.g., Digital Object Identifier (DOI) for scholarly articles\n\na digital, long-term storage of data\n\nnot on a personal or professional website\nGitHub files don’t typically have sufficient metadata\nideally: OSF, Zenodo or some other repository\n\nin recent papers, an OSF link is typically provided\nalso: discoverable\n\ne.g., in data-specific search engines (Google’s Dataset search)"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#accessible",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#accessible",
+    "title": "Reproducibility",
+    "section": "Accessible",
+    "text": "Accessible\n\ndata (and code) should be\n\nmachine- and human-readable\navailable on a trusted repository, e.g., the OSF\nOpen Access\n\nnot behind a paywall\nnor require a login"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#interoperable",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#interoperable",
+    "title": "Reproducibility",
+    "section": "Interoperable",
+    "text": "Interoperable\n\n\n\ndata (and code) should\n\nnot dependent on an operating system\nnor entirely on software/package versions\n\neasiest work around:\n\ndocument your software versions\nthis doesn’t automatically facilitate interoperability\nbut may help pinpoint where problems are coming from"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#reusable",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#reusable",
+    "title": "Reproducibility",
+    "section": "Reusable",
+    "text": "Reusable\n\n\n\ndata (and code) should\n\nbe reusable for future research\n\ndata format should be generic\n\ni.e., not tied to a specific program\nfor tabular data, I recommend .csv format\n\nwe can swap with ‘reproducible’ in the context of analyses"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#task-finding-data",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#task-finding-data",
+    "title": "Reproducibility",
+    "section": "Task: finding data",
+    "text": "Task: finding data\nGo to datasetsearch.research.google.com/\n\ndo a search for data related to a topic of interest to you\nwhat type of information does the search provide?\nwhat type of links?\ndo you find analysis code, or just data?\ndo the same search at osf.io\nand at zenodo.org/\n\nare there the same amount of hits?"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#data-and-code-neq-reproducibility",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#data-and-code-neq-reproducibility",
+    "title": "Reproducibility",
+    "section": "Data and code \\(\\neq\\) Reproducibility",
+    "text": "Data and code \\(\\neq\\) Reproducibility\n\neven including code does not guarantee reproducibility\naccess to data and code do not mean analyses are reproducible\nwhat can go wrong? Examples from Laurinavichyute et al. (2022)\n\n\n\n\nData problems\n\ninaccessible data\nincomplete data (e.g., 2/3 experiments)\n\nCode problems\n\nincomplete code\nerror messages\ncode rot: outdated syntax or environment\nproprietary software\n\n\n\n\nDocumentation problems\n\ndata difficult to interpret\nno README file/data dictionary\nunclear folder/file/variable naming convention\nmanuscript contradicts code\n\nUnclear terms of use\n\nno licence specification"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#share-the-code-not-just-the-data",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#share-the-code-not-just-the-data",
+    "title": "Reproducibility",
+    "section": "Share the code, not just the data",
+    "text": "Share the code, not just the data\n\nWhy?\n\nkey details are often missing from ‘Methods’ sections\n\nsuggestions for researchers from Laurinavichyute et al. (2022)\n\n\n\n\nShare data in usable form\n\nwith pre-processing code\n\nUse publicly accessible repositories\n\ne.g., OSF\n\nUse non-proprietary data formats\n\ne.g., not .xls files (Excel)\n\n\n\n\nProvide documentation\n\ne.g., README, data dictionaries\n\nShare code and data\n\nthey estimate a 38% increase in reproducibility\n\nTeach data management and computing skills\n\nthat’s what this course is for!"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#project-management",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#project-management",
+    "title": "Reproducibility",
+    "section": "Project management",
+    "text": "Project management\n\nfolder structure\nproject-relative file paths\nappropriate documentation\n\ne.g., README\n\nit’s great to map out your project structure early on\n\nbut it will grow as you go along\nreproducible principles facilitate adapting as it grows"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#literate-programming",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#literate-programming",
+    "title": "Reproducibility",
+    "section": "Literate programming",
+    "text": "Literate programming\n\nInstead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do.\n\n— Knuth (1984), p. 97\n\n\n\noriginally used to refer to writing programs\nbut also applies to analysis code\n\nespecially if we’re aiming for reproducibility\n\n\n\n\nmain concepts:\n\ncode is linear (this pre-dates Knuth, 1984)\ninformative but concise commenting\n\n\n\n\nmain benefits:\n\nfacilitates maintenance\nhelpful for future-you, collaborators, etc."
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#documentation",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#documentation",
+    "title": "Reproducibility",
+    "section": "Documentation",
+    "text": "Documentation\n\nmetadata\n\nproject README\ncodebook/data dictionary\n\nREADME should contain\n\na project description\nrelevant links\ndescription of folder structure\n\ncan be updated as the project develops\nREADME.md files in GitHub/Lab are automatically used as a project description\n\n.md is a plaintext document\nuses markdown syntax"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#version-control",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#version-control",
+    "title": "Reproducibility",
+    "section": "Version control",
+    "text": "Version control\n\ngit: local tracking\nuseful for the analysis and writing phases\n\nbut can be tricky for collaboration\n\nGitHub/GitLab: remote tracking\n\nstore your changes to your local git repository\nthen push them to your remote repository\n\nsafe guards against local hardware/software issues\n\nlost or damaged computer or local files\n\nand allows for collaboration or sharing"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#persistant-public-storage",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#persistant-public-storage",
+    "title": "Reproducibility",
+    "section": "Persistant (public) storage",
+    "text": "Persistant (public) storage\n\nGitHub/Lab are sub-optimal\n\ndeveloper-focused\ntypically lack thorough documentation/metadata\nnot very user-friendly for non-users\n\nOSF, Zenodo\n\nOpen Science-focused\ncan be linked to a GitHub/Lab repository\nfacilitate thorough documentation\nuser-friendly"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#writing",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#writing",
+    "title": "Reproducibility",
+    "section": "Writing",
+    "text": "Writing\n\ndynamic reports with Markdown syntax\n\ne.g., Rmarkdown, Quarto\nintegration of data, code, and prose\n\nfacilitates cross-referencing within document\nintegration of citation management tools\nsupports LaTeX syntax for example sentences and tables\n\n\npapaja package for APA-formatted Rmarkdown documents\nchallenge: collaboration\n\nnot all collaborators know these tools\ntrack changes not currently possible"
   },
   {
     "objectID": "slides/03-reproducibility/reproducibility.html",
@@ -958,165 +1483,177 @@
     ]
   },
   {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#what-should-ideally-be-shared",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#what-should-ideally-be-shared",
-    "title": "Reproducibility",
-    "section": "What should (ideally) be shared?",
-    "text": "What should (ideally) be shared?\n\n\n\nmaterials\n\nprotocols\nstimuli\nexperiment set-up\n\ndocumentation\n\nREADME\nmetadata\n\n\n\n\ndata\n\nraw\n\ne.g., text files, audio, video, or images\n\nprocessed\n\nanalysis code\n\npre-processing\nanalyses\n\n\n\n\n\n\n\nmaterials are helpful for replication\n\nbut also for inspection of e.g., design\n\n\n\n\ndata and code are necessary for reproducibility\n\nalong with proper documentation of software used"
+    "objectID": "slides/01-open_science/open-science_slides.html#systemic-problem-in-science",
+    "href": "slides/01-open_science/open-science_slides.html#systemic-problem-in-science",
+    "title": "Open Science",
+    "section": "Systemic problem in science",
+    "text": "Systemic problem in science\n\nthe combination of\n\npublication bias\n\njournals favour novel, significant findings\n\npublish or perish\n\nresearchers’ careers depend on publications\n\n\ncan/does/did lead to:\n\nHARKing\n\nHypothesising After Results are Known\n\np-hacking\n\n(re-)running analyses until a significant effect is found\n\nreplication crisis\n\npervasive failure to replicate previous research"
   },
   {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#reproducibility-rates-in-linguistic-research",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#reproducibility-rates-in-linguistic-research",
-    "title": "Reproducibility",
-    "section": "Reproducibility rates in linguistic research",
-    "text": "Reproducibility rates in linguistic research\n\n\n\n\n\n\n\nFigure 1: Source: Bochynska et al. (2023), p. 11 (all rights reserved)\n\n\n\n\n\n\n\n\n\n\nmeta-analysis of 519 randomly sampled articles from various linguistic journales\n\npre- and post-reproducibility crisis (2008/9, 2018/19) (Bochynska et al., 2023)\ndifferentiated between primary (collected for study) and secondary (pre-existing) data\n\nreported a post-RC increase in shared materials, data, and analyses\n\nbut still low rates of each\n\nhigher rates of secondary data sharing, presumably due to publicly available corpora\ndata shared more often than analyses, pre- and post-RC"
+    "objectID": "slides/01-open_science/open-science_slides.html#journal-club",
+    "href": "slides/01-open_science/open-science_slides.html#journal-club",
+    "title": "Open Science",
+    "section": "Journal Club",
+    "text": "Journal Club\n\nlevel: Easy\ne.g., ReproducibiliTea Berlin\n\ndiscuss topics and share knowledge on Open Science Practices"
   },
   {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#journal-of-memory-and-language",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#journal-of-memory-and-language",
-    "title": "Reproducibility",
-    "section": "Journal of Memory and Language",
-    "text": "Journal of Memory and Language\n\nmeta-analysis of articles from JML (Laurinavichyute et al., 2022)\n\nbefore and after an Open Science Policy was introduced in 2019\n\n\n\n\nFigure 2: Source: Laurinavichyute et al. (2022), p. 5 (all rights reserved)\n\ncode and data availability improved\nbut reproducibility rate ranged from 34-56%, depending on criteria\nhigher rates compared to field-wide meta-analysis (Bochynska et al., 2023)"
+    "objectID": "slides/01-open_science/open-science_slides.html#project-workflow",
+    "href": "slides/01-open_science/open-science_slides.html#project-workflow",
+    "title": "Open Science",
+    "section": "Project Workflow",
+    "text": "Project Workflow\n\nlevel: Easy\nfolder structure\n\nhow to sensibly set up your folders\n\ncontained environments\n\nusing RProjects and the here package\n\ndata management\n\nestablishing some data storage convention\n\nversion control\n\ne.g., git, GitHub/GitLab, OSF"
   },
   {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#findable",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#findable",
-    "title": "Reproducibility",
-    "section": "Findable",
-    "text": "Findable\n\nrefers to data and supplementary materials\nmaterials should have a “persistant identifier”\n\ne.g., Digital Object Identifier (DOI) for scholarly articles\n\na digital, long-term storage of data\n\nnot on a personal or professional website\nGitHub files don’t typically have sufficient metadata\nideally: OSF, Zenodo or some other repository\n\nin recent papers, an OSF link is typically provided\nalso: discoverable\n\ne.g., in data-specific search engines (Google’s Dataset search)"
+    "objectID": "slides/01-open_science/open-science_slides.html#preprints",
+    "href": "slides/01-open_science/open-science_slides.html#preprints",
+    "title": "Open Science",
+    "section": "Preprints",
+    "text": "Preprints\n\nlevel: Easy\nmanuscript version publicly available\n\nprior to peer review\nduring peer review\nafter publication\n\nallows for a wider audience\n\nearlier feedback\nactually increases citation count\n\ntypically found on (psy)arXiv, OSF"
   },
   {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#accessible",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#accessible",
-    "title": "Reproducibility",
-    "section": "Accessible",
-    "text": "Accessible\n\ndata (and code) should be\n\nmachine- and human-readable\navailable on a trusted repository, e.g., the OSF\nOpen Access\n\nnot behind a paywall\nnor require a login"
+    "objectID": "slides/01-open_science/open-science_slides.html#reproducible-code",
+    "href": "slides/01-open_science/open-science_slides.html#reproducible-code",
+    "title": "Open Science",
+    "section": "Reproducible Code",
+    "text": "Reproducible Code\n\nlevel: Medium\nwith open source software (R, RStudio, packages)\nliterate programming\ndynamic reports with Quarto/Rmarkdown\nreproducibility goes hand-in-hand with project workflow and data management\nideally:\n\navoid GUI (Graphic User Interface with point-and-click, e.g., SPSS)\navoid propreitary software (paid licences, e.g., SPSS, Matlab)\nuse open software (e.g., R, Python)\nuse a programming language and include useful comments"
   },
   {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#interoperable",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#interoperable",
-    "title": "Reproducibility",
-    "section": "Interoperable",
-    "text": "Interoperable\n\n\n\ndata (and code) should\n\nnot dependent on an operating system\nnor entirely on software/package versions\n\neasiest work around:\n\ndocument your software versions\nthis doesn’t automatically facilitate interoperability\nbut may help pinpoint where problems are coming from"
+    "objectID": "slides/01-open_science/open-science_slides.html#data-sharing",
+    "href": "slides/01-open_science/open-science_slides.html#data-sharing",
+    "title": "Open Science",
+    "section": "Data sharing",
+    "text": "Data sharing\n\nlevel: Medium\npublicly sharing your data\n\nincluding raw data (if possible)\n\nallows for reproduction of analyses\ntakes forethought and experience\ndocumentation and naming conventions are important\n\ne.g., data dictionaries/codebooks"
   },
   {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#reusable",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#reusable",
-    "title": "Reproducibility",
-    "section": "Reusable",
-    "text": "Reusable\n\n\n\ndata (and code) should\n\nbe reusable for future research\n\ndata format should be generic\n\ni.e., not tied to a specific program\nfor tabular data, I recommend .csv format\n\nwe can swap with ‘reproducible’ in the context of analyses"
+    "objectID": "slides/01-open_science/open-science_slides.html#transparent-writing",
+    "href": "slides/01-open_science/open-science_slides.html#transparent-writing",
+    "title": "Open Science",
+    "section": "Transparent writing",
+    "text": "Transparent writing\n\nlevel: Medium\ntransparency regarding\n\nmethods/procedure\nhypotheses (confirmatory vs. exploratory)\ndata analyses\n\nan experiment plan or lab notebook are key!"
   },
   {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#task-finding-data",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#task-finding-data",
-    "title": "Reproducibility",
-    "section": "Task: finding data",
-    "text": "Task: finding data\nGo to datasetsearch.research.google.com/\n\ndo a search for data related to a topic of interest to you\nwhat type of information does the search provide?\nwhat type of links?\ndo you find analysis code, or just data?\ndo the same search at osf.io\nand at zenodo.org/\n\nare there the same amount of hits?"
+    "objectID": "slides/01-open_science/open-science_slides.html#preregistration",
+    "href": "slides/01-open_science/open-science_slides.html#preregistration",
+    "title": "Open Science",
+    "section": "Preregistration",
+    "text": "Preregistration\n\nlevel: Medium\na timestamped and (often) public plan of:\n\nresearch questions\nhypotheses\nmethod\nanalyses\n\nclearly state intentions and predictions for confirmatory analyses\n\neverything else is exploratory\n\ntemplates available on AsPredicted and the OSF"
   },
   {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#data-and-code-neq-reproducibility",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#data-and-code-neq-reproducibility",
-    "title": "Reproducibility",
-    "section": "Data and code \\(\\neq\\) Reproducibility",
-    "text": "Data and code \\(\\neq\\) Reproducibility\n\neven including code does not guarantee reproducibility\naccess to data and code do not mean analyses are reproducible\nwhat can go wrong? Examples from Laurinavichyute et al. (2022)\n\n\n\n\nData problems\n\ninaccessible data\nincomplete data (e.g., 2/3 experiments)\n\nCode problems\n\nincomplete code\nerror messages\ncode rot: outdated syntax or environment\nproprietary software\n\n\n\n\nDocumentation problems\n\ndata difficult to interpret\nno README file/data dictionary\nunclear folder/file/variable naming convention\nmanuscript contradicts code\n\nUnclear terms of use\n\nno licence specification"
+    "objectID": "slides/01-open_science/open-science_slides.html#registered-report",
+    "href": "slides/01-open_science/open-science_slides.html#registered-report",
+    "title": "Open Science",
+    "section": "Registered Report",
+    "text": "Registered Report\n\nlevel: Difficult\nsubmitting the introduction, methods, analysis plan to a journal before data collection\n\nif accepted: publication regardless of the result\n\na more detailed pre-registration, often with fully written sections\nmuch more time consuming before data collection can begin\n\njournal acceptance can take months"
   },
   {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#share-the-code-not-just-the-data",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#share-the-code-not-just-the-data",
-    "title": "Reproducibility",
-    "section": "Share the code, not just the data",
-    "text": "Share the code, not just the data\n\nWhy?\n\nkey details are often missing from ‘Methods’ sections\n\nsuggestions for researchers from Laurinavichyute et al. (2022)\n\n\n\n\nShare data in usable form\n\nwith pre-processing code\n\nUse publicly accessible repositories\n\ne.g., OSF\n\nUse non-proprietary data formats\n\ne.g., not .xls files (Excel)\n\n\n\n\nProvide documentation\n\ne.g., README, data dictionaries\n\nShare code and data\n\nthey estimate a 38% increase in reproducibility\n\nTeach data management and computing skills\n\nthat’s what this course is for!"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#project-management",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#project-management",
-    "title": "Reproducibility",
-    "section": "Project management",
-    "text": "Project management\n\nfolder structure\nproject-relative file paths\nappropriate documentation\n\ne.g., README\n\nit’s great to map out your project structure early on\n\nbut it will grow as you go along\nreproducible principles facilitate adapting as it grows"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#literate-programming",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#literate-programming",
-    "title": "Reproducibility",
-    "section": "Literate programming",
-    "text": "Literate programming\n\nInstead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do.\n\n— Knuth (1984), p. 97\n\n\n\noriginally used to refer to writing programs\nbut also applies to analysis code\n\nespecially if we’re aiming for reproducibility\n\n\n\n\nmain concepts:\n\ncode is linear (this pre-dates Knuth, 1984)\ninformative but concise commenting\n\n\n\n\nmain benefits:\n\nfacilitates maintenance\nhelpful for future-you, collaborators, etc."
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#documentation",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#documentation",
-    "title": "Reproducibility",
-    "section": "Documentation",
-    "text": "Documentation\n\nmetadata\n\nproject README\ncodebook/data dictionary\n\nREADME should contain\n\na project description\nrelevant links\ndescription of folder structure\n\ncan be updated as the project develops\nREADME.md files in GitHub/Lab are automatically used as a project description\n\n.md is a plaintext document\nuses markdown syntax"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#version-control",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#version-control",
-    "title": "Reproducibility",
-    "section": "Version control",
-    "text": "Version control\n\ngit: local tracking\nuseful for the analysis and writing phases\n\nbut can be tricky for collaboration\n\nGitHub/GitLab: remote tracking\n\nstore your changes to your local git repository\nthen push them to your remote repository\n\nsafe guards against local hardware/software issues\n\nlost or damaged computer or local files\n\nand allows for collaboration or sharing"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#persistant-public-storage",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#persistant-public-storage",
-    "title": "Reproducibility",
-    "section": "Persistant (public) storage",
-    "text": "Persistant (public) storage\n\nGitHub/Lab are sub-optimal\n\ndeveloper-focused\ntypically lack thorough documentation/metadata\nnot very user-friendly for non-users\n\nOSF, Zenodo\n\nOpen Science-focused\ncan be linked to a GitHub/Lab repository\nfacilitate thorough documentation\nuser-friendly"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#writing",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#writing",
-    "title": "Reproducibility",
-    "section": "Writing",
-    "text": "Writing\n\ndynamic reports with Markdown syntax\n\ne.g., Rmarkdown, Quarto\nintegration of data, code, and prose\n\nfacilitates cross-referencing within document\nintegration of citation management tools\nsupports LaTeX syntax for example sentences and tables\n\n\npapaja package for APA-formatted Rmarkdown documents\nchallenge: collaboration\n\nnot all collaborators know these tools\ntrack changes not currently possible"
-  },
-  {
-    "objectID": "session-info.html",
-    "href": "session-info.html",
-    "title": "Session Info",
+    "objectID": "slides/01-open_science/open-science.html",
+    "href": "slides/01-open_science/open-science.html",
+    "title": "Open Science",
     "section": "",
-    "text": "git2r::repository()\n\nLocal:    main /Users/danielapalleschi/Documents/IdSL/Teaching/SoSe24/M.A./r4repro_SoSe2024\nRemote:   main @ origin (git@github.com:daniela-palleschi/r4repro_SoSe2024.git)\nHead:     [7332027] 2024-05-14: add slides for lit programming and wrangling\n\n\n\nsessionInfo()\n\nR version 4.4.0 (2024-04-24)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Ventura 13.2.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Berlin\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nloaded via a namespace (and not attached):\n [1] htmlwidgets_1.6.4 compiler_4.4.0    fastmap_1.1.1     cli_3.6.2        \n [5] htmltools_0.5.8.1 tools_4.4.0       rstudioapi_0.16.0 yaml_2.3.8       \n [9] rmarkdown_2.26    knitr_1.46        git2r_0.33.0      jsonlite_1.8.8   \n[13] xfun_0.43         digest_0.6.35     rlang_1.1.3       renv_1.0.7       \n[17] evaluate_0.23"
+    "text": "Today we will learn…\n\nwhat Open Science Practices are\nwhy they’re important\nwhich practices you can implement",
+    "crumbs": [
+      "D. Palleschi",
+      "Open Science"
+    ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "",
-    "section": "",
-    "text": "Code\n\n\n\n\n\nPreface\nThis web-book contains slides for the 2024 summer semester course ‘Open Science Practices: Implementing a Reproducible Workflow in R’ (and other iterations) given by Daniela Palleschi at the Humboldt-Universität zu Berlin. The tools discussed in this book are specific to the R enviornment, but the concepts are universal and programming language agnostic.\nEach week’s topic is listed in the sidebar in chronological order. Three output formats are available, all with the same content:\n\nHTML page\nPDF of content\nRevealJS slides (optimally formatted)\n\nThe contents were formatted for the slide output. Tables and figures may be too large/small in formats 1 and 2. From the HTML page the other 2 formats can be viewed by clicking on their symbol under ‘Other Formats’ (right sidebar)."
+    "objectID": "slides/01-open_science/open-science.html#systemic-problem-in-science",
+    "href": "slides/01-open_science/open-science.html#systemic-problem-in-science",
+    "title": "Open Science",
+    "section": "Systemic problem in science",
+    "text": "Systemic problem in science\n\nthe combination of\n\npublication bias\n\njournals favour novel, significant findings\n\npublish or perish\n\nresearchers’ careers depend on publications\n\n\ncan/does/did lead to:\n\nHARKing\n\nHypothesising After Results are Known\n\np-hacking\n\n(re-)running analyses until a significant effect is found\n\nreplication crisis\n\npervasive failure to replicate previous research",
+    "crumbs": [
+      "D. Palleschi",
+      "Open Science"
+    ]
   },
   {
-    "objectID": "slides/data_tidying/tidying.html",
-    "href": "slides/data_tidying/tidying.html",
-    "title": "Untitled",
-    "section": "",
-    "text": "this is the major step of data tidying\n\nmake each column a variable\nmake each row an observation\nmake each cell a data point\n\nwhat variable and observation mean will depend on what you want to do, and will change at different steps of your analyses\nyou typically want long data\n\nbut our dataset isn’t as long as it could be\n\n\n\n\n\n\n\n\n\n\n\ntakes wide data and makes it longer\n\nconverts headers of columns into values of a new column\ncombines the values of those columns into a new condensed column\n\ntakes a few arguments:\n\ncols: which columns do we want to combine into a single column?\nnames_to: what should we call the new column containing the previous column names?\nvalues_to: what should we call the new column containing the values from the previous columns?\n\n\n\n\n\n\ndf_lifetime |&gt; \n  select(px,trial,region,ff,fp,rpd,tt,rt,type,accept,condition) |&gt;\n  filter(type==\"critical\",region==\"verb\",px!=\"px3\") |&gt;\n  pivot_longer(\n  cols = c(ff,fp,rpd,tt,rt), # columns to make long \n  names_to = \"measure\", # new column name for headers\n  values_to = \"time\" # new column name for values\n)\n\n\nSource: PsyTeachR\n\n\n\n\n\ntakes long data and makes it wider\ntakes a few arguments:\n\nid_cols: identifying columns\nnames_from: what should we call the new column containing the previous column names?\nnames_prefix:\nvalues_from: new column values\n\n\n\n\n\n\ndf_lifetime |&gt; \n  select(px,trial,region,ff,fp,rpd,tt,rt,type,accept,condition) |&gt;\n  filter(type==\"critical\",px!=\"px3\") |&gt;\n  pivot_wider(\n  id_cols = c(px,trial), # columns to make long \n  names_from = region, # new column name for headers\n  names_prefix = \"reg_\", # new column name for values\n  values_from = tt\n)\n\n\nSource: PsyTeachR"
+    "objectID": "slides/01-open_science/open-science.html#journal-club",
+    "href": "slides/01-open_science/open-science.html#journal-club",
+    "title": "Open Science",
+    "section": "Journal Club",
+    "text": "Journal Club\n\nlevel: Easy\ne.g., ReproducibiliTea Berlin\n\ndiscuss topics and share knowledge on Open Science Practices",
+    "crumbs": [
+      "D. Palleschi",
+      "Open Science"
+    ]
   },
   {
-    "objectID": "slides/data_tidying/tidying.html#pivot_longer",
-    "href": "slides/data_tidying/tidying.html#pivot_longer",
-    "title": "Untitled",
-    "section": "",
-    "text": "takes wide data and makes it longer\n\nconverts headers of columns into values of a new column\ncombines the values of those columns into a new condensed column\n\ntakes a few arguments:\n\ncols: which columns do we want to combine into a single column?\nnames_to: what should we call the new column containing the previous column names?\nvalues_to: what should we call the new column containing the values from the previous columns?"
+    "objectID": "slides/01-open_science/open-science.html#project-workflow",
+    "href": "slides/01-open_science/open-science.html#project-workflow",
+    "title": "Open Science",
+    "section": "Project Workflow",
+    "text": "Project Workflow\n\nlevel: Easy\nfolder structure\n\nhow to sensibly set up your folders\n\ncontained environments\n\nusing RProjects and the here package\n\ndata management\n\nestablishing some data storage convention\n\nversion control\n\ne.g., git, GitHub/GitLab, OSF",
+    "crumbs": [
+      "D. Palleschi",
+      "Open Science"
+    ]
   },
   {
-    "objectID": "slides/data_tidying/tidying.html#pivot_longer-1",
-    "href": "slides/data_tidying/tidying.html#pivot_longer-1",
-    "title": "Untitled",
-    "section": "",
-    "text": "df_lifetime |&gt; \n  select(px,trial,region,ff,fp,rpd,tt,rt,type,accept,condition) |&gt;\n  filter(type==\"critical\",region==\"verb\",px!=\"px3\") |&gt;\n  pivot_longer(\n  cols = c(ff,fp,rpd,tt,rt), # columns to make long \n  names_to = \"measure\", # new column name for headers\n  values_to = \"time\" # new column name for values\n)\n\n\nSource: PsyTeachR"
+    "objectID": "slides/01-open_science/open-science.html#preprints",
+    "href": "slides/01-open_science/open-science.html#preprints",
+    "title": "Open Science",
+    "section": "Preprints",
+    "text": "Preprints\n\nlevel: Easy\nmanuscript version publicly available\n\nprior to peer review\nduring peer review\nafter publication\n\nallows for a wider audience\n\nearlier feedback\nactually increases citation count\n\ntypically found on (psy)arXiv, OSF",
+    "crumbs": [
+      "D. Palleschi",
+      "Open Science"
+    ]
   },
   {
-    "objectID": "slides/data_tidying/tidying.html#pivot_wider",
-    "href": "slides/data_tidying/tidying.html#pivot_wider",
-    "title": "Untitled",
-    "section": "",
-    "text": "takes long data and makes it wider\ntakes a few arguments:\n\nid_cols: identifying columns\nnames_from: what should we call the new column containing the previous column names?\nnames_prefix:\nvalues_from: new column values"
+    "objectID": "slides/01-open_science/open-science.html#reproducible-code",
+    "href": "slides/01-open_science/open-science.html#reproducible-code",
+    "title": "Open Science",
+    "section": "Reproducible Code",
+    "text": "Reproducible Code\n\nlevel: Medium\nwith open source software (R, RStudio, packages)\nliterate programming\ndynamic reports with Quarto/Rmarkdown\nreproducibility goes hand-in-hand with project workflow and data management\nideally:\n\navoid GUI (Graphic User Interface with point-and-click, e.g., SPSS)\navoid propreitary software (paid licences, e.g., SPSS, Matlab)\nuse open software (e.g., R, Python)\nuse a programming language and include useful comments",
+    "crumbs": [
+      "D. Palleschi",
+      "Open Science"
+    ]
   },
   {
-    "objectID": "slides/data_tidying/tidying.html#pivot_wider-1",
-    "href": "slides/data_tidying/tidying.html#pivot_wider-1",
-    "title": "Untitled",
-    "section": "",
-    "text": "df_lifetime |&gt; \n  select(px,trial,region,ff,fp,rpd,tt,rt,type,accept,condition) |&gt;\n  filter(type==\"critical\",px!=\"px3\") |&gt;\n  pivot_wider(\n  id_cols = c(px,trial), # columns to make long \n  names_from = region, # new column name for headers\n  names_prefix = \"reg_\", # new column name for values\n  values_from = tt\n)\n\n\nSource: PsyTeachR"
+    "objectID": "slides/01-open_science/open-science.html#data-sharing",
+    "href": "slides/01-open_science/open-science.html#data-sharing",
+    "title": "Open Science",
+    "section": "Data sharing",
+    "text": "Data sharing\n\nlevel: Medium\npublicly sharing your data\n\nincluding raw data (if possible)\n\nallows for reproduction of analyses\ntakes forethought and experience\ndocumentation and naming conventions are important\n\ne.g., data dictionaries/codebooks",
+    "crumbs": [
+      "D. Palleschi",
+      "Open Science"
+    ]
+  },
+  {
+    "objectID": "slides/01-open_science/open-science.html#transparent-writing",
+    "href": "slides/01-open_science/open-science.html#transparent-writing",
+    "title": "Open Science",
+    "section": "Transparent writing",
+    "text": "Transparent writing\n\nlevel: Medium\ntransparency regarding\n\nmethods/procedure\nhypotheses (confirmatory vs. exploratory)\ndata analyses\n\nan experiment plan or lab notebook are key!",
+    "crumbs": [
+      "D. Palleschi",
+      "Open Science"
+    ]
+  },
+  {
+    "objectID": "slides/01-open_science/open-science.html#preregistration",
+    "href": "slides/01-open_science/open-science.html#preregistration",
+    "title": "Open Science",
+    "section": "Preregistration",
+    "text": "Preregistration\n\nlevel: Medium\na timestamped and (often) public plan of:\n\nresearch questions\nhypotheses\nmethod\nanalyses\n\nclearly state intentions and predictions for confirmatory analyses\n\neverything else is exploratory\n\ntemplates available on AsPredicted and the OSF",
+    "crumbs": [
+      "D. Palleschi",
+      "Open Science"
+    ]
+  },
+  {
+    "objectID": "slides/01-open_science/open-science.html#registered-report",
+    "href": "slides/01-open_science/open-science.html#registered-report",
+    "title": "Open Science",
+    "section": "Registered Report",
+    "text": "Registered Report\n\nlevel: Difficult\nsubmitting the introduction, methods, analysis plan to a journal before data collection\n\nif accepted: publication regardless of the result\n\na more detailed pre-registration, often with fully written sections\nmuch more time consuming before data collection can begin\n\njournal acceptance can take months",
+    "crumbs": [
+      "D. Palleschi",
+      "Open Science"
+    ]
   },
   {
     "objectID": "slides/02-replication_crisis/replication-crisis_slides.html#most-published-research-findings-are-false",
