@@ -23,6 +23,9 @@ website:
       - slides/04-rprojects/rprojects.qmd
       - slides/05-literate_programming/lit_programming.qmd
       - slides/06-data_wrangling/wrangling.qmd
+      - slides/07-tables/tables.qmd
+      - slides/08-data_viz/data_viz.qmd
+      - slides/09-packages/packages.qmd
 
     # - references.qmd
 # 

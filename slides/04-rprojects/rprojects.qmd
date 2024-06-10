@@ -108,6 +108,7 @@ Today we will...
 - you can have several RProjects open simultaneously
   + and run several scripts across projects simultaneously
 - most importantly, RProjects (can) centralise a specific project's workflow and file path
+- to read more about R Projects, check out [Section 6.2: Projects](https://r4ds.hadley.nz/workflow-scripts.html#projects) from @wickham_r_2023 (or [Ch. 8 -  Workflow: Projects](https://r4ds.had.co.nz/workflow-projects.html) @wickham_r_2016)
 
 ## Creating a new Project
 

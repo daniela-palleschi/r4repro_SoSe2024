@@ -4779,6 +4779,36 @@ vertical-align: -.125em;
  <span class="menu-text">RProjects</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./slides/05-literate_programming/repro_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Writing Reproducible Code</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./slides/06-data_wrangling/cleaning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data wrangling</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./slides/07-tables/sheet-data_viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data communication with tables</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./slides/08-data_viz/sheet-data_viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Visualisation with <code>ggplot2</code></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./slides/09-packages/packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Package (version) management</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -4814,7 +4844,7 @@ vertical-align: -.125em;
 <div class="cell-output cell-output-stdout">
 <pre><code>Local:    main /Users/danielapalleschi/Documents/IdSL/Teaching/SoSe24/M.A./r4repro_SoSe2024
 Remote:   main @ origin (git@github.com:daniela-palleschi/r4repro_SoSe2024.git)
-Head:     [9da1122] 2024-05-06: update mats for week 4: RProjects</code></pre>
+Head:     [7332027] 2024-05-14: add slides for lit programming and wrangling</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -4838,10 +4868,10 @@ attached base packages:
 [1] stats     graphics  grDevices datasets  utils     methods   base     
 
 loaded via a namespace (and not attached):
- [1] htmlwidgets_1.6.4 compiler_4.4.0    fastmap_1.1.1     cli_3.6.2        
+ [1] htmlwidgets_1.6.4 compiler_4.4.0    fastmap_1.2.0     cli_3.6.2        
  [5] htmltools_0.5.8.1 tools_4.4.0       rstudioapi_0.16.0 yaml_2.3.8       
- [9] rmarkdown_2.26    knitr_1.46        git2r_0.33.0      jsonlite_1.8.8   
-[13] xfun_0.43         digest_0.6.35     rlang_1.1.3       renv_1.0.7       
+ [9] rmarkdown_2.27    knitr_1.47        git2r_0.33.0      jsonlite_1.8.8   
+[13] xfun_0.44         digest_0.6.35     rlang_1.1.4       renv_1.0.7       
 [17] evaluate_0.23    </code></pre>
 </div>
 </div>
@@ -5135,7 +5165,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/daniela-palleschi\.github\.io\/r4repro_SoSe2024\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
