@@ -7,18 +7,18 @@
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.553">
-
-  <meta name="author" content="Daniela Palleschi">
-  <meta name="dcterms.date" content="2024-06-03">
-  <title>R for Reproducibility - Data Visualisation with ggplot2</title>
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
-  <style>
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+<meta name="author" content="Daniela Palleschi">
+<meta name="dcterms.date" content="2024-06-03">
+<title>R for Reproducibility - Data Visualisation with ggplot2</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+<link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+<style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -116,12 +116,12 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto.css">
-  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-  <style type="text/css">
+<link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto.css">
+<link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+<link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+<link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+<link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+<style type="text/css">
 
   .callout {
     margin-top: 1em;
@@ -319,7 +319,7 @@
   }
 
   </style>
-  <style type="text/css">
+<style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
       overflow: auto;
@@ -407,8 +407,7 @@
       margin-right: 0; 
     }
   </style>
-  <script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
-  <link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script><link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <meta name="twitter:title" content="R for Reproducibility - Data Visualisation with ggplot2">
 <meta name="twitter:description" content="Communicating your data">
 <meta name="twitter:card" content="summary">
@@ -417,8 +416,8 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="logos/logos.tif" data-background-position="50% 92%" data-background-size="15%" class="quarto-title-block center">
-  <h1 class="title">Data Visualisation with <code>ggplot2</code></h1>
+<section id="title-slide" data-background-image="logos/logos.tif" data-background-position="50% 92%" data-background-size="15%" class="quarto-title-block center"><h1 class="title">Data Visualisation with <code>ggplot2</code>
+</h1>
   <p class="subtitle">Communicating your data</p>
 
 <div class="quarto-title-authors">
@@ -433,19 +432,12 @@ Daniela Palleschi
 </div>
 
   <p class="date">2024-06-03</p>
-</section>
-<section id="learning-objectives" class="title-slide slide level1 center">
-<h1>Learning objectives</h1>
+</section><section id="learning-objectives" class="title-slide slide level1 center"><h1>Learning objectives</h1>
 <ul>
 <li class="fragment">visualise variable distributions</li>
 <li class="fragment">visualise summary statistics</li>
 <li class="fragment">save figures as <code>rds</code> or as figures</li>
-</ul>
-</section>
-
-<section>
-<section id="load-packages-and-data" class="title-slide slide level1 center">
-<h1>Load packages and data</h1>
+</ul></section><section><section id="load-packages-and-data" class="title-slide slide level1 center"><h1>Load packages and data</h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># load packages</span></span>
 <span id="cb1-2"><a></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -460,9 +452,7 @@ Daniela Palleschi
 <span id="cb2-7"><a></a>  <span class="fu">filter</span>(type <span class="sc">==</span> <span class="st">"critical"</span>, <span class="co"># only critical trials</span></span>
 <span id="cb2-8"><a></a>         px <span class="sc">!=</span> <span class="st">"px3"</span>) <span class="co"># this participant had lots of 0's for some reason</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="summary-of-first-fixation-times" class="title-slide slide level2 center">
-<h2>Summary of first-fixation times</h2>
+</section><section id="summary-of-first-fixation-times" class="title-slide slide level2 center"><h2>Summary of first-fixation times</h2>
 <ul>
 <li class="fragment">this code is from the previous topic</li>
 </ul>
@@ -481,36 +471,31 @@ Daniela Palleschi
 <span id="cb3-12"><a></a>         <span class="at">upper.ci =</span> mean.ff <span class="sc">+</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> (<span class="fl">0.05</span> <span class="sc">/</span> <span class="dv">2</span>), N <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> se) <span class="sc">|&gt;</span> </span>
 <span id="cb3-13"><a></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-</section>
-<section id="plotting-reading-times" class="title-slide slide level1 center">
-<h1>Plotting reading times</h1>
+</section></section><section id="plotting-reading-times" class="title-slide slide level1 center"><h1>Plotting reading times</h1>
 <ul>
 <li class="fragment">reading times are (usually) continuous variables
 <ul>
 <li class="fragment">as are e.g., reaction times</li>
-</ul></li>
+</ul>
+</li>
 <li class="fragment">they are truncated at 0, meaning they cannot have negative values
 <ul>
-<li class="fragment">because of this, they tend to have a <em>skewed distribution</em></li>
-</ul></li>
+<li class="fragment">because of this, they tend to have a <em>skewed distribution</em>
+</li>
 </ul>
-</section>
-
-<section id="plots-with-ggplot2" class="title-slide slide level1 center">
-<h1>Plots with <code>ggplot2</code></h1>
+</li>
+</ul></section><section id="plots-with-ggplot2" class="title-slide slide level1 center"><h1>Plots with <code>ggplot2</code>
+</h1>
 <ul>
-<li class="fragment"><code>ggplot2</code> is part of the tidyverse (like <code>dplyr</code>)
+<li class="fragment">
+<code>ggplot2</code> is part of the tidyverse (like <code>dplyr</code>)
 <ul>
-<li class="fragment">uses a <em>layered grammar of graphics</em></li>
+<li class="fragment">uses a <em>layered grammar of graphics</em>
+</li>
 <li class="fragment">i.e., we build layers</li>
-</ul></li>
 </ul>
-</section>
-
-<section>
-<section id="an-example-histogram" class="title-slide slide level1 center">
-<h1>An example: histogram</h1>
+</li>
+</ul></section><section><section id="an-example-histogram" class="title-slide slide level1 center"><h1>An example: histogram</h1>
 <div class="cell columns column-output-location">
 <div class="column">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>iris <span class="sc">|&gt;</span> </span>
@@ -518,36 +503,30 @@ Daniela Palleschi
 <span id="cb4-3"><a></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
 <span id="cb4-4"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"A histogram"</span>,</span>
 <span id="cb4-5"><a></a>       <span class="at">x =</span> <span class="st">"variable"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column fragment">
+</div>
+<div class="column fragment">
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
+<figure><p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-</section>
-<section id="start-layering" class="title-slide slide level2 center">
-<h2>Start layering</h2>
+</section><section id="start-layering" class="title-slide slide level2 center"><h2>Start layering</h2>
 <div class="cell columns column-output-location">
 <div class="column">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>df_lifetime <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(ff)) <span class="co"># aes = 'aesthetic'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+<figure><p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-</section>
-
-<section id="add-labels" class="title-slide slide level2 center">
-<h2>Add labels</h2>
+</section><section id="add-labels" class="title-slide slide level2 center"><h2>Add labels</h2>
 <div class="cell columns column-output-location">
 <div class="column">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>df_lifetime <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(ff)) <span class="sc">+</span> </span>
@@ -556,17 +535,13 @@ Daniela Palleschi
 </div><div class="column">
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
+<figure><p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-</section>
-
-<section id="add" class="title-slide slide level2 center">
-<h2>Add</h2>
+</section><section id="add" class="title-slide slide level2 center"><h2>Add</h2>
 <div class="cell columns column-output-location">
 <div class="column">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>df_lifetime <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(ff)) <span class="sc">+</span> </span>
@@ -576,18 +551,13 @@ Daniela Palleschi
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure>
-<figcaption>Distribution of first fixation times at the verb region (raw milliseconds)</figcaption>
-<p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+<figure><figcaption>Distribution of first fixation times at the verb region (raw milliseconds)</figcaption><p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-</section>
-
-<section id="add-condition" class="title-slide slide level2 center">
-<h2>Add condition</h2>
+</section><section id="add-condition" class="title-slide slide level2 center"><h2>Add condition</h2>
 <div class="cell columns column-output-location">
 <div class="column">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>df_lifetime <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(ff, <span class="at">fill =</span> condition)) <span class="sc">+</span> </span>
@@ -597,16 +567,13 @@ Daniela Palleschi
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure>
-<figcaption>Distribution of first fixation times at the verb region (raw milliseconds)</figcaption>
-<p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+<figure><figcaption>Distribution of first fixation times at the verb region (raw milliseconds)</figcaption><p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<aside class="notes">
-<p>The colour here is STACKED!! i.e., not layered. Notice the distribution doesn’t change from all grey to coloured</p>
+<aside class="notes"><p>The colour here is STACKED!! i.e., not layered. Notice the distribution doesn’t change from all grey to coloured</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -617,21 +584,22 @@ Daniela Palleschi
           width: 1px!important;
           overflow: hidden!important;
           display:block!important;
-      }</style></aside>
-</section>
-
-<section id="customisation" class="title-slide slide level2 center">
-<h2>Customisation</h2>
+      }</style></aside></section><section id="customisation" class="title-slide slide level2 center"><h2>Customisation</h2>
 <ul>
 <li class="fragment">we can add arguments to our geoms
 <ul>
 <li class="fragment">e.g., transparency: <code>alpha =</code> takes a value between 0 to 1</li>
-</ul></li>
+</ul>
+</li>
 <li class="fragment">we can use <code>theme()</code> to customise font sizes, legend placement, etc.</li>
-<li class="fragment">tehre are also popular preset themes, such as <code>theme_bw()</code> and <code>theme_minimal()</code></li>
+<li class="fragment">tehre are also popular preset themes, such as <code>theme_bw()</code> and <code>theme_minimal()</code>
+</li>
 </ul>
 <div class="panel-tabset">
-<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1"><code>theme_bw()</code></a></li><li><a href="#tabset-1-2"><code>theme_minimal()</code></a></li></ul>
+<ul id="tabset-1" class="panel-tabset-tabby">
+<li><a data-tabby-default="" href="#tabset-1-1"><code>theme_bw()</code></a></li>
+<li><a href="#tabset-1-2"><code>theme_minimal()</code></a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-1-1">
 <div class="cell columns column-output-location">
@@ -644,9 +612,7 @@ Daniela Palleschi
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure>
-<figcaption>Distribution of first fixation times at the verb region (raw milliseconds).</figcaption>
-<p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+<figure><figcaption>Distribution of first fixation times at the verb region (raw milliseconds).</figcaption><p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -664,9 +630,7 @@ Daniela Palleschi
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure>
-<figcaption>Distribution of first fixation times at the verb region (raw milliseconds).</figcaption>
-<p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
+<figure><figcaption>Distribution of first fixation times at the verb region (raw milliseconds).</figcaption><p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -675,29 +639,26 @@ Daniela Palleschi
 </div>
 </div>
 </div>
-</section>
-</section>
-<section>
-<section id="distributions" class="title-slide slide level1 smaller center">
-<h1>Distributions</h1>
+</section></section><section><section id="distributions" class="title-slide slide level1 smaller center"><h1>Distributions</h1>
 <ul>
 <li class="fragment">show the distribution of observations
 <ul>
 <li class="fragment">so we can see where the data are clustered</li>
 <li class="fragment">and eyeball the shape of the distribution</li>
-</ul></li>
+</ul>
+</li>
 <li class="fragment">we already saw the histogram, which shows the number of observations per variable value</li>
-<li class="fragment"><strong>density plots</strong> are another useful plot for visualising distributions</li>
+<li class="fragment">
+<strong>density plots</strong> are another useful plot for visualising distributions</li>
 </ul>
 
-<img data-src="data_viz_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
-<section id="density-plots" class="title-slide slide level2 center">
-<h2>Density plots</h2>
+<img data-src="data_viz_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section><section id="density-plots" class="title-slide slide level2 center"><h2>Density plots</h2>
 <ul>
 <li class="fragment">below I just replaced <code>geom_histogram()</code> with <code>geom_density()</code>
 <ul>
 <li class="fragment">I also filtered the data to include only values of <code>ff</code> above 0</li>
-</ul></li>
+</ul>
+</li>
 <li class="fragment">what is plotted along the y-axis? how does this differ from a histogram?</li>
 </ul>
 <div class="cell columns column-output-location">
@@ -709,26 +670,23 @@ Daniela Palleschi
 <span id="cb11-5"><a></a>       <span class="at">x =</span> <span class="st">"First fixation times (ms)"</span>) <span class="sc">+</span></span>
 <span id="cb11-6"><a></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
 <span id="cb11-7"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column fragment">
+</div>
+<div class="column fragment">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure>
-<figcaption>Distribution of first fixation times at the verb region (raw milliseconds).</figcaption>
-<p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+<figure><figcaption>Distribution of first fixation times at the verb region (raw milliseconds).</figcaption><p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-</section>
-
-<section id="grouped-density-plots" class="title-slide slide level2 center">
-<h2>Grouped density plots</h2>
+</section><section id="grouped-density-plots" class="title-slide slide level2 center"><h2>Grouped density plots</h2>
 <ul>
 <li class="fragment">just like with histograms, we can look at the density plots of different subsets of the data with <code>aes(fill = )</code>
 <ul>
 <li class="fragment">like region</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 <div class="cell columns column-output-location">
 <div class="column">
@@ -739,22 +697,20 @@ Daniela Palleschi
 <span id="cb12-5"><a></a>       <span class="at">x =</span> <span class="st">"First fixation times (ms)"</span>) <span class="sc">+</span></span>
 <span id="cb12-6"><a></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span>.<span class="dv">5</span>) <span class="sc">+</span></span>
 <span id="cb12-7"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column fragment">
+</div>
+<div class="column fragment">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure>
-<figcaption>Distribution of first fixation times at the verb region (raw milliseconds).</figcaption>
-<p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
+<figure><figcaption>Distribution of first fixation times at the verb region (raw milliseconds).</figcaption><p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-</section>
-<section id="facet_grid" class="title-slide slide level3 center">
-<h3><code>facet_grid()</code></h3>
+</section><section id="facet_grid" class="title-slide slide level3 center"><h3><code>facet_grid()</code></h3>
 <ul>
-<li class="fragment">there are a lot of overlapping density curves, let’s try to separate them with <code>facet_grid(x~y)</code></li>
+<li class="fragment">there are a lot of overlapping density curves, let’s try to separate them with <code>facet_grid(x~y)</code>
+</li>
 </ul>
 <div class="cell columns column-output-location">
 <div class="column">
@@ -766,12 +722,11 @@ Daniela Palleschi
 <span id="cb13-6"><a></a>       <span class="at">x =</span> <span class="st">"First fixation times (ms)"</span>) <span class="sc">+</span></span>
 <span id="cb13-7"><a></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span>.<span class="dv">5</span>) <span class="sc">+</span></span>
 <span id="cb13-8"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column fragment">
+</div>
+<div class="column fragment">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure>
-<figcaption>Distribution of first fixation times at the verb region (raw milliseconds).</figcaption>
-<p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
+<figure><figcaption>Distribution of first fixation times at the verb region (raw milliseconds).</figcaption><p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -779,17 +734,15 @@ Daniela Palleschi
 </div>
 <ul>
 <li class="fragment">how would you describe the density plots of the different regions?</li>
-</ul>
-</section>
-
-<section id="re-ordering-factors" class="title-slide slide level3 center">
-<h3>re-ordering factors</h3>
+</ul></section><section id="re-ordering-factors" class="title-slide slide level3 center"><h3>re-ordering factors</h3>
 <ul>
 <li class="fragment">by default, factors will be ordered alphabetically
 <ul>
 <li class="fragment">but we don’t always want that</li>
-<li class="fragment">here, <code>verb-1</code> should be before <code>verb</code></li>
-</ul></li>
+<li class="fragment">here, <code>verb-1</code> should be before <code>verb</code>
+</li>
+</ul>
+</li>
 </ul>
 <div class="cell columns column-output-location">
 <div class="column">
@@ -798,16 +751,15 @@ Daniela Palleschi
 <span id="cb14-3"><a></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"verb-1"</span>,<span class="st">"verb"</span>,<span class="st">"verb+1"</span>,<span class="st">"verb+2"</span>,<span class="st">"verb+3"</span>,<span class="st">"verb+4"</span>)))</span>
 <span id="cb14-4"><a></a></span>
 <span id="cb14-5"><a></a><span class="fu">summary</span>(df_lifetime<span class="sc">$</span>region)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column fragment">
+</div>
+<div class="column fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>verb-1   verb verb+1 verb+2 verb+3 verb+4 
    559    559    559    559    559    182 </code></pre>
 </div>
 </div>
 </div>
-</section>
-<section id="exercise" class="slide level4 scrollable">
-<h4>Exercise</h4>
+</section><section id="exercise" class="slide level4 scrollable"><h4>Exercise</h4>
 <ol type="1">
 <li class="fragment">create a density plot with the fill colour set to <code>condition</code>, but:</li>
 </ol>
@@ -817,24 +769,20 @@ Daniela Palleschi
 <li class="fragment">your plot should look something like A or B:</li>
 </ul>
 
-<img data-src="data_viz_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
-<section id="extra-exercise" class="slide level4 scrollable">
-<h4>Extra exercise</h4>
+<img data-src="data_viz_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section><section id="extra-exercise" class="slide level4 scrollable"><h4>Extra exercise</h4>
 <ol start="2" type="1">
 <li class="fragment">Can you produce these plots?</li>
 </ol>
 
-<img data-src="data_viz_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
-
-
-<section id="scatterplots" class="title-slide slide level2 center">
-<h2>Scatterplots</h2>
+<img data-src="data_viz_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section><section id="scatterplots" class="title-slide slide level2 center"><h2>Scatterplots</h2>
 <ul>
 <li class="fragment">histograms and density plots plot a <strong>single variable</strong> along the x-axis
 <ul>
 <li class="fragment">in most other plots the dependent (measure) variable is plotted along the y-axis by convention</li>
-</ul></li>
-<li class="fragment">scatterplots plot the relationship between <strong>two variables</strong></li>
+</ul>
+</li>
+<li class="fragment">scatterplots plot the relationship between <strong>two variables</strong>
+</li>
 </ul>
 <div class="cell columns column-output-location">
 <div class="column">
@@ -844,25 +792,24 @@ Daniela Palleschi
 <span id="cb16-4"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"A scatterplot"</span>,</span>
 <span id="cb16-5"><a></a>       <span class="at">x =</span> <span class="st">"variable X"</span>,</span>
 <span id="cb16-6"><a></a>       <span class="at">y =</span> <span class="st">"variable Y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column fragment">
+</div>
+<div class="column fragment">
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></p>
+<figure><p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-</section>
-<section id="scatterplots-1" class="title-slide slide level3 center">
-<h3>Scatterplots</h3>
+</section><section id="scatterplots-1" class="title-slide slide level3 center"><h3>Scatterplots</h3>
 <ul>
 <li class="fragment">the figure below plots total reading times (verb region) to the verb region (x-axis) and reaction times to the critical sentence (y-axis)
 <ul>
 <li class="fragment">what does each point represent?</li>
 <li class="fragment">how would you describe the relationship between the two variables?</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 <div class="cell columns column-output-location">
 <div class="column">
@@ -876,67 +823,58 @@ Daniela Palleschi
 <span id="cb17-8"><a></a>       <span class="at">y =</span> <span class="st">"Reaction time (ms)"</span>) <span class="sc">+</span></span>
 <span id="cb17-9"><a></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb17-10"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column fragment">
+</div>
+<div class="column fragment">
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
+<figure><p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-</section>
-<section id="exercise-1" class="slide level4 scrollable">
-<h4>Exercise</h4>
+</section><section id="exercise-1" class="slide level4 scrollable"><h4>Exercise</h4>
 <ol type="1">
 <li class="fragment">Generate a scatterplot of total reading times and reaction times, with:
 <ul>
 <li class="fragment">colour and shape set to condition</li>
-<li class="fragment">tip: these both belong in <code>aes()</code></li>
-</ul></li>
+<li class="fragment">tip: these both belong in <code>aes()</code>
+</li>
+</ul>
+</li>
 <li class="fragment">What information does this plot suggest?</li>
 </ol>
 <div class="cell">
 
 </div>
-</section>
-
-
-<section id="bar-plot" class="title-slide slide level2 center">
-<h2>Bar plot</h2>
+</section><section id="bar-plot" class="title-slide slide level2 center"><h2>Bar plot</h2>
 <div class="columns">
 <div class="column" style="width:100%;">
 <ul>
 <li class="fragment">show the distribution of categorical factor levels
 <ul>
 <li class="fragment">i.e., the frequency of observations per level</li>
-</ul></li>
+</ul>
+</li>
 <li class="fragment">be sure to read in <code>accept</code> as a factor!</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>df_lifetime <span class="sc">|&gt;</span> </span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>df_lifetime <span class="sc">|&gt;</span> </span>
 <span id="cb18-2"><a></a>  <span class="fu">distinct</span>(px,trial,<span class="at">.keep_all=</span>T) <span class="sc">|&gt;</span> </span>
 <span id="cb18-3"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(accept) )) <span class="sc">+</span></span>
 <span id="cb18-4"><a></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
 <span id="cb18-5"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div>
-<figure>
-<p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-21-1.png" width="960"></p>
+<figure><p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-21-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>df_lifetime <span class="sc">|&gt;</span> </span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>df_lifetime <span class="sc">|&gt;</span> </span>
 <span id="cb19-2"><a></a>  <span class="fu">distinct</span>(px,trial,<span class="at">.keep_all=</span>T) <span class="sc">|&gt;</span> </span>
 <span id="cb19-3"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(accept), <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
 <span id="cb19-4"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Binary responses"</span>,</span>
@@ -944,21 +882,16 @@ Daniela Palleschi
 <span id="cb19-6"><a></a>       <span class="at">fill =</span> <span class="st">"Condition"</span>) <span class="sc">+</span></span>
 <span id="cb19-7"><a></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
 <span id="cb19-8"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div>
-<figure>
-<p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-22-1.png" width="960"></p>
+<figure><p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-22-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
 </div>
-</section>
-
-<section id="grouped-bar-plots" class="title-slide slide level2 center">
-<h2>Grouped bar plots</h2>
+</section><section id="grouped-bar-plots" class="title-slide slide level2 center"><h2>Grouped bar plots</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>df_lifetime <span class="sc">|&gt;</span> </span>
 <span id="cb20-2"><a></a>  <span class="fu">distinct</span>(px,trial,<span class="at">.keep_all=</span>T) <span class="sc">|&gt;</span> </span>
@@ -970,18 +903,19 @@ Daniela Palleschi
 <span id="cb20-8"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="data_viz_files/figure-revealjs/unnamed-chunk-23-1.png" width="960" class="r-stretch"></section>
-<section id="exercise-2" class="title-slide slide level3 center scrollable">
-<h3>Exercise</h3>
+<img data-src="data_viz_files/figure-revealjs/unnamed-chunk-23-1.png" width="960" class="r-stretch"></section><section id="exercise-2" class="title-slide slide level3 center scrollable"><h3>Exercise</h3>
 <ol type="1">
 <li class="fragment">Generate a grouped bar plot (i.e., <code>dodge</code>) with:
 <ul>
-<li class="fragment">a facet grid for <code>tense</code></li>
+<li class="fragment">a facet grid for <code>tense</code>
+</li>
 <li class="fragment">plots <code>lifetime</code> on the x-axis</li>
-<li class="fragment">and fills the bars based on <code>accept</code></li>
+<li class="fragment">and fills the bars based on <code>accept</code>
+</li>
 <li class="fragment">change the labels accordingly</li>
 <li class="fragment">customise as you like</li>
-</ul></li>
+</ul>
+</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>df_lifetime <span class="sc">|&gt;</span> </span>
@@ -994,11 +928,7 @@ Daniela Palleschi
 <span id="cb21-8"><a></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
 <span id="cb21-9"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-
-
-<section id="grouped-bar-plots-1" class="title-slide slide level2 center">
-<h2>Grouped bar plots</h2>
+</section><section id="grouped-bar-plots-1" class="title-slide slide level2 center"><h2>Grouped bar plots</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>df_lifetime <span class="sc">|&gt;</span> </span>
 <span id="cb22-2"><a></a>  <span class="fu">distinct</span>(px,trial,<span class="at">.keep_all=</span>T) <span class="sc">|&gt;</span> </span>
@@ -1011,10 +941,7 @@ Daniela Palleschi
 <span id="cb22-9"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="data_viz_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch"></section>
-
-<section id="stacked-bar-plots" class="title-slide slide level2 center">
-<h2>Stacked bar plots</h2>
+<img data-src="data_viz_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch"></section><section id="stacked-bar-plots" class="title-slide slide level2 center"><h2>Stacked bar plots</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23" data-code-line-numbers="8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>df_lifetime <span class="sc">|&gt;</span> </span>
 <span id="cb23-2"><a></a>  <span class="fu">distinct</span>(px,trial,<span class="at">.keep_all=</span>T) <span class="sc">|&gt;</span> </span>
@@ -1027,38 +954,28 @@ Daniela Palleschi
 <span id="cb23-9"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="data_viz_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch"></section>
-<section id="exercise-3" class="title-slide slide level3 center scrollable">
-<h3>Exercise</h3>
+<img data-src="data_viz_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch"></section><section id="exercise-3" class="title-slide slide level3 center scrollable"><h3>Exercise</h3>
 <ol type="1">
 <li class="fragment">Choose the barplot you like best for binary data</li>
 <li class="fragment">Reproduce that barplot, but with <code>reg_in</code> at the <code>verb1</code> region</li>
 </ol>
 
-<img data-src="data_viz_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch"></section>
-
-<section id="extra-exercise-1" class="title-slide slide level3 center scrollable">
-<h3>Extra exercise</h3>
+<img data-src="data_viz_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch"></section><section id="extra-exercise-1" class="title-slide slide level3 center scrollable"><h3>Extra exercise</h3>
 <ol type="1">
 <li class="fragment">Create another bar plot, but for <code>reg_out</code> for all sentence regions</li>
-<li class="fragment">Use <code>facet_grid()</code></li>
+<li class="fragment">Use <code>facet_grid()</code>
+</li>
 </ol>
 <ul>
 <li class="fragment">to have facets by region (columns) and by tense (in 2 rows)</li>
 </ul>
 
-<img data-src="data_viz_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch"></section>
-
-</section>
-<section>
-<section id="summary-statistics" class="title-slide slide level1 center">
-<h1>Summary statistics</h1>
+<img data-src="data_viz_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch"></section></section><section><section id="summary-statistics" class="title-slide slide level1 center"><h1>Summary statistics</h1>
 <ul>
 <li class="fragment">measures of location: mean, median, mode</li>
 <li class="fragment">measures of spread: (interquartile) range, standard deviation</li>
 </ul>
-<aside class="notes">
-<p>IQR: middle 50% of data</p>
+<aside class="notes"><p>IQR: middle 50% of data</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1069,25 +986,21 @@ Daniela Palleschi
           width: 1px!important;
           overflow: hidden!important;
           display:block!important;
-      }</style></aside>
-</section>
-<section id="boxplots" class="title-slide slide level2 center">
-<h2>Boxplots</h2>
+      }</style></aside></section><section id="boxplots" class="title-slide slide level2 center"><h2>Boxplots</h2>
 <ul>
 <li class="fragment">boxplots provide information about the distribution of a <em>continuous</em> variable
 <ul>
 <li class="fragment">but includes information like <em>median</em> (dark line) and <em>quartiles</em> (box and whiskers)</li>
 <li class="fragment">and <em>outliers</em> (dots)</li>
-</ul></li>
+</ul>
+</li>
 <li class="fragment">like scatterplots, require x and y variables
 <ul>
-<li class="fragment">but one of them needs to be <strong>categorical</strong></li>
-</ul></li>
+<li class="fragment">but one of them needs to be <strong>categorical</strong>
+</li>
 </ul>
-</section>
-
-<section id="section" class="title-slide slide level2 center">
-<h2></h2>
+</li>
+</ul></section><section id="section" class="title-slide slide level2 center"><h2></h2>
 <div class="cell columns column-output-location">
 <div class="column">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>iris <span class="sc">|&gt;</span> </span>
@@ -1096,24 +1009,19 @@ Daniela Palleschi
 <span id="cb24-4"><a></a>       <span class="at">x =</span> <span class="st">"Categorical variable"</span>,</span>
 <span id="cb24-5"><a></a>       <span class="at">y =</span> <span class="st">"Continuous variable"</span>) <span class="sc">+</span></span>
 <span id="cb24-6"><a></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column fragment">
+</div>
+<div class="column fragment">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure>
-<figcaption>A scatterplot. Median (50th percentile): thick black lines; interquartile range (IQR; 25th and 75th percentile): box limits; minimum (0th percentile) and maximum (100th percentile) excluding outliers: : whiskers; outliers: points</figcaption>
-<p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-29-1.png" width="960"></p>
+<figure><figcaption>A scatterplot. Median (50th percentile): thick black lines; interquartile range (IQR; 25th and 75th percentile): box limits; minimum (0th percentile) and maximum (100th percentile) excluding outliers: : whiskers; outliers: points</figcaption><p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-29-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-</section>
+</section><section id="boxplot-explained" class="title-slide slide level2 center"><h2>Boxplot explained</h2>
 
-<section id="boxplot-explained" class="title-slide slide level2 center">
-<h2>Boxplot explained</h2>
-
-<img data-src="data_viz_files/figure-revealjs/unnamed-chunk-30-1.png" class="r-stretch quarto-figure-center"><p class="caption">Image source: <span class="citation" data-cites="winter_statistics_2019">Winter (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> (all rights reserved)</p><aside class="notes">
-<p>whiskers: 1.5*IQR from Q1 (lower whisker) or Q3 (upper whisker) outliers: outside that range</p>
+<img data-src="data_viz_files/figure-revealjs/unnamed-chunk-30-1.png" class="r-stretch quarto-figure-center"><p class="caption">Image source: <span class="citation" data-cites="winter_statistics_2019">Winter (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> (all rights reserved)</p><aside class="notes"><p>whiskers: 1.5*IQR from Q1 (lower whisker) or Q3 (upper whisker) outliers: outside that range</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1124,11 +1032,7 @@ Daniela Palleschi
           width: 1px!important;
           overflow: hidden!important;
           display:block!important;
-      }</style></aside>
-</section>
-
-<section id="boxplots-1" class="title-slide slide level2 center">
-<h2>Boxplots</h2>
+      }</style></aside></section><section id="boxplots-1" class="title-slide slide level2 center"><h2>Boxplots</h2>
 <ul>
 <li class="fragment">let’s change our scatterplot to a boxplot</li>
 </ul>
@@ -1143,19 +1047,17 @@ Daniela Palleschi
 <span id="cb25-7"><a></a>       <span class="at">y =</span> <span class="st">"First-fixation duration (ms)"</span>) <span class="sc">+</span></span>
 <span id="cb25-8"><a></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb25-9"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column fragment">
+</div>
+<div class="column fragment">
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-32-1.png" width="960"></p>
+<figure><p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-32-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-</section>
-<section id="grouped-boxplots" class="title-slide slide level3 center">
-<h3>Grouped boxplots</h3>
+</section><section id="grouped-boxplots" class="title-slide slide level3 center"><h3>Grouped boxplots</h3>
 <div class="cell columns column-output-location">
 <div class="column">
 <div class="sourceCode cell-code" id="cb26" data-code-line-numbers="4,"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>df_lifetime <span class="sc">|&gt;</span></span>
@@ -1167,19 +1069,17 @@ Daniela Palleschi
 <span id="cb26-7"><a></a>       <span class="at">y =</span> <span class="st">"First-fixation duration (ms)"</span>) <span class="sc">+</span></span>
 <span id="cb26-8"><a></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb26-9"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column fragment">
+</div>
+<div class="column fragment">
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-33-1.png" width="960"></p>
+<figure><p><img data-src="data_viz_files/figure-revealjs/unnamed-chunk-33-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-</section>
-<section id="exercise-4" class="slide level4 scrollable">
-<h4>Exercise</h4>
+</section><section id="exercise-4" class="slide level4 scrollable"><h4>Exercise</h4>
 <ol type="1">
 <li class="fragment">Create a group boxplot (x = tense, fill = lifetime) for</li>
 </ol>
@@ -1188,21 +1088,19 @@ Daniela Palleschi
 <li class="fragment">regression path duration (verb region)</li>
 <li class="fragment">total reading time (verb region)</li>
 <li class="fragment">reaction times (use the <code>distinct()</code> verb to have a single observation per participant and per trial)</li>
-</ul>
-</section>
-
-
-<section id="interaction-plots" class="title-slide slide level2 smaller center">
-<h2>Interaction plots</h2>
+</ul></section><section id="interaction-plots" class="title-slide slide level2 smaller center"><h2>Interaction plots</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li class="fragment">common for <strong>factorial</strong> designs, i.e., comparing <em>categorical</em> predictors</li>
 <li class="fragment">there are 2 ways of producing them:
 <ul>
-<li class="fragment">with your data frame and <code>stat_summary()</code></li>
-<li class="fragment">or with a summary table and ggplot geoms <code>geom_point()</code>, <code>geom_errorbar()</code>, and <code>geom_line()</code></li>
-</ul></li>
+<li class="fragment">with your data frame and <code>stat_summary()</code>
+</li>
+<li class="fragment">or with a summary table and ggplot geoms <code>geom_point()</code>, <code>geom_errorbar()</code>, and <code>geom_line()</code>
+</li>
+</ul>
+</li>
 <li class="fragment">we’ll need our summary table to plot an interaction plot</li>
 </ul>
 </div><div class="column" style="width:50%;">
@@ -1210,8 +1108,7 @@ Daniela Palleschi
 <div class="cell-output-display">
 <div>
 <table class="table" data-quarto-postprocess="true" style="font-size: 20px; margin-left: auto; margin-right: auto;">
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">condition</th>
 <th style="text-align: left;" data-quarto-table-cell-role="th">lifetime</th>
 <th style="text-align: left;" data-quarto-table-cell-role="th">tense</th>
@@ -1222,8 +1119,7 @@ Daniela Palleschi
 <th style="text-align: right;" data-quarto-table-cell-role="th">ci</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">lower.ci</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">upper.ci</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">deadPP</td>
@@ -1275,15 +1171,11 @@ Daniela Palleschi
 </tr>
 </tbody>
 </table>
-
-
 </div>
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">library</span>(patchwork)</span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">library</span>(patchwork)</span>
 <span id="cb27-2"><a></a></span>
 <span id="cb27-3"><a></a>df_lifetime <span class="sc">|&gt;</span> </span>
 <span id="cb27-4"><a></a>  <span class="fu">filter</span>(region <span class="sc">==</span> <span class="st">"verb"</span>) <span class="sc">|&gt;</span> </span>
@@ -1321,14 +1213,11 @@ Daniela Palleschi
 <span id="cb27-36"><a></a>  <span class="fu">plot_annotation</span>(<span class="at">tag_levels =</span> <span class="st">"A"</span>) <span class="sc">+</span></span>
 <span id="cb27-37"><a></a>  <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">"collect"</span>) <span class="sc">&amp;</span></span>
 <span id="cb27-38"><a></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div id="fig-interaction-revealjs" class="quarto-figure quarto-figure-center quarto-float">
-<figure class="quarto-float quarto-float-fig">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-interaction-revealjs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-interaction-revealjs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Identical interaction plots produced two ways: feeding a dataset into <code>ggplot()</code> and using <code>stat_summary()</code> (A) or feeding a summary table into <code>ggplot()</code> and using geoms (B)
-</figcaption>
-<div aria-describedby="fig-interaction-revealjs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+</figcaption><div aria-describedby="fig-interaction-revealjs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="data_viz_files/figure-revealjs/fig-interaction-revealjs-1.png" width="960">
 </div>
 </figure>
@@ -1337,51 +1226,44 @@ Figure&nbsp;1: Identical interaction plots produced two ways: feeding a dataset 
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="question-binomial-data" class="title-slide slide level1 center">
-<h1>Question: Binomial data</h1>
+</section></section><section id="question-binomial-data" class="title-slide slide level1 center"><h1>Question: Binomial data</h1>
 <ul>
 <li class="fragment">binomial data are those with 2 categories, for example
 <ul>
 <li class="fragment">present, absent</li>
 <li class="fragment">yes, no</li>
-</ul></li>
+</ul>
+</li>
 <li class="fragment">in our dataset, each trial ended with a binary naturalness judgement task
 <ul>
 <li class="fragment">how might we plot such data?</li>
-</ul></li>
 </ul>
-</section>
-
-<section>
-<section id="saving-our-plots" class="title-slide slide level1 center scrollable">
-<h1>Saving our plots</h1>
+</li>
+</ul></section><section><section id="saving-our-plots" class="title-slide slide level1 center scrollable"><h1>Saving our plots</h1>
 <ul>
 <li class="fragment">we can save our plots two ways:
 <ol type="1">
 <li class="fragment">as image files (e.g., JPEG, PNG, SVG, etc.): when writing in Word, LaTeX, etc.</li>
 <li class="fragment">as a single R object (Rds: R data structure): when writing in Rmarkdown/Quarto</li>
-</ol></li>
-</ul>
-</section>
-<section id="ggsave" class="title-slide slide level2 center">
-<h2><code>ggsave()</code></h2>
+</ol>
+</li>
+</ul></section><section id="ggsave" class="title-slide slide level2 center"><h2><code>ggsave()</code></h2>
 <ul>
 <li class="fragment">the <code>ggsave()</code> function is useful for saving ggplot objects
 <ul>
 <li class="fragment">we first have to save one of our figures as an object</li>
 <li class="fragment">I usually save ggplot objects with the prefix <code>fig_</code> (short for figure)</li>
-</ul></li>
+</ul>
+</li>
 <li class="fragment">make sure you also have a useful place to store these figures
 <ul>
-<li class="fragment">e.g., a folder called <code>figures</code></li>
-</ul></li>
+<li class="fragment">e.g., a folder called <code>figures</code>
+</li>
+</ul>
+</li>
 </ul>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>fig_lifetime_ff <span class="ot">&lt;-</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>fig_lifetime_ff <span class="ot">&lt;-</span></span>
 <span id="cb28-2"><a></a>summary_ff <span class="sc">|&gt;</span> </span>
 <span id="cb28-3"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> lifetime, <span class="at">y =</span> mean.ff, </span>
 <span id="cb28-4"><a></a>                     <span class="at">shape =</span> tense,</span>
@@ -1405,43 +1287,37 @@ Figure&nbsp;1: Identical interaction plots produced two ways: feeding a dataset 
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="fu">ggsave</span>(fig_lifetime_ff, <span class="at">filename =</span> <span class="fu">here</span>(<span class="st">"figures"</span>, <span class="st">"fig_lifetime_ff.png"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
-<li class="fragment"><code>ggsave()</code> has lots of arguments to control width, height, resolution, etc.
+<li class="fragment">
+<code>ggsave()</code> has lots of arguments to control width, height, resolution, etc.
 <ul>
 <li class="fragment">to see more, run <code>?ggsave</code> in the Console</li>
-</ul></li>
-<li class="fragment">you can also save as JPG/JPEG, SVG, even PDF by just changing the filename extension</li>
 </ul>
-</section>
-
-<section id="saverds" class="title-slide slide level2 center">
-<h2><code>saveRDS()</code></h2>
+</li>
+<li class="fragment">you can also save as JPG/JPEG, SVG, even PDF by just changing the filename extension</li>
+</ul></section><section id="saverds" class="title-slide slide level2 center"><h2><code>saveRDS()</code></h2>
 <ul>
 <li class="fragment">we can also save the figure as R code
 <ul>
 <li class="fragment">which means we can control the width, height, resolution, etc. later on when we load it in</li>
 <li class="fragment">useful if you’ll be writing up your results in R markdown or Quarto</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="fu">saveRDS</span>(fig_lifetime_ff, <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"figures"</span>, <span class="st">"fig_lifetime_ff.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-
-<section id="readrds" class="title-slide slide level2 center">
-<h2><code>readRDS()</code></h2>
+</section><section id="readrds" class="title-slide slide level2 center"><h2><code>readRDS()</code></h2>
 <ul>
 <li class="fragment">you can’t click on the file to view the figure because it’s R code
 <ul>
 <li class="fragment">you’d need to load the data into R again</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>fig_lifetime_ff <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"figures"</span>, <span class="st">"fig_lifetime_ff.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-
-<section id="section-1" class="title-slide slide level2 center">
-<h2></h2>
+</section><section id="section-1" class="title-slide slide level2 center"><h2></h2>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1456,10 +1332,7 @@ Figure&nbsp;1: Identical interaction plots produced two ways: feeding a dataset 
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="references" class="title-slide slide level1 unlisted unnumbered smaller scrollable" data-visibility="uncounted">
-<h1>References</h1>
+</section></section><section id="references" class="title-slide slide level1 unlisted unnumbered smaller scrollable" data-visibility="uncounted"><h1>References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" data-custom-style="Bibliography" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-nordmann_applied_2022" class="csl-entry" role="listitem">
 Nordmann, E., &amp; DeBruine, L. (2022). <em>Applied data skills</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.6365078">https://doi.org/10.5281/zenodo.6365078</a>
@@ -1481,26 +1354,10 @@ Winter, B. (2019). Statistics for <span>Linguists</span>: <span>An Introduction 
 </div>
 </div>
 </section>
-    </div>
+</div>
   </div>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
-  <!-- reveal.js plugins -->
-  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
-  
-
-  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
-
-  <script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="../../site_libs/revealjs/dist/reveal.js"></script><!-- reveal.js plugins --><script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script><script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script><script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script><script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script><script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script><script src="../../site_libs/revealjs/plugin/notes/notes.js"></script><script src="../../site_libs/revealjs/plugin/search/search.js"></script><script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script><script src="../../site_libs/revealjs/plugin/math/math.js"></script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><script>
 
       // Full list of configuration options available at:
       // https://revealjs.com/config/
@@ -1690,9 +1547,7 @@ Winter, B. (2019). Statistics for <span>Linguists</span>: <span>An Introduction 
           RevealZoom
         ]
       });
-    </script>
-    
-    <script>
+    </script><script>
       // htmlwidgets need to know to resize themselves when slides are shown/hidden.
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
       // slide changes (different for each slide format).
@@ -1727,9 +1582,7 @@ Winter, B. (2019). Statistics for <span>Linguists</span>: <span>An Introduction 
         }
 
       })();
-    </script>
-
-    <script id="quarto-html-after-body" type="application/javascript">
+    </script><script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
         const mode = bsSheetEl.getAttribute("data-mode");
@@ -1905,6 +1758,6 @@ Winter, B. (2019). Statistics for <span>Linguists</span>: <span>An Introduction 
       }
     });
     </script>
-    
+
 
 </body></html>

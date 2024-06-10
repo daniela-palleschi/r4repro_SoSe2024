@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/06-data_wrangling/cleaning.html</loc>
-    <lastmod>2024-05-27T09:09:45.068Z</lastmod>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/teaching_notes/teaching_notes.html</loc>
+    <lastmod>2024-06-07T11:35:08.420Z</lastmod>
   </url>
   <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/06-data_wrangling/cleaning_slides.html</loc>
-    <lastmod>2024-05-27T09:09:45.068Z</lastmod>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/04-rprojects/rprojects.html</loc>
+    <lastmod>2024-06-07T11:44:21.692Z</lastmod>
   </url>
   <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/05-literate_programming/repro_code.html</loc>
-    <lastmod>2024-05-14T11:09:54.246Z</lastmod>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/04-rprojects/rprojects_slides.html</loc>
+    <lastmod>2024-06-07T11:44:21.692Z</lastmod>
   </url>
   <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/05-literate_programming/repro_code_slides.html</loc>
-    <lastmod>2024-05-14T11:09:54.246Z</lastmod>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/02-replication_crisis/replication-crisis.html</loc>
+    <lastmod>2024-04-29T19:50:43.285Z</lastmod>
   </url>
   <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/08-data_viz/slides-data_viz.html</loc>
-    <lastmod>2024-06-03T16:14:30.944Z</lastmod>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/02-replication_crisis/replication-crisis_slides.html</loc>
+    <lastmod>2024-04-29T19:50:43.285Z</lastmod>
   </url>
   <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/08-data_viz/sheet-data_viz.html</loc>
-    <lastmod>2024-06-03T16:14:30.944Z</lastmod>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/01-open_science/open-science.html</loc>
+    <lastmod>2024-04-29T19:50:57.898Z</lastmod>
+  </url>
+  <url>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/01-open_science/open-science_slides.html</loc>
+    <lastmod>2024-04-29T19:50:57.898Z</lastmod>
   </url>
   <url>
     <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/data_tidying/tidying.html</loc>
@@ -30,11 +34,11 @@
   </url>
   <url>
     <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/07-tables/slides-data_viz.html</loc>
-    <lastmod>2024-06-03T16:16:51.666Z</lastmod>
+    <lastmod>2024-06-10T10:20:32.514Z</lastmod>
   </url>
   <url>
     <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/07-tables/sheet-data_viz.html</loc>
-    <lastmod>2024-06-03T16:16:51.666Z</lastmod>
+    <lastmod>2024-06-10T10:20:32.514Z</lastmod>
   </url>
   <url>
     <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/session-info.html</loc>
@@ -53,27 +57,35 @@
     <lastmod>2024-04-29T19:51:08.397Z</lastmod>
   </url>
   <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/01-open_science/open-science_slides.html</loc>
-    <lastmod>2024-04-29T19:50:57.898Z</lastmod>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/09-packages/packages_slides.html</loc>
+    <lastmod>2024-06-10T14:47:35.683Z</lastmod>
   </url>
   <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/01-open_science/open-science.html</loc>
-    <lastmod>2024-04-29T19:50:57.898Z</lastmod>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/09-packages/packages.html</loc>
+    <lastmod>2024-06-10T14:47:35.683Z</lastmod>
   </url>
   <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/02-replication_crisis/replication-crisis_slides.html</loc>
-    <lastmod>2024-04-29T19:50:43.285Z</lastmod>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/08-data_viz/sheet-data_viz.html</loc>
+    <lastmod>2024-06-03T16:14:30.944Z</lastmod>
   </url>
   <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/02-replication_crisis/replication-crisis.html</loc>
-    <lastmod>2024-04-29T19:50:43.285Z</lastmod>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/08-data_viz/slides-data_viz.html</loc>
+    <lastmod>2024-06-03T16:14:30.944Z</lastmod>
   </url>
   <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/04-rprojects/rprojects_slides.html</loc>
-    <lastmod>2024-05-07T12:53:41.893Z</lastmod>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/05-literate_programming/repro_code_slides.html</loc>
+    <lastmod>2024-06-07T12:43:39.125Z</lastmod>
   </url>
   <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/04-rprojects/rprojects.html</loc>
-    <lastmod>2024-05-07T12:53:41.893Z</lastmod>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/05-literate_programming/repro_code.html</loc>
+    <lastmod>2024-06-07T12:43:39.125Z</lastmod>
+  </url>
+  <url>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/06-data_wrangling/cleaning_slides.html</loc>
+    <lastmod>2024-05-27T09:09:45.068Z</lastmod>
+  </url>
+  <url>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/06-data_wrangling/cleaning.html</loc>
+    <lastmod>2024-05-27T09:09:45.068Z</lastmod>
   </url>
 </urlset>
