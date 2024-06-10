@@ -1,0 +1,89 @@
+---
+title: "Untitled"
+execute: 
+  eval: false
+---
+
+# Reshape data
+
+- this is the major step of data tidying
+  + make each column a variable
+  + make each row an observation
+  + make each cell a data point
+- what variable and observation mean will depend on what you want to do, and will change at different steps of your analyses
+
+- you typically want *long* data
+  + but our dataset isn't as long as it could be
+
+## {.unlisted .unnumbered}
+
+
+::: {.content-hidden when-format="pdf"}
+```{r echo = F, fig.align = "center", out.width="100%"}
+#| fig-cap-location: bottom
+magick::image_read(here::here("media/pivot_friends.jpeg"))
+```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r echo = F, fig.align = "center", out.width="50%"}
+#| fig-cap-location: bottom
+magick::image_read(here::here("media/pivot_friends.jpeg"))
+```
+:::
+
+## `pivot_longer()`
+
+- takes wide data and makes it longer
+  + converts headers of columns into values of a new column
+  + combines the values of those columns into a new condensed column
+- takes a few arguments:
+  + `cols`: which columns do we want to combine into a single column?
+  + `names_to`: what should we call the new column containing the previous column names?
+  + `values_to`: what should we call the new column containing the values from the previous columns?
+
+## `pivot_longer()` {-}
+
+```{r}
+#| output-location: fragment
+df_lifetime |> 
+  select(px,trial,region,ff,fp,rpd,tt,rt,type,accept,condition) |>
+  filter(type=="critical",region=="verb",px!="px3") |>
+  pivot_longer(
+  cols = c(ff,fp,rpd,tt,rt), # columns to make long 
+  names_to = "measure", # new column name for headers
+  values_to = "time" # new column name for values
+)
+```
+
+::: footer
+Source: [PsyTeachR](https://psyteachr.github.io/ads-v2/08-tidy.html#long-to-wide)
+:::
+
+## `pivot_wider()`
+
+- takes long data and makes it wider
+- takes a few arguments:
+  + `id_cols`: identifying columns
+  + `names_from`: what should we call the new column containing the previous column names?
+  + `names_prefix`: 
+  + `values_from`: new column values
+  
+## `pivot_wider()` {-}
+  
+```{r}
+#| output-location: fragment
+df_lifetime |> 
+  select(px,trial,region,ff,fp,rpd,tt,rt,type,accept,condition) |>
+  filter(type=="critical",px!="px3") |>
+  pivot_wider(
+  id_cols = c(px,trial), # columns to make long 
+  names_from = region, # new column name for headers
+  names_prefix = "reg_", # new column name for values
+  values_from = tt
+)
+```
+
+::: footer
+Source: [PsyTeachR](https://psyteachr.github.io/ads-v2/08-tidy.html#long-to-wide)
+:::

@@ -1,0 +1,412 @@
+---
+title: "Data communication with tables"
+subtitle: "Data dictionaries and summary tables"
+author: "Daniela Palleschi"
+institute: Humboldt-Universität zu Berlin
+footer: "Data Visualisation"
+lang: en
+date: 2023-04-13
+format:
+  revealjs: 
+    output-file: slides-data_viz.html
+    theme: [dark]
+    width: 1600
+    height: 900
+    progress: true
+    # smaller: true
+    scrollable: true
+    slide-number: c/t
+    code-link: true
+    code-overflow: wrap
+    code-tools: true
+    # logo: logos/hu_logo.png
+    # css: logo.css
+    incremental: true
+    # number-sections: true
+    toc-title: 'Topics'
+    navigation-mode: linear
+    controls-layout: bottom-right
+    fig-cap-location: top
+    font-size: 0.6em
+    slide-level: 4
+    chalkboard: true
+    title-slide-attributes: 
+      data-background-image: logos/logos.tif
+      data-background-size: 15%
+      data-background-position: 50% 92%
+  html:
+    self-contained: true
+    output-file: sheet-data_viz.html
+    number-sections: true
+    toc: true
+    code-overflow: wrap
+    code-tools: true
+  pdf:
+    output-file: pdf-data_viz.pdf
+    toc: true
+    number-sections: false
+    colorlinks: true
+    code-overflow: wrap
+editor_options: 
+  chunk_output_type: console
+bibliography: ../../references.bib
+csl: ../../apa.csl
+---
+
+```{r}
+#| echo: false
+knitr::opts_chunk$set(eval = T, # evaluate chunks
+                      echo = T, # 'print code chunk?'
+                      message = F, # 'print messages (e.g., warnings)?'
+                      error = F, # stop when error encountered
+                      warning = F) # don't print warnings
+```
+
+# Learning objectives
+
+- create a data dictionary
+- produce formatted tables with the `knitr` package
+- produce summary tables
+
+# Load packages and data
+
+```{r}
+# load tidyverse
+pacman::p_load(tidyverse, here)
+
+# load data
+df_lifetime <- readr::read_csv(here::here("data/tidy_data_lifetime_pilot.csv"), 
+                               # for special characters
+                               locale = readr::locale(encoding = "latin1") 
+                               ) |>
+  mutate_if(is.character,as.factor) |> # all character variables as factor
+  filter(type == "critical", # only critical trials
+         px != "px3") # this participant had lots of 0's for some reason
+```
+
+# Data dictionary
+
+- we haven't really discussed what exactly our data *are*, though
+- data dictionaries (a.k.a. code books)
+  + describe each variable in a dataset
+  + ideally also provide information regarding possible values
+
+## Variable names
+
+- we can list the names of all variables in a dataset using `names()`
+
+```{r}
+#| output-location: fragment
+names(df_lifetime)
+```
+
+- but we need to be able to put these names into a single column
+  + where each row contains one variable name
+  + and other columns contain information like description and data class
+
+### Names to rows
+
+```{r}
+# From day 2 of Lisa DeBruine's [Coding Club: Creating an R Package](https://psyteachr.github.io/intro-r-pkgs/02-data.html#documentation)
+
+# create as many empty strings as we name variable names
+coldesc <- rep("", ncol(df_lifetime))
+# add variable names to these empty strings
+names(coldesc) <- names(df_lifetime)
+```
+
+```{r}
+# print as code needed to create an object
+dput(coldesc)
+```
+
+##
+
+- copy the output of `dput(coldesc)` and assign it to an object
+  + tip: you can reformat the code by highlighting it and using `Cmd/Ctrl+Shift+A`
+    + or in the menu bar: Code > Reformat Code
+- replace `c()` with `tibble()` to create a dataframe
+  + and fill in the quotations with description of the data
+
+```{r}
+dict_lifetime <- tibble(
+  px = "participant ID (factor)",
+  trial = "trial number (ordered factor)",
+  region = "sentence region (order factor)",
+  region_n = "numerical representation of sentence region (ordered factor)",
+  region_text = "text presented in the region (string)",
+  eye = "which eye was tracking: right or left (binomial)",
+  ff = "first-fixation times in milliseconds (continuous, values can be 0<)",
+  fp = "first-pass reading times in milliseconds (numeric, values can be 0<)",
+  rpd = "regression-path duration in milliseconds (numeric, values can be 0<)",
+  tt = "total reading time in milliseconds (numeric, values can be 0<)",
+  fix_count = "number of total fixations in the region (count)",
+  reg_in = "whether of a regression was made into the regions (binomial: 0 = no, 1 = yes)",
+  reg_in_count = "number of fixations into the region (count)",
+  reg_out = "whether of a regression was made out of the regions (binomial: 0 = no, 1 = yes)",
+  reg_out_count = "number of fixations out of the region (count)",
+  rt = "reaction time from critical sentence presentation to button press (continuous, values can be 0<)",
+  bio = "lifetime biography context sentence (string)",
+  critical = "critical sentence (string)",
+  gender = "gender of stimulus subject (binomial: male, female)",
+  item_id = "item identification number (critical items: 1-80)",
+  list = "experimental list version: base list version (1-4) and whether the yes-button was coded as 4 or 5 (factor: 14, 15, 24, 25, 34, 35, 44, 45)",
+  match = "whether the referent-lifetime was congruent with tense",
+  condition = "condition: lifetime (dead, alive) + tense (PP, SF) (factor)",
+  name = "name of stimulis subject (string)",
+  lifetime = "lifetime status of stimulus subject at time of experiment (binomial: dead, alive)",
+  tense = "tense used in critical sentence (binomail: PP = present perfect, SF = simple future)",
+  type = "sentence type (factor with one level: critical)",
+  yes_press = "corresponding coding for the yes-button on Cedrus response box (4 = left button, 5 = right button)",
+  KeyPress = "key that was pressed (4 = left button, 5 = right button)",
+  accept = "whether the item was accepted, i.e., whether KeyPress equalled yes_press",
+  accuracy = "whether the acceptance was accurate (reject for a mismatch, accept for a match)",
+  px_accuracy = "participant's overall accuracy score"
+)
+```
+
+##
+
+- but `dict_lifetime` doesn't have the shape we want
+  + each variable name is a column name
+  + and its description is in the first row
+  
+```{r}
+dict_lifetime
+```
+
+- we want to transpose the data
+  + i.e., rotates the data so that the column names are in a row, with the descriptions in another row
+  
+## `pivot_longer()`
+
+- takes wide data and makes it longer
+  + converts headers of columns into values of a new column
+  + combines the values of those columns into a new condensed column
+- takes a few arguments:
+  + `cols`: which columns do we want to combine into a single column?
+  + `names_to`: what should we call the new column containing the previous column names?
+  + `values_to`: what should we call the new column containing the values from the previous columns?
+
+## {.unlisted .unnumbered}
+
+
+::: {.content-hidden when-format="pdf"}
+```{r echo = F, fig.align = "center", out.width="100%"}
+#| fig-cap-location: bottom
+magick::image_read(here::here("media/pivot_friends.jpeg"))
+```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r echo = F, fig.align = "center", out.width="50%"}
+#| fig-cap-location: bottom
+magick::image_read(here::here("media/pivot_friends.jpeg"))
+```
+:::
+
+### Pivot our data dictionary
+
+- this looks much better!
+
+```{r}
+#| output-location: fragment
+dict_lifetime <-
+  dict_lifetime |> 
+  pivot_longer(
+    cols = everything(),
+    names_to = "variable",
+    values_to = "description"
+  )
+```
+
+## Save data dictionary
+
+- now we can save our data dictionary just like we would any csv
+
+```{r}
+write_csv(dict_lifetime, here("data", "tidy_data_lifetime_pilot_dictionary.csv"))
+```
+
+# Formatted tables
+
+- when we render our document, `dict_lifetime` won't look very pretty
+- there are several packages that produce nicely formatted tables
+  + `knitr`
+  
+```{r}
+dict_lifetime |> 
+  knitr::kable() 
+```
+
+## Tables as LaTeX code
+
+- you can add the argument `"latex"` to print LaTeX code for a table in the Console
+  + you can then cut and paste this code into a LaTeX (or Overleaf) script
+
+```{r}
+#| eval: false
+dict_lifetime |> 
+  knitr::kable("latex") 
+```
+
+- but be careful, if you're rendering to HTML the table won't be printed if you use `"latex"`
+
+### Exercise
+
+1. install the `knitr` package (`install.packages("knitr")`)
+2. print `dict_lifetime`, but only for the following variables:
+    + `px`, `trial`, `region_text`, `ff`, `fp`, and `condition`
+3. use `kable()` from `knitr` to print the table
+
+```{r}
+#| echo: false
+dict_lifetime |> 
+  filter(variable %in% c("px", "trial", "region_text", "ff", "fp", "condition")) |> 
+  knitr::kable()
+```
+
+# Data summaries
+
+- we can create summary tables of our data
+
+```{r, eval = F, echo = F}
+# with Rmisc::summarySEwithin
+df_lifetime |> 
+  filter(region == "verb",
+         !is.na(ff)) |> 
+  Rmisc::summarySEwithin(measurevar="ff", withinvars ="condition")
+```
+
+```{r}
+#| code-fold: true
+# compute summary 
+summary_ff <- df_lifetime |> 
+  filter(region=="verb") |> 
+  group_by(condition,lifetime,tense) %>%
+  summarise(N = n(),
+            mean.ff = mean(ff, na.rm = T),
+            sd = sd(ff, na.rm = T)) %>%
+  # compute standard error, confidence intervals, and lower/upper ci bounds
+  mutate(se = sd / sqrt(N),
+         ci = qt(1 - (0.05 / 2), N - 1) * se,
+         lower.ci = mean.ff - qt(1 - (0.05 / 2), N - 1) * se,
+         upper.ci = mean.ff + qt(1 - (0.05 / 2), N - 1) * se)
+```
+
+- and print the output with the `kable()` function from the `knitr` package
+  + for extra customisation you can also use the `kableExtra` package (e.g., with the `kable_styling()` function)
+
+```{r}
+#| output-location: fragment
+
+# install.packages("knitr") # if not yet installed
+knitr::kable(summary_ff, digits=1,
+             caption = "Table with summmary statistics for first-fixation duration at the verb region")
+```
+
+# Saving summary tables
+
+- we could also save this table using `write_csv()`
+  + but it's relatively simple to re-produce, so I wouldn't bother
+  + instead, when writing up my results I would load in the data and print the summary directly
+- sometimes summary tables are more code-intensive
+  + in this case I would save the summary as a csv, and simply load and print it when writing in R markdown or Quarto
+
+##
+
+# Additional packages
+
+There are many other packages for including tables that are publication-ready. Some that I would suggest you look into:
+
+- [`kableExtra`](https://haozhu233.github.io/kableExtra/) which includes additionally formatting options for `knitr::kable()` tables via the `kable_styling()` function and others
+  + tables must first pass through `knitr::kable()`, e.g., `my_table |> knitr::kable() |> kableExtra::kable_styling()`
+- [`flextable`](https://cran.r-project.org/web/packages/flextable/index.html)
+  + very flexible package for creating publication-ready tables of many formats
+- `papaja::apa_table()`: the `papaja` package aids in creating APA-formatted journal articles
+  + the `apa_table()` function can take objects containing results from a statisical test/model and output a formatted table
+  + we'll discuss this topic more when we get into regression
+  
+## `kableExtra::kable_styling()`
+
+- we'll first create a little summary table using the `iris` dataset which comes built-in with R
+
+```{r}
+sum_iris <- iris |> 
+  summarise(mean = mean(Sepal.Length),
+            sd = sd(Sepal.Length),
+            n = n(),
+            .by = Species)
+```
+
+- and we'll print the summary using `kable_styling()` (@tbl-kableExtra)
+
+```{r}
+#| label: tbl-kableExtra
+#| tbl-cap: "Example output of an table using the `kableExtra` package"
+sum_iris |> 
+  knitr::kable() |> 
+  kableExtra::kable_styling()
+```
+
+## `flextable`
+
+- print the same summary using `flextable()` (@tbl-flextable)
+
+```{r}
+#| label: tbl-flextable
+#| tbl-cap: "Example output of an table using the `flextable` package"
+sum_iris |> 
+  flextable::flextable()
+```
+
+
+## `papaja::apa_table()`
+
+- now run a linear mixed model on the `iris` data
+  
+```{r}
+lmm_iris <-
+  lme4::lmer(Sepal.Width ~ Sepal.Length + Petal.Width +
+               (1|Species), data = iris)
+```
+
+- and print a model summary table using `apa_table()` (@tbl-lmm_iris)
+
+```{r}
+#| label: tbl-lmm_iris
+#| tbl-cap: "Example output of an LMM using `papaja` package"
+lmm_iris |> papaja::apa_print() |> 
+papaja::apa_table(caption = NULL)
+```
+
+  
+
+
+# Exercise
+
+1. create an object with some summary statistics of the variable `rt`
+    + call it `summary_rt`
+3. use `kable()` from `knitr` to print a table, it should look something like @tbl-rt
+4. try creating the same table with one (or more) of the additional packages we saw above (`kableExtra`, `flextable`, `papaja`)
+
+```{r}
+#| echo: false
+summary_rt <- df_lifetime |> 
+  distinct(px,trial,.keep_all=T) |> 
+  group_by(lifetime,tense,condition) %>%
+  summarise(N = n(),
+            mean.rt = mean(rt, na.rm = T),
+            sd = sd(rt, na.rm = T))
+```
+
+```{r}
+#| echo: false
+#| label: tbl-rt
+knitr::kable(summary_rt, digits=1,
+             caption = "Summary of reaction times (ms) per condition")
+```
+
+
+
+
