@@ -5,6 +5,14 @@
     <lastmod>2024-06-07T11:35:08.420Z</lastmod>
   </url>
   <url>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/06-data_wrangling/tidying.html</loc>
+    <lastmod>2024-06-11T14:15:08.945Z</lastmod>
+  </url>
+  <url>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/06-data_wrangling/tidying_slides.html</loc>
+    <lastmod>2024-06-11T14:15:08.945Z</lastmod>
+  </url>
+  <url>
     <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/04-rprojects/rprojects.html</loc>
     <lastmod>2024-06-07T11:44:21.692Z</lastmod>
   </url>
@@ -29,40 +37,36 @@
     <lastmod>2024-04-29T19:50:57.898Z</lastmod>
   </url>
   <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/data_tidying/tidying.html</loc>
-    <lastmod>2024-05-14T11:09:07.360Z</lastmod>
-  </url>
-  <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/07-tables/slides-data_viz.html</loc>
-    <lastmod>2024-06-10T10:20:32.514Z</lastmod>
-  </url>
-  <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/07-tables/sheet-data_viz.html</loc>
-    <lastmod>2024-06-10T10:20:32.514Z</lastmod>
-  </url>
-  <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/session-info.html</loc>
-    <lastmod>2024-05-06T14:17:55.485Z</lastmod>
-  </url>
-  <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/index.html</loc>
-    <lastmod>2024-06-11T09:59:48.140Z</lastmod>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/03-reproducibility/reproducibility.html</loc>
+    <lastmod>2024-04-29T19:51:08.397Z</lastmod>
   </url>
   <url>
     <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/03-reproducibility/reproducibility_slides.html</loc>
     <lastmod>2024-04-29T19:51:08.397Z</lastmod>
   </url>
   <url>
-    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/03-reproducibility/reproducibility.html</loc>
-    <lastmod>2024-04-29T19:51:08.397Z</lastmod>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/index.html</loc>
+    <lastmod>2024-06-11T09:59:48.140Z</lastmod>
+  </url>
+  <url>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/session-info.html</loc>
+    <lastmod>2024-05-06T14:17:55.485Z</lastmod>
+  </url>
+  <url>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/07-tables/sheet-data_viz.html</loc>
+    <lastmod>2024-06-10T10:20:32.514Z</lastmod>
+  </url>
+  <url>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/07-tables/slides-data_viz.html</loc>
+    <lastmod>2024-06-10T10:20:32.514Z</lastmod>
   </url>
   <url>
     <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/09-packages/packages_slides.html</loc>
-    <lastmod>2024-06-11T10:00:37.509Z</lastmod>
+    <lastmod>2024-06-11T12:58:31.830Z</lastmod>
   </url>
   <url>
     <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/09-packages/packages.html</loc>
-    <lastmod>2024-06-11T10:00:37.509Z</lastmod>
+    <lastmod>2024-06-11T12:58:31.830Z</lastmod>
   </url>
   <url>
     <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/08-data_viz/sheet-data_viz.html</loc>
@@ -82,10 +86,18 @@
   </url>
   <url>
     <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/06-data_wrangling/cleaning_slides.html</loc>
-    <lastmod>2024-05-27T09:09:45.068Z</lastmod>
+    <lastmod>2024-06-11T12:56:52.316Z</lastmod>
   </url>
   <url>
     <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/06-data_wrangling/cleaning.html</loc>
-    <lastmod>2024-05-27T09:09:45.068Z</lastmod>
+    <lastmod>2024-06-11T12:56:52.316Z</lastmod>
+  </url>
+  <url>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/10-writing/writing_slides.html</loc>
+    <lastmod>2024-06-19T08:14:59.726Z</lastmod>
+  </url>
+  <url>
+    <loc>https://daniela-palleschi.github.io/r4repro_SoSe2024/slides/10-writing/writing.html</loc>
+    <lastmod>2024-06-19T08:14:59.726Z</lastmod>
   </url>
 </urlset>

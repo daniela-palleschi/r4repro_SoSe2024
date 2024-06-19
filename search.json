@@ -7,6 +7,81 @@
     "text": "Week 1: Open Science\n\nggplot2::ggplot(iris)\n\n\n\n\n\n\n\nFigure 1\n\n\n\n\n\n\n\nWeek 2: Replication Crisis\n\n\nWeek 3: Reproducibility\n\ncould introduce idea of the spectrum (Peng, 2011) or iceberg (Rodrigues, 2023)\n\n\n\nWeek 4: Project-oriented workflow with R Projects\n\n\nWeek 5: Literate programming\n\nshould also introduce modular data analysis by name (mentioned in Bowers & Voors, 2016; from Nagler, 1995)\n\nthe concept was introduced, but just name it\n\n\n\n\nWeek 6:\n\n\nWeek 7:\n\n\nWeek 8:\n\n\nWeek 9: Package management\n\n\n\n\n\n\n\n\n\n\nReferences\n\nBowers, J., & Voors, M. (2016). How to improve your relationship with your future self. Revista de Ciencia Política (Santiago), 36(3), 829–848. https://doi.org/10.4067/S0718-090X2016000300011\n\n\nNagler, J. (1995). Coding Style and Good Computing Practices.\n\n\nPeng, R. D. (2011). Reproducible Research in Computational Science. Science, 334(6060), 1226–1227. https://doi.org/10.1126/science.1213847\n\n\nRodrigues, B. (2023). Building reproducible analytical pipelines with R."
   },
   {
+    "objectID": "slides/06-data_wrangling/tidying.html",
+    "href": "slides/06-data_wrangling/tidying.html",
+    "title": "Data tidying",
+    "section": "",
+    "text": "Today we will…\n\nlearn how to re-structure our data with the tidyr package\nuse pivot_longer() to make data longer\nuse pivot_wider() to make data wider",
+    "crumbs": [
+      "D. Palleschi",
+      "Data tidying"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/tidying.html#inspect-data",
+    "href": "slides/06-data_wrangling/tidying.html#inspect-data",
+    "title": "Data tidying",
+    "section": "Inspect data",
+    "text": "Inspect data\n\nwe’ll be changing the shape of our data, so let’s first see how it looks as-is\n\n\ndf_lifetime \n\n# A tibble: 10 × 7\n   px    trial region    ff    fp   rpd    tt\n   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 px5       3 verb-1   190   190   190   190\n 2 px5       3 verb     175   175   175   321\n 3 px5       3 verb+1   154   154  1258  1723\n 4 px5       3 verb+2   160   283   283   672\n 5 px5       3 verb+3   156   575  1940   575\n 6 px5       8 verb-1   246   246   246   246\n 7 px5       8 verb     228   960   960  1892\n 8 px5       8 verb+1   176   573   573   967\n 9 px5       8 verb+2   151   151   151   450\n10 px5       8 verb+3   216   981  2852   981\n\n\n\nof importance, we have the following variables:\n\nregion: contains info on which sentence region the row’s reading times correspond to\nff: first fixation time, an eye-tracking reading measure\nfp: first-pass reading time, an eye-tracking reading measure\nrpd: regression path duration, an eye-tracking reading measure\ntt: total reading time, an eye-tracking reading measure\n\nwe see that we have 10 rows x 4 reading time measures = 40 reading time measures",
+    "crumbs": [
+      "D. Palleschi",
+      "Data tidying"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/tidying.html#pivot-with-tidyr",
+    "href": "slides/06-data_wrangling/tidying.html#pivot-with-tidyr",
+    "title": "Data tidying",
+    "section": "Pivot with tidyr",
+    "text": "Pivot with tidyr\n\nto pivot (verb): to turn or rotate on a point, like a hinge. Or a basketball player pivoting back and forth on one foot to protect the ball. (vocabulary.com)\na pivot (noun): a fixed point supporting something that turns or balances (dictonary.Cambridge.org)\n\n\n\n\n\n\n\n\n\nFigure 1: A memorable scence (to millenials) from Friends where the word ‘pivot’ is repeatedly used (YouTube clip)",
+    "crumbs": [
+      "D. Palleschi",
+      "Data tidying"
+    ]
+  },
+  {
+    "objectID": "slides/06-data_wrangling/tidying_slides.html#inspect-data",
+    "href": "slides/06-data_wrangling/tidying_slides.html#inspect-data",
+    "title": "Data tidying",
+    "section": "Inspect data",
+    "text": "Inspect data\n\nwe’ll be changing the shape of our data, so let’s first see how it looks as-is\n\n\ndf_lifetime \n\n# A tibble: 10 × 7\n   px    trial region    ff    fp   rpd    tt\n   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 px5       3 verb-1   190   190   190   190\n 2 px5       3 verb     175   175   175   321\n 3 px5       3 verb+1   154   154  1258  1723\n 4 px5       3 verb+2   160   283   283   672\n 5 px5       3 verb+3   156   575  1940   575\n 6 px5       8 verb-1   246   246   246   246\n 7 px5       8 verb     228   960   960  1892\n 8 px5       8 verb+1   176   573   573   967\n 9 px5       8 verb+2   151   151   151   450\n10 px5       8 verb+3   216   981  2852   981\n\n\n\nof importance, we have the following variables:\n\n\nregion: contains info on which sentence region the row’s reading times correspond to\n\nff: first fixation time, an eye-tracking reading measure\n\nfp: first-pass reading time, an eye-tracking reading measure\n\nrpd: regression path duration, an eye-tracking reading measure\n\ntt: total reading time, an eye-tracking reading measure\n\n\nwe see that we have 10 rows x 4 reading time measures = 40 reading time measures"
+  },
+  {
+    "objectID": "slides/06-data_wrangling/tidying_slides.html#pivot-with-tidyr",
+    "href": "slides/06-data_wrangling/tidying_slides.html#pivot-with-tidyr",
+    "title": "Data tidying",
+    "section": "Pivot with tidyr\n",
+    "text": "Pivot with tidyr\n\n\nto pivot (verb): to turn or rotate on a point, like a hinge. Or a basketball player pivoting back and forth on one foot to protect the ball. (vocabulary.com)\na pivot (noun): a fixed point supporting something that turns or balances (dictonary.Cambridge.org)"
+  },
+  {
+    "objectID": "slides/06-data_wrangling/tidying_slides.html#section",
+    "href": "slides/06-data_wrangling/tidying_slides.html#section",
+    "title": "Data tidying",
+    "section": "",
+    "text": "Figure 1: A memorable scence (to millenials) from Friends where the word ‘pivot’ is repeatedly used (YouTube clip)"
+  },
+  {
+    "objectID": "slides/06-data_wrangling/tidying_slides.html#pivot_longer",
+    "href": "slides/06-data_wrangling/tidying_slides.html#pivot_longer",
+    "title": "Data tidying",
+    "section": "pivot_longer()",
+    "text": "pivot_longer()\n\nlet’s take our four reading time measures and list them in a single variable that we’ll call measure, and put their values in a second variable called time\n\n\n\ndf_longer &lt;-\n  df_lifetime |&gt; \n  pivot_longer(\n  cols = c(ff,fp,rpd,tt), # columns to make long \n  names_to = \"measure\", # new column name for headers\n  values_to = \"time\" # new column name for values\n)\n\n\n\n\n\ndf_longer\n\n# A tibble: 40 × 5\n   px    trial region measure  time\n   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt;\n 1 px5       3 verb-1 ff        190\n 2 px5       3 verb-1 fp        190\n 3 px5       3 verb-1 rpd       190\n 4 px5       3 verb-1 tt        190\n 5 px5       3 verb   ff        175\n 6 px5       3 verb   fp        175\n 7 px5       3 verb   rpd       175\n 8 px5       3 verb   tt        321\n 9 px5       3 verb+1 ff        154\n10 px5       3 verb+1 fp        154\n# ℹ 30 more rows\n\n\n\nnow instead of having the four reading time values in a single row across four columns called ff, fp, rpd, and tt, we have two columns (measure and time) which contain the reading time measure names and corresponding reading times\nwe again still have 40 reading time values: 40 rows x 1 column containing reading time values (time)"
+  },
+  {
+    "objectID": "slides/06-data_wrangling/tidying_slides.html#pivot_wider",
+    "href": "slides/06-data_wrangling/tidying_slides.html#pivot_wider",
+    "title": "Data tidying",
+    "section": "pivot_wider()",
+    "text": "pivot_wider()\n\nlet’s now take our region column in df_longer and widen it\n\nwe’ll do this only for tt (total reading time) the resultfour reading time measures and list them in a single variable that we’ll call measure, and put their values in a second variable called time\n\n\n\n\n\ndf_longer_wider &lt;-\n  df_longer |&gt; \n  pivot_wider(\n  id_cols = c(px,trial,measure), # columns to make long \n  names_from = region, # new column name for headers\n  names_prefix = \"reg_\", # new column name for values (optional)\n  values_from = time\n) \n\n\n\n\n\ndf_longer_wider\n\n# A tibble: 8 × 8\n  px    trial measure `reg_verb-1` reg_verb `reg_verb+1` `reg_verb+2`\n  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;\n1 px5       3 ff               190      175          154          160\n2 px5       3 fp               190      175          154          283\n3 px5       3 rpd              190      175         1258          283\n4 px5       3 tt               190      321         1723          672\n5 px5       8 ff               246      228          176          151\n6 px5       8 fp               246      960          573          151\n7 px5       8 rpd              246      960          573          151\n8 px5       8 tt               246     1892          967          450\n# ℹ 1 more variable: `reg_verb+3` &lt;dbl&gt;\n\n\n\nagain, we have 40 reading time values: 8 rows x 5 variables containing reading time values per region"
+  },
+  {
+    "objectID": "slides/06-data_wrangling/tidying_slides.html#section-1",
+    "href": "slides/06-data_wrangling/tidying_slides.html#section-1",
+    "title": "Data tidying",
+    "section": "",
+    "text": "look at the three versions of the data below, and ask yourself: what does each one more easily communicate?\n\n\ndf_longer\n\n# A tibble: 40 × 5\n   px    trial region measure  time\n   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt;\n 1 px5       3 verb-1 ff        190\n 2 px5       3 verb-1 fp        190\n 3 px5       3 verb-1 rpd       190\n 4 px5       3 verb-1 tt        190\n 5 px5       3 verb   ff        175\n 6 px5       3 verb   fp        175\n 7 px5       3 verb   rpd       175\n 8 px5       3 verb   tt        321\n 9 px5       3 verb+1 ff        154\n10 px5       3 verb+1 fp        154\n# ℹ 30 more rows\n\n\n\n# only first 15 rows\ndf_longer |&gt; head(15)\n\n# A tibble: 15 × 5\n   px    trial region measure  time\n   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt;\n 1 px5       3 verb-1 ff        190\n 2 px5       3 verb-1 fp        190\n 3 px5       3 verb-1 rpd       190\n 4 px5       3 verb-1 tt        190\n 5 px5       3 verb   ff        175\n 6 px5       3 verb   fp        175\n 7 px5       3 verb   rpd       175\n 8 px5       3 verb   tt        321\n 9 px5       3 verb+1 ff        154\n10 px5       3 verb+1 fp        154\n11 px5       3 verb+1 rpd      1258\n12 px5       3 verb+1 tt       1723\n13 px5       3 verb+2 ff        160\n14 px5       3 verb+2 fp        283\n15 px5       3 verb+2 rpd       283\n\n\n\ndf_longer_wider\n\n# A tibble: 8 × 8\n  px    trial measure `reg_verb-1` reg_verb `reg_verb+1` `reg_verb+2`\n  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;\n1 px5       3 ff               190      175          154          160\n2 px5       3 fp               190      175          154          283\n3 px5       3 rpd              190      175         1258          283\n4 px5       3 tt               190      321         1723          672\n5 px5       8 ff               246      228          176          151\n6 px5       8 fp               246      960          573          151\n7 px5       8 rpd              246      960          573          151\n8 px5       8 tt               246     1892          967          450\n# ℹ 1 more variable: `reg_verb+3` &lt;dbl&gt;\n\n\n\nMore reading: PsyTeachR"
+  },
+  {
     "objectID": "slides/04-rprojects/rprojects.html",
     "href": "slides/04-rprojects/rprojects.html",
     "title": "RProjects",
@@ -634,362 +709,6 @@
     "text": "Registered Report\n\nlevel: Difficult\n\nsubmitting the introduction, methods, analysis plan to a journal before data collection\n\nif accepted: publication regardless of the result\n\n\na more detailed pre-registration, often with fully written sections\n\nmuch more time consuming before data collection can begin\n\njournal acceptance can take months"
   },
   {
-    "objectID": "slides/data_tidying/tidying.html",
-    "href": "slides/data_tidying/tidying.html",
-    "title": "Untitled",
-    "section": "",
-    "text": "this is the major step of data tidying\n\nmake each column a variable\nmake each row an observation\nmake each cell a data point\n\nwhat variable and observation mean will depend on what you want to do, and will change at different steps of your analyses\nyou typically want long data\n\nbut our dataset isn’t as long as it could be\n\n\n\n\n\n\n\n\n\n\n\ntakes wide data and makes it longer\n\nconverts headers of columns into values of a new column\ncombines the values of those columns into a new condensed column\n\ntakes a few arguments:\n\ncols: which columns do we want to combine into a single column?\nnames_to: what should we call the new column containing the previous column names?\nvalues_to: what should we call the new column containing the values from the previous columns?\n\n\n\n\n\n\ndf_lifetime |&gt; \n  select(px,trial,region,ff,fp,rpd,tt,rt,type,accept,condition) |&gt;\n  filter(type==\"critical\",region==\"verb\",px!=\"px3\") |&gt;\n  pivot_longer(\n  cols = c(ff,fp,rpd,tt,rt), # columns to make long \n  names_to = \"measure\", # new column name for headers\n  values_to = \"time\" # new column name for values\n)\n\n\nSource: PsyTeachR\n\n\n\n\n\ntakes long data and makes it wider\ntakes a few arguments:\n\nid_cols: identifying columns\nnames_from: what should we call the new column containing the previous column names?\nnames_prefix:\nvalues_from: new column values\n\n\n\n\n\n\ndf_lifetime |&gt; \n  select(px,trial,region,ff,fp,rpd,tt,rt,type,accept,condition) |&gt;\n  filter(type==\"critical\",px!=\"px3\") |&gt;\n  pivot_wider(\n  id_cols = c(px,trial), # columns to make long \n  names_from = region, # new column name for headers\n  names_prefix = \"reg_\", # new column name for values\n  values_from = tt\n)\n\n\nSource: PsyTeachR"
-  },
-  {
-    "objectID": "slides/data_tidying/tidying.html#pivot_longer",
-    "href": "slides/data_tidying/tidying.html#pivot_longer",
-    "title": "Untitled",
-    "section": "",
-    "text": "takes wide data and makes it longer\n\nconverts headers of columns into values of a new column\ncombines the values of those columns into a new condensed column\n\ntakes a few arguments:\n\ncols: which columns do we want to combine into a single column?\nnames_to: what should we call the new column containing the previous column names?\nvalues_to: what should we call the new column containing the values from the previous columns?"
-  },
-  {
-    "objectID": "slides/data_tidying/tidying.html#pivot_longer-1",
-    "href": "slides/data_tidying/tidying.html#pivot_longer-1",
-    "title": "Untitled",
-    "section": "",
-    "text": "df_lifetime |&gt; \n  select(px,trial,region,ff,fp,rpd,tt,rt,type,accept,condition) |&gt;\n  filter(type==\"critical\",region==\"verb\",px!=\"px3\") |&gt;\n  pivot_longer(\n  cols = c(ff,fp,rpd,tt,rt), # columns to make long \n  names_to = \"measure\", # new column name for headers\n  values_to = \"time\" # new column name for values\n)\n\n\nSource: PsyTeachR"
-  },
-  {
-    "objectID": "slides/data_tidying/tidying.html#pivot_wider",
-    "href": "slides/data_tidying/tidying.html#pivot_wider",
-    "title": "Untitled",
-    "section": "",
-    "text": "takes long data and makes it wider\ntakes a few arguments:\n\nid_cols: identifying columns\nnames_from: what should we call the new column containing the previous column names?\nnames_prefix:\nvalues_from: new column values"
-  },
-  {
-    "objectID": "slides/data_tidying/tidying.html#pivot_wider-1",
-    "href": "slides/data_tidying/tidying.html#pivot_wider-1",
-    "title": "Untitled",
-    "section": "",
-    "text": "df_lifetime |&gt; \n  select(px,trial,region,ff,fp,rpd,tt,rt,type,accept,condition) |&gt;\n  filter(type==\"critical\",px!=\"px3\") |&gt;\n  pivot_wider(\n  id_cols = c(px,trial), # columns to make long \n  names_from = region, # new column name for headers\n  names_prefix = \"reg_\", # new column name for values\n  values_from = tt\n)\n\n\nSource: PsyTeachR"
-  },
-  {
-    "objectID": "slides/07-tables/slides-data_viz.html#variable-names",
-    "href": "slides/07-tables/slides-data_viz.html#variable-names",
-    "title": "Data communication with tables",
-    "section": "Variable names",
-    "text": "Variable names\n\nwe can list the names of all variables in a dataset using names()\n\n\n\nnames(df_lifetime)\n\n\n\n [1] \"px\"            \"trial\"         \"region\"        \"region_n\"     \n [5] \"region_text\"   \"eye\"           \"ff\"            \"fp\"           \n [9] \"rpd\"           \"tt\"            \"fix_count\"     \"reg_in\"       \n[13] \"reg_in_count\"  \"reg_out\"       \"reg_out_count\" \"rt\"           \n[17] \"bio\"           \"critical\"      \"gender\"        \"item_id\"      \n[21] \"list\"          \"match\"         \"condition\"     \"name\"         \n[25] \"lifetime\"      \"tense\"         \"type\"          \"yes_press\"    \n[29] \"KeyPress\"      \"accept\"        \"accuracy\"      \"px_accuracy\"  \n\n\n\nbut we need to be able to put these names into a single column\n\nwhere each row contains one variable name\nand other columns contain information like description and data class"
-  },
-  {
-    "objectID": "slides/07-tables/slides-data_viz.html#section",
-    "href": "slides/07-tables/slides-data_viz.html#section",
-    "title": "Data communication with tables",
-    "section": "",
-    "text": "copy the output of dput(coldesc) and assign it to an object\n\ntip: you can reformat the code by highlighting it and using Cmd/Ctrl+Shift+A\n\nor in the menu bar: Code &gt; Reformat Code\n\n\n\n\nreplace c() with tibble() to create a dataframe\n\nand fill in the quotations with description of the data\n\n\n\n\ndict_lifetime &lt;- tibble(\n  px = \"participant ID (factor)\",\n  trial = \"trial number (ordered factor)\",\n  region = \"sentence region (order factor)\",\n  region_n = \"numerical representation of sentence region (ordered factor)\",\n  region_text = \"text presented in the region (string)\",\n  eye = \"which eye was tracking: right or left (binomial)\",\n  ff = \"first-fixation times in milliseconds (continuous, values can be 0&lt;)\",\n  fp = \"first-pass reading times in milliseconds (numeric, values can be 0&lt;)\",\n  rpd = \"regression-path duration in milliseconds (numeric, values can be 0&lt;)\",\n  tt = \"total reading time in milliseconds (numeric, values can be 0&lt;)\",\n  fix_count = \"number of total fixations in the region (count)\",\n  reg_in = \"whether of a regression was made into the regions (binomial: 0 = no, 1 = yes)\",\n  reg_in_count = \"number of fixations into the region (count)\",\n  reg_out = \"whether of a regression was made out of the regions (binomial: 0 = no, 1 = yes)\",\n  reg_out_count = \"number of fixations out of the region (count)\",\n  rt = \"reaction time from critical sentence presentation to button press (continuous, values can be 0&lt;)\",\n  bio = \"lifetime biography context sentence (string)\",\n  critical = \"critical sentence (string)\",\n  gender = \"gender of stimulus subject (binomial: male, female)\",\n  item_id = \"item identification number (critical items: 1-80)\",\n  list = \"experimental list version: base list version (1-4) and whether the yes-button was coded as 4 or 5 (factor: 14, 15, 24, 25, 34, 35, 44, 45)\",\n  match = \"whether the referent-lifetime was congruent with tense\",\n  condition = \"condition: lifetime (dead, alive) + tense (PP, SF) (factor)\",\n  name = \"name of stimulis subject (string)\",\n  lifetime = \"lifetime status of stimulus subject at time of experiment (binomial: dead, alive)\",\n  tense = \"tense used in critical sentence (binomail: PP = present perfect, SF = simple future)\",\n  type = \"sentence type (factor with one level: critical)\",\n  yes_press = \"corresponding coding for the yes-button on Cedrus response box (4 = left button, 5 = right button)\",\n  KeyPress = \"key that was pressed (4 = left button, 5 = right button)\",\n  accept = \"whether the item was accepted, i.e., whether KeyPress equalled yes_press\",\n  accuracy = \"whether the acceptance was accurate (reject for a mismatch, accept for a match)\",\n  px_accuracy = \"participant's overall accuracy score\"\n)"
-  },
-  {
-    "objectID": "slides/07-tables/slides-data_viz.html#section-1",
-    "href": "slides/07-tables/slides-data_viz.html#section-1",
-    "title": "Data communication with tables",
-    "section": "",
-    "text": "but dict_lifetime doesn’t have the shape we want\n\neach variable name is a column name\nand its description is in the first row\n\n\n\n\ndict_lifetime\n\n# A tibble: 1 × 32\n  px             trial region region_n region_text eye   ff    fp    rpd   tt   \n  &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;\n1 participant I… tria… sente… numeric… text prese… whic… firs… firs… regr… tota…\n# ℹ 22 more variables: fix_count &lt;chr&gt;, reg_in &lt;chr&gt;, reg_in_count &lt;chr&gt;,\n#   reg_out &lt;chr&gt;, reg_out_count &lt;chr&gt;, rt &lt;chr&gt;, bio &lt;chr&gt;, critical &lt;chr&gt;,\n#   gender &lt;chr&gt;, item_id &lt;chr&gt;, list &lt;chr&gt;, match &lt;chr&gt;, condition &lt;chr&gt;,\n#   name &lt;chr&gt;, lifetime &lt;chr&gt;, tense &lt;chr&gt;, type &lt;chr&gt;, yes_press &lt;chr&gt;,\n#   KeyPress &lt;chr&gt;, accept &lt;chr&gt;, accuracy &lt;chr&gt;, px_accuracy &lt;chr&gt;\n\n\n\nwe want to transpose the data\n\ni.e., rotates the data so that the column names are in a row, with the descriptions in another row"
-  },
-  {
-    "objectID": "slides/07-tables/slides-data_viz.html#pivot_longer",
-    "href": "slides/07-tables/slides-data_viz.html#pivot_longer",
-    "title": "Data communication with tables",
-    "section": "pivot_longer()",
-    "text": "pivot_longer()\n\ntakes wide data and makes it longer\n\nconverts headers of columns into values of a new column\ncombines the values of those columns into a new condensed column\n\n\ntakes a few arguments:\n\n\ncols: which columns do we want to combine into a single column?\n\nnames_to: what should we call the new column containing the previous column names?\n\nvalues_to: what should we call the new column containing the values from the previous columns?"
-  },
-  {
-    "objectID": "slides/07-tables/slides-data_viz.html#save-data-dictionary",
-    "href": "slides/07-tables/slides-data_viz.html#save-data-dictionary",
-    "title": "Data communication with tables",
-    "section": "Save data dictionary",
-    "text": "Save data dictionary\n\nnow we can save our data dictionary just like we would any csv\n\n\nwrite_csv(dict_lifetime, here(\"data\", \"tidy_data_lifetime_pilot_dictionary.csv\"))"
-  },
-  {
-    "objectID": "slides/07-tables/slides-data_viz.html#tables-as-latex-code",
-    "href": "slides/07-tables/slides-data_viz.html#tables-as-latex-code",
-    "title": "Data communication with tables",
-    "section": "Tables as LaTeX code",
-    "text": "Tables as LaTeX code\n\nyou can add the argument \"latex\" to print LaTeX code for a table in the Console\n\nyou can then cut and paste this code into a LaTeX (or Overleaf) script\n\n\n\n\ndict_lifetime |&gt; \n  knitr::kable(\"latex\") \n\n\nbut be careful, if you’re rendering to HTML the table won’t be printed if you use \"latex\""
-  },
-  {
-    "objectID": "slides/07-tables/slides-data_viz.html#kableextrakable_styling",
-    "href": "slides/07-tables/slides-data_viz.html#kableextrakable_styling",
-    "title": "Data communication with tables",
-    "section": "kableExtra::kable_styling()",
-    "text": "kableExtra::kable_styling()\n\nwe’ll first create a little summary table using the iris dataset which comes built-in with R\n\n\nsum_iris &lt;- iris |&gt; \n  summarise(mean = mean(Sepal.Length),\n            sd = sd(Sepal.Length),\n            n = n(),\n            .by = Species)\n\n\nand we’ll print the summary using kable_styling() (Table 1)\n\n\nsum_iris |&gt; \n  knitr::kable() |&gt; \n  kableExtra::kable_styling()\n\n\nTable 1: Example output of an table using the kableExtra package\n\n\n\n\n\nSpecies\nmean\nsd\nn\n\n\n\nsetosa\n5.006\n0.3524897\n50\n\n\nversicolor\n5.936\n0.5161711\n50\n\n\nvirginica\n6.588\n0.6358796\n50"
-  },
-  {
-    "objectID": "slides/07-tables/slides-data_viz.html#flextable",
-    "href": "slides/07-tables/slides-data_viz.html#flextable",
-    "title": "Data communication with tables",
-    "section": "flextable",
-    "text": "flextable\n\nprint the same summary using flextable() (Table 2)\n\n\nsum_iris |&gt; \n  flextable::flextable()\n\n\nTable 2: Example output of an table using the flextable package\n\n\n\n\n\n\nSpecies\nmean\nsd\nn\n\n\n\nsetosa\n5.006\n0.3524897\n50\n\n\nversicolor\n5.936\n0.5161711\n50\n\n\nvirginica\n6.588\n0.6358796\n50"
-  },
-  {
-    "objectID": "slides/07-tables/slides-data_viz.html#papajaapa_table",
-    "href": "slides/07-tables/slides-data_viz.html#papajaapa_table",
-    "title": "Data communication with tables",
-    "section": "papaja::apa_table()",
-    "text": "papaja::apa_table()\n\nnow run a linear mixed model on the iris data\n\n\nlmm_iris &lt;-\n  lme4::lmer(Sepal.Width ~ Sepal.Length + Petal.Width +\n               (1|Species), data = iris)\n\n\nand print a model summary table using apa_table() (Table 3)\n\n\nlmm_iris |&gt; papaja::apa_print() |&gt; \npapaja::apa_table(caption = NULL)\n\n\nTable 3: Example output of an LMM using papaja package\n\n\n\n(#tab:tbl-lmm_iris)\n\nTerm\n\\(\\hat{\\beta}\\)\n95% CI\n\\(t\\)\n\n\n\nIntercept\n0.85\n[-0.34, 2.05]\n1.39\n\n\nSepal Length\n0.27\n[0.18, 0.36]\n5.85\n\n\nPetal Width\n0.51\n[0.28, 0.74]\n4.37"
-  },
-  {
-    "objectID": "slides/07-tables/sheet-data_viz.html",
-    "href": "slides/07-tables/sheet-data_viz.html",
-    "title": "Data communication with tables",
-    "section": "",
-    "text": "create a data dictionary\nproduce formatted tables with the knitr package\nproduce summary tables",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
-  },
-  {
-    "objectID": "slides/07-tables/sheet-data_viz.html#variable-names",
-    "href": "slides/07-tables/sheet-data_viz.html#variable-names",
-    "title": "Data communication with tables",
-    "section": "3.1 Variable names",
-    "text": "3.1 Variable names\n\nwe can list the names of all variables in a dataset using names()\n\n\nnames(df_lifetime)\n\n [1] \"px\"            \"trial\"         \"region\"        \"region_n\"     \n [5] \"region_text\"   \"eye\"           \"ff\"            \"fp\"           \n [9] \"rpd\"           \"tt\"            \"fix_count\"     \"reg_in\"       \n[13] \"reg_in_count\"  \"reg_out\"       \"reg_out_count\" \"rt\"           \n[17] \"bio\"           \"critical\"      \"gender\"        \"item_id\"      \n[21] \"list\"          \"match\"         \"condition\"     \"name\"         \n[25] \"lifetime\"      \"tense\"         \"type\"          \"yes_press\"    \n[29] \"KeyPress\"      \"accept\"        \"accuracy\"      \"px_accuracy\"  \n\n\n\nbut we need to be able to put these names into a single column\n\nwhere each row contains one variable name\nand other columns contain information like description and data class\n\n\n\n3.1.1 Names to rows\n\n# From day 2 of Lisa DeBruine's [Coding Club: Creating an R Package](https://psyteachr.github.io/intro-r-pkgs/02-data.html#documentation)\n\n# create as many empty strings as we name variable names\ncoldesc &lt;- rep(\"\", ncol(df_lifetime))\n# add variable names to these empty strings\nnames(coldesc) &lt;- names(df_lifetime)\n\n\n# print as code needed to create an object\ndput(coldesc)\n\nc(px = \"\", trial = \"\", region = \"\", region_n = \"\", region_text = \"\", \neye = \"\", ff = \"\", fp = \"\", rpd = \"\", tt = \"\", fix_count = \"\", \nreg_in = \"\", reg_in_count = \"\", reg_out = \"\", reg_out_count = \"\", \nrt = \"\", bio = \"\", critical = \"\", gender = \"\", item_id = \"\", \nlist = \"\", match = \"\", condition = \"\", name = \"\", lifetime = \"\", \ntense = \"\", type = \"\", yes_press = \"\", KeyPress = \"\", accept = \"\", \naccuracy = \"\", px_accuracy = \"\")",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
-  },
-  {
-    "objectID": "slides/07-tables/sheet-data_viz.html#section",
-    "href": "slides/07-tables/sheet-data_viz.html#section",
-    "title": "Data communication with tables",
-    "section": "3.2 ",
-    "text": "3.2 \n\ncopy the output of dput(coldesc) and assign it to an object\n\ntip: you can reformat the code by highlighting it and using Cmd/Ctrl+Shift+A\n\nor in the menu bar: Code &gt; Reformat Code\n\n\nreplace c() with tibble() to create a dataframe\n\nand fill in the quotations with description of the data\n\n\n\ndict_lifetime &lt;- tibble(\n  px = \"participant ID (factor)\",\n  trial = \"trial number (ordered factor)\",\n  region = \"sentence region (order factor)\",\n  region_n = \"numerical representation of sentence region (ordered factor)\",\n  region_text = \"text presented in the region (string)\",\n  eye = \"which eye was tracking: right or left (binomial)\",\n  ff = \"first-fixation times in milliseconds (continuous, values can be 0&lt;)\",\n  fp = \"first-pass reading times in milliseconds (numeric, values can be 0&lt;)\",\n  rpd = \"regression-path duration in milliseconds (numeric, values can be 0&lt;)\",\n  tt = \"total reading time in milliseconds (numeric, values can be 0&lt;)\",\n  fix_count = \"number of total fixations in the region (count)\",\n  reg_in = \"whether of a regression was made into the regions (binomial: 0 = no, 1 = yes)\",\n  reg_in_count = \"number of fixations into the region (count)\",\n  reg_out = \"whether of a regression was made out of the regions (binomial: 0 = no, 1 = yes)\",\n  reg_out_count = \"number of fixations out of the region (count)\",\n  rt = \"reaction time from critical sentence presentation to button press (continuous, values can be 0&lt;)\",\n  bio = \"lifetime biography context sentence (string)\",\n  critical = \"critical sentence (string)\",\n  gender = \"gender of stimulus subject (binomial: male, female)\",\n  item_id = \"item identification number (critical items: 1-80)\",\n  list = \"experimental list version: base list version (1-4) and whether the yes-button was coded as 4 or 5 (factor: 14, 15, 24, 25, 34, 35, 44, 45)\",\n  match = \"whether the referent-lifetime was congruent with tense\",\n  condition = \"condition: lifetime (dead, alive) + tense (PP, SF) (factor)\",\n  name = \"name of stimulis subject (string)\",\n  lifetime = \"lifetime status of stimulus subject at time of experiment (binomial: dead, alive)\",\n  tense = \"tense used in critical sentence (binomail: PP = present perfect, SF = simple future)\",\n  type = \"sentence type (factor with one level: critical)\",\n  yes_press = \"corresponding coding for the yes-button on Cedrus response box (4 = left button, 5 = right button)\",\n  KeyPress = \"key that was pressed (4 = left button, 5 = right button)\",\n  accept = \"whether the item was accepted, i.e., whether KeyPress equalled yes_press\",\n  accuracy = \"whether the acceptance was accurate (reject for a mismatch, accept for a match)\",\n  px_accuracy = \"participant's overall accuracy score\"\n)",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
-  },
-  {
-    "objectID": "slides/07-tables/sheet-data_viz.html#section-1",
-    "href": "slides/07-tables/sheet-data_viz.html#section-1",
-    "title": "Data communication with tables",
-    "section": "3.3 ",
-    "text": "3.3 \n\nbut dict_lifetime doesn’t have the shape we want\n\neach variable name is a column name\nand its description is in the first row\n\n\n\ndict_lifetime\n\n# A tibble: 1 × 32\n  px             trial region region_n region_text eye   ff    fp    rpd   tt   \n  &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;\n1 participant I… tria… sente… numeric… text prese… whic… firs… firs… regr… tota…\n# ℹ 22 more variables: fix_count &lt;chr&gt;, reg_in &lt;chr&gt;, reg_in_count &lt;chr&gt;,\n#   reg_out &lt;chr&gt;, reg_out_count &lt;chr&gt;, rt &lt;chr&gt;, bio &lt;chr&gt;, critical &lt;chr&gt;,\n#   gender &lt;chr&gt;, item_id &lt;chr&gt;, list &lt;chr&gt;, match &lt;chr&gt;, condition &lt;chr&gt;,\n#   name &lt;chr&gt;, lifetime &lt;chr&gt;, tense &lt;chr&gt;, type &lt;chr&gt;, yes_press &lt;chr&gt;,\n#   KeyPress &lt;chr&gt;, accept &lt;chr&gt;, accuracy &lt;chr&gt;, px_accuracy &lt;chr&gt;\n\n\n\nwe want to transpose the data\n\ni.e., rotates the data so that the column names are in a row, with the descriptions in another row",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
-  },
-  {
-    "objectID": "slides/07-tables/sheet-data_viz.html#pivot_longer",
-    "href": "slides/07-tables/sheet-data_viz.html#pivot_longer",
-    "title": "Data communication with tables",
-    "section": "3.4 pivot_longer()",
-    "text": "3.4 pivot_longer()\n\ntakes wide data and makes it longer\n\nconverts headers of columns into values of a new column\ncombines the values of those columns into a new condensed column\n\ntakes a few arguments:\n\ncols: which columns do we want to combine into a single column?\nnames_to: what should we call the new column containing the previous column names?\nvalues_to: what should we call the new column containing the values from the previous columns?",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
-  },
-  {
-    "objectID": "slides/07-tables/sheet-data_viz.html#section-2",
-    "href": "slides/07-tables/sheet-data_viz.html#section-2",
-    "title": "Data communication with tables",
-    "section": "",
-    "text": "3.4.1 Pivot our data dictionary\n\nthis looks much better!\n\n\ndict_lifetime &lt;-\n  dict_lifetime |&gt; \n  pivot_longer(\n    cols = everything(),\n    names_to = \"variable\",\n    values_to = \"description\"\n  )",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
-  },
-  {
-    "objectID": "slides/07-tables/sheet-data_viz.html#save-data-dictionary",
-    "href": "slides/07-tables/sheet-data_viz.html#save-data-dictionary",
-    "title": "Data communication with tables",
-    "section": "3.5 Save data dictionary",
-    "text": "3.5 Save data dictionary\n\nnow we can save our data dictionary just like we would any csv\n\n\nwrite_csv(dict_lifetime, here(\"data\", \"tidy_data_lifetime_pilot_dictionary.csv\"))",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
-  },
-  {
-    "objectID": "slides/07-tables/sheet-data_viz.html#tables-as-latex-code",
-    "href": "slides/07-tables/sheet-data_viz.html#tables-as-latex-code",
-    "title": "Data communication with tables",
-    "section": "4.1 Tables as LaTeX code",
-    "text": "4.1 Tables as LaTeX code\n\nyou can add the argument \"latex\" to print LaTeX code for a table in the Console\n\nyou can then cut and paste this code into a LaTeX (or Overleaf) script\n\n\n\ndict_lifetime |&gt; \n  knitr::kable(\"latex\") \n\n\nbut be careful, if you’re rendering to HTML the table won’t be printed if you use \"latex\"\n\n\n4.1.1 Exercise\n\ninstall the knitr package (install.packages(\"knitr\"))\nprint dict_lifetime, but only for the following variables:\n\npx, trial, region_text, ff, fp, and condition\n\nuse kable() from knitr to print the table\n\n\n\n\n\n\n\n\n\n\nvariable\ndescription\n\n\n\n\npx\nparticipant ID (factor)\n\n\ntrial\ntrial number (ordered factor)\n\n\nregion_text\ntext presented in the region (string)\n\n\nff\nfirst-fixation times in milliseconds (continuous, values can be 0&lt;)\n\n\nfp\nfirst-pass reading times in milliseconds (numeric, values can be 0&lt;)\n\n\ncondition\ncondition: lifetime (dead, alive) + tense (PP, SF) (factor)",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
-  },
-  {
-    "objectID": "slides/07-tables/sheet-data_viz.html#section-3",
-    "href": "slides/07-tables/sheet-data_viz.html#section-3",
-    "title": "Data communication with tables",
-    "section": "6.1 ",
-    "text": "6.1",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
-  },
-  {
-    "objectID": "slides/07-tables/sheet-data_viz.html#kableextrakable_styling",
-    "href": "slides/07-tables/sheet-data_viz.html#kableextrakable_styling",
-    "title": "Data communication with tables",
-    "section": "7.1 kableExtra::kable_styling()",
-    "text": "7.1 kableExtra::kable_styling()\n\nwe’ll first create a little summary table using the iris dataset which comes built-in with R\n\n\nsum_iris &lt;- iris |&gt; \n  summarise(mean = mean(Sepal.Length),\n            sd = sd(Sepal.Length),\n            n = n(),\n            .by = Species)\n\n\nand we’ll print the summary using kable_styling() (Table 1)\n\n\nsum_iris |&gt; \n  knitr::kable() |&gt; \n  kableExtra::kable_styling()\n\n\n\nTable 1: Example output of an table using the kableExtra package\n\n\n\n\n\n\n\nSpecies\nmean\nsd\nn\n\n\n\n\nsetosa\n5.006\n0.3524897\n50\n\n\nversicolor\n5.936\n0.5161711\n50\n\n\nvirginica\n6.588\n0.6358796\n50",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
-  },
-  {
-    "objectID": "slides/07-tables/sheet-data_viz.html#flextable",
-    "href": "slides/07-tables/sheet-data_viz.html#flextable",
-    "title": "Data communication with tables",
-    "section": "7.2 flextable",
-    "text": "7.2 flextable\n\nprint the same summary using flextable() (Table 2)\n\n\nsum_iris |&gt; \n  flextable::flextable()\n\n\n\nTable 2: Example output of an table using the flextable package\n\n\n\nSpeciesmeansdnsetosa5.0060.352489750versicolor5.9360.516171150virginica6.5880.635879650",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
-  },
-  {
-    "objectID": "slides/07-tables/sheet-data_viz.html#papajaapa_table",
-    "href": "slides/07-tables/sheet-data_viz.html#papajaapa_table",
-    "title": "Data communication with tables",
-    "section": "7.3 papaja::apa_table()",
-    "text": "7.3 papaja::apa_table()\n\nnow run a linear mixed model on the iris data\n\n\nlmm_iris &lt;-\n  lme4::lmer(Sepal.Width ~ Sepal.Length + Petal.Width +\n               (1|Species), data = iris)\n\n\nand print a model summary table using apa_table() (Table 3)\n\n\nlmm_iris |&gt; papaja::apa_print() |&gt; \npapaja::apa_table(caption = NULL)\n\n\n\nTable 3: Example output of an LMM using papaja package\n\n\n\n\n(#tab:tbl-lmm_iris)\n\n\nTerm\n\\(\\hat{\\beta}\\)\n95% CI\n\\(t\\)\n\n\n\n\nIntercept\n0.85\n[-0.34, 2.05]\n1.39\n\n\nSepal Length\n0.27\n[0.18, 0.36]\n5.85\n\n\nPetal Width\n0.51\n[0.28, 0.74]\n4.37",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
-  },
-  {
-    "objectID": "session-info.html",
-    "href": "session-info.html",
-    "title": "Session Info",
-    "section": "",
-    "text": "git2r::repository()\n\nLocal:    main /Users/danielapalleschi/Documents/IdSL/Teaching/SoSe24/M.A./r4repro_SoSe2024\nRemote:   main @ origin (git@github.com:daniela-palleschi/r4repro_SoSe2024.git)\nHead:     [b033ff5] 2024-06-11: update pacman callout tip to include code examples (package management slides)\n\n\n\nsessionInfo()\n\nR version 4.4.0 (2024-04-24)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Ventura 13.2.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Berlin\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nloaded via a namespace (and not attached):\n [1] htmlwidgets_1.6.4 compiler_4.4.0    fastmap_1.2.0     cli_3.6.2        \n [5] htmltools_0.5.8.1 tools_4.4.0       rstudioapi_0.16.0 yaml_2.3.8       \n [9] rmarkdown_2.27    knitr_1.47        git2r_0.33.0      jsonlite_1.8.8   \n[13] xfun_0.44         digest_0.6.35     rlang_1.1.4       renv_1.0.7       \n[17] evaluate_0.23"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "",
-    "section": "",
-    "text": "Code\n\n\n\n\n\nPreface\nThis web-book contains slides for the 2024 summer semester course ‘Open Science Practices: Implementing a Reproducible Workflow in R’ (and other iterations) given by Daniela Palleschi at the Humboldt-Universität zu Berlin. The tools discussed in this book are specific to the R enviornment, but the concepts are universal and programming language agnostic.\nEach week’s topic is listed in the sidebar in chronological order. Three output formats are available, all with the same content:\n\nHTML page\nPDF of content\nRevealJS slides (optimally formatted)\n\nThe contents were formatted for the slide output. Tables and figures may be too large/small in formats 1 and 2. From the HTML page the other 2 formats can be viewed by clicking on their symbol under ‘Other Formats’ (right sidebar)."
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#what-should-ideally-be-shared",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#what-should-ideally-be-shared",
-    "title": "Reproducibility",
-    "section": "What should (ideally) be shared?",
-    "text": "What should (ideally) be shared?\n\n\n\nmaterials\n\nprotocols\nstimuli\nexperiment set-up\n\n\ndocumentation\n\nREADME\nmetadata\n\n\n\n\n\ndata\n\nraw\n\ne.g., text files, audio, video, or images\n\n\nprocessed\n\n\nanalysis code\n\npre-processing\nanalyses\n\n\n\n\n\n\n\n\nmaterials are helpful for replication\n\nbut also for inspection of e.g., design\n\n\n\n\n\ndata and code are necessary for reproducibility\n\nalong with proper documentation of software used"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#reproducibility-rates-in-linguistic-research",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#reproducibility-rates-in-linguistic-research",
-    "title": "Reproducibility",
-    "section": "Reproducibility rates in linguistic research",
-    "text": "Reproducibility rates in linguistic research\n\n\n\n\n\n\nFigure 1: Source: Bochynska et al. (2023), p. 11 (all rights reserved)\n\n\n\n\n\n\n\n\n\nmeta-analysis of 519 randomly sampled articles from various linguistic journales\n\npre- and post-reproducibility crisis (2008/9, 2018/19) (Bochynska et al., 2023)\n\ndifferentiated between primary (collected for study) and secondary (pre-existing) data\n\n\nreported a post-RC increase in shared materials, data, and analyses\n\nbut still low rates of each\n\n\nhigher rates of secondary data sharing, presumably due to publicly available corpora\ndata shared more often than analyses, pre- and post-RC"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#journal-of-memory-and-language",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#journal-of-memory-and-language",
-    "title": "Reproducibility",
-    "section": "Journal of Memory and Language",
-    "text": "Journal of Memory and Language\n\nmeta-analysis of articles from JML (Laurinavichyute et al., 2022)\n\nbefore and after an Open Science Policy was introduced in 2019\n\n\n\n\n\nFigure 2: Source: Laurinavichyute et al. (2022), p. 5 (all rights reserved)\n\ncode and data availability improved\nbut reproducibility rate ranged from 34-56%, depending on criteria\nhigher rates compared to field-wide meta-analysis (Bochynska et al., 2023)"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#findable",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#findable",
-    "title": "Reproducibility",
-    "section": "Findable",
-    "text": "Findable\n\nrefers to data and supplementary materials\n\nmaterials should have a “persistant identifier”\n\ne.g., Digital Object Identifier (DOI) for scholarly articles\n\n\n\na digital, long-term storage of data\n\n\nnot on a personal or professional website\nGitHub files don’t typically have sufficient metadata\nideally: OSF, Zenodo or some other repository\n\n\nin recent papers, an OSF link is typically provided\n\nalso: discoverable\n\ne.g., in data-specific search engines (Google’s Dataset search)"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#accessible",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#accessible",
-    "title": "Reproducibility",
-    "section": "Accessible",
-    "text": "Accessible\n\ndata (and code) should be\n\nmachine- and human-readable\navailable on a trusted repository, e.g., the OSF\nOpen Access\n\nnot behind a paywall\nnor require a login"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#interoperable",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#interoperable",
-    "title": "Reproducibility",
-    "section": "Interoperable",
-    "text": "Interoperable\n\n\n\ndata (and code) should\n\nnot dependent on an operating system\nnor entirely on software/package versions\n\n\neasiest work around:\n\ndocument your software versions\nthis doesn’t automatically facilitate interoperability\nbut may help pinpoint where problems are coming from"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#reusable",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#reusable",
-    "title": "Reproducibility",
-    "section": "Reusable",
-    "text": "Reusable\n\n\n\ndata (and code) should\n\nbe reusable for future research\n\n\ndata format should be generic\n\ni.e., not tied to a specific program\nfor tabular data, I recommend .csv format\n\n\nwe can swap with ‘reproducible’ in the context of analyses"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#task-finding-data",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#task-finding-data",
-    "title": "Reproducibility",
-    "section": "Task: finding data",
-    "text": "Task: finding data\nGo to datasetsearch.research.google.com/\n\ndo a search for data related to a topic of interest to you\nwhat type of information does the search provide?\nwhat type of links?\ndo you find analysis code, or just data?\ndo the same search at osf.io\n\nand at zenodo.org/\n\nare there the same amount of hits?"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#data-and-code-neq-reproducibility",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#data-and-code-neq-reproducibility",
-    "title": "Reproducibility",
-    "section": "Data and code \\(\\neq\\) Reproducibility",
-    "text": "Data and code \\(\\neq\\) Reproducibility\n\neven including code does not guarantee reproducibility\naccess to data and code do not mean analyses are reproducible\nwhat can go wrong? Examples from Laurinavichyute et al. (2022)\n\n\n\n\nData problems\n\ninaccessible data\nincomplete data (e.g., 2/3 experiments)\n\n\nCode problems\n\nincomplete code\nerror messages\ncode rot: outdated syntax or environment\nproprietary software\n\n\n\n\n\nDocumentation problems\n\ndata difficult to interpret\nno README file/data dictionary\nunclear folder/file/variable naming convention\nmanuscript contradicts code\n\n\nUnclear terms of use\n\nno licence specification"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#share-the-code-not-just-the-data",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#share-the-code-not-just-the-data",
-    "title": "Reproducibility",
-    "section": "Share the code, not just the data",
-    "text": "Share the code, not just the data\n\nWhy?\n\nkey details are often missing from ‘Methods’ sections\n\n\nsuggestions for researchers from Laurinavichyute et al. (2022)\n\n\n\n\n\nShare data in usable form\n\nwith pre-processing code\n\n\nUse publicly accessible repositories\n\ne.g., OSF\n\n\nUse non-proprietary data formats\n\ne.g., not .xls files (Excel)\n\n\n\n\n\nProvide documentation\n\ne.g., README, data dictionaries\n\n\nShare code and data\n\nthey estimate a 38% increase in reproducibility\n\n\nTeach data management and computing skills\n\nthat’s what this course is for!"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#project-management",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#project-management",
-    "title": "Reproducibility",
-    "section": "Project management",
-    "text": "Project management\n\nfolder structure\nproject-relative file paths\nappropriate documentation\n\ne.g., README\n\n\nit’s great to map out your project structure early on\n\nbut it will grow as you go along\nreproducible principles facilitate adapting as it grows"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#literate-programming",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#literate-programming",
-    "title": "Reproducibility",
-    "section": "Literate programming",
-    "text": "Literate programming\n\nInstead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do.\n\n— Knuth (1984), p. 97\n\n\n\noriginally used to refer to writing programs\nbut also applies to analysis code\n\nespecially if we’re aiming for reproducibility\n\n\n\n\n\n\nmain concepts:\n\ncode is linear (this pre-dates Knuth, 1984)\n\ninformative but concise commenting\n\n\n\n\n\n\nmain benefits:\n\nfacilitates maintenance\nhelpful for future-you, collaborators, etc."
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#documentation",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#documentation",
-    "title": "Reproducibility",
-    "section": "Documentation",
-    "text": "Documentation\n\n\nmetadata\n\nproject README\ncodebook/data dictionary\n\n\n\nREADME should contain\n\na project description\nrelevant links\ndescription of folder structure\n\n\ncan be updated as the project develops\n\nREADME.md files in GitHub/Lab are automatically used as a project description\n\n\n.md is a plaintext document\nuses markdown syntax"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#version-control",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#version-control",
-    "title": "Reproducibility",
-    "section": "Version control",
-    "text": "Version control\n\ngit: local tracking\nuseful for the analysis and writing phases\n\nbut can be tricky for collaboration\n\n\nGitHub/GitLab: remote tracking\n\nstore your changes to your local git repository\nthen push them to your remote repository\n\n\nsafe guards against local hardware/software issues\n\nlost or damaged computer or local files\n\n\nand allows for collaboration or sharing"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#persistant-public-storage",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#persistant-public-storage",
-    "title": "Reproducibility",
-    "section": "Persistant (public) storage",
-    "text": "Persistant (public) storage\n\nGitHub/Lab are sub-optimal\n\ndeveloper-focused\ntypically lack thorough documentation/metadata\nnot very user-friendly for non-users\n\n\nOSF, Zenodo\n\nOpen Science-focused\ncan be linked to a GitHub/Lab repository\nfacilitate thorough documentation\nuser-friendly"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#writing",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#writing",
-    "title": "Reproducibility",
-    "section": "Writing",
-    "text": "Writing\n\n\ndynamic reports with Markdown syntax\n\ne.g., Rmarkdown, Quarto\nintegration of data, code, and prose\n\nfacilitates cross-referencing within document\nintegration of citation management tools\nsupports LaTeX syntax for example sentences and tables\n\n\n\n\npapaja package for APA-formatted Rmarkdown documents\n\nchallenge: collaboration\n\nnot all collaborators know these tools\ntrack changes not currently possible"
-  },
-  {
     "objectID": "slides/03-reproducibility/reproducibility.html",
     "href": "slides/03-reproducibility/reproducibility.html",
     "title": "Reproducibility",
@@ -1177,6 +896,327 @@
     ]
   },
   {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#what-should-ideally-be-shared",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#what-should-ideally-be-shared",
+    "title": "Reproducibility",
+    "section": "What should (ideally) be shared?",
+    "text": "What should (ideally) be shared?\n\n\n\nmaterials\n\nprotocols\nstimuli\nexperiment set-up\n\n\ndocumentation\n\nREADME\nmetadata\n\n\n\n\n\ndata\n\nraw\n\ne.g., text files, audio, video, or images\n\n\nprocessed\n\n\nanalysis code\n\npre-processing\nanalyses\n\n\n\n\n\n\n\n\nmaterials are helpful for replication\n\nbut also for inspection of e.g., design\n\n\n\n\n\ndata and code are necessary for reproducibility\n\nalong with proper documentation of software used"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#reproducibility-rates-in-linguistic-research",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#reproducibility-rates-in-linguistic-research",
+    "title": "Reproducibility",
+    "section": "Reproducibility rates in linguistic research",
+    "text": "Reproducibility rates in linguistic research\n\n\n\n\n\n\nFigure 1: Source: Bochynska et al. (2023), p. 11 (all rights reserved)\n\n\n\n\n\n\n\n\n\nmeta-analysis of 519 randomly sampled articles from various linguistic journales\n\npre- and post-reproducibility crisis (2008/9, 2018/19) (Bochynska et al., 2023)\n\ndifferentiated between primary (collected for study) and secondary (pre-existing) data\n\n\nreported a post-RC increase in shared materials, data, and analyses\n\nbut still low rates of each\n\n\nhigher rates of secondary data sharing, presumably due to publicly available corpora\ndata shared more often than analyses, pre- and post-RC"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#journal-of-memory-and-language",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#journal-of-memory-and-language",
+    "title": "Reproducibility",
+    "section": "Journal of Memory and Language",
+    "text": "Journal of Memory and Language\n\nmeta-analysis of articles from JML (Laurinavichyute et al., 2022)\n\nbefore and after an Open Science Policy was introduced in 2019\n\n\n\n\n\nFigure 2: Source: Laurinavichyute et al. (2022), p. 5 (all rights reserved)\n\ncode and data availability improved\nbut reproducibility rate ranged from 34-56%, depending on criteria\nhigher rates compared to field-wide meta-analysis (Bochynska et al., 2023)"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#findable",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#findable",
+    "title": "Reproducibility",
+    "section": "Findable",
+    "text": "Findable\n\nrefers to data and supplementary materials\n\nmaterials should have a “persistant identifier”\n\ne.g., Digital Object Identifier (DOI) for scholarly articles\n\n\n\na digital, long-term storage of data\n\n\nnot on a personal or professional website\nGitHub files don’t typically have sufficient metadata\nideally: OSF, Zenodo or some other repository\n\n\nin recent papers, an OSF link is typically provided\n\nalso: discoverable\n\ne.g., in data-specific search engines (Google’s Dataset search)"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#accessible",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#accessible",
+    "title": "Reproducibility",
+    "section": "Accessible",
+    "text": "Accessible\n\ndata (and code) should be\n\nmachine- and human-readable\navailable on a trusted repository, e.g., the OSF\nOpen Access\n\nnot behind a paywall\nnor require a login"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#interoperable",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#interoperable",
+    "title": "Reproducibility",
+    "section": "Interoperable",
+    "text": "Interoperable\n\n\n\ndata (and code) should\n\nnot dependent on an operating system\nnor entirely on software/package versions\n\n\neasiest work around:\n\ndocument your software versions\nthis doesn’t automatically facilitate interoperability\nbut may help pinpoint where problems are coming from"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#reusable",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#reusable",
+    "title": "Reproducibility",
+    "section": "Reusable",
+    "text": "Reusable\n\n\n\ndata (and code) should\n\nbe reusable for future research\n\n\ndata format should be generic\n\ni.e., not tied to a specific program\nfor tabular data, I recommend .csv format\n\n\nwe can swap with ‘reproducible’ in the context of analyses"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#task-finding-data",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#task-finding-data",
+    "title": "Reproducibility",
+    "section": "Task: finding data",
+    "text": "Task: finding data\nGo to datasetsearch.research.google.com/\n\ndo a search for data related to a topic of interest to you\nwhat type of information does the search provide?\nwhat type of links?\ndo you find analysis code, or just data?\ndo the same search at osf.io\n\nand at zenodo.org/\n\nare there the same amount of hits?"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#data-and-code-neq-reproducibility",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#data-and-code-neq-reproducibility",
+    "title": "Reproducibility",
+    "section": "Data and code \\(\\neq\\) Reproducibility",
+    "text": "Data and code \\(\\neq\\) Reproducibility\n\neven including code does not guarantee reproducibility\naccess to data and code do not mean analyses are reproducible\nwhat can go wrong? Examples from Laurinavichyute et al. (2022)\n\n\n\n\nData problems\n\ninaccessible data\nincomplete data (e.g., 2/3 experiments)\n\n\nCode problems\n\nincomplete code\nerror messages\ncode rot: outdated syntax or environment\nproprietary software\n\n\n\n\n\nDocumentation problems\n\ndata difficult to interpret\nno README file/data dictionary\nunclear folder/file/variable naming convention\nmanuscript contradicts code\n\n\nUnclear terms of use\n\nno licence specification"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#share-the-code-not-just-the-data",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#share-the-code-not-just-the-data",
+    "title": "Reproducibility",
+    "section": "Share the code, not just the data",
+    "text": "Share the code, not just the data\n\nWhy?\n\nkey details are often missing from ‘Methods’ sections\n\n\nsuggestions for researchers from Laurinavichyute et al. (2022)\n\n\n\n\n\nShare data in usable form\n\nwith pre-processing code\n\n\nUse publicly accessible repositories\n\ne.g., OSF\n\n\nUse non-proprietary data formats\n\ne.g., not .xls files (Excel)\n\n\n\n\n\nProvide documentation\n\ne.g., README, data dictionaries\n\n\nShare code and data\n\nthey estimate a 38% increase in reproducibility\n\n\nTeach data management and computing skills\n\nthat’s what this course is for!"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#project-management",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#project-management",
+    "title": "Reproducibility",
+    "section": "Project management",
+    "text": "Project management\n\nfolder structure\nproject-relative file paths\nappropriate documentation\n\ne.g., README\n\n\nit’s great to map out your project structure early on\n\nbut it will grow as you go along\nreproducible principles facilitate adapting as it grows"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#literate-programming",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#literate-programming",
+    "title": "Reproducibility",
+    "section": "Literate programming",
+    "text": "Literate programming\n\nInstead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do.\n\n— Knuth (1984), p. 97\n\n\n\noriginally used to refer to writing programs\nbut also applies to analysis code\n\nespecially if we’re aiming for reproducibility\n\n\n\n\n\n\nmain concepts:\n\ncode is linear (this pre-dates Knuth, 1984)\n\ninformative but concise commenting\n\n\n\n\n\n\nmain benefits:\n\nfacilitates maintenance\nhelpful for future-you, collaborators, etc."
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#documentation",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#documentation",
+    "title": "Reproducibility",
+    "section": "Documentation",
+    "text": "Documentation\n\n\nmetadata\n\nproject README\ncodebook/data dictionary\n\n\n\nREADME should contain\n\na project description\nrelevant links\ndescription of folder structure\n\n\ncan be updated as the project develops\n\nREADME.md files in GitHub/Lab are automatically used as a project description\n\n\n.md is a plaintext document\nuses markdown syntax"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#version-control",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#version-control",
+    "title": "Reproducibility",
+    "section": "Version control",
+    "text": "Version control\n\ngit: local tracking\nuseful for the analysis and writing phases\n\nbut can be tricky for collaboration\n\n\nGitHub/GitLab: remote tracking\n\nstore your changes to your local git repository\nthen push them to your remote repository\n\n\nsafe guards against local hardware/software issues\n\nlost or damaged computer or local files\n\n\nand allows for collaboration or sharing"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#persistant-public-storage",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#persistant-public-storage",
+    "title": "Reproducibility",
+    "section": "Persistant (public) storage",
+    "text": "Persistant (public) storage\n\nGitHub/Lab are sub-optimal\n\ndeveloper-focused\ntypically lack thorough documentation/metadata\nnot very user-friendly for non-users\n\n\nOSF, Zenodo\n\nOpen Science-focused\ncan be linked to a GitHub/Lab repository\nfacilitate thorough documentation\nuser-friendly"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#writing",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#writing",
+    "title": "Reproducibility",
+    "section": "Writing",
+    "text": "Writing\n\n\ndynamic reports with Markdown syntax\n\ne.g., Rmarkdown, Quarto\nintegration of data, code, and prose\n\nfacilitates cross-referencing within document\nintegration of citation management tools\nsupports LaTeX syntax for example sentences and tables\n\n\n\n\npapaja package for APA-formatted Rmarkdown documents\n\nchallenge: collaboration\n\nnot all collaborators know these tools\ntrack changes not currently possible"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "",
+    "section": "",
+    "text": "Code\n\n\n\n\n\nPreface\nThis web-book contains slides for the 2024 summer semester course ‘Open Science Practices: Implementing a Reproducible Workflow in R’ (and other iterations) given by Daniela Palleschi at the Humboldt-Universität zu Berlin. The tools discussed in this book are specific to the R enviornment, but the concepts are universal and programming language agnostic.\nEach week’s topic is listed in the sidebar in chronological order. Three output formats are available, all with the same content:\n\nHTML page\nPDF of content\nRevealJS slides (optimally formatted)\n\nThe contents were formatted for the slide output. Tables and figures may be too large/small in formats 1 and 2. From the HTML page the other 2 formats can be viewed by clicking on their symbol under ‘Other Formats’ (right sidebar)."
+  },
+  {
+    "objectID": "session-info.html",
+    "href": "session-info.html",
+    "title": "Session Info",
+    "section": "",
+    "text": "git2r::repository()\n\nLocal:    main /Users/danielapalleschi/Documents/IdSL/Teaching/SoSe24/M.A./r4repro_SoSe2024\nRemote:   main @ origin (git@github.com:daniela-palleschi/r4repro_SoSe2024.git)\nHead:     [b033ff5] 2024-06-11: update pacman callout tip to include code examples (package management slides)\n\n\n\nsessionInfo()\n\nR version 4.4.0 (2024-04-24)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Ventura 13.2.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Berlin\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nloaded via a namespace (and not attached):\n [1] htmlwidgets_1.6.4 compiler_4.4.0    fastmap_1.2.0     cli_3.6.2        \n [5] htmltools_0.5.8.1 tools_4.4.0       rstudioapi_0.16.0 yaml_2.3.8       \n [9] rmarkdown_2.27    knitr_1.47        git2r_0.33.0      jsonlite_1.8.8   \n[13] xfun_0.44         digest_0.6.35     rlang_1.1.4       renv_1.0.7       \n[17] evaluate_0.23"
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html",
+    "href": "slides/07-tables/sheet-data_viz.html",
+    "title": "Data communication with tables",
+    "section": "",
+    "text": "create a data dictionary\nproduce formatted tables with the knitr package\nproduce summary tables",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#variable-names",
+    "href": "slides/07-tables/sheet-data_viz.html#variable-names",
+    "title": "Data communication with tables",
+    "section": "3.1 Variable names",
+    "text": "3.1 Variable names\n\nwe can list the names of all variables in a dataset using names()\n\n\nnames(df_lifetime)\n\n [1] \"px\"            \"trial\"         \"region\"        \"region_n\"     \n [5] \"region_text\"   \"eye\"           \"ff\"            \"fp\"           \n [9] \"rpd\"           \"tt\"            \"fix_count\"     \"reg_in\"       \n[13] \"reg_in_count\"  \"reg_out\"       \"reg_out_count\" \"rt\"           \n[17] \"bio\"           \"critical\"      \"gender\"        \"item_id\"      \n[21] \"list\"          \"match\"         \"condition\"     \"name\"         \n[25] \"lifetime\"      \"tense\"         \"type\"          \"yes_press\"    \n[29] \"KeyPress\"      \"accept\"        \"accuracy\"      \"px_accuracy\"  \n\n\n\nbut we need to be able to put these names into a single column\n\nwhere each row contains one variable name\nand other columns contain information like description and data class\n\n\n\n3.1.1 Names to rows\n\n# From day 2 of Lisa DeBruine's [Coding Club: Creating an R Package](https://psyteachr.github.io/intro-r-pkgs/02-data.html#documentation)\n\n# create as many empty strings as we name variable names\ncoldesc &lt;- rep(\"\", ncol(df_lifetime))\n# add variable names to these empty strings\nnames(coldesc) &lt;- names(df_lifetime)\n\n\n# print as code needed to create an object\ndput(coldesc)\n\nc(px = \"\", trial = \"\", region = \"\", region_n = \"\", region_text = \"\", \neye = \"\", ff = \"\", fp = \"\", rpd = \"\", tt = \"\", fix_count = \"\", \nreg_in = \"\", reg_in_count = \"\", reg_out = \"\", reg_out_count = \"\", \nrt = \"\", bio = \"\", critical = \"\", gender = \"\", item_id = \"\", \nlist = \"\", match = \"\", condition = \"\", name = \"\", lifetime = \"\", \ntense = \"\", type = \"\", yes_press = \"\", KeyPress = \"\", accept = \"\", \naccuracy = \"\", px_accuracy = \"\")",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#section",
+    "href": "slides/07-tables/sheet-data_viz.html#section",
+    "title": "Data communication with tables",
+    "section": "3.2 ",
+    "text": "3.2 \n\ncopy the output of dput(coldesc) and assign it to an object\n\ntip: you can reformat the code by highlighting it and using Cmd/Ctrl+Shift+A\n\nor in the menu bar: Code &gt; Reformat Code\n\n\nreplace c() with tibble() to create a dataframe\n\nand fill in the quotations with description of the data\n\n\n\ndict_lifetime &lt;- tibble(\n  px = \"participant ID (factor)\",\n  trial = \"trial number (ordered factor)\",\n  region = \"sentence region (order factor)\",\n  region_n = \"numerical representation of sentence region (ordered factor)\",\n  region_text = \"text presented in the region (string)\",\n  eye = \"which eye was tracking: right or left (binomial)\",\n  ff = \"first-fixation times in milliseconds (continuous, values can be 0&lt;)\",\n  fp = \"first-pass reading times in milliseconds (numeric, values can be 0&lt;)\",\n  rpd = \"regression-path duration in milliseconds (numeric, values can be 0&lt;)\",\n  tt = \"total reading time in milliseconds (numeric, values can be 0&lt;)\",\n  fix_count = \"number of total fixations in the region (count)\",\n  reg_in = \"whether of a regression was made into the regions (binomial: 0 = no, 1 = yes)\",\n  reg_in_count = \"number of fixations into the region (count)\",\n  reg_out = \"whether of a regression was made out of the regions (binomial: 0 = no, 1 = yes)\",\n  reg_out_count = \"number of fixations out of the region (count)\",\n  rt = \"reaction time from critical sentence presentation to button press (continuous, values can be 0&lt;)\",\n  bio = \"lifetime biography context sentence (string)\",\n  critical = \"critical sentence (string)\",\n  gender = \"gender of stimulus subject (binomial: male, female)\",\n  item_id = \"item identification number (critical items: 1-80)\",\n  list = \"experimental list version: base list version (1-4) and whether the yes-button was coded as 4 or 5 (factor: 14, 15, 24, 25, 34, 35, 44, 45)\",\n  match = \"whether the referent-lifetime was congruent with tense\",\n  condition = \"condition: lifetime (dead, alive) + tense (PP, SF) (factor)\",\n  name = \"name of stimulis subject (string)\",\n  lifetime = \"lifetime status of stimulus subject at time of experiment (binomial: dead, alive)\",\n  tense = \"tense used in critical sentence (binomail: PP = present perfect, SF = simple future)\",\n  type = \"sentence type (factor with one level: critical)\",\n  yes_press = \"corresponding coding for the yes-button on Cedrus response box (4 = left button, 5 = right button)\",\n  KeyPress = \"key that was pressed (4 = left button, 5 = right button)\",\n  accept = \"whether the item was accepted, i.e., whether KeyPress equalled yes_press\",\n  accuracy = \"whether the acceptance was accurate (reject for a mismatch, accept for a match)\",\n  px_accuracy = \"participant's overall accuracy score\"\n)",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#section-1",
+    "href": "slides/07-tables/sheet-data_viz.html#section-1",
+    "title": "Data communication with tables",
+    "section": "3.3 ",
+    "text": "3.3 \n\nbut dict_lifetime doesn’t have the shape we want\n\neach variable name is a column name\nand its description is in the first row\n\n\n\ndict_lifetime\n\n# A tibble: 1 × 32\n  px             trial region region_n region_text eye   ff    fp    rpd   tt   \n  &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;\n1 participant I… tria… sente… numeric… text prese… whic… firs… firs… regr… tota…\n# ℹ 22 more variables: fix_count &lt;chr&gt;, reg_in &lt;chr&gt;, reg_in_count &lt;chr&gt;,\n#   reg_out &lt;chr&gt;, reg_out_count &lt;chr&gt;, rt &lt;chr&gt;, bio &lt;chr&gt;, critical &lt;chr&gt;,\n#   gender &lt;chr&gt;, item_id &lt;chr&gt;, list &lt;chr&gt;, match &lt;chr&gt;, condition &lt;chr&gt;,\n#   name &lt;chr&gt;, lifetime &lt;chr&gt;, tense &lt;chr&gt;, type &lt;chr&gt;, yes_press &lt;chr&gt;,\n#   KeyPress &lt;chr&gt;, accept &lt;chr&gt;, accuracy &lt;chr&gt;, px_accuracy &lt;chr&gt;\n\n\n\nwe want to transpose the data\n\ni.e., rotates the data so that the column names are in a row, with the descriptions in another row",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#pivot_longer",
+    "href": "slides/07-tables/sheet-data_viz.html#pivot_longer",
+    "title": "Data communication with tables",
+    "section": "3.4 pivot_longer()",
+    "text": "3.4 pivot_longer()\n\ntakes wide data and makes it longer\n\nconverts headers of columns into values of a new column\ncombines the values of those columns into a new condensed column\n\ntakes a few arguments:\n\ncols: which columns do we want to combine into a single column?\nnames_to: what should we call the new column containing the previous column names?\nvalues_to: what should we call the new column containing the values from the previous columns?",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#section-2",
+    "href": "slides/07-tables/sheet-data_viz.html#section-2",
+    "title": "Data communication with tables",
+    "section": "",
+    "text": "3.4.1 Pivot our data dictionary\n\nthis looks much better!\n\n\ndict_lifetime &lt;-\n  dict_lifetime |&gt; \n  pivot_longer(\n    cols = everything(),\n    names_to = \"variable\",\n    values_to = \"description\"\n  )",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#save-data-dictionary",
+    "href": "slides/07-tables/sheet-data_viz.html#save-data-dictionary",
+    "title": "Data communication with tables",
+    "section": "3.5 Save data dictionary",
+    "text": "3.5 Save data dictionary\n\nnow we can save our data dictionary just like we would any csv\n\n\nwrite_csv(dict_lifetime, here(\"data\", \"tidy_data_lifetime_pilot_dictionary.csv\"))",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#tables-as-latex-code",
+    "href": "slides/07-tables/sheet-data_viz.html#tables-as-latex-code",
+    "title": "Data communication with tables",
+    "section": "4.1 Tables as LaTeX code",
+    "text": "4.1 Tables as LaTeX code\n\nyou can add the argument \"latex\" to print LaTeX code for a table in the Console\n\nyou can then cut and paste this code into a LaTeX (or Overleaf) script\n\n\n\ndict_lifetime |&gt; \n  knitr::kable(\"latex\") \n\n\nbut be careful, if you’re rendering to HTML the table won’t be printed if you use \"latex\"\n\n\n4.1.1 Exercise\n\ninstall the knitr package (install.packages(\"knitr\"))\nprint dict_lifetime, but only for the following variables:\n\npx, trial, region_text, ff, fp, and condition\n\nuse kable() from knitr to print the table\n\n\n\n\n\n\n\n\n\n\nvariable\ndescription\n\n\n\n\npx\nparticipant ID (factor)\n\n\ntrial\ntrial number (ordered factor)\n\n\nregion_text\ntext presented in the region (string)\n\n\nff\nfirst-fixation times in milliseconds (continuous, values can be 0&lt;)\n\n\nfp\nfirst-pass reading times in milliseconds (numeric, values can be 0&lt;)\n\n\ncondition\ncondition: lifetime (dead, alive) + tense (PP, SF) (factor)",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#section-3",
+    "href": "slides/07-tables/sheet-data_viz.html#section-3",
+    "title": "Data communication with tables",
+    "section": "6.1 ",
+    "text": "6.1",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#kableextrakable_styling",
+    "href": "slides/07-tables/sheet-data_viz.html#kableextrakable_styling",
+    "title": "Data communication with tables",
+    "section": "7.1 kableExtra::kable_styling()",
+    "text": "7.1 kableExtra::kable_styling()\n\nwe’ll first create a little summary table using the iris dataset which comes built-in with R\n\n\nsum_iris &lt;- iris |&gt; \n  summarise(mean = mean(Sepal.Length),\n            sd = sd(Sepal.Length),\n            n = n(),\n            .by = Species)\n\n\nand we’ll print the summary using kable_styling() (Table 1)\n\n\nsum_iris |&gt; \n  knitr::kable() |&gt; \n  kableExtra::kable_styling()\n\n\n\nTable 1: Example output of an table using the kableExtra package\n\n\n\n\n\n\n\nSpecies\nmean\nsd\nn\n\n\n\n\nsetosa\n5.006\n0.3524897\n50\n\n\nversicolor\n5.936\n0.5161711\n50\n\n\nvirginica\n6.588\n0.6358796\n50",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#flextable",
+    "href": "slides/07-tables/sheet-data_viz.html#flextable",
+    "title": "Data communication with tables",
+    "section": "7.2 flextable",
+    "text": "7.2 flextable\n\nprint the same summary using flextable() (Table 2)\n\n\nsum_iris |&gt; \n  flextable::flextable()\n\n\n\nTable 2: Example output of an table using the flextable package\n\n\n\nSpeciesmeansdnsetosa5.0060.352489750versicolor5.9360.516171150virginica6.5880.635879650",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#papajaapa_table",
+    "href": "slides/07-tables/sheet-data_viz.html#papajaapa_table",
+    "title": "Data communication with tables",
+    "section": "7.3 papaja::apa_table()",
+    "text": "7.3 papaja::apa_table()\n\nnow run a linear mixed model on the iris data\n\n\nlmm_iris &lt;-\n  lme4::lmer(Sepal.Width ~ Sepal.Length + Petal.Width +\n               (1|Species), data = iris)\n\n\nand print a model summary table using apa_table() (Table 3)\n\n\nlmm_iris |&gt; papaja::apa_print() |&gt; \npapaja::apa_table(caption = NULL)\n\n\n\nTable 3: Example output of an LMM using papaja package\n\n\n\n\n(#tab:tbl-lmm_iris)\n\n\nTerm\n\\(\\hat{\\beta}\\)\n95% CI\n\\(t\\)\n\n\n\n\nIntercept\n0.85\n[-0.34, 2.05]\n1.39\n\n\nSepal Length\n0.27\n[0.18, 0.36]\n5.85\n\n\nPetal Width\n0.51\n[0.28, 0.74]\n4.37",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#variable-names",
+    "href": "slides/07-tables/slides-data_viz.html#variable-names",
+    "title": "Data communication with tables",
+    "section": "Variable names",
+    "text": "Variable names\n\nwe can list the names of all variables in a dataset using names()\n\n\n\nnames(df_lifetime)\n\n\n\n [1] \"px\"            \"trial\"         \"region\"        \"region_n\"     \n [5] \"region_text\"   \"eye\"           \"ff\"            \"fp\"           \n [9] \"rpd\"           \"tt\"            \"fix_count\"     \"reg_in\"       \n[13] \"reg_in_count\"  \"reg_out\"       \"reg_out_count\" \"rt\"           \n[17] \"bio\"           \"critical\"      \"gender\"        \"item_id\"      \n[21] \"list\"          \"match\"         \"condition\"     \"name\"         \n[25] \"lifetime\"      \"tense\"         \"type\"          \"yes_press\"    \n[29] \"KeyPress\"      \"accept\"        \"accuracy\"      \"px_accuracy\"  \n\n\n\nbut we need to be able to put these names into a single column\n\nwhere each row contains one variable name\nand other columns contain information like description and data class"
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#section",
+    "href": "slides/07-tables/slides-data_viz.html#section",
+    "title": "Data communication with tables",
+    "section": "",
+    "text": "copy the output of dput(coldesc) and assign it to an object\n\ntip: you can reformat the code by highlighting it and using Cmd/Ctrl+Shift+A\n\nor in the menu bar: Code &gt; Reformat Code\n\n\n\n\nreplace c() with tibble() to create a dataframe\n\nand fill in the quotations with description of the data\n\n\n\n\ndict_lifetime &lt;- tibble(\n  px = \"participant ID (factor)\",\n  trial = \"trial number (ordered factor)\",\n  region = \"sentence region (order factor)\",\n  region_n = \"numerical representation of sentence region (ordered factor)\",\n  region_text = \"text presented in the region (string)\",\n  eye = \"which eye was tracking: right or left (binomial)\",\n  ff = \"first-fixation times in milliseconds (continuous, values can be 0&lt;)\",\n  fp = \"first-pass reading times in milliseconds (numeric, values can be 0&lt;)\",\n  rpd = \"regression-path duration in milliseconds (numeric, values can be 0&lt;)\",\n  tt = \"total reading time in milliseconds (numeric, values can be 0&lt;)\",\n  fix_count = \"number of total fixations in the region (count)\",\n  reg_in = \"whether of a regression was made into the regions (binomial: 0 = no, 1 = yes)\",\n  reg_in_count = \"number of fixations into the region (count)\",\n  reg_out = \"whether of a regression was made out of the regions (binomial: 0 = no, 1 = yes)\",\n  reg_out_count = \"number of fixations out of the region (count)\",\n  rt = \"reaction time from critical sentence presentation to button press (continuous, values can be 0&lt;)\",\n  bio = \"lifetime biography context sentence (string)\",\n  critical = \"critical sentence (string)\",\n  gender = \"gender of stimulus subject (binomial: male, female)\",\n  item_id = \"item identification number (critical items: 1-80)\",\n  list = \"experimental list version: base list version (1-4) and whether the yes-button was coded as 4 or 5 (factor: 14, 15, 24, 25, 34, 35, 44, 45)\",\n  match = \"whether the referent-lifetime was congruent with tense\",\n  condition = \"condition: lifetime (dead, alive) + tense (PP, SF) (factor)\",\n  name = \"name of stimulis subject (string)\",\n  lifetime = \"lifetime status of stimulus subject at time of experiment (binomial: dead, alive)\",\n  tense = \"tense used in critical sentence (binomail: PP = present perfect, SF = simple future)\",\n  type = \"sentence type (factor with one level: critical)\",\n  yes_press = \"corresponding coding for the yes-button on Cedrus response box (4 = left button, 5 = right button)\",\n  KeyPress = \"key that was pressed (4 = left button, 5 = right button)\",\n  accept = \"whether the item was accepted, i.e., whether KeyPress equalled yes_press\",\n  accuracy = \"whether the acceptance was accurate (reject for a mismatch, accept for a match)\",\n  px_accuracy = \"participant's overall accuracy score\"\n)"
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#section-1",
+    "href": "slides/07-tables/slides-data_viz.html#section-1",
+    "title": "Data communication with tables",
+    "section": "",
+    "text": "but dict_lifetime doesn’t have the shape we want\n\neach variable name is a column name\nand its description is in the first row\n\n\n\n\ndict_lifetime\n\n# A tibble: 1 × 32\n  px             trial region region_n region_text eye   ff    fp    rpd   tt   \n  &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;\n1 participant I… tria… sente… numeric… text prese… whic… firs… firs… regr… tota…\n# ℹ 22 more variables: fix_count &lt;chr&gt;, reg_in &lt;chr&gt;, reg_in_count &lt;chr&gt;,\n#   reg_out &lt;chr&gt;, reg_out_count &lt;chr&gt;, rt &lt;chr&gt;, bio &lt;chr&gt;, critical &lt;chr&gt;,\n#   gender &lt;chr&gt;, item_id &lt;chr&gt;, list &lt;chr&gt;, match &lt;chr&gt;, condition &lt;chr&gt;,\n#   name &lt;chr&gt;, lifetime &lt;chr&gt;, tense &lt;chr&gt;, type &lt;chr&gt;, yes_press &lt;chr&gt;,\n#   KeyPress &lt;chr&gt;, accept &lt;chr&gt;, accuracy &lt;chr&gt;, px_accuracy &lt;chr&gt;\n\n\n\nwe want to transpose the data\n\ni.e., rotates the data so that the column names are in a row, with the descriptions in another row"
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#pivot_longer",
+    "href": "slides/07-tables/slides-data_viz.html#pivot_longer",
+    "title": "Data communication with tables",
+    "section": "pivot_longer()",
+    "text": "pivot_longer()\n\ntakes wide data and makes it longer\n\nconverts headers of columns into values of a new column\ncombines the values of those columns into a new condensed column\n\n\ntakes a few arguments:\n\n\ncols: which columns do we want to combine into a single column?\n\nnames_to: what should we call the new column containing the previous column names?\n\nvalues_to: what should we call the new column containing the values from the previous columns?"
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#save-data-dictionary",
+    "href": "slides/07-tables/slides-data_viz.html#save-data-dictionary",
+    "title": "Data communication with tables",
+    "section": "Save data dictionary",
+    "text": "Save data dictionary\n\nnow we can save our data dictionary just like we would any csv\n\n\nwrite_csv(dict_lifetime, here(\"data\", \"tidy_data_lifetime_pilot_dictionary.csv\"))"
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#tables-as-latex-code",
+    "href": "slides/07-tables/slides-data_viz.html#tables-as-latex-code",
+    "title": "Data communication with tables",
+    "section": "Tables as LaTeX code",
+    "text": "Tables as LaTeX code\n\nyou can add the argument \"latex\" to print LaTeX code for a table in the Console\n\nyou can then cut and paste this code into a LaTeX (or Overleaf) script\n\n\n\n\ndict_lifetime |&gt; \n  knitr::kable(\"latex\") \n\n\nbut be careful, if you’re rendering to HTML the table won’t be printed if you use \"latex\""
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#kableextrakable_styling",
+    "href": "slides/07-tables/slides-data_viz.html#kableextrakable_styling",
+    "title": "Data communication with tables",
+    "section": "kableExtra::kable_styling()",
+    "text": "kableExtra::kable_styling()\n\nwe’ll first create a little summary table using the iris dataset which comes built-in with R\n\n\nsum_iris &lt;- iris |&gt; \n  summarise(mean = mean(Sepal.Length),\n            sd = sd(Sepal.Length),\n            n = n(),\n            .by = Species)\n\n\nand we’ll print the summary using kable_styling() (Table 1)\n\n\nsum_iris |&gt; \n  knitr::kable() |&gt; \n  kableExtra::kable_styling()\n\n\nTable 1: Example output of an table using the kableExtra package\n\n\n\n\n\nSpecies\nmean\nsd\nn\n\n\n\nsetosa\n5.006\n0.3524897\n50\n\n\nversicolor\n5.936\n0.5161711\n50\n\n\nvirginica\n6.588\n0.6358796\n50"
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#flextable",
+    "href": "slides/07-tables/slides-data_viz.html#flextable",
+    "title": "Data communication with tables",
+    "section": "flextable",
+    "text": "flextable\n\nprint the same summary using flextable() (Table 2)\n\n\nsum_iris |&gt; \n  flextable::flextable()\n\n\nTable 2: Example output of an table using the flextable package\n\n\n\n\n\n\nSpecies\nmean\nsd\nn\n\n\n\nsetosa\n5.006\n0.3524897\n50\n\n\nversicolor\n5.936\n0.5161711\n50\n\n\nvirginica\n6.588\n0.6358796\n50"
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#papajaapa_table",
+    "href": "slides/07-tables/slides-data_viz.html#papajaapa_table",
+    "title": "Data communication with tables",
+    "section": "papaja::apa_table()",
+    "text": "papaja::apa_table()\n\nnow run a linear mixed model on the iris data\n\n\nlmm_iris &lt;-\n  lme4::lmer(Sepal.Width ~ Sepal.Length + Petal.Width +\n               (1|Species), data = iris)\n\n\nand print a model summary table using apa_table() (Table 3)\n\n\nlmm_iris |&gt; papaja::apa_print() |&gt; \npapaja::apa_table(caption = NULL)\n\n\nTable 3: Example output of an LMM using papaja package\n\n\n\n(#tab:tbl-lmm_iris)\n\nTerm\n\\(\\hat{\\beta}\\)\n95% CI\n\\(t\\)\n\n\n\nIntercept\n0.85\n[-0.34, 2.05]\n1.39\n\n\nSepal Length\n0.27\n[0.18, 0.36]\n5.85\n\n\nPetal Width\n0.51\n[0.28, 0.74]\n4.37"
+  },
+  {
     "objectID": "slides/09-packages/packages_slides.html#cran-packages",
     "href": "slides/09-packages/packages_slides.html#cran-packages",
     "title": "Package management",
@@ -1307,7 +1347,7 @@
     "href": "slides/09-packages/packages.html",
     "title": "Package management",
     "section": "",
-    "text": "to read more on today’s topic, check out:\nCh. 10 (Basic reprodubility: freezing packages) from Rodrigues (2023)\nthe renv website\n\nor CRAN documentation and vignettes therein (e.g.,: Introduction to renv)",
+    "text": "Today we will…\n\nlearn about R package repositories\nlearn how package dependencies can break code\nuse the renv package to create and maintain a project-relative package library",
     "crumbs": [
       "D. Palleschi",
       "Package management"
@@ -2492,6 +2532,269 @@
     "crumbs": [
       "D. Palleschi",
       "Data wrangling"
+    ]
+  },
+  {
+    "objectID": "slides/10-writing/writing_slides.html#disclaimer",
+    "href": "slides/10-writing/writing_slides.html#disclaimer",
+    "title": "Reproducible Writing",
+    "section": "Disclaimer",
+    "text": "Disclaimer\n\nthis is also a very quick-and-dirty introduction on getting started with APA-formatted manuscripts in R markdown\n\nthere are a lot of resources (e.g., E-books, blog posts, forum threads, manuals) that will address specific formatting problems or wishes you may have\nGoogle is your friend!\n\n\nalso, these slides were written in Quarto, and are published as HTML\n\nmuch of the syntax I’m presenting doesn’t actually work in Quarto/HTML\nbut all the raw code that I show will work in R markdown/PDF"
+  },
+  {
+    "objectID": "slides/10-writing/writing_slides.html#tinytex",
+    "href": "slides/10-writing/writing_slides.html#tinytex",
+    "title": "Reproducible Writing",
+    "section": "tinytex",
+    "text": "tinytex\n\nincludes helper functions for installing LaTeX distribution\n\ni.e., helps create PDF outputs\n\n\n\n\n# to install tinytex run these two lines\ninstall.packages(\"tinytex\")\ntinytex::install_tinytex()"
+  },
+  {
+    "objectID": "slides/10-writing/writing_slides.html#papaja",
+    "href": "slides/10-writing/writing_slides.html#papaja",
+    "title": "Reproducible Writing",
+    "section": "papaja",
+    "text": "papaja\nI want to add a citation\n\nfor APA-formatted scientific manuscripts\n\ncurrently uses APA 6, but we can update it to APA 7\n\n\n\n\n# to install tinytex run these two lines\ninstall.packages(\"papaja\")"
+  },
+  {
+    "objectID": "slides/10-writing/writing_slides.html#rmarkdown",
+    "href": "slides/10-writing/writing_slides.html#rmarkdown",
+    "title": "Reproducible Writing",
+    "section": "Rmarkdown",
+    "text": "Rmarkdown\n\nwe can also write PDFs in Quarto\n\nbut its relatively new, and there’s more support for scientific articles in R markdown\n\n\nmost everything in R markdown is identical to Quarto\n\nsome important differences: code chunk options (we’ll see these later)"
+  },
+  {
+    "objectID": "slides/10-writing/writing_slides.html#apa-formatting-with-papaja",
+    "href": "slides/10-writing/writing_slides.html#apa-formatting-with-papaja",
+    "title": "Reproducible Writing",
+    "section": "APA-formatting with papaja\n",
+    "text": "APA-formatting with papaja\n\n\na package specifically for writing APA-formatted manuscripts\n\nFile &gt; New File &gt; R markdown &gt; From template &gt; APA-formatted article (papaja)\n\nwill open a file with a long YAML\nrender it and see how it looks"
+  },
+  {
+    "objectID": "slides/10-writing/writing_slides.html#task",
+    "href": "slides/10-writing/writing_slides.html#task",
+    "title": "Reproducible Writing",
+    "section": "Task",
+    "text": "Task\n\nin a new papaja script, do the following:\n\n\nchange the YAML to include your name"
+  },
+  {
+    "objectID": "slides/10-writing/writing_slides.html#figures",
+    "href": "slides/10-writing/writing_slides.html#figures",
+    "title": "Reproducible Writing",
+    "section": "Figures",
+    "text": "Figures\n\nor figure, table, example sentence or equation\n\n\n```{r fig-iris, eval = TRUE}\nlibrary(ggplot2)\niris |&gt; ggplot() + aes(x = Sepal.Length, y = Sepal.Width) + geom_point()\n```\n\n\n\nFigure 1\n\nnow if we were to write As seen in Figure \\ref{fig-iris}, we would get: As seen in Figure 1\nbe careful not to use underscores (_) in your figure labels, this causes problems"
+  },
+  {
+    "objectID": "slides/10-writing/writing_slides.html#images",
+    "href": "slides/10-writing/writing_slides.html#images",
+    "title": "Reproducible Writing",
+    "section": "Images",
+    "text": "Images\n\nYou might also include a figure of the trial procedure, or some other visual description of your data\nFor example, in Figure Figure 2 we see an overview of the types of iris (flowers) that make up the data from the built-in iris dataset (figure from Mijwil & Abttan, 2021)\n\nyou can then cross-reference to images the same was, by putting the label inside \\ref{}\n\n\n\n```{r fig-summary, out.width=\"100%\", fig.pos=\"t\", fig.cap=\"\\\\label{fig-summary}Visual depiction of dependent variables from the `iris` dataset\"}\nknitr::include_graphics(here::here(\"figures\", \"iris_photo.png\"))\n```\n\n\n\nFigure 2: Visual depiction of dependent variables from the iris dataset"
+  },
+  {
+    "objectID": "slides/10-writing/writing_slides.html#example-sentences",
+    "href": "slides/10-writing/writing_slides.html#example-sentences",
+    "title": "Reproducible Writing",
+    "section": "Example sentences",
+    "text": "Example sentences\n\nwe can write example sentences with latex syntax\nfirst, add this to your YAML\n\n\nheader-includes:\n  \\usepackage{float} \\usepackage{gb4e} \\noauthomath\n\n\nthen, you can write an example as follows:\n\n\n\\begin{exe}\n\\ex \\label{ex:example} This is an item with just one example.\n\\end{exe}\n\n\nThis is an item with just one example.\n\n\nand reference it in your text with See example \\ref{ex:example}, which will be written as: See example 1"
+  },
+  {
+    "objectID": "slides/10-writing/writing_slides.html#data-tables",
+    "href": "slides/10-writing/writing_slides.html#data-tables",
+    "title": "Reproducible Writing",
+    "section": "Data tables",
+    "text": "Data tables\n\nYou can of course also present tables of your data or models\n\n\n\n\nTable 2: Mean values for iris measures\n\n\n\n\n\nSpecies\nSepal.Length\nSepal.Width\nPetal.Length\nPetal.Width\n\n\n\nsetosa\n5.006\n3.428\n1.462\n0.246\n\n\nversicolor\n5.936\n2.770\n4.260\n1.326\n\n\nvirginica\n6.588\n2.974\n5.552\n2.026\n\n\n\n\n\n\n\n\n\n\ncross-referencing works the same:\n\nyou write: Mean values are given in Table \\ref{tab:iris-table}.\n\nR markdown prints: Mean values are given in Table 2."
+  },
+  {
+    "objectID": "slides/10-writing/writing_slides.html#placing-tables-and-figures",
+    "href": "slides/10-writing/writing_slides.html#placing-tables-and-figures",
+    "title": "Reproducible Writing",
+    "section": "Placing tables and figures",
+    "text": "Placing tables and figures\n\nTo allow figures and tables to appear in-text (i.e., not at the end of the document), change floatsintext: in the YAML to yes (it will be no by default)\n\notherwise papaja pushes all tables and figures to the very end of the document\n\n\n\n\nfloatsintext      : yes # CHANGE TO YES to allow figures and tables to float in text"
+  },
+  {
+    "objectID": "slides/10-writing/writing_slides.html#bibtex-format",
+    "href": "slides/10-writing/writing_slides.html#bibtex-format",
+    "title": "Reproducible Writing",
+    "section": "BibTex format",
+    "text": "BibTex format\n\nbelow is an example of a BibTex formatted citation\n\nthe first info after the opening curly bracked is the reference key (knuth1984literate)\n\n\nadd this reference to your .bib file\n\n\n@article{knuth1984literate,\n  title={Literate programming},\n  author={Knuth, Donald Ervin},\n  journal={The computer journal},\n  volume={27},\n  number={2},\n  pages={97--111},\n  year={1984},\n  publisher={Oxford University Press}\n}"
+  },
+  {
+    "objectID": "slides/10-writing/writing_slides.html#zotero",
+    "href": "slides/10-writing/writing_slides.html#zotero",
+    "title": "Reproducible Writing",
+    "section": "Zotero",
+    "text": "Zotero\n\nthis process can be streamlined by using Zotero + Better BibTex (BBT)\n\nthere are several walk-throughs of how to do this online, e.g.,\n\n\nthe benefit: using Zotero keeps a record of your PDFs/readings\n\nZotero Desktop is a nice way to annotate readings and take notes\ndirect integration of BBT with RStudio is possible\n\n\ncheck out this blogpost to learn more"
+  },
+  {
+    "objectID": "slides/10-writing/writing_slides.html#collaboration",
+    "href": "slides/10-writing/writing_slides.html#collaboration",
+    "title": "Reproducible Writing",
+    "section": "Collaboration",
+    "text": "Collaboration\n\nunfortunately, there’s no elegant method for collaborative writing in R markdown/Rstudio\n\nthe only real option is to use a remote git repository (e.g., GitHub or GitLab)\nbut this has a steep learning curve and is prone to problems when collaborators aren’t familiar with git\ntrack changes are also not as elegant as in Overleaf, Google Docs, Word documents, etc. (e.g., with accept/reject buttons or pop-up comments)\n\n\nif you have co-authors, consider they may or may not be R (markdown) or LaTeX or R-savvy"
+  },
+  {
+    "objectID": "slides/10-writing/writing.html",
+    "href": "slides/10-writing/writing.html",
+    "title": "Reproducible Writing",
+    "section": "",
+    "text": "Today we will…\n\nlearn about R markdown for writing\nintegrate citations with Bib(La)Tex\nlearn how to cross-reference\ncreate lingiustic example sentences",
+    "crumbs": [
+      "D. Palleschi",
+      "Reproducible Writing"
+    ]
+  },
+  {
+    "objectID": "slides/10-writing/writing.html#disclaimer",
+    "href": "slides/10-writing/writing.html#disclaimer",
+    "title": "Reproducible Writing",
+    "section": "0.1 Disclaimer",
+    "text": "0.1 Disclaimer\n\nthis is also a very quick-and-dirty introduction on getting started with APA-formatted manuscripts in R markdown\n\nthere are a lot of resources (e.g., E-books, blog posts, forum threads, manuals) that will address specific formatting problems or wishes you may have\nGoogle is your friend!\n\nalso, these slides were written in Quarto, and are published as HTML\n\nmuch of the syntax I’m presenting doesn’t actually work in Quarto/HTML\nbut all the raw code that I show will work in R markdown/PDF",
+    "crumbs": [
+      "D. Palleschi",
+      "Reproducible Writing"
+    ]
+  },
+  {
+    "objectID": "slides/10-writing/writing.html#tinytex",
+    "href": "slides/10-writing/writing.html#tinytex",
+    "title": "Reproducible Writing",
+    "section": "1.1 tinytex",
+    "text": "1.1 tinytex\n\nincludes helper functions for installing LaTeX distribution\n\ni.e., helps create PDF outputs\n\n\n\n# to install tinytex run these two lines\ninstall.packages(\"tinytex\")\ntinytex::install_tinytex()",
+    "crumbs": [
+      "D. Palleschi",
+      "Reproducible Writing"
+    ]
+  },
+  {
+    "objectID": "slides/10-writing/writing.html#papaja",
+    "href": "slides/10-writing/writing.html#papaja",
+    "title": "Reproducible Writing",
+    "section": "1.2 papaja",
+    "text": "1.2 papaja\nI want to add a citation\n\nfor APA-formatted scientific manuscripts\n\ncurrently uses APA 6, but we can update it to APA 7\n\n\n\n# to install tinytex run these two lines\ninstall.packages(\"papaja\")",
+    "crumbs": [
+      "D. Palleschi",
+      "Reproducible Writing"
+    ]
+  },
+  {
+    "objectID": "slides/10-writing/writing.html#rmarkdown",
+    "href": "slides/10-writing/writing.html#rmarkdown",
+    "title": "Reproducible Writing",
+    "section": "2.1 Rmarkdown",
+    "text": "2.1 Rmarkdown\n\nwe can also write PDFs in Quarto\n\nbut its relatively new, and there’s more support for scientific articles in R markdown\n\nmost everything in R markdown is identical to Quarto\n\nsome important differences: code chunk options (we’ll see these later)",
+    "crumbs": [
+      "D. Palleschi",
+      "Reproducible Writing"
+    ]
+  },
+  {
+    "objectID": "slides/10-writing/writing.html#apa-formatting-with-papaja",
+    "href": "slides/10-writing/writing.html#apa-formatting-with-papaja",
+    "title": "Reproducible Writing",
+    "section": "2.2 APA-formatting with papaja",
+    "text": "2.2 APA-formatting with papaja\n\na package specifically for writing APA-formatted manuscripts\nFile &gt; New File &gt; R markdown &gt; From template &gt; APA-formatted article (papaja)\n\nwill open a file with a long YAML\nrender it and see how it looks",
+    "crumbs": [
+      "D. Palleschi",
+      "Reproducible Writing"
+    ]
+  },
+  {
+    "objectID": "slides/10-writing/writing.html#task",
+    "href": "slides/10-writing/writing.html#task",
+    "title": "Reproducible Writing",
+    "section": "2.3 Task",
+    "text": "2.3 Task\n\nin a new papaja script, do the following:\n\n\nchange the YAML to include your name",
+    "crumbs": [
+      "D. Palleschi",
+      "Reproducible Writing"
+    ]
+  },
+  {
+    "objectID": "slides/10-writing/writing.html#figures",
+    "href": "slides/10-writing/writing.html#figures",
+    "title": "Reproducible Writing",
+    "section": "3.1 Figures",
+    "text": "3.1 Figures\n\nor figure, table, example sentence or equation\n\n\n```{r fig-iris, eval = TRUE}\nlibrary(ggplot2)\niris |&gt; ggplot() + aes(x = Sepal.Length, y = Sepal.Width) + geom_point()\n```\n\n\n\n\n\n\n\n\n\nFigure 1\n\n\n\n\n\n\nnow if we were to write As seen in Figure \\ref{fig-iris}, we would get: As seen in Figure 1\nbe careful not to use underscores (_) in your figure labels, this causes problems",
+    "crumbs": [
+      "D. Palleschi",
+      "Reproducible Writing"
+    ]
+  },
+  {
+    "objectID": "slides/10-writing/writing.html#images",
+    "href": "slides/10-writing/writing.html#images",
+    "title": "Reproducible Writing",
+    "section": "3.2 Images",
+    "text": "3.2 Images\n\nYou might also include a figure of the trial procedure, or some other visual description of your data\nFor example, in Figure Figure 2 we see an overview of the types of iris (flowers) that make up the data from the built-in iris dataset (figure from Mijwil & Abttan, 2021)\nyou can then cross-reference to images the same was, by putting the label inside \\ref{}\n\n\n```{r fig-summary, out.width=\"100%\", fig.pos=\"t\", fig.cap=\"\\\\label{fig-summary}Visual depiction of dependent variables from the `iris` dataset\"}\nknitr::include_graphics(here::here(\"figures\", \"iris_photo.png\"))\n```\n\n\n\n\n\n\n\n\n\nFigure 2: Visual depiction of dependent variables from the iris dataset",
+    "crumbs": [
+      "D. Palleschi",
+      "Reproducible Writing"
+    ]
+  },
+  {
+    "objectID": "slides/10-writing/writing.html#example-sentences",
+    "href": "slides/10-writing/writing.html#example-sentences",
+    "title": "Reproducible Writing",
+    "section": "3.3 Example sentences",
+    "text": "3.3 Example sentences\n\nwe can write example sentences with latex syntax\nfirst, add this to your YAML\n\n\nheader-includes:\n  \\usepackage{float} \\usepackage{gb4e} \\noauthomath\n\n\nthen, you can write an example as follows:\n\n\n\\begin{exe}\n\\ex \\label{ex:example} This is an item with just one example.\n\\end{exe}\n\n\nThis is an item with just one example.\n\n\nand reference it in your text with See example \\ref{ex:example}, which will be written as: See example 1",
+    "crumbs": [
+      "D. Palleschi",
+      "Reproducible Writing"
+    ]
+  },
+  {
+    "objectID": "slides/10-writing/writing.html#data-tables",
+    "href": "slides/10-writing/writing.html#data-tables",
+    "title": "Reproducible Writing",
+    "section": "4.1 Data tables",
+    "text": "4.1 Data tables\n\nYou can of course also present tables of your data or models\n\n\n\n\n\nTable 2: Mean values for iris measures\n\n\n\n\n\n\n\nSpecies\nSepal.Length\nSepal.Width\nPetal.Length\nPetal.Width\n\n\n\n\nsetosa\n5.006\n3.428\n1.462\n0.246\n\n\nversicolor\n5.936\n2.770\n4.260\n1.326\n\n\nvirginica\n6.588\n2.974\n5.552\n2.026\n\n\n\n\n\n\n\n\n\n\n\n\ncross-referencing works the same:\n\nyou write: Mean values are given in Table \\ref{tab:iris-table}.\nR markdown prints: Mean values are given in Table 2.",
+    "crumbs": [
+      "D. Palleschi",
+      "Reproducible Writing"
+    ]
+  },
+  {
+    "objectID": "slides/10-writing/writing.html#placing-tables-and-figures",
+    "href": "slides/10-writing/writing.html#placing-tables-and-figures",
+    "title": "Reproducible Writing",
+    "section": "4.2 Placing tables and figures",
+    "text": "4.2 Placing tables and figures\n\nTo allow figures and tables to appear in-text (i.e., not at the end of the document), change floatsintext: in the YAML to yes (it will be no by default)\n\notherwise papaja pushes all tables and figures to the very end of the document\n\n\n\nfloatsintext      : yes # CHANGE TO YES to allow figures and tables to float in text",
+    "crumbs": [
+      "D. Palleschi",
+      "Reproducible Writing"
+    ]
+  },
+  {
+    "objectID": "slides/10-writing/writing.html#bibtex-format",
+    "href": "slides/10-writing/writing.html#bibtex-format",
+    "title": "Reproducible Writing",
+    "section": "5.1 BibTex format",
+    "text": "5.1 BibTex format\n\nbelow is an example of a BibTex formatted citation\n\nthe first info after the opening curly bracked is the reference key (knuth1984literate)\n\nadd this reference to your .bib file\n\n\n@article{knuth1984literate,\n  title={Literate programming},\n  author={Knuth, Donald Ervin},\n  journal={The computer journal},\n  volume={27},\n  number={2},\n  pages={97--111},\n  year={1984},\n  publisher={Oxford University Press}\n}\n\n\n5.1.1 In-text citations\n\nto then include a reference in-text, include the BibTeX reference key preceded @\nso if we write @knuth1984literate we should get a formatted citation: Knuth (1984)\n\nand the full citation should be added to our references section\n\nif we were to write [@knuth1984literate] we would get the reference in brackets (Knuth, 1984)\n\nto learn more about how to control the formatting of in-text references check out Section 3.2 (Citations) in the papaja manual",
+    "crumbs": [
+      "D. Palleschi",
+      "Reproducible Writing"
+    ]
+  },
+  {
+    "objectID": "slides/10-writing/writing.html#zotero",
+    "href": "slides/10-writing/writing.html#zotero",
+    "title": "Reproducible Writing",
+    "section": "5.2 Zotero",
+    "text": "5.2 Zotero\n\nthis process can be streamlined by using Zotero + Better BibTex (BBT)\n\nthere are several walk-throughs of how to do this online, e.g.,\n\nthe benefit: using Zotero keeps a record of your PDFs/readings\n\nZotero Desktop is a nice way to annotate readings and take notes\ndirect integration of BBT with RStudio is possible\n\ncheck out this blogpost to learn more",
+    "crumbs": [
+      "D. Palleschi",
+      "Reproducible Writing"
+    ]
+  },
+  {
+    "objectID": "slides/10-writing/writing.html#collaboration",
+    "href": "slides/10-writing/writing.html#collaboration",
+    "title": "Reproducible Writing",
+    "section": "6.1 Collaboration",
+    "text": "6.1 Collaboration\n\nunfortunately, there’s no elegant method for collaborative writing in R markdown/Rstudio\n\nthe only real option is to use a remote git repository (e.g., GitHub or GitLab)\nbut this has a steep learning curve and is prone to problems when collaborators aren’t familiar with git\ntrack changes are also not as elegant as in Overleaf, Google Docs, Word documents, etc. (e.g., with accept/reject buttons or pop-up comments)\n\nif you have co-authors, consider they may or may not be R (markdown) or LaTeX or R-savvy\n\n\nyou could send collaborators a PDF that they annotate and then you make the changes back in your R markdown script(s)\n\nbut this is quite labour intensive on your side\n\nalternatively, you can also output your first draft as a Word document and then use that as a starting point for collaborative writing\n\nkeep in mind that any changes to the analyses will then need to be done in Rmarkdown and imported to the edited Word document\n\nthere is also the trackdown package which integrates R markdown scripts with Google Docs\n\nbut there are obvious data protection/ethical concerns with doing so\n\ncurrently, I prefer to move the first draft to Overleaf\n\nI can always re-run my analyses, re-write up my results section, and just replace the LaTeX code for that section",
+    "crumbs": [
+      "D. Palleschi",
+      "Reproducible Writing"
     ]
   }
 ]

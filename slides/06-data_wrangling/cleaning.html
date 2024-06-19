@@ -4816,6 +4816,12 @@ vertical-align: -.125em;
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../slides/06-data_wrangling/tidying.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data tidying</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../slides/07-tables/sheet-data_viz.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data communication with tables</span></a>
   </div>
@@ -4830,6 +4836,12 @@ vertical-align: -.125em;
   <div class="sidebar-item-container"> 
   <a href="../../slides/09-packages/packages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Package management</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/10-writing/writing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reproducible Writing</span></a>
   </div>
 </li>
     </ul>
@@ -4904,8 +4916,7 @@ vertical-align: -.125em;
   <li><a href="#distinct" id="toc-distinct" class="nav-link" data-scroll-target="#distinct"><code>distinct()</code></a></li>
   <li><a href="#arrange" id="toc-arrange" class="nav-link" data-scroll-target="#arrange"><code>arrange()</code></a></li>
   </ul></li>
-  <li><a href="#save-your-tidy-data" id="toc-save-your-tidy-data" class="nav-link" data-scroll-target="#save-your-tidy-data">Save your tidy data</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a>
+  <li><a href="#save-your-tidy-data" id="toc-save-your-tidy-data" class="nav-link" data-scroll-target="#save-your-tidy-data">Save your tidy data</a>
   <ul class="collapse">
   <li><a href="#important-terms" id="toc-important-terms" class="nav-link" data-scroll-target="#important-terms">Important terms</a></li>
   <li><a href="#important-functions" id="toc-important-functions" class="nav-link" data-scroll-target="#important-functions">Important functions</a></li>
@@ -6140,14 +6151,6 @@ Select criteria
 <div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run this manually!</span></span>
 <span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(df_lifetime, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data/tidy_data_lifetime_pilot.csv&quot;</span>),<span class="at">row.names=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="summary" class="level1">
-<h1>Summary</h1>
-<ul>
-<li><p>we saw that the equation for a straight line boils down to its intercept and slope</p></li>
-<li><p>we fit our first linear model with a categorical predictor</p></li>
-<li><p>next, we’ll look at a case with more than one predictor: <strong>multiple</strong> regression</p></li>
-</ul>
 <section id="important-terms" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="important-terms">Important terms</h2>
 <table class="table">
@@ -7932,52 +7935,44 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb79-1092"><a href="#cb79-1092" aria-hidden="true" tabindex="-1"></a><span class="in">write.csv(df_lifetime, here::here(&quot;data/tidy_data_lifetime_pilot.csv&quot;),row.names=FALSE)</span></span>
 <span id="cb79-1093"><a href="#cb79-1093" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb79-1094"><a href="#cb79-1094" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-1095"><a href="#cb79-1095" aria-hidden="true" tabindex="-1"></a><span class="fu"># Summary</span></span>
+<span id="cb79-1095"><a href="#cb79-1095" aria-hidden="true" tabindex="-1"></a><span class="fu">## Important terms {.unnumbered}</span></span>
 <span id="cb79-1096"><a href="#cb79-1096" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-1097"><a href="#cb79-1097" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>we saw that the equation for a straight line boils down to its intercept and slope</span>
-<span id="cb79-1098"><a href="#cb79-1098" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-1099"><a href="#cb79-1099" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>we fit our first linear model with a categorical predictor</span>
-<span id="cb79-1100"><a href="#cb79-1100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-1101"><a href="#cb79-1101" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>next, we&#39;ll look at a case with more than one predictor: **multiple** regression</span>
-<span id="cb79-1102"><a href="#cb79-1102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-1103"><a href="#cb79-1103" aria-hidden="true" tabindex="-1"></a><span class="fu">## Important terms {.unnumbered}</span></span>
-<span id="cb79-1104"><a href="#cb79-1104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-1105"><a href="#cb79-1105" aria-hidden="true" tabindex="-1"></a>|                             |                                                                              |</span>
-<span id="cb79-1106"><a href="#cb79-1106" aria-hidden="true" tabindex="-1"></a>|-----------------------|-------------------------------------------------|</span>
-<span id="cb79-1107"><a href="#cb79-1107" aria-hidden="true" tabindex="-1"></a>| wrangle                     | have a long dispute                                                          |</span>
-<span id="cb79-1108"><a href="#cb79-1108" aria-hidden="true" tabindex="-1"></a>| data wrangling              | tidying and transforming your data                                           |</span>
-<span id="cb79-1109"><a href="#cb79-1109" aria-hidden="true" tabindex="-1"></a>| tidy data                   | data where each column is a variable and each row is an observation          |</span>
-<span id="cb79-1110"><a href="#cb79-1110" aria-hidden="true" tabindex="-1"></a>| the tidyverse               | a group of packages for tidy data                                            |</span>
-<span id="cb79-1111"><a href="#cb79-1111" aria-hidden="true" tabindex="-1"></a>| dplyr                       | a package within the tidyverse for data wrangling                            |</span>
-<span id="cb79-1112"><a href="#cb79-1112" aria-hidden="true" tabindex="-1"></a>| pipe operator (<span class="in">`|&gt;`</span> or <span class="in">`|&gt;`</span>) | operational function, passes the result of one function/argument to the next |</span>
-<span id="cb79-1113"><a href="#cb79-1113" aria-hidden="true" tabindex="-1"></a>| logical operators           | compare values of two arguments: <span class="in">`&amp;`</span>, <span class="in">`|`</span>, <span class="in">`==`</span>, <span class="in">`!=`</span>, <span class="sc">\&gt;</span>, <span class="sc">\&lt;</span>                |</span>
-<span id="cb79-1114"><a href="#cb79-1114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-1115"><a href="#cb79-1115" aria-hidden="true" tabindex="-1"></a><span class="fu">## Important functions {.smaller .unnumbered}</span></span>
-<span id="cb79-1116"><a href="#cb79-1116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-1117"><a href="#cb79-1117" aria-hidden="true" tabindex="-1"></a>|                  |                                                    |</span>
-<span id="cb79-1118"><a href="#cb79-1118" aria-hidden="true" tabindex="-1"></a>|------------------|----------------------------------------------------|</span>
-<span id="cb79-1119"><a href="#cb79-1119" aria-hidden="true" tabindex="-1"></a>| <span class="in">`read_csv()`</span>     | read-in a csv as a tibble (from <span class="in">`readr`</span> package)   |</span>
-<span id="cb79-1120"><a href="#cb79-1120" aria-hidden="true" tabindex="-1"></a>| <span class="in">`rename()`</span>       | rename variables                                   |</span>
-<span id="cb79-1121"><a href="#cb79-1121" aria-hidden="true" tabindex="-1"></a>| <span class="in">`relocate()`</span>     | move variables                                     |</span>
-<span id="cb79-1122"><a href="#cb79-1122" aria-hidden="true" tabindex="-1"></a>| <span class="in">`mutate()`</span>       | change or create new variables                     |</span>
-<span id="cb79-1123"><a href="#cb79-1123" aria-hidden="true" tabindex="-1"></a>| <span class="in">`if_else()`</span>      | condition for <span class="sc">\`</span>mutate()<span class="sc">\`</span>                         |</span>
-<span id="cb79-1124"><a href="#cb79-1124" aria-hidden="true" tabindex="-1"></a>| <span class="in">`case_when()`</span>    | handle multiple conditions for <span class="sc">\`</span>mutate()<span class="sc">\`</span>        |</span>
-<span id="cb79-1125"><a href="#cb79-1125" aria-hidden="true" tabindex="-1"></a>| <span class="in">`group_by()`</span>     | group by a certain variable                        |</span>
-<span id="cb79-1126"><a href="#cb79-1126" aria-hidden="true" tabindex="-1"></a>| <span class="in">`select()`</span>       | keep (or exclude) certain variables                |</span>
-<span id="cb79-1127"><a href="#cb79-1127" aria-hidden="true" tabindex="-1"></a>| <span class="in">`filter()`</span>       | keep (or exclude) rows based on some criteria      |</span>
-<span id="cb79-1128"><a href="#cb79-1128" aria-hidden="true" tabindex="-1"></a>| <span class="in">`distinct()`</span>     | keep rows with distinct value of given variable(s) |</span>
-<span id="cb79-1129"><a href="#cb79-1129" aria-hidden="true" tabindex="-1"></a>| <span class="in">`arrange()`</span>      | sort variable(s) in ascending or descending order  |</span>
-<span id="cb79-1130"><a href="#cb79-1130" aria-hidden="true" tabindex="-1"></a>| <span class="in">`separate()`</span>     | split a variable into multiple variables           |</span>
-<span id="cb79-1131"><a href="#cb79-1131" aria-hidden="true" tabindex="-1"></a>| <span class="in">`pivot_longer()`</span> | make wide data longer                              |</span>
-<span id="cb79-1132"><a href="#cb79-1132" aria-hidden="true" tabindex="-1"></a>| <span class="in">`pivot_wider()`</span>  | make long data wider                               |</span>
-<span id="cb79-1133"><a href="#cb79-1133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-1134"><a href="#cb79-1134" aria-hidden="true" tabindex="-1"></a><span class="fu"># Session Info</span></span>
-<span id="cb79-1135"><a href="#cb79-1135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-1138"><a href="#cb79-1138" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb79-1139"><a href="#cb79-1139" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb79-1140"><a href="#cb79-1140" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: &quot;Show code&quot;</span></span>
-<span id="cb79-1141"><a href="#cb79-1141" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
-<span id="cb79-1142"><a href="#cb79-1142" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb79-1097"><a href="#cb79-1097" aria-hidden="true" tabindex="-1"></a>|                             |                                                                              |</span>
+<span id="cb79-1098"><a href="#cb79-1098" aria-hidden="true" tabindex="-1"></a>|-----------------------|-------------------------------------------------|</span>
+<span id="cb79-1099"><a href="#cb79-1099" aria-hidden="true" tabindex="-1"></a>| wrangle                     | have a long dispute                                                          |</span>
+<span id="cb79-1100"><a href="#cb79-1100" aria-hidden="true" tabindex="-1"></a>| data wrangling              | tidying and transforming your data                                           |</span>
+<span id="cb79-1101"><a href="#cb79-1101" aria-hidden="true" tabindex="-1"></a>| tidy data                   | data where each column is a variable and each row is an observation          |</span>
+<span id="cb79-1102"><a href="#cb79-1102" aria-hidden="true" tabindex="-1"></a>| the tidyverse               | a group of packages for tidy data                                            |</span>
+<span id="cb79-1103"><a href="#cb79-1103" aria-hidden="true" tabindex="-1"></a>| dplyr                       | a package within the tidyverse for data wrangling                            |</span>
+<span id="cb79-1104"><a href="#cb79-1104" aria-hidden="true" tabindex="-1"></a>| pipe operator (<span class="in">`|&gt;`</span> or <span class="in">`|&gt;`</span>) | operational function, passes the result of one function/argument to the next |</span>
+<span id="cb79-1105"><a href="#cb79-1105" aria-hidden="true" tabindex="-1"></a>| logical operators           | compare values of two arguments: <span class="in">`&amp;`</span>, <span class="in">`|`</span>, <span class="in">`==`</span>, <span class="in">`!=`</span>, <span class="sc">\&gt;</span>, <span class="sc">\&lt;</span>                |</span>
+<span id="cb79-1106"><a href="#cb79-1106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-1107"><a href="#cb79-1107" aria-hidden="true" tabindex="-1"></a><span class="fu">## Important functions {.smaller .unnumbered}</span></span>
+<span id="cb79-1108"><a href="#cb79-1108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-1109"><a href="#cb79-1109" aria-hidden="true" tabindex="-1"></a>|                  |                                                    |</span>
+<span id="cb79-1110"><a href="#cb79-1110" aria-hidden="true" tabindex="-1"></a>|------------------|----------------------------------------------------|</span>
+<span id="cb79-1111"><a href="#cb79-1111" aria-hidden="true" tabindex="-1"></a>| <span class="in">`read_csv()`</span>     | read-in a csv as a tibble (from <span class="in">`readr`</span> package)   |</span>
+<span id="cb79-1112"><a href="#cb79-1112" aria-hidden="true" tabindex="-1"></a>| <span class="in">`rename()`</span>       | rename variables                                   |</span>
+<span id="cb79-1113"><a href="#cb79-1113" aria-hidden="true" tabindex="-1"></a>| <span class="in">`relocate()`</span>     | move variables                                     |</span>
+<span id="cb79-1114"><a href="#cb79-1114" aria-hidden="true" tabindex="-1"></a>| <span class="in">`mutate()`</span>       | change or create new variables                     |</span>
+<span id="cb79-1115"><a href="#cb79-1115" aria-hidden="true" tabindex="-1"></a>| <span class="in">`if_else()`</span>      | condition for <span class="sc">\`</span>mutate()<span class="sc">\`</span>                         |</span>
+<span id="cb79-1116"><a href="#cb79-1116" aria-hidden="true" tabindex="-1"></a>| <span class="in">`case_when()`</span>    | handle multiple conditions for <span class="sc">\`</span>mutate()<span class="sc">\`</span>        |</span>
+<span id="cb79-1117"><a href="#cb79-1117" aria-hidden="true" tabindex="-1"></a>| <span class="in">`group_by()`</span>     | group by a certain variable                        |</span>
+<span id="cb79-1118"><a href="#cb79-1118" aria-hidden="true" tabindex="-1"></a>| <span class="in">`select()`</span>       | keep (or exclude) certain variables                |</span>
+<span id="cb79-1119"><a href="#cb79-1119" aria-hidden="true" tabindex="-1"></a>| <span class="in">`filter()`</span>       | keep (or exclude) rows based on some criteria      |</span>
+<span id="cb79-1120"><a href="#cb79-1120" aria-hidden="true" tabindex="-1"></a>| <span class="in">`distinct()`</span>     | keep rows with distinct value of given variable(s) |</span>
+<span id="cb79-1121"><a href="#cb79-1121" aria-hidden="true" tabindex="-1"></a>| <span class="in">`arrange()`</span>      | sort variable(s) in ascending or descending order  |</span>
+<span id="cb79-1122"><a href="#cb79-1122" aria-hidden="true" tabindex="-1"></a>| <span class="in">`separate()`</span>     | split a variable into multiple variables           |</span>
+<span id="cb79-1123"><a href="#cb79-1123" aria-hidden="true" tabindex="-1"></a>| <span class="in">`pivot_longer()`</span> | make wide data longer                              |</span>
+<span id="cb79-1124"><a href="#cb79-1124" aria-hidden="true" tabindex="-1"></a>| <span class="in">`pivot_wider()`</span>  | make long data wider                               |</span>
+<span id="cb79-1125"><a href="#cb79-1125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-1126"><a href="#cb79-1126" aria-hidden="true" tabindex="-1"></a><span class="fu"># Session Info</span></span>
+<span id="cb79-1127"><a href="#cb79-1127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-1130"><a href="#cb79-1130" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb79-1131"><a href="#cb79-1131" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb79-1132"><a href="#cb79-1132" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: &quot;Show code&quot;</span></span>
+<span id="cb79-1133"><a href="#cb79-1133" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb79-1134"><a href="#cb79-1134" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
