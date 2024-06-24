@@ -1,5 +1,5 @@
 ---
-title: "Publishing your analyses"
+title: "Publishing analyses for Code Review"
 subtitle: "Persistant project repositories with the OSF"
 author: "Daniela Palleschi"
 institute: Humboldt-Universität zu Berlin
@@ -74,6 +74,8 @@ Today we will...
 
 # Resources {.unnumbered .unlisted}
 
+- @debruine_intro_2022 and accompanying [slides](https://debruine.github.io/code-review/#/title-slide)
+
 # Open and FAIR data
 
 ::: {.content-visible when-format="revealjs"}
@@ -130,7 +132,7 @@ magick::image_read(here::here("media/FAIR_nlm_nih.png"))
 
 - if you don't already have an OSF account, click the 'sign up' button at the top right of the [OSF homepage](https://osf.io/)
 
-## Setting up a project
+# Our first OSF repo
 
 - we'll start by creating a new OSF project
 
@@ -157,7 +159,7 @@ magick::image_read(here::here("media/FAIR_nlm_nih.png"))
   + make sure the 'Bibliographic Contributor' button is checked
 - go back to the project page, do you see any changes?
 
-# Adding files
+## Adding files
 
 - our purpose for creating an OSF project was to share our data and materials
   + to do this, we navigate to the 'Files' tab
@@ -188,27 +190,50 @@ magick::image_read(here::here("media/FAIR_nlm_nih.png"))
 
 - optionally, you can also upload the PDF output produced by each script
   + this means that anybody viewing your project doesn't have to download the Quarto scripts to see what was done (as they aren't viewable in-browser)
+  
+# Checking reproducibility
 
-# Reproducibility
+- a code review refers to when somebody else checks your code
+  + this should also include a check for reproducibility
+- why should we do it?
+  + firstly, everybody makes mistakes! increases the chances they'll be fixed
+  + tests reproducibility
 
-- great, so we've shared the code, not just the data!
+## Download OSF repo
+
+- let's start by downloading our OSF repo
+  + from the project overview page, go to 'Files' pane
+  + click on 'OSF Storage (Germany - Frankfurt)'
+  + Click 'Download as zip' button and store somewhere useful/rename as needed
+
+```{r}
+#| echo: false
+#| out-width: "100%"
+#| fig-align: center
+#| label: fig-osf_download_zip
+#| fig-cap: "How to download an OSF repo"
+magick::image_read(here::here("media/osf_download_zip.png"))
+```
+
+## Reproduce your analyses
+
+- first, close all R projects you currently have open
+- now, navigate to the zip you just downloaded
+  + select a Quarto script from `scripts/`
+  + try to run the script, does it run?
+
+# Revisiting reproducibility
+
+- we've shared the code, not just the data
   + this has been strongly encouraged in the reproducibility research as of late (e.g., @@laurinavichyute_share_2017)
   + but is this sufficient to ensure long-term reproducibility?
 - in addition, would the code and data in their current state run on another machine?
 
-- our focus is on sharing data and analyses with the aim of reproducibility
+- our focus is on sharing data and analyses with the aim of reproducibility, not just documenting what was done
   + so we have to share what is necessary to make our project reproducible
 - so what should we share?
 
-## R project
-
-- consider, for example, how we accessed the data from our scripts
-  + did we use `setwd()`?
-  + did we use filepaths?
-  + no, we used the `here()` package within an R project
-- so, we should, at minimum, also include the `.Rproj` file at the project root directory
-
-### Reproducibility spectrum
+## Reproducibility spectrum
 
 - reproducibility is on a continuum, referred to as the *reproducibility spectrum* in @peng_reproducible_2011 (@fig-peng_2011)
   + *linked* means "*all data, metadata, and code [is] stored and linked with each other and with corresponding publications*" [@peng_reproducible_2011, p. 1227]
@@ -223,7 +248,7 @@ magick::image_read(here::here("media/FAIR_nlm_nih.png"))
 magick::image_read(here::here("media/peng_2011_reproducibility_spectrum.png"))
 ```
 
-### Reproducibility iceberg
+## Reproducibility iceberg
 
 - a more detailed description of this continuum is givin in @rodrigues_building_nodate's *reproducibility iceberg* (@fig-rodrigues_2023)
   + our project is currently somewhere in the middle of the iceberg (or will be once it's on the OSF)
@@ -240,13 +265,141 @@ magick::image_read(here::here("media/peng_2011_reproducibility_spectrum.png"))
 magick::image_read(here::here("media/rodrigues_2023_reproducibility_iceberg.png"))
 ```
 
+## Improving code reproducibility
+
+- what structural dependecies do our scripts have?
+  + e.g., filepaths and folder names
+- consider, for example, how we accessed the data from our scripts
+  + did we use `setwd()`?
+  + did we use filepaths?
+  + no, we used the `here()` package within an R project
+  + this meant we used our project root directory as our working directory
+- so, we should, at minimum, also include the `.Rproj` file at the project root directory
+
+## Packages
+
+- included the `.Rproj` file won't mean that the person who downloads it will also have our packages
+  + e.g., they might not have the `here` package, and won't even be able to use our code to load in the data
+- as we discussed some weeks ago, this is what the `renv` package does
+  + we created project library, i.e., a lockfile (`renv.lock`) which is a project
+  
+## Auto-loaders
+
+- we also need to include our `.Rprofile` file
+  + this is our auto-loader
+  + whenever we open the R project, this file will be run
+- it currently contains just `source("renv/activate.R")`
+  + this means: when you open the R project, run the `renv/activate.R` file
+- so, we need to include our `renv/activate.R` file in our OSF repo
+  + including these two will automatically install the relevant version of `renv`
+
+::: {.content-visible when-format="revealjs"}
+## {-}
+:::
+
+::: {.callout-tip}
+## `.Rprofile` in Finder
+
+Some files are usually invisible on a Mac, such as those that start with dot (like `.Rprofile`). This makes it difficult to simply drag and drop the `.Rprofile` file to the OSF. To make such files viewable in Finder, navigate to the relevant project folder and use the keyboard shortcut `Ctrl + Shift + Dot`. These files will then appear greyed out.
+
+```{r}
+#| echo: false
+#| out-width: "100%"
+#| fig-align: center
+#| label: fig-Rprofile
+#| fig-cap: "Use the shortcut `Ctrl + Shift + Dot` to view hidden files on a Mac"
+magick::image_read(here::here("media/finder_Rprofile.png"))
+```
+
+:::
+
+## README
+
+- remember to update your README accordingly!
+  + this can be updated as you add more to your project
+- the project `README.md` will ideally have information that is useful once the project is downloaded in its entirety
+  + e.g., brief info about the project/data
+  + description of the folder/file structure
+  + any info required for reproducibility
+- e.g., anybody who downloads the project will need to run `renv::restore()` to restore your project library (but this will only work if they're using the same R version!)
+  + so be sure to include that info!
+
+::: {.content-visible when-format="revealjs"}
+## REAMDE renv explanation
+:::
+
+For example, you could add something like this:
+
+```{markdown}
+**Reproduce analyses**: Once you open this project, `renv` will automatically be installed. After this is complete, you please run `renv::restore()` to restore the project package library. This will not affect the package versions you have already installed globally on your machine.
+```
+
+
+## OSF repo structure
+
+```{r}
+#| echo: false
+#| out-width: "50%"
+#| fig-align: center
+#| label: fig-osf_download_full_zip
+#| fig-cap: "Your OSF should now look like this"
+magick::image_read(here::here("media/osf_download_full_zip.png"))
+```
+
+## Reproduce your analyses
+
+- again, close all R projects you currently have open
+- now, navigate to the zip you just downloaded
+  + select a Quarto script from `scripts/`
+  + try to run the script, does it run?
+
 # Code review
 
 - a code review refers to when somebody else checks your code
-  + this should also include a check for reproducibility
+  + this checks for reproducibility and validity of your analysis
 - why should we do it?
   + firstly, everybody makes mistakes! increases the chances they'll be fixed
   + tests reproducibility
+
+## Sharing your project
+
+- we need to share our project with others
+  + your project is still private
+  + so you need to produce a link because the URL won't work for non-contributors
+- produce a View-only link
+  + you can do this in Settings (top right)
+  + give an informative name (so you remember why you created this link)
+- if you select `Anonymize`, your name will be removed from the project
+  + this is useful for e.g., blind peer review
+  + but will *not* remove your name from your scripts!
+
+::: {.content-visible when-format="revealjs"}
+## {-}
+:::
+
+::: {.callout-tip}
+# Anonymise your scripts (optional)
+
+If you have a relatively large project with your name at the beginning of multiple scripts, it can be tedious to manually remove it. And you might not be sure you actually took your name out of everything!
+
+This can be used using RStudio's [Global Find](https://posit.co/blog/rstudio-1-3-the-little-things/): 
+
++ press `Cmd+Shift+F`
++ in the pop-up, choose your filepath (for me: the OSF folder *only*) and hit enter
++ then toggle to 'Replace' when a tab pops up next to the Terminal
++ type in your replacement (e.g., `[Anonymized for peer review]`), and hit "Replace All"
+
+**Important**: this will work for HTML and R/Quarto/Rmd scripts, but *not* for PDFs! so you might want to re-render all PDFs. As far as I can tell you have to re-render each PDF. If you're working in a Quarto project (and not an `.Rproj`), then you can use `quarto render subfoldername --to pdf` in the Terminal to re-render only the OSF PDFs. We didn't discuss Quarto projects in this course, however.
+
+After the manuscript is accepted, you can then reverse this step: use the Global Find to replace `[Anonymized for peer review]` with your name! This is why I suggest surrounding the phrase with `[]`, it ensures you don't accidentally replace the string 'anonymized for peer review' elsewhere in your files (e.g., maybe you wrote in some analysis plan "all scripts will be anonymized for peer review", which would then replaced with "all scripts will be Daniela Palleschi" if I had replaced "Anonymized for peer review" with my name).
+:::
+
+## Swapping project URLs
+
+- go to Moodle and add your OSF repo URL 
+- go to someone else's OSF repo and download their project
+  + inspect the project metafiles (e.g., README)
+  + try to reproduce the analyses, can you?
 
 # Session Info {.unnumbered}
 
@@ -260,6 +413,7 @@ print(sessionInfo(), locale = F)
 ---
 nocite: |
   @rodrigues_building_nodate
+  @debruine_intro_2022
 ---
 
 ::: {#refs custom-style="Bibliography"}
