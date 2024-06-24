@@ -1,0 +1,266 @@
+---
+title: "Publishing your analyses"
+subtitle: "Persistant project repositories with the OSF"
+author: "Daniela Palleschi"
+institute: Humboldt-Universität zu Berlin
+lang: en
+date: 2024-06-24
+format: 
+  html:
+    output-file: osf.html
+    number-sections: true
+    toc: true
+    code-overflow: wrap
+    code-tools: true
+    self-contained: true
+  pdf:
+    output-file: osf.pdf
+    toc: true
+    number-sections: true
+    colorlinks: true
+    code-overflow: wrap
+  revealjs:
+    output-file: osf_slides.html
+    include-in-header: ../../mathjax.html # for multiple equation hyperrefs
+    code-overflow: wrap
+    theme: [dark]
+    width: 1600
+    height: 900
+    # chalkboard:
+    #   src: chalkboard.json
+    progress: true
+    scrollable: true
+    # smaller: true
+    slide-number: c/t
+    code-link: true
+    incremental: true
+    # number-sections: true
+    toc: false
+    toc-depth: 2
+    toc-title: 'Overview'
+    navigation-mode: linear
+    controls-layout: bottom-right
+    fig-cap-location: top
+    font-size: 0.6em
+    slide-level: 4
+    self-contained: true
+    title-slide-attributes: 
+      data-background-size: 15%
+      data-background-position: 50% 92%
+    fig-align: center
+    fig-dpi: 300
+editor_options: 
+  chunk_output_type: console
+bibliography: references.bib
+csl: ../../apa.csl
+execute:
+  echo: true
+  eval: true
+---
+
+```{r}
+#| eval: false
+#| echo: false
+# should be run manually
+rbbt::bbt_update_bib(here::here("slides/11-osf/osf.qmd"))
+```
+
+# Learning objectives {.unlisted .unnumbered}
+
+Today we will...
+
+- learn about the OSF
+- see popular uses of the OSF
+
+# Resources {.unnumbered .unlisted}
+
+# Open and FAIR data
+
+::: {.content-visible when-format="revealjs"}
+
+:::: columns
+
+::: {.column width="60%"}
+
+- recall the FAIR principles we discussed at the beginning of term
+   + data should be Findable, Accessible, Interoperable, and Reusable
+   + we're extending these principles to our *analyses* as well
+
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| out-width: "95%"
+#| fig-align: center
+#| label: fig-FAIR-slides
+#| fig-cap: "Source: [National Library of Medicine](https://www.nlm.nih.gov/oet/ed/cde/tutorial/02-300.html) (all rights reserved)"
+magick::image_negate(magick::image_read(here::here("media/FAIR_nlm_nih.png")))
+```
+:::
+::::
+
+:::
+
+- recall the FAIR principles we discussed at the beginning of term
+   + data should be Findable, Accessible, Interoperable, and Reusable
+   + we're extending these principles to our *analyses* as well
+- so far, our data and analyses are stored locally on our machines
+  + we need to share them with a persistant public storage
+  + e.g., GitHub or GitLab, the Open Science Framework (OSF) or Zenodo
+
+```{r}
+#| echo: false
+#| out-width: "50%"
+#| fig-align: center
+#| label: fig-FAIR
+#| fig-cap: "Source: [National Library of Medicine](https://www.nlm.nih.gov/oet/ed/cde/tutorial/02-300.html) (all rights reserved)"
+magick::image_read(here::here("media/FAIR_nlm_nih.png"))
+```
+
+# OSF: Open Science Framework
+
+- we'll use the OSF ([https://osf.io/](https://osf.io/)), which is a user-friendly project management platform
+  + provides persistant URLs
+  + user-friendly (drag-and-drop)
+  + popular for open storage of data, materials, and analyses
+- also offers pre-registration and pre-print storage
+- can also be connected to Dropbox, Google Drive, GitHub and GitLab
+  + but this requires you to have your data and analyses stored on these services, the security of which cannot be guaranteed long-term
+
+- if you don't already have an OSF account, click the 'sign up' button at the top right of the [OSF homepage](https://osf.io/)
+
+## Setting up a project
+
+- we'll start by creating a new OSF project
+
+1. Sign in to the OSF
+2. Click on 'Create new project'
+    + provide a name such as 'Open Science Practices: Reproducibility coursework (SoSe2024)'
+    + **Important**: set storage location to `Germany - Frankfurt`
+    + add some concise description
+3. Navigate to your project and explore the page and tabs
+
+## Private or public
+
+- you should notice near the top right corner a button 'Make Public'
+  + this tells you that your project is currently private
+  + this means nobody can see it but you (or any collaborators you add)
+- typically you would make a repository public when it has been accepted for publication, or if you publish a pre-print
+  + you can also make it public before this, but this is something to discuss with your collaborators
+  
+## Contributors
+
+- contributors are typically co-authors or collaborators for a project
+- click on the 'Contributors' tab (top right of the screen)
+  + click on '+ Add', find my account, and add me as a collaborator with 'Read' rights
+  + make sure the 'Bibliographic Contributor' button is checked
+- go back to the project page, do you see any changes?
+
+# Adding files
+
+- our purpose for creating an OSF project was to share our data and materials
+  + to do this, we navigate to the 'Files' tab
+- rather unfortunately, we can only upload files (i.e., not entire folders)
+  + this has the benefit of meaning our folder structure must be *intentional*
+  + but the drawback that it's quite tedious if you want to share a large project
+
+- let's start but adding our data and scripts
+  + add a folder called `data`
+  + and another folder called `scripts` or `code`, or whatever you prefer
+
+## Adding data
+
+- under `data`, add the three `csv` files you presumably have in the same folder in your project (drag and drop them, or select the big green `+`)
+  + `data_lifetime_pilot`
+  + `tidy_data_lifetime_pilot.csv`
+  + `tidy_data_lifetime_pilot_dictionary.csv`
+
+
+## Adding scripts
+
+- under the `scripts` folder add the scripts where we worked with the data:
+  + our wrangling script
+  + our tables script
+  + our data visualisation script
+  
+### Adding PDF output
+
+- optionally, you can also upload the PDF output produced by each script
+  + this means that anybody viewing your project doesn't have to download the Quarto scripts to see what was done (as they aren't viewable in-browser)
+
+# Reproducibility
+
+- great, so we've shared the code, not just the data!
+  + this has been strongly encouraged in the reproducibility research as of late (e.g., @@laurinavichyute_share_2017)
+  + but is this sufficient to ensure long-term reproducibility?
+- in addition, would the code and data in their current state run on another machine?
+
+- our focus is on sharing data and analyses with the aim of reproducibility
+  + so we have to share what is necessary to make our project reproducible
+- so what should we share?
+
+## R project
+
+- consider, for example, how we accessed the data from our scripts
+  + did we use `setwd()`?
+  + did we use filepaths?
+  + no, we used the `here()` package within an R project
+- so, we should, at minimum, also include the `.Rproj` file at the project root directory
+
+### Reproducibility spectrum
+
+- reproducibility is on a continuum, referred to as the *reproducibility spectrum* in @peng_reproducible_2011 (@fig-peng_2011)
+  + *linked* means "*all data, metadata, and code [is] stored and linked with each other and with corresponding publications*" [@peng_reproducible_2011, p. 1227]
+  + *executable* is not explained, and is more difficult to guarantee long-term as it depends on software versions
+
+```{r}
+#| echo: false
+#| out-width: "100%"
+#| fig-align: center
+#| label: fig-peng_2011
+#| fig-cap: "Source: @peng_reproducible_2011"
+magick::image_read(here::here("media/peng_2011_reproducibility_spectrum.png"))
+```
+
+### Reproducibility iceberg
+
+- a more detailed description of this continuum is givin in @rodrigues_building_nodate's *reproducibility iceberg* (@fig-rodrigues_2023)
+  + our project is currently somewhere in the middle of the iceberg (or will be once it's on the OSF)
+  + we're not using GitHub, with is a developer platform and useful for version control and is beyond the scope of this course
+- importantly, the iceberg explicitly mentioned the `renv` package
+  + this reminds us that we should be *sharing* 
+
+```{r}
+#| echo: false
+#| out-width: "75%"
+#| fig-align: center
+#| label: fig-rodrigues_2023
+#| fig-cap: "Source: @rodrigues_building_nodate"
+magick::image_read(here::here("media/rodrigues_2023_reproducibility_iceberg.png"))
+```
+
+# Code review
+
+- a code review refers to when somebody else checks your code
+  + this should also include a check for reproducibility
+- why should we do it?
+  + firstly, everybody makes mistakes! increases the chances they'll be fixed
+  + tests reproducibility
+
+# Session Info {.unnumbered}
+
+```{r}
+print(sessionInfo(), locale = F)
+```
+
+
+# References {.unlisted .unnumbered visibility="uncounted"}
+
+---
+nocite: |
+  @rodrigues_building_nodate
+---
+
+::: {#refs custom-style="Bibliography"}
+:::

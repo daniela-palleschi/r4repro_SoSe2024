@@ -1,0 +1,259 @@
+---
+title: "Data tidying"
+subtitle: "From wide-to-long and long-to-wide with `tidyr`"
+author: "Daniela Palleschi"
+institute: Humboldt-Universität zu Berlin
+lang: en
+date: 2024-05-14
+format: 
+  html:
+    output-file: tidying.html
+    number-sections: false
+    toc: true
+    code-overflow: wrap
+    code-tools: true
+    self-contained: true
+  pdf:
+    output-file: tidying.pdf
+    toc: true
+    number-sections: false
+    colorlinks: true
+    code-overflow: wrap
+  revealjs:
+    output-file: tidying_slides.html
+    include-in-header: ../../mathjax.html # for multiple equation hyperrefs
+    code-overflow: wrap
+    theme: [dark]
+    width: 1600
+    height: 900
+    # chalkboard:
+    #   src: chalkboard.json
+    progress: true
+    scrollable: true
+    # smaller: true
+    slide-number: c/t
+    code-link: true
+    # logo: logos/hu_logo.png
+    # css: logo.css
+    incremental: true
+    # number-sections: true
+    toc: false
+    toc-depth: 2
+    toc-title: 'Overview'
+    navigation-mode: linear
+    controls-layout: bottom-right
+    fig-cap-location: top
+    font-size: 0.6em
+    slide-level: 4
+    self-contained: true
+    title-slide-attributes: 
+      data-background-image: logos/logos.tif
+      data-background-size: 15%
+      data-background-position: 50% 92%
+    fig-align: center
+    fig-dpi: 300
+editor_options: 
+  chunk_output_type: console
+bibliography: ../../references.bib
+csl: ../../apa.csl
+execute:
+  echo: true
+---
+
+# Learning objectives
+
+Today we will...
+
+- learn how to re-structure our data with the `tidyr` package
+- use `pivot_longer()` to make data longer
+- use `pivot_wider()` to make data wider
+
+# Set-up {.unnumbered}
+
+Load the `tidyverse` package
+
+```{r}
+library(tidyverse)
+```
+
+Load a subset of the `tidy_data_lifetime_pilot.csv` data. For demonstration purposes, we'll only look at two trials from a single participant.
+
+```{r}
+df_lifetime <- readr::read_csv(here::here("data/tidy_data_lifetime_pilot.csv"), 
+                               # for special characters
+                               locale = readr::locale(encoding = "latin1") 
+                               ) |>
+  filter(type=="critical", px=="px5", trial %in% c(3,8)) |> 
+  select(px,trial,region,ff,fp,rpd,tt)
+```
+
+## Inspect data
+
+- we'll be changing the shape of our data, so let's first see how it looks as-is
+
+```{r}
+df_lifetime 
+```
+
+- of importance, we have the following variables:
+  + `region`: contains info on which sentence region the row's reading times correspond to
+  + `ff`: first fixation time, an eye-tracking reading measure
+  + `fp`: first-pass reading time, an eye-tracking reading measure
+  + `rpd`: regression path duration, an eye-tracking reading measure
+  + `tt`: total reading time, an eye-tracking reading measure
+- we see that we have 10 rows x 4 reading time measures = 40 reading time measures
+
+
+# Reshape data
+
+- this is the major step of data tidying
+  + make each column a variable
+  + make each row an observation
+  + make each cell a data point
+- what variable and observation mean will depend on what you want to do, and will change at different steps of your analyses
+
+- you typically want *long* data
+  + but our dataset isn't as long as it could be
+
+- the `tidyr` package from the `tidyverse` has some useful functions to faciliate this: `pivot_longer()` and `pivot_wider()`
+
+## Pivot with `tidyr`
+
+- to pivot (verb): *to turn or rotate on a point, like a hinge. Or a basketball player pivoting back and forth on one foot to protect the ball.* ([vocabulary.com](https://www.vocabulary.com/dictionary/pivot#:~:text=To%20pivot%20is%20to%20turn,foot%20to%20protect%20the%20ball.))
+
+- a pivot (noun): *a fixed point supporting something that turns or balances* ([dictonary.Cambridge.org](https://dictionary.cambridge.org/dictionary/english/pivot))
+
+::: {.content-visible when-format="revealjs"}
+## 
+:::
+
+::: {.content-hidden when-format="pdf"}
+```{r echo = F, fig.align = "center", out.width="100%"}
+#| fig-cap-location: bottom
+#| label: fig-friends
+#| fig-cap: "A memorable scence (to millenials) from Friends where the word 'pivot' is repeatedly used ([YouTube clip](https://www.youtube.com/watch?v=8w3wmQAMoxQ))"
+
+magick::image_read(here::here("media/pivot_friends.jpeg"))
+```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r echo = F, fig.align = "center", out.width="50%"}
+#| fig-cap-location: bottom
+magick::image_read(here::here("media/pivot_friends.jpeg"))
+```
+:::
+
+# Wide-to-long: `pivot_longer()`
+
+- `pivot_longer()` takes wide data and makes it longer
+  + converts headers of columns into values of a new column
+  + combines the values of those columns into a new condensed column
+- takes a few arguments:
+  + `cols`: which columns do we want to combine into a single column?
+  + `names_to`: what should we call the new column containing the previous column names?
+  + `values_to`: what should we call the new column containing the values from the previous columns?
+
+::: {.content-visible when-format="revealjs"}
+## `pivot_longer()`
+:::
+
+- let's take our four reading time measures and list them in a single variable that we'll call `measure`, and put their values in a second variable called `time`
+
+```{r}
+#| output-location: fragment
+df_longer <-
+  df_lifetime |> 
+  pivot_longer(
+  cols = c(ff,fp,rpd,tt), # columns to make long 
+  names_to = "measure", # new column name for headers
+  values_to = "time" # new column name for values
+)
+```
+
+```{r}
+df_longer
+```
+
+
+- now instead of having the four reading time values in a single row across four columns called `ff`, `fp`, `rpd`, and `tt`, we have two columns (`measure` and `time`) which contain the reading time measure names and corresponding reading times
+- we again still have 40 reading time values: 40 rows x 1 column containing reading time values (`time`)
+
+# Long-to-wide: `pivot_wider()`
+
+- `pivot_wider()` takes long data and makes it wider
+- takes a few arguments:
+  + `id_cols`: identifying columns
+  + `names_from`: what should we call the new column containing the previous column names?
+  + `names_prefix`: 
+  + `values_from`: new column values
+
+::: {.content-visible when-format="revealjs"}
+## `pivot_wider()`
+:::
+
+- let's now take our `region` column in `df_longer` and widen it
+  + we'll do this only for `tt` (total reading time)
+  the resultfour reading time measures and list them in a single variable that we'll call `measure`, and put their values in a second variable called `time`
+  
+```{r}
+#| output-location: fragment
+df_longer_wider <-
+  df_longer |> 
+  pivot_wider(
+  id_cols = c(px,trial,measure), # columns to make long 
+  names_from = region, # new column name for headers
+  names_prefix = "reg_", # new column name for values (optional)
+  values_from = time
+) 
+```
+
+```{r}
+df_longer_wider
+```
+
+- again, we have 40 reading time values: 8 rows x 5 variables containing reading time values per region
+
+# Re-structuring, not changing
+
+- in `df_lifetime`, `df_longer`, and `df_longer_wider`, we have 40 reading time values
+  + we have the exact same information in all three versions
+  + we have not removed or changed our data
+  + we have only changed the *structure* of the data
+- this might not always be the case, based on what you're trying to achieve
+  + but it's important to understand that you can find the same information in long versus wide data
+  + the way you structure your data should reflect/facilitate what you're trying to say about your data
+
+::: {.content-visible when-format="revealjs"}
+##
+:::
+
+- look at the three versions of the data below, and ask yourself: what does each one more easily communicate?
+
+```{r}
+df_longer
+```
+
+```{r}
+# only first 15 rows
+df_longer |> head(15)
+```
+
+```{r}
+df_longer_wider
+```
+
+
+
+  
+::: footer
+More reading: [PsyTeachR](https://psyteachr.github.io/ads-v2/08-tidy.html#long-to-wide)
+:::
+
+# Learning objectives 🏁
+
+Today we...
+
+- learned how to re-structure our data with the `tidyr` package ✅
+- used `pivot_longer()` to make data longer ✅
+- used `pivot_wider()` to make data wider ✅

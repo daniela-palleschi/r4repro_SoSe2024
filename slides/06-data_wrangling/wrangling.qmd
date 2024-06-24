@@ -1000,14 +1000,6 @@ df_crit |>
 write.csv(df_lifetime, here::here("data/tidy_data_lifetime_pilot.csv"),row.names=FALSE)
 ```
 
-# Summary
-
--   we saw that the equation for a straight line boils down to its intercept and slope
-
--   we fit our first linear model with a categorical predictor
-
--   next, we'll look at a case with more than one predictor: **multiple** regression
-
 ## Important terms {.unnumbered}
 
 |                             |                                                                              |

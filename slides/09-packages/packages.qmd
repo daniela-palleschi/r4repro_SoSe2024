@@ -68,6 +68,14 @@ execute:
 rbbt::bbt_update_bib(here::here("slides/09-packages/packages.qmd"))
 ```
 
+# Learning objectives {.unlisted .unnumbered}
+
+Today we will...
+
+- learn about R package repositories
+- learn how package dependencies can break code
+- use the `renv` package to create and maintain a project-relative package library
+
 # Resources {.unnumbered .unlisted}
 
 - to read more on today's topic, check out:
@@ -85,8 +93,6 @@ rbbt::bbt_update_bib(here::here("slides/09-packages/packages.qmd"))
 - this is part of the reason for the success and popularity of R
   + someone else has likely created a package for some problem or need you have
 
-
-
 ## CRAN packages
 
 - the Comprehensive R Archive Network: R's central software repository
@@ -95,24 +101,6 @@ rbbt::bbt_update_bib(here::here("slides/09-packages/packages.qmd"))
 - for a package to be included in the CRAN, it must go through a lot of tests and checks
   + any updates or changes must again be reviewed before being added to CRAN
 - CRAN packages can be installed using `install.packages()`, as we've been doing
-
-## Developer packages
-
-- often hosted on GitHub or GitLab, where packages are typically developed before being reviewed and added to the CRAN
-  + benefit: you can make whatever you changes to your package that you like without having to pass a review on the CRAN
-- since CRAN packages are often developed on GH or GL, pre-release (beta) versions will often be available on a GH repo
-- packages/package versions on GH cannot be installed via `install.packages()`
-  + we'll see later how to do this
-  
-## Dependencies
-
-- some packages are dependent on specific versions of other packages
-  + if so, you will be prompted during installation to install these dependencies
-  + but beware: sometimes this overwrites an existing package version you already have, which can break code that was written with this older version
-- this is especially true because, as our projects are currently set up, we have one global package version on our computer
-  + so analyses we ran 3 years ago would've used older versions of packages
-  + when we update these packages for current analyses, this might disrupt the code from 3 years ago
-- we'll see one (partial) solution for this problem soon
 
 ::: {.content-visible when-format="revealjs"}
 ##
@@ -152,6 +140,24 @@ The additional benefit of `p_load()` is that, if you don't actually have one of 
 
 :::
 :::
+
+## Developer packages
+
+- often hosted on GitHub or GitLab, where packages are typically developed before being reviewed and added to the CRAN
+  + benefit: you can make whatever you changes to your package that you like without having to pass a review on the CRAN
+- since CRAN packages are often developed on GH or GL, pre-release (beta) versions will often be available on a GH repo
+- packages/package versions on GH cannot be installed via `install.packages()`
+  + we'll see later how to do this
+  
+## Dependencies
+
+- some packages are dependent on specific versions of other packages
+  + if so, you will be prompted during installation to install these dependencies
+  + but beware: sometimes this overwrites an existing package version you already have, which can break code that was written with this older version
+- this is especially true because, as our projects are currently set up, we have one global package version on our computer
+  + so analyses we ran 3 years ago would've used older versions of packages
+  + when we update these packages for current analyses, this might disrupt the code from 3 years ago
+- we'll see one (partial) solution for this problem soon
 
 # Package versions
 
@@ -499,6 +505,14 @@ renv::restore()
 #| eval: true
 sessionInfo()
 ```
+
+# Learning objectives {.unlisted .unnumbered}
+
+Today we will...
+
+- learn about R package repositories
+- learn how package dependencies can break code
+- use the `renv` package to create and maintain a project-relative package library
 
 # References {.unlisted .unnumbered visibility="uncounted"}
 
