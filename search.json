@@ -4,7 +4,7 @@
     "href": "teaching_notes/teaching_notes.html",
     "title": "Teaching notes",
     "section": "",
-    "text": "Week 1: Open Science\n\nggplot2::ggplot(iris)\n\n\n\n\n\n\n\nFigure 1\n\n\n\n\n\n\n\nWeek 2: Replication Crisis\n\n\nWeek 3: Reproducibility\n\ncould introduce idea of the spectrum (Peng, 2011) or iceberg (Rodrigues, 2023)\n\n\n\nWeek 4: Project-oriented workflow with R Projects\n\n\nWeek 5: Literate programming\n\nshould also introduce modular data analysis by name (mentioned in Bowers & Voors, 2016; from Nagler, 1995)\n\nthe concept was introduced, but just name it\n\n\n\n\nWeek 6:\n\n\nWeek 7:\n\n\nWeek 8:\n\n\nWeek 9: Package management\n\n\n\n\n\n\n\n\n\n\nReferences\n\nBowers, J., & Voors, M. (2016). How to improve your relationship with your future self. Revista de Ciencia Política (Santiago), 36(3), 829–848. https://doi.org/10.4067/S0718-090X2016000300011\n\n\nNagler, J. (1995). Coding Style and Good Computing Practices.\n\n\nPeng, R. D. (2011). Reproducible Research in Computational Science. Science, 334(6060), 1226–1227. https://doi.org/10.1126/science.1213847\n\n\nRodrigues, B. (2023). Building reproducible analytical pipelines with R."
+    "text": "Week 1: Open Science\n\nggplot2::ggplot(iris)\n\n\n\n\n\n\n\nFigure 1\n\n\n\n\n\n\n\nWeek 2: Replication Crisis\n\n\nWeek 3: Reproducibility\n\ncould introduce idea of the spectrum (Peng, 2011) or iceberg (Rodrigues, 2023)\n\n\n\nWeek 4: Project-oriented workflow with R Projects\n\ndiscuss Jenny Bryan’s naming things slides\n\nand/or her How to Name Files like a Normie\n\nreference Danielle Navarro’s slides on project structure\n\n\n\nWeek 5: Literate programming\n\nshould also introduce modular data analysis by name (mentioned in Bowers & Voors, 2016; from Nagler, 1995)\n\nthe concept was introduced, but just name it\n\n\n\n\nWeek 6:\n\n\nWeek 7:\n\n\nWeek 8:\n\n\nWeek 9: Package management\n\n\nWeek 10: writing (papaja)\n\n\nWeek 11: OSF + Code Review\n\nmaybe make a check list for the code review?\n\n\n\n\n\n\n\n\n\n\n\nReferences\n\nBowers, J., & Voors, M. (2016). How to improve your relationship with your future self. Revista de Ciencia Política (Santiago), 36(3), 829–848. https://doi.org/10.4067/S0718-090X2016000300011\n\n\nNagler, J. (1995). Coding Style and Good Computing Practices.\n\n\nPeng, R. D. (2011). Reproducible Research in Computational Science. Science, 334(6060), 1226–1227. https://doi.org/10.1126/science.1213847\n\n\nRodrigues, B. (2023). Building reproducible analytical pipelines with R."
   },
   {
     "objectID": "slides/06-data_wrangling/tidying.html",
@@ -709,6 +709,640 @@
     "text": "Registered Report\n\nlevel: Difficult\n\nsubmitting the introduction, methods, analysis plan to a journal before data collection\n\nif accepted: publication regardless of the result\n\n\na more detailed pre-registration, often with fully written sections\n\nmuch more time consuming before data collection can begin\n\njournal acceptance can take months"
   },
   {
+    "objectID": "slides/09-packages/packages.html",
+    "href": "slides/09-packages/packages.html",
+    "title": "Package management",
+    "section": "",
+    "text": "Today we will…\n\nlearn about R package repositories\nlearn how package dependencies can break code\nuse the renv package to create and maintain a project-relative package library",
+    "crumbs": [
+      "D. Palleschi",
+      "Package management"
+    ]
+  },
+  {
+    "objectID": "slides/09-packages/packages.html#cran-packages",
+    "href": "slides/09-packages/packages.html#cran-packages",
+    "title": "Package management",
+    "section": "1.1 CRAN packages",
+    "text": "1.1 CRAN packages\n\nthe Comprehensive R Archive Network: R’s central software repository\n\ncurrently 20,888 available!\n\nan archive of the most recent package versions\nfor a package to be included in the CRAN, it must go through a lot of tests and checks\n\nany updates or changes must again be reviewed before being added to CRAN\n\nCRAN packages can be installed using install.packages(), as we’ve been doing\n\n\n\n\n\n\n\npacman package (optional)\n\n\n\n\n\na package management tool\nwe’ll use the p_load() function to replace install.packages() and library() in our worksflow\n\ntakes a list of packages, and checks if each package is installed already\nif yes, the package is loaded (as with library())\nif no, the package is installed (as with install.packages()) and then loaded (as with library())\n\nonly works with CRAN packages (which is all we have for now anyway), although pacman has a function for developer packages (which we’ll talk about later)\n\nTo get started: install pacman (install.packages(\"pacman\")). Then, you can load in your packages using pacman::p_load(), or with a long list of library() calls like we’ve previously done (you see why I prefer p_load()!).\n\n\n\n\n\nLoading packages with `pacman::p_load()`\n\npacman::p_load(tidyverse, here, janitor)\n\n\n\n\n\n\nLoading packages with `library()`\n\nlibrary(tidyverse)\nlibrary(here)\nlibrary(janitor)\n\n\n\n\nThe additional benefit of p_load() is that, if you don’t actually have one of the packages installed it will automatically be installed and then loaded. With library() you would instead get an error message.",
+    "crumbs": [
+      "D. Palleschi",
+      "Package management"
+    ]
+  },
+  {
+    "objectID": "slides/09-packages/packages.html#developer-packages",
+    "href": "slides/09-packages/packages.html#developer-packages",
+    "title": "Package management",
+    "section": "1.2 Developer packages",
+    "text": "1.2 Developer packages\n\noften hosted on GitHub or GitLab, where packages are typically developed before being reviewed and added to the CRAN\n\nbenefit: you can make whatever you changes to your package that you like without having to pass a review on the CRAN\n\nsince CRAN packages are often developed on GH or GL, pre-release (beta) versions will often be available on a GH repo\npackages/package versions on GH cannot be installed via install.packages()\n\nwe’ll see later how to do this",
+    "crumbs": [
+      "D. Palleschi",
+      "Package management"
+    ]
+  },
+  {
+    "objectID": "slides/09-packages/packages.html#dependencies",
+    "href": "slides/09-packages/packages.html#dependencies",
+    "title": "Package management",
+    "section": "1.3 Dependencies",
+    "text": "1.3 Dependencies\n\nsome packages are dependent on specific versions of other packages\n\nif so, you will be prompted during installation to install these dependencies\nbut beware: sometimes this overwrites an existing package version you already have, which can break code that was written with this older version\n\nthis is especially true because, as our projects are currently set up, we have one global package version on our computer\n\nso analyses we ran 3 years ago would’ve used older versions of packages\nwhen we update these packages for current analyses, this might disrupt the code from 3 years ago\n\nwe’ll see one (partial) solution for this problem soon",
+    "crumbs": [
+      "D. Palleschi",
+      "Package management"
+    ]
+  },
+  {
+    "objectID": "slides/09-packages/packages.html#updating-packages",
+    "href": "slides/09-packages/packages.html#updating-packages",
+    "title": "Package management",
+    "section": "2.1 Updating packages",
+    "text": "2.1 Updating packages\n\nto check if a package needs updating, you can:\n\ngo to Tools &gt; Check for package updates, or\nrun update.packages()\n\neach will tell you which packages can be updated to which versions\n\nand give you the option of updating these packages",
+    "crumbs": [
+      "D. Palleschi",
+      "Package management"
+    ]
+  },
+  {
+    "objectID": "slides/09-packages/packages.html#package-library",
+    "href": "slides/09-packages/packages.html#package-library",
+    "title": "Package management",
+    "section": "2.2 Package library",
+    "text": "2.2 Package library\n\nwhere do all these installed packages go?\n\na folder that contains all the packages, called a library\n\nto find out where this (global) package library is, run .libPaths()\n\n\n.libPaths()\n\n\nthe output should currently produce a single file path, something like:\n\n\n&gt; .libPaths()\n[1] \"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library\"\n\n\nthis is the location of your global package library",
+    "crumbs": [
+      "D. Palleschi",
+      "Package management"
+    ]
+  },
+  {
+    "objectID": "slides/09-packages/packages.html#package-versions-and-reproducibility",
+    "href": "slides/09-packages/packages.html#package-versions-and-reproducibility",
+    "title": "Package management",
+    "section": "2.3 Package versions and reproducibility",
+    "text": "2.3 Package versions and reproducibility\n\nwe’ve seen that package versions and dependencies can easily break our existing code\nthis means that older projects that were built using previous package versions won’t be able to run if we update these packages in our global package library\n\nalso a problem in the future: our current code will depend on the package versions we’re using today\n\nwe need a project-relative package library that is independent of the global library\n\nwe’ll use the renv package to do this",
+    "crumbs": [
+      "D. Palleschi",
+      "Package management"
+    ]
+  },
+  {
+    "objectID": "slides/09-packages/packages.html#limits-of-renv",
+    "href": "slides/09-packages/packages.html#limits-of-renv",
+    "title": "Package management",
+    "section": "3.1 Limits of renv",
+    "text": "3.1 Limits of renv\nrenv…\n\n\n…can\n\nkeep track of packages and their versions\ncreate a project-specific library per R version\nautomatically load/install these package versions\n\n\n…cannot\n\nmake a project reproducible across all computational environments\nload/install package versions that are incompatible with current R versions or computational environments\nguarantee full long-term reproduciblity",
+    "crumbs": [
+      "D. Palleschi",
+      "Package management"
+    ]
+  },
+  {
+    "objectID": "slides/09-packages/packages.html#renv-workflow",
+    "href": "slides/09-packages/packages.html#renv-workflow",
+    "title": "Package management",
+    "section": "3.2 renv workflow",
+    "text": "3.2 renv workflow\n\nFigure 1 visualises a project workflow with renv\nnext we’ll see how we use these functions to set-up and maintain a project-specific package library\n\n\n\n\n\n\n\n\n\nFigure 1: Source: CRAN vignette ‘Introduction to renv’ (all rights reserved)",
+    "crumbs": [
+      "D. Palleschi",
+      "Package management"
+    ]
+  },
+  {
+    "objectID": "slides/09-packages/packages.html#new-files",
+    "href": "slides/09-packages/packages.html#new-files",
+    "title": "Package management",
+    "section": "4.1 New files",
+    "text": "4.1 New files\n\nrenv::init() creates three new files or directories\n\nrenv.lock\nrenv/\n.Rprofile\n\nexplore these files/folders and see if you can figure out what they contain",
+    "crumbs": [
+      "D. Palleschi",
+      "Package management"
+    ]
+  },
+  {
+    "objectID": "slides/09-packages/packages.html#renv.lock",
+    "href": "slides/09-packages/packages.html#renv.lock",
+    "title": "Package management",
+    "section": "4.2 renv.lock",
+    "text": "4.2 renv.lock\n\ncontains metadata about the packages and their versions that you have installed\n\nthis is enough metadata to re-install these package versions on a new machine\n\ntwo main components:\n\nR: info on R version and list of repositories where packages were installed from\nPackages: a record per package with necessary info for re-installation",
+    "crumbs": [
+      "D. Palleschi",
+      "Package management"
+    ]
+  },
+  {
+    "objectID": "slides/09-packages/packages.html#renv-1",
+    "href": "slides/09-packages/packages.html#renv-1",
+    "title": "Package management",
+    "section": "4.3 renv/",
+    "text": "4.3 renv/\n\nimportantly, contains your project-relative library/\n\nthis is instead of using the one library on your computer\n\nprovides us with “isolation”: the package versions used in an R Project is independent of the global library\n\nin other words, different R Projects can use different package versions\nupdating packages globally, or in one project, will not affect other project libraries",
+    "crumbs": [
+      "D. Palleschi",
+      "Package management"
+    ]
+  },
+  {
+    "objectID": "slides/09-packages/packages.html#rprofile",
+    "href": "slides/09-packages/packages.html#rprofile",
+    "title": "Package management",
+    "section": "4.4 .RProfile",
+    "text": "4.4 .RProfile\n\nruns whenver you (re-)start your R Project\nat this point, should contain a single line:\n\n\nsource(\"renv/activate.R\")\n\n\nif you go to this R script, you’ll send a lot of code\n\nthis essentially loads in your project library",
+    "crumbs": [
+      "D. Palleschi",
+      "Package management"
+    ]
+  },
+  {
+    "objectID": "slides/09-packages/packages.html#project-library",
+    "href": "slides/09-packages/packages.html#project-library",
+    "title": "Package management",
+    "section": "4.5 Project library",
+    "text": "4.5 Project library\n\nnow if we re-run .libPaths(), we should see our project library\n\n\n\n\nRun in the Console\n\n.libPaths()\n\n\n\n&gt; .libPaths()\n[1] \"/Users/danielapalleschi/Documents/IdSL/Teaching/SoSe24/M.A./r4repro_SoSe2024/renv/library/macos/R-4.4/aarch64-apple-darwin20\"\n[2] \"/Users/danielapalleschi/Library/Caches/org.R-project.R/R/renv/sandbox/macos/R-4.4/aarch64-apple-darwin20/f7156815\"  \n\n\n[1] is the local project library path\n[2] is the path to a global package cache that renv maintains so that you don’t repeatedly download packages to your machine for each project library\n\ne.g., if we already have ggplot2 installed globally on our machine, whenever we want to add it to a project library we don’t need to re-install it entirely from the CRAN (unless we want a different package version)",
+    "crumbs": [
+      "D. Palleschi",
+      "Package management"
+    ]
+  },
+  {
+    "objectID": "slides/09-packages/packages.html#installing-a-new-package",
+    "href": "slides/09-packages/packages.html#installing-a-new-package",
+    "title": "Package management",
+    "section": "5.1 Installing a new package",
+    "text": "5.1 Installing a new package\n\nlet’s also install a package I’m confident you don’t already have on your machine (as you might’ve already worked with lme4 in other classes)\n\n[brms] for Bayesian regression models using Stan\n\n\n\n\nCode\ninstall.packages(\"brms\")\nrenv::install(\"brms\")\n\n\n\nand if we want a specific package version:\n\n\nrenv::install(\"brms@2.19.0\")",
+    "crumbs": [
+      "D. Palleschi",
+      "Package management"
+    ]
+  },
+  {
+    "objectID": "slides/09-packages/packages.html#installing-developer-packages",
+    "href": "slides/09-packages/packages.html#installing-developer-packages",
+    "title": "Package management",
+    "section": "5.2 Installing developer packages",
+    "text": "5.2 Installing developer packages\n\nnot all packages are available on the CRAN\n\nwe can install developer packages from GitHub or GitLab using, e.g., the install_github() function from either the remotes or devtools package (both are very common)\n\n\n\nremotes::install_github(\"paul-buerkner/brms\")\ndevtools::install_github(\"paul-buerkner/brms\")\n\n\nor we can use renv::install()\n\n\n# most recent version\nrenv::install(\"paul-buerkner/brms\")\n\n\n# a specific previous version, for which you'll need the commit ID\nrenv::install(\"paul-buerkner/brms@db6ddde90ba533cb3942bc5a62b03803773b9844\")",
+    "crumbs": [
+      "D. Palleschi",
+      "Package management"
+    ]
+  },
+  {
+    "objectID": "slides/09-packages/packages.html#updating-renv.lock-file",
+    "href": "slides/09-packages/packages.html#updating-renv.lock-file",
+    "title": "Package management",
+    "section": "6.1 Updating renv.lock file",
+    "text": "6.1 Updating renv.lock file\n\nto update the lockfile and library, simply run:\n\n\nrenv::snapshot()\n\n\nyou’ll be given a list of changes to be made and asked if you want to proceed\n\nif not problems are mentioned, then you can go ahead",
+    "crumbs": [
+      "D. Palleschi",
+      "Package management"
+    ]
+  },
+  {
+    "objectID": "slides/09-packages/packages_slides.html#cran-packages",
+    "href": "slides/09-packages/packages_slides.html#cran-packages",
+    "title": "Package management",
+    "section": "CRAN packages",
+    "text": "CRAN packages\n\nthe Comprehensive R Archive Network: R’s central software repository\n\ncurrently 20,888 available!\n\n\nan archive of the most recent package versions\nfor a package to be included in the CRAN, it must go through a lot of tests and checks\n\nany updates or changes must again be reviewed before being added to CRAN\n\n\nCRAN packages can be installed using install.packages(), as we’ve been doing"
+  },
+  {
+    "objectID": "slides/09-packages/packages_slides.html#section",
+    "href": "slides/09-packages/packages_slides.html#section",
+    "title": "Package management",
+    "section": "",
+    "text": "pacman package (optional)\n\n\n\n\na package management tool\nwe’ll use the p_load() function to replace install.packages() and library() in our worksflow\n\ntakes a list of packages, and checks if each package is installed already\nif yes, the package is loaded (as with library())\nif no, the package is installed (as with install.packages()) and then loaded (as with library())\n\n\nonly works with CRAN packages (which is all we have for now anyway), although pacman has a function for developer packages (which we’ll talk about later)\n\nTo get started: install pacman (install.packages(\"pacman\")). Then, you can load in your packages using pacman::p_load(), or with a long list of library() calls like we’ve previously done (you see why I prefer p_load()!).\n\n\n\n\n\nLoading packages with `pacman::p_load()`\n\npacman::p_load(tidyverse, here, janitor)\n\n\n\n\n\n\nLoading packages with `library()`\n\nlibrary(tidyverse)\nlibrary(here)\nlibrary(janitor)\n\n\n\n\nThe additional benefit of p_load() is that, if you don’t actually have one of the packages installed it will automatically be installed and then loaded. With library() you would instead get an error message."
+  },
+  {
+    "objectID": "slides/09-packages/packages_slides.html#developer-packages",
+    "href": "slides/09-packages/packages_slides.html#developer-packages",
+    "title": "Package management",
+    "section": "Developer packages",
+    "text": "Developer packages\n\noften hosted on GitHub or GitLab, where packages are typically developed before being reviewed and added to the CRAN\n\nbenefit: you can make whatever you changes to your package that you like without having to pass a review on the CRAN\n\n\nsince CRAN packages are often developed on GH or GL, pre-release (beta) versions will often be available on a GH repo\npackages/package versions on GH cannot be installed via install.packages()\n\nwe’ll see later how to do this"
+  },
+  {
+    "objectID": "slides/09-packages/packages_slides.html#dependencies",
+    "href": "slides/09-packages/packages_slides.html#dependencies",
+    "title": "Package management",
+    "section": "Dependencies",
+    "text": "Dependencies\n\nsome packages are dependent on specific versions of other packages\n\nif so, you will be prompted during installation to install these dependencies\nbut beware: sometimes this overwrites an existing package version you already have, which can break code that was written with this older version\n\n\nthis is especially true because, as our projects are currently set up, we have one global package version on our computer\n\nso analyses we ran 3 years ago would’ve used older versions of packages\nwhen we update these packages for current analyses, this might disrupt the code from 3 years ago\n\n\nwe’ll see one (partial) solution for this problem soon"
+  },
+  {
+    "objectID": "slides/09-packages/packages_slides.html#updating-packages",
+    "href": "slides/09-packages/packages_slides.html#updating-packages",
+    "title": "Package management",
+    "section": "Updating packages",
+    "text": "Updating packages\n\nto check if a package needs updating, you can:\n\ngo to Tools &gt; Check for package updates, or\nrun update.packages()\n\n\n\neach will tell you which packages can be updated to which versions\n\nand give you the option of updating these packages"
+  },
+  {
+    "objectID": "slides/09-packages/packages_slides.html#package-library",
+    "href": "slides/09-packages/packages_slides.html#package-library",
+    "title": "Package management",
+    "section": "Package library",
+    "text": "Package library\n\nwhere do all these installed packages go?\n\na folder that contains all the packages, called a library\n\n\nto find out where this (global) package library is, run .libPaths()\n\n\n\n.libPaths()\n\n\nthe output should currently produce a single file path, something like:\n\n\n&gt; .libPaths()\n[1] \"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library\"\n\n\nthis is the location of your global package library"
+  },
+  {
+    "objectID": "slides/09-packages/packages_slides.html#package-versions-and-reproducibility",
+    "href": "slides/09-packages/packages_slides.html#package-versions-and-reproducibility",
+    "title": "Package management",
+    "section": "Package versions and reproducibility",
+    "text": "Package versions and reproducibility\n\nwe’ve seen that package versions and dependencies can easily break our existing code\nthis means that older projects that were built using previous package versions won’t be able to run if we update these packages in our global package library\n\nalso a problem in the future: our current code will depend on the package versions we’re using today\n\n\nwe need a project-relative package library that is independent of the global library\n\nwe’ll use the renv package to do this"
+  },
+  {
+    "objectID": "slides/09-packages/packages_slides.html#limits-of-renv",
+    "href": "slides/09-packages/packages_slides.html#limits-of-renv",
+    "title": "Package management",
+    "section": "Limits of renv\n",
+    "text": "Limits of renv\n\nrenv…\n\n\n…can\n\nkeep track of packages and their versions\ncreate a project-specific library per R version\nautomatically load/install these package versions\n\n\n…cannot\n\nmake a project reproducible across all computational environments\nload/install package versions that are incompatible with current R versions or computational environments\nguarantee full long-term reproduciblity"
+  },
+  {
+    "objectID": "slides/09-packages/packages_slides.html#renv-workflow",
+    "href": "slides/09-packages/packages_slides.html#renv-workflow",
+    "title": "Package management",
+    "section": "\nrenv workflow",
+    "text": "renv workflow\n\n\nFigure 1 visualises a project workflow with renv\n\nnext we’ll see how we use these functions to set-up and maintain a project-specific package library\n\n\n\nFigure 1: Source: CRAN vignette ‘Introduction to renv’ (all rights reserved)"
+  },
+  {
+    "objectID": "slides/09-packages/packages_slides.html#section-1",
+    "href": "slides/09-packages/packages_slides.html#section-1",
+    "title": "Package management",
+    "section": "",
+    "text": "you should see something like this in the Console:\n\n\n- Linking packages into the project library ... [137/137] Done!\n- Resolving missing dependencies ... \n# Installing packages --------------------------------------------------------\nThe following package(s) will be updated in the lockfile:\n\n# CRAN -----------------------------------------------------------------------\n[long list of packages and their versions]\n\nThe version of R recorded in the lockfile will be updated:\n- R               [* -&gt; 4.4.0]\n\n- Lockfile written to \"~/Documents/IdSL/Teaching/SoSe24/M.A./r4repro_student/renv.lock\".\n\nRestarting R session...\n\n- Project '~/Documents/IdSL/Teaching/SoSe24/M.A./r4repro_student' loaded. [renv 1.0.7]"
+  },
+  {
+    "objectID": "slides/09-packages/packages_slides.html#new-files",
+    "href": "slides/09-packages/packages_slides.html#new-files",
+    "title": "Package management",
+    "section": "New files",
+    "text": "New files\n\n\nrenv::init() creates three new files or directories\n\nrenv.lock\nrenv/\n.Rprofile\n\n\nexplore these files/folders and see if you can figure out what they contain"
+  },
+  {
+    "objectID": "slides/09-packages/packages_slides.html#renv.lock",
+    "href": "slides/09-packages/packages_slides.html#renv.lock",
+    "title": "Package management",
+    "section": "renv.lock",
+    "text": "renv.lock\n\ncontains metadata about the packages and their versions that you have installed\n\nthis is enough metadata to re-install these package versions on a new machine\n\n\ntwo main components:\n\n\nR: info on R version and list of repositories where packages were installed from\n\nPackages: a record per package with necessary info for re-installation"
+  },
+  {
+    "objectID": "slides/09-packages/packages_slides.html#renv-1",
+    "href": "slides/09-packages/packages_slides.html#renv-1",
+    "title": "Package management",
+    "section": "renv/",
+    "text": "renv/\n\nimportantly, contains your project-relative library/\n\nthis is instead of using the one library on your computer\n\n\nprovides us with “isolation”: the package versions used in an R Project is independent of the global library\n\nin other words, different R Projects can use different package versions\nupdating packages globally, or in one project, will not affect other project libraries"
+  },
+  {
+    "objectID": "slides/09-packages/packages_slides.html#rprofile",
+    "href": "slides/09-packages/packages_slides.html#rprofile",
+    "title": "Package management",
+    "section": ".RProfile",
+    "text": ".RProfile\n\nruns whenver you (re-)start your R Project\nat this point, should contain a single line:\n\n\nsource(\"renv/activate.R\")\n\n\nif you go to this R script, you’ll send a lot of code\n\nthis essentially loads in your project library"
+  },
+  {
+    "objectID": "slides/09-packages/packages_slides.html#project-library",
+    "href": "slides/09-packages/packages_slides.html#project-library",
+    "title": "Package management",
+    "section": "Project library",
+    "text": "Project library\n\nnow if we re-run .libPaths(), we should see our project library\n\n\n\n\nRun in the Console\n\n.libPaths()\n\n\n\n&gt; .libPaths()\n[1] \"/Users/danielapalleschi/Documents/IdSL/Teaching/SoSe24/M.A./r4repro_SoSe2024/renv/library/macos/R-4.4/aarch64-apple-darwin20\"\n[2] \"/Users/danielapalleschi/Library/Caches/org.R-project.R/R/renv/sandbox/macos/R-4.4/aarch64-apple-darwin20/f7156815\"  \n\n\n\n[1] is the local project library path\n\n[2] is the path to a global package cache that renv maintains so that you don’t repeatedly download packages to your machine for each project library\n\ne.g., if we already have ggplot2 installed globally on our machine, whenever we want to add it to a project library we don’t need to re-install it entirely from the CRAN (unless we want a different package version)"
+  },
+  {
+    "objectID": "slides/09-packages/packages_slides.html#installing-a-new-package",
+    "href": "slides/09-packages/packages_slides.html#installing-a-new-package",
+    "title": "Package management",
+    "section": "Installing a new package",
+    "text": "Installing a new package\n\nlet’s also install a package I’m confident you don’t already have on your machine (as you might’ve already worked with lme4 in other classes)\n\n[brms] for Bayesian regression models using Stan\n\n\n\n\nCodeinstall.packages(\"brms\")\nrenv::install(\"brms\")\n\n\n\nand if we want a specific package version:\n\n\nrenv::install(\"brms@2.19.0\")"
+  },
+  {
+    "objectID": "slides/09-packages/packages_slides.html#installing-developer-packages",
+    "href": "slides/09-packages/packages_slides.html#installing-developer-packages",
+    "title": "Package management",
+    "section": "Installing developer packages",
+    "text": "Installing developer packages\n\nnot all packages are available on the CRAN\n\nwe can install developer packages from GitHub or GitLab using, e.g., the install_github() function from either the remotes or devtools package (both are very common)\n\n\n\n\nremotes::install_github(\"paul-buerkner/brms\")\ndevtools::install_github(\"paul-buerkner/brms\")\n\n\n\nor we can use renv::install()\n\n\n\n# most recent version\nrenv::install(\"paul-buerkner/brms\")\n\n\n# a specific previous version, for which you'll need the commit ID\nrenv::install(\"paul-buerkner/brms@db6ddde90ba533cb3942bc5a62b03803773b9844\")"
+  },
+  {
+    "objectID": "slides/09-packages/packages_slides.html#updating-renv.lock-file",
+    "href": "slides/09-packages/packages_slides.html#updating-renv.lock-file",
+    "title": "Package management",
+    "section": "Updating renv.lock file",
+    "text": "Updating renv.lock file\n\nto update the lockfile and library, simply run:\n\n\nrenv::snapshot()\n\n\nyou’ll be given a list of changes to be made and asked if you want to proceed\n\nif not problems are mentioned, then you can go ahead"
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#variable-names",
+    "href": "slides/07-tables/slides-data_viz.html#variable-names",
+    "title": "Data communication with tables",
+    "section": "Variable names",
+    "text": "Variable names\n\nwe can list the names of all variables in a dataset using names()\n\n\n\nnames(df_lifetime)\n\n\n\n [1] \"px\"            \"trial\"         \"region\"        \"region_n\"     \n [5] \"region_text\"   \"eye\"           \"ff\"            \"fp\"           \n [9] \"rpd\"           \"tt\"            \"fix_count\"     \"reg_in\"       \n[13] \"reg_in_count\"  \"reg_out\"       \"reg_out_count\" \"rt\"           \n[17] \"bio\"           \"critical\"      \"gender\"        \"item_id\"      \n[21] \"list\"          \"match\"         \"condition\"     \"name\"         \n[25] \"lifetime\"      \"tense\"         \"type\"          \"yes_press\"    \n[29] \"KeyPress\"      \"accept\"        \"accuracy\"      \"px_accuracy\"  \n\n\n\nbut we need to be able to put these names into a single column\n\nwhere each row contains one variable name\nand other columns contain information like description and data class"
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#section",
+    "href": "slides/07-tables/slides-data_viz.html#section",
+    "title": "Data communication with tables",
+    "section": "",
+    "text": "copy the output of dput(coldesc) and assign it to an object\n\ntip: you can reformat the code by highlighting it and using Cmd/Ctrl+Shift+A\n\nor in the menu bar: Code &gt; Reformat Code\n\n\n\n\nreplace c() with tibble() to create a dataframe\n\nand fill in the quotations with description of the data\n\n\n\n\ndict_lifetime &lt;- tibble(\n  px = \"participant ID (factor)\",\n  trial = \"trial number (ordered factor)\",\n  region = \"sentence region (order factor)\",\n  region_n = \"numerical representation of sentence region (ordered factor)\",\n  region_text = \"text presented in the region (string)\",\n  eye = \"which eye was tracking: right or left (binomial)\",\n  ff = \"first-fixation times in milliseconds (continuous, values can be 0&lt;)\",\n  fp = \"first-pass reading times in milliseconds (numeric, values can be 0&lt;)\",\n  rpd = \"regression-path duration in milliseconds (numeric, values can be 0&lt;)\",\n  tt = \"total reading time in milliseconds (numeric, values can be 0&lt;)\",\n  fix_count = \"number of total fixations in the region (count)\",\n  reg_in = \"whether of a regression was made into the regions (binomial: 0 = no, 1 = yes)\",\n  reg_in_count = \"number of fixations into the region (count)\",\n  reg_out = \"whether of a regression was made out of the regions (binomial: 0 = no, 1 = yes)\",\n  reg_out_count = \"number of fixations out of the region (count)\",\n  rt = \"reaction time from critical sentence presentation to button press (continuous, values can be 0&lt;)\",\n  bio = \"lifetime biography context sentence (string)\",\n  critical = \"critical sentence (string)\",\n  gender = \"gender of stimulus subject (binomial: male, female)\",\n  item_id = \"item identification number (critical items: 1-80)\",\n  list = \"experimental list version: base list version (1-4) and whether the yes-button was coded as 4 or 5 (factor: 14, 15, 24, 25, 34, 35, 44, 45)\",\n  match = \"whether the referent-lifetime was congruent with tense\",\n  condition = \"condition: lifetime (dead, alive) + tense (PP, SF) (factor)\",\n  name = \"name of stimulis subject (string)\",\n  lifetime = \"lifetime status of stimulus subject at time of experiment (binomial: dead, alive)\",\n  tense = \"tense used in critical sentence (binomail: PP = present perfect, SF = simple future)\",\n  type = \"sentence type (factor with one level: critical)\",\n  yes_press = \"corresponding coding for the yes-button on Cedrus response box (4 = left button, 5 = right button)\",\n  KeyPress = \"key that was pressed (4 = left button, 5 = right button)\",\n  accept = \"whether the item was accepted, i.e., whether KeyPress equalled yes_press\",\n  accuracy = \"whether the acceptance was accurate (reject for a mismatch, accept for a match)\",\n  px_accuracy = \"participant's overall accuracy score\"\n)"
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#section-1",
+    "href": "slides/07-tables/slides-data_viz.html#section-1",
+    "title": "Data communication with tables",
+    "section": "",
+    "text": "but dict_lifetime doesn’t have the shape we want\n\neach variable name is a column name\nand its description is in the first row\n\n\n\n\ndict_lifetime\n\n# A tibble: 1 × 32\n  px             trial region region_n region_text eye   ff    fp    rpd   tt   \n  &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;\n1 participant I… tria… sente… numeric… text prese… whic… firs… firs… regr… tota…\n# ℹ 22 more variables: fix_count &lt;chr&gt;, reg_in &lt;chr&gt;, reg_in_count &lt;chr&gt;,\n#   reg_out &lt;chr&gt;, reg_out_count &lt;chr&gt;, rt &lt;chr&gt;, bio &lt;chr&gt;, critical &lt;chr&gt;,\n#   gender &lt;chr&gt;, item_id &lt;chr&gt;, list &lt;chr&gt;, match &lt;chr&gt;, condition &lt;chr&gt;,\n#   name &lt;chr&gt;, lifetime &lt;chr&gt;, tense &lt;chr&gt;, type &lt;chr&gt;, yes_press &lt;chr&gt;,\n#   KeyPress &lt;chr&gt;, accept &lt;chr&gt;, accuracy &lt;chr&gt;, px_accuracy &lt;chr&gt;\n\n\n\nwe want to transpose the data\n\ni.e., rotates the data so that the column names are in a row, with the descriptions in another row"
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#pivot_longer",
+    "href": "slides/07-tables/slides-data_viz.html#pivot_longer",
+    "title": "Data communication with tables",
+    "section": "pivot_longer()",
+    "text": "pivot_longer()\n\ntakes wide data and makes it longer\n\nconverts headers of columns into values of a new column\ncombines the values of those columns into a new condensed column\n\n\ntakes a few arguments:\n\n\ncols: which columns do we want to combine into a single column?\n\nnames_to: what should we call the new column containing the previous column names?\n\nvalues_to: what should we call the new column containing the values from the previous columns?"
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#save-data-dictionary",
+    "href": "slides/07-tables/slides-data_viz.html#save-data-dictionary",
+    "title": "Data communication with tables",
+    "section": "Save data dictionary",
+    "text": "Save data dictionary\n\nnow we can save our data dictionary just like we would any csv\n\n\nwrite_csv(dict_lifetime, here(\"data\", \"tidy_data_lifetime_pilot_dictionary.csv\"))"
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#tables-as-latex-code",
+    "href": "slides/07-tables/slides-data_viz.html#tables-as-latex-code",
+    "title": "Data communication with tables",
+    "section": "Tables as LaTeX code",
+    "text": "Tables as LaTeX code\n\nyou can add the argument \"latex\" to print LaTeX code for a table in the Console\n\nyou can then cut and paste this code into a LaTeX (or Overleaf) script\n\n\n\n\ndict_lifetime |&gt; \n  knitr::kable(\"latex\") \n\n\nbut be careful, if you’re rendering to HTML the table won’t be printed if you use \"latex\""
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#kableextrakable_styling",
+    "href": "slides/07-tables/slides-data_viz.html#kableextrakable_styling",
+    "title": "Data communication with tables",
+    "section": "kableExtra::kable_styling()",
+    "text": "kableExtra::kable_styling()\n\nwe’ll first create a little summary table using the iris dataset which comes built-in with R\n\n\nsum_iris &lt;- iris |&gt; \n  summarise(mean = mean(Sepal.Length),\n            sd = sd(Sepal.Length),\n            n = n(),\n            .by = Species)\n\n\nand we’ll print the summary using kable_styling() (Table 1)\n\n\nsum_iris |&gt; \n  knitr::kable() |&gt; \n  kableExtra::kable_styling()\n\n\nTable 1: Example output of an table using the kableExtra package\n\n\n\n\n\nSpecies\nmean\nsd\nn\n\n\n\nsetosa\n5.006\n0.3524897\n50\n\n\nversicolor\n5.936\n0.5161711\n50\n\n\nvirginica\n6.588\n0.6358796\n50"
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#flextable",
+    "href": "slides/07-tables/slides-data_viz.html#flextable",
+    "title": "Data communication with tables",
+    "section": "flextable",
+    "text": "flextable\n\nprint the same summary using flextable() (Table 2)\n\n\nsum_iris |&gt; \n  flextable::flextable()\n\n\nTable 2: Example output of an table using the flextable package\n\n\n\n\n\n\nSpecies\nmean\nsd\nn\n\n\n\nsetosa\n5.006\n0.3524897\n50\n\n\nversicolor\n5.936\n0.5161711\n50\n\n\nvirginica\n6.588\n0.6358796\n50"
+  },
+  {
+    "objectID": "slides/07-tables/slides-data_viz.html#papajaapa_table",
+    "href": "slides/07-tables/slides-data_viz.html#papajaapa_table",
+    "title": "Data communication with tables",
+    "section": "papaja::apa_table()",
+    "text": "papaja::apa_table()\n\nnow run a linear mixed model on the iris data\n\n\nlmm_iris &lt;-\n  lme4::lmer(Sepal.Width ~ Sepal.Length + Petal.Width +\n               (1|Species), data = iris)\n\n\nand print a model summary table using apa_table() (Table 3)\n\n\nlmm_iris |&gt; papaja::apa_print() |&gt; \npapaja::apa_table(caption = NULL)\n\n\nTable 3: Example output of an LMM using papaja package\n\n\n\n(#tab:tbl-lmm_iris)\n\nTerm\n\\(\\hat{\\beta}\\)\n95% CI\n\\(t\\)\n\n\n\nIntercept\n0.85\n[-0.34, 2.05]\n1.39\n\n\nSepal Length\n0.27\n[0.18, 0.36]\n5.85\n\n\nPetal Width\n0.51\n[0.28, 0.74]\n4.37"
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html",
+    "href": "slides/07-tables/sheet-data_viz.html",
+    "title": "Data communication with tables",
+    "section": "",
+    "text": "create a data dictionary\nproduce formatted tables with the knitr package\nproduce summary tables",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#variable-names",
+    "href": "slides/07-tables/sheet-data_viz.html#variable-names",
+    "title": "Data communication with tables",
+    "section": "3.1 Variable names",
+    "text": "3.1 Variable names\n\nwe can list the names of all variables in a dataset using names()\n\n\nnames(df_lifetime)\n\n [1] \"px\"            \"trial\"         \"region\"        \"region_n\"     \n [5] \"region_text\"   \"eye\"           \"ff\"            \"fp\"           \n [9] \"rpd\"           \"tt\"            \"fix_count\"     \"reg_in\"       \n[13] \"reg_in_count\"  \"reg_out\"       \"reg_out_count\" \"rt\"           \n[17] \"bio\"           \"critical\"      \"gender\"        \"item_id\"      \n[21] \"list\"          \"match\"         \"condition\"     \"name\"         \n[25] \"lifetime\"      \"tense\"         \"type\"          \"yes_press\"    \n[29] \"KeyPress\"      \"accept\"        \"accuracy\"      \"px_accuracy\"  \n\n\n\nbut we need to be able to put these names into a single column\n\nwhere each row contains one variable name\nand other columns contain information like description and data class\n\n\n\n3.1.1 Names to rows\n\n# From day 2 of Lisa DeBruine's [Coding Club: Creating an R Package](https://psyteachr.github.io/intro-r-pkgs/02-data.html#documentation)\n\n# create as many empty strings as we name variable names\ncoldesc &lt;- rep(\"\", ncol(df_lifetime))\n# add variable names to these empty strings\nnames(coldesc) &lt;- names(df_lifetime)\n\n\n# print as code needed to create an object\ndput(coldesc)\n\nc(px = \"\", trial = \"\", region = \"\", region_n = \"\", region_text = \"\", \neye = \"\", ff = \"\", fp = \"\", rpd = \"\", tt = \"\", fix_count = \"\", \nreg_in = \"\", reg_in_count = \"\", reg_out = \"\", reg_out_count = \"\", \nrt = \"\", bio = \"\", critical = \"\", gender = \"\", item_id = \"\", \nlist = \"\", match = \"\", condition = \"\", name = \"\", lifetime = \"\", \ntense = \"\", type = \"\", yes_press = \"\", KeyPress = \"\", accept = \"\", \naccuracy = \"\", px_accuracy = \"\")",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#section",
+    "href": "slides/07-tables/sheet-data_viz.html#section",
+    "title": "Data communication with tables",
+    "section": "3.2 ",
+    "text": "3.2 \n\ncopy the output of dput(coldesc) and assign it to an object\n\ntip: you can reformat the code by highlighting it and using Cmd/Ctrl+Shift+A\n\nor in the menu bar: Code &gt; Reformat Code\n\n\nreplace c() with tibble() to create a dataframe\n\nand fill in the quotations with description of the data\n\n\n\ndict_lifetime &lt;- tibble(\n  px = \"participant ID (factor)\",\n  trial = \"trial number (ordered factor)\",\n  region = \"sentence region (order factor)\",\n  region_n = \"numerical representation of sentence region (ordered factor)\",\n  region_text = \"text presented in the region (string)\",\n  eye = \"which eye was tracking: right or left (binomial)\",\n  ff = \"first-fixation times in milliseconds (continuous, values can be 0&lt;)\",\n  fp = \"first-pass reading times in milliseconds (numeric, values can be 0&lt;)\",\n  rpd = \"regression-path duration in milliseconds (numeric, values can be 0&lt;)\",\n  tt = \"total reading time in milliseconds (numeric, values can be 0&lt;)\",\n  fix_count = \"number of total fixations in the region (count)\",\n  reg_in = \"whether of a regression was made into the regions (binomial: 0 = no, 1 = yes)\",\n  reg_in_count = \"number of fixations into the region (count)\",\n  reg_out = \"whether of a regression was made out of the regions (binomial: 0 = no, 1 = yes)\",\n  reg_out_count = \"number of fixations out of the region (count)\",\n  rt = \"reaction time from critical sentence presentation to button press (continuous, values can be 0&lt;)\",\n  bio = \"lifetime biography context sentence (string)\",\n  critical = \"critical sentence (string)\",\n  gender = \"gender of stimulus subject (binomial: male, female)\",\n  item_id = \"item identification number (critical items: 1-80)\",\n  list = \"experimental list version: base list version (1-4) and whether the yes-button was coded as 4 or 5 (factor: 14, 15, 24, 25, 34, 35, 44, 45)\",\n  match = \"whether the referent-lifetime was congruent with tense\",\n  condition = \"condition: lifetime (dead, alive) + tense (PP, SF) (factor)\",\n  name = \"name of stimulis subject (string)\",\n  lifetime = \"lifetime status of stimulus subject at time of experiment (binomial: dead, alive)\",\n  tense = \"tense used in critical sentence (binomail: PP = present perfect, SF = simple future)\",\n  type = \"sentence type (factor with one level: critical)\",\n  yes_press = \"corresponding coding for the yes-button on Cedrus response box (4 = left button, 5 = right button)\",\n  KeyPress = \"key that was pressed (4 = left button, 5 = right button)\",\n  accept = \"whether the item was accepted, i.e., whether KeyPress equalled yes_press\",\n  accuracy = \"whether the acceptance was accurate (reject for a mismatch, accept for a match)\",\n  px_accuracy = \"participant's overall accuracy score\"\n)",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#section-1",
+    "href": "slides/07-tables/sheet-data_viz.html#section-1",
+    "title": "Data communication with tables",
+    "section": "3.3 ",
+    "text": "3.3 \n\nbut dict_lifetime doesn’t have the shape we want\n\neach variable name is a column name\nand its description is in the first row\n\n\n\ndict_lifetime\n\n# A tibble: 1 × 32\n  px             trial region region_n region_text eye   ff    fp    rpd   tt   \n  &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;\n1 participant I… tria… sente… numeric… text prese… whic… firs… firs… regr… tota…\n# ℹ 22 more variables: fix_count &lt;chr&gt;, reg_in &lt;chr&gt;, reg_in_count &lt;chr&gt;,\n#   reg_out &lt;chr&gt;, reg_out_count &lt;chr&gt;, rt &lt;chr&gt;, bio &lt;chr&gt;, critical &lt;chr&gt;,\n#   gender &lt;chr&gt;, item_id &lt;chr&gt;, list &lt;chr&gt;, match &lt;chr&gt;, condition &lt;chr&gt;,\n#   name &lt;chr&gt;, lifetime &lt;chr&gt;, tense &lt;chr&gt;, type &lt;chr&gt;, yes_press &lt;chr&gt;,\n#   KeyPress &lt;chr&gt;, accept &lt;chr&gt;, accuracy &lt;chr&gt;, px_accuracy &lt;chr&gt;\n\n\n\nwe want to transpose the data\n\ni.e., rotates the data so that the column names are in a row, with the descriptions in another row",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#pivot_longer",
+    "href": "slides/07-tables/sheet-data_viz.html#pivot_longer",
+    "title": "Data communication with tables",
+    "section": "3.4 pivot_longer()",
+    "text": "3.4 pivot_longer()\n\ntakes wide data and makes it longer\n\nconverts headers of columns into values of a new column\ncombines the values of those columns into a new condensed column\n\ntakes a few arguments:\n\ncols: which columns do we want to combine into a single column?\nnames_to: what should we call the new column containing the previous column names?\nvalues_to: what should we call the new column containing the values from the previous columns?",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#section-2",
+    "href": "slides/07-tables/sheet-data_viz.html#section-2",
+    "title": "Data communication with tables",
+    "section": "",
+    "text": "3.4.1 Pivot our data dictionary\n\nthis looks much better!\n\n\ndict_lifetime &lt;-\n  dict_lifetime |&gt; \n  pivot_longer(\n    cols = everything(),\n    names_to = \"variable\",\n    values_to = \"description\"\n  )",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#save-data-dictionary",
+    "href": "slides/07-tables/sheet-data_viz.html#save-data-dictionary",
+    "title": "Data communication with tables",
+    "section": "3.5 Save data dictionary",
+    "text": "3.5 Save data dictionary\n\nnow we can save our data dictionary just like we would any csv\n\n\nwrite_csv(dict_lifetime, here(\"data\", \"tidy_data_lifetime_pilot_dictionary.csv\"))",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#tables-as-latex-code",
+    "href": "slides/07-tables/sheet-data_viz.html#tables-as-latex-code",
+    "title": "Data communication with tables",
+    "section": "4.1 Tables as LaTeX code",
+    "text": "4.1 Tables as LaTeX code\n\nyou can add the argument \"latex\" to print LaTeX code for a table in the Console\n\nyou can then cut and paste this code into a LaTeX (or Overleaf) script\n\n\n\ndict_lifetime |&gt; \n  knitr::kable(\"latex\") \n\n\nbut be careful, if you’re rendering to HTML the table won’t be printed if you use \"latex\"\n\n\n4.1.1 Exercise\n\ninstall the knitr package (install.packages(\"knitr\"))\nprint dict_lifetime, but only for the following variables:\n\npx, trial, region_text, ff, fp, and condition\n\nuse kable() from knitr to print the table\n\n\n\n\n\n\n\n\n\n\nvariable\ndescription\n\n\n\n\npx\nparticipant ID (factor)\n\n\ntrial\ntrial number (ordered factor)\n\n\nregion_text\ntext presented in the region (string)\n\n\nff\nfirst-fixation times in milliseconds (continuous, values can be 0&lt;)\n\n\nfp\nfirst-pass reading times in milliseconds (numeric, values can be 0&lt;)\n\n\ncondition\ncondition: lifetime (dead, alive) + tense (PP, SF) (factor)",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#section-3",
+    "href": "slides/07-tables/sheet-data_viz.html#section-3",
+    "title": "Data communication with tables",
+    "section": "6.1 ",
+    "text": "6.1",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#kableextrakable_styling",
+    "href": "slides/07-tables/sheet-data_viz.html#kableextrakable_styling",
+    "title": "Data communication with tables",
+    "section": "7.1 kableExtra::kable_styling()",
+    "text": "7.1 kableExtra::kable_styling()\n\nwe’ll first create a little summary table using the iris dataset which comes built-in with R\n\n\nsum_iris &lt;- iris |&gt; \n  summarise(mean = mean(Sepal.Length),\n            sd = sd(Sepal.Length),\n            n = n(),\n            .by = Species)\n\n\nand we’ll print the summary using kable_styling() (Table 1)\n\n\nsum_iris |&gt; \n  knitr::kable() |&gt; \n  kableExtra::kable_styling()\n\n\n\nTable 1: Example output of an table using the kableExtra package\n\n\n\n\n\n\n\nSpecies\nmean\nsd\nn\n\n\n\n\nsetosa\n5.006\n0.3524897\n50\n\n\nversicolor\n5.936\n0.5161711\n50\n\n\nvirginica\n6.588\n0.6358796\n50",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#flextable",
+    "href": "slides/07-tables/sheet-data_viz.html#flextable",
+    "title": "Data communication with tables",
+    "section": "7.2 flextable",
+    "text": "7.2 flextable\n\nprint the same summary using flextable() (Table 2)\n\n\nsum_iris |&gt; \n  flextable::flextable()\n\n\n\nTable 2: Example output of an table using the flextable package\n\n\n\nSpeciesmeansdnsetosa5.0060.352489750versicolor5.9360.516171150virginica6.5880.635879650",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "slides/07-tables/sheet-data_viz.html#papajaapa_table",
+    "href": "slides/07-tables/sheet-data_viz.html#papajaapa_table",
+    "title": "Data communication with tables",
+    "section": "7.3 papaja::apa_table()",
+    "text": "7.3 papaja::apa_table()\n\nnow run a linear mixed model on the iris data\n\n\nlmm_iris &lt;-\n  lme4::lmer(Sepal.Width ~ Sepal.Length + Petal.Width +\n               (1|Species), data = iris)\n\n\nand print a model summary table using apa_table() (Table 3)\n\n\nlmm_iris |&gt; papaja::apa_print() |&gt; \npapaja::apa_table(caption = NULL)\n\n\n\nTable 3: Example output of an LMM using papaja package\n\n\n\n\n(#tab:tbl-lmm_iris)\n\n\nTerm\n\\(\\hat{\\beta}\\)\n95% CI\n\\(t\\)\n\n\n\n\nIntercept\n0.85\n[-0.34, 2.05]\n1.39\n\n\nSepal Length\n0.27\n[0.18, 0.36]\n5.85\n\n\nPetal Width\n0.51\n[0.28, 0.74]\n4.37",
+    "crumbs": [
+      "D. Palleschi",
+      "Data communication with tables"
+    ]
+  },
+  {
+    "objectID": "session-info.html",
+    "href": "session-info.html",
+    "title": "Session Info",
+    "section": "",
+    "text": "git2r::repository()\n\nLocal:    main /Users/danielapalleschi/Documents/IdSL/Teaching/SoSe24/M.A./r4repro_SoSe2024\nRemote:   main @ origin (git@github.com:daniela-palleschi/r4repro_SoSe2024.git)\nHead:     [cdcfbc7] 2024-06-24: update OSF/Code Review slides\n\n\n\nsessionInfo()\n\nR version 4.4.0 (2024-04-24)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Ventura 13.2.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Berlin\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nloaded via a namespace (and not attached):\n [1] htmlwidgets_1.6.4 compiler_4.4.0    fastmap_1.2.0     cli_3.6.2        \n [5] htmltools_0.5.8.1 tools_4.4.0       rstudioapi_0.16.0 yaml_2.3.8       \n [9] rmarkdown_2.27    knitr_1.47        git2r_0.33.0      jsonlite_1.8.8   \n[13] xfun_0.44         digest_0.6.35     rlang_1.1.4       renv_1.0.7       \n[17] evaluate_0.23"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "",
+    "section": "",
+    "text": "Code\n\n\n\n\n\nPreface\nThis web-book contains slides for the 2024 summer semester course ‘Open Science Practices: Implementing a Reproducible Workflow in R’ (and other iterations) given by Daniela Palleschi at the Humboldt-Universität zu Berlin. The tools discussed in this book are specific to the R enviornment, but the concepts are universal and programming language agnostic.\nEach week’s topic is listed in the sidebar in chronological order. Three output formats are available, all with the same content:\n\nHTML page\nPDF of content\nRevealJS slides (optimally formatted)\n\nThe contents were formatted for the slide output. Tables and figures may be too large/small in formats 1 and 2. From the HTML page the other 2 formats can be viewed by clicking on their symbol under ‘Other Formats’ (right sidebar)."
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#what-should-ideally-be-shared",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#what-should-ideally-be-shared",
+    "title": "Reproducibility",
+    "section": "What should (ideally) be shared?",
+    "text": "What should (ideally) be shared?\n\n\n\nmaterials\n\nprotocols\nstimuli\nexperiment set-up\n\n\ndocumentation\n\nREADME\nmetadata\n\n\n\n\n\ndata\n\nraw\n\ne.g., text files, audio, video, or images\n\n\nprocessed\n\n\nanalysis code\n\npre-processing\nanalyses\n\n\n\n\n\n\n\n\nmaterials are helpful for replication\n\nbut also for inspection of e.g., design\n\n\n\n\n\ndata and code are necessary for reproducibility\n\nalong with proper documentation of software used"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#reproducibility-rates-in-linguistic-research",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#reproducibility-rates-in-linguistic-research",
+    "title": "Reproducibility",
+    "section": "Reproducibility rates in linguistic research",
+    "text": "Reproducibility rates in linguistic research\n\n\n\n\n\n\nFigure 1: Source: Bochynska et al. (2023), p. 11 (all rights reserved)\n\n\n\n\n\n\n\n\n\nmeta-analysis of 519 randomly sampled articles from various linguistic journales\n\npre- and post-reproducibility crisis (2008/9, 2018/19) (Bochynska et al., 2023)\n\ndifferentiated between primary (collected for study) and secondary (pre-existing) data\n\n\nreported a post-RC increase in shared materials, data, and analyses\n\nbut still low rates of each\n\n\nhigher rates of secondary data sharing, presumably due to publicly available corpora\ndata shared more often than analyses, pre- and post-RC"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#journal-of-memory-and-language",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#journal-of-memory-and-language",
+    "title": "Reproducibility",
+    "section": "Journal of Memory and Language",
+    "text": "Journal of Memory and Language\n\nmeta-analysis of articles from JML (Laurinavichyute et al., 2022)\n\nbefore and after an Open Science Policy was introduced in 2019\n\n\n\n\n\nFigure 2: Source: Laurinavichyute et al. (2022), p. 5 (all rights reserved)\n\ncode and data availability improved\nbut reproducibility rate ranged from 34-56%, depending on criteria\nhigher rates compared to field-wide meta-analysis (Bochynska et al., 2023)"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#findable",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#findable",
+    "title": "Reproducibility",
+    "section": "Findable",
+    "text": "Findable\n\nrefers to data and supplementary materials\n\nmaterials should have a “persistant identifier”\n\ne.g., Digital Object Identifier (DOI) for scholarly articles\n\n\n\na digital, long-term storage of data\n\n\nnot on a personal or professional website\nGitHub files don’t typically have sufficient metadata\nideally: OSF, Zenodo or some other repository\n\n\nin recent papers, an OSF link is typically provided\n\nalso: discoverable\n\ne.g., in data-specific search engines (Google’s Dataset search)"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#accessible",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#accessible",
+    "title": "Reproducibility",
+    "section": "Accessible",
+    "text": "Accessible\n\ndata (and code) should be\n\nmachine- and human-readable\navailable on a trusted repository, e.g., the OSF\nOpen Access\n\nnot behind a paywall\nnor require a login"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#interoperable",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#interoperable",
+    "title": "Reproducibility",
+    "section": "Interoperable",
+    "text": "Interoperable\n\n\n\ndata (and code) should\n\nnot dependent on an operating system\nnor entirely on software/package versions\n\n\neasiest work around:\n\ndocument your software versions\nthis doesn’t automatically facilitate interoperability\nbut may help pinpoint where problems are coming from"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#reusable",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#reusable",
+    "title": "Reproducibility",
+    "section": "Reusable",
+    "text": "Reusable\n\n\n\ndata (and code) should\n\nbe reusable for future research\n\n\ndata format should be generic\n\ni.e., not tied to a specific program\nfor tabular data, I recommend .csv format\n\n\nwe can swap with ‘reproducible’ in the context of analyses"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#task-finding-data",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#task-finding-data",
+    "title": "Reproducibility",
+    "section": "Task: finding data",
+    "text": "Task: finding data\nGo to datasetsearch.research.google.com/\n\ndo a search for data related to a topic of interest to you\nwhat type of information does the search provide?\nwhat type of links?\ndo you find analysis code, or just data?\ndo the same search at osf.io\n\nand at zenodo.org/\n\nare there the same amount of hits?"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#data-and-code-neq-reproducibility",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#data-and-code-neq-reproducibility",
+    "title": "Reproducibility",
+    "section": "Data and code \\(\\neq\\) Reproducibility",
+    "text": "Data and code \\(\\neq\\) Reproducibility\n\neven including code does not guarantee reproducibility\naccess to data and code do not mean analyses are reproducible\nwhat can go wrong? Examples from Laurinavichyute et al. (2022)\n\n\n\n\nData problems\n\ninaccessible data\nincomplete data (e.g., 2/3 experiments)\n\n\nCode problems\n\nincomplete code\nerror messages\ncode rot: outdated syntax or environment\nproprietary software\n\n\n\n\n\nDocumentation problems\n\ndata difficult to interpret\nno README file/data dictionary\nunclear folder/file/variable naming convention\nmanuscript contradicts code\n\n\nUnclear terms of use\n\nno licence specification"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#share-the-code-not-just-the-data",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#share-the-code-not-just-the-data",
+    "title": "Reproducibility",
+    "section": "Share the code, not just the data",
+    "text": "Share the code, not just the data\n\nWhy?\n\nkey details are often missing from ‘Methods’ sections\n\n\nsuggestions for researchers from Laurinavichyute et al. (2022)\n\n\n\n\n\nShare data in usable form\n\nwith pre-processing code\n\n\nUse publicly accessible repositories\n\ne.g., OSF\n\n\nUse non-proprietary data formats\n\ne.g., not .xls files (Excel)\n\n\n\n\n\nProvide documentation\n\ne.g., README, data dictionaries\n\n\nShare code and data\n\nthey estimate a 38% increase in reproducibility\n\n\nTeach data management and computing skills\n\nthat’s what this course is for!"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#project-management",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#project-management",
+    "title": "Reproducibility",
+    "section": "Project management",
+    "text": "Project management\n\nfolder structure\nproject-relative file paths\nappropriate documentation\n\ne.g., README\n\n\nit’s great to map out your project structure early on\n\nbut it will grow as you go along\nreproducible principles facilitate adapting as it grows"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#literate-programming",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#literate-programming",
+    "title": "Reproducibility",
+    "section": "Literate programming",
+    "text": "Literate programming\n\nInstead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do.\n\n— Knuth (1984), p. 97\n\n\n\noriginally used to refer to writing programs\nbut also applies to analysis code\n\nespecially if we’re aiming for reproducibility\n\n\n\n\n\n\nmain concepts:\n\ncode is linear (this pre-dates Knuth, 1984)\n\ninformative but concise commenting\n\n\n\n\n\n\nmain benefits:\n\nfacilitates maintenance\nhelpful for future-you, collaborators, etc."
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#documentation",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#documentation",
+    "title": "Reproducibility",
+    "section": "Documentation",
+    "text": "Documentation\n\n\nmetadata\n\nproject README\ncodebook/data dictionary\n\n\n\nREADME should contain\n\na project description\nrelevant links\ndescription of folder structure\n\n\ncan be updated as the project develops\n\nREADME.md files in GitHub/Lab are automatically used as a project description\n\n\n.md is a plaintext document\nuses markdown syntax"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#version-control",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#version-control",
+    "title": "Reproducibility",
+    "section": "Version control",
+    "text": "Version control\n\ngit: local tracking\nuseful for the analysis and writing phases\n\nbut can be tricky for collaboration\n\n\nGitHub/GitLab: remote tracking\n\nstore your changes to your local git repository\nthen push them to your remote repository\n\n\nsafe guards against local hardware/software issues\n\nlost or damaged computer or local files\n\n\nand allows for collaboration or sharing"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#persistant-public-storage",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#persistant-public-storage",
+    "title": "Reproducibility",
+    "section": "Persistant (public) storage",
+    "text": "Persistant (public) storage\n\nGitHub/Lab are sub-optimal\n\ndeveloper-focused\ntypically lack thorough documentation/metadata\nnot very user-friendly for non-users\n\n\nOSF, Zenodo\n\nOpen Science-focused\ncan be linked to a GitHub/Lab repository\nfacilitate thorough documentation\nuser-friendly"
+  },
+  {
+    "objectID": "slides/03-reproducibility/reproducibility_slides.html#writing",
+    "href": "slides/03-reproducibility/reproducibility_slides.html#writing",
+    "title": "Reproducibility",
+    "section": "Writing",
+    "text": "Writing\n\n\ndynamic reports with Markdown syntax\n\ne.g., Rmarkdown, Quarto\nintegration of data, code, and prose\n\nfacilitates cross-referencing within document\nintegration of citation management tools\nsupports LaTeX syntax for example sentences and tables\n\n\n\n\npapaja package for APA-formatted Rmarkdown documents\n\nchallenge: collaboration\n\nnot all collaborators know these tools\ntrack changes not currently possible"
+  },
+  {
     "objectID": "slides/03-reproducibility/reproducibility.html",
     "href": "slides/03-reproducibility/reproducibility.html",
     "title": "Reproducibility",
@@ -896,637 +1530,344 @@
     ]
   },
   {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#what-should-ideally-be-shared",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#what-should-ideally-be-shared",
-    "title": "Reproducibility",
-    "section": "What should (ideally) be shared?",
-    "text": "What should (ideally) be shared?\n\n\n\nmaterials\n\nprotocols\nstimuli\nexperiment set-up\n\n\ndocumentation\n\nREADME\nmetadata\n\n\n\n\n\ndata\n\nraw\n\ne.g., text files, audio, video, or images\n\n\nprocessed\n\n\nanalysis code\n\npre-processing\nanalyses\n\n\n\n\n\n\n\n\nmaterials are helpful for replication\n\nbut also for inspection of e.g., design\n\n\n\n\n\ndata and code are necessary for reproducibility\n\nalong with proper documentation of software used"
+    "objectID": "slides/11-osf/osf_slides.html#private-or-public",
+    "href": "slides/11-osf/osf_slides.html#private-or-public",
+    "title": "Publishing analyses + Peer code review",
+    "section": "Private or public",
+    "text": "Private or public\n\nyou should notice near the top right corner a button ‘Make Public’\n\nthis tells you that your project is currently private\nthis means nobody can see it but you (or any collaborators you add)\n\n\ntypically you would make a repository public when it has been accepted for publication, or if you publish a pre-print\n\nyou can also make it public before this, but this is something to discuss with your collaborators"
   },
   {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#reproducibility-rates-in-linguistic-research",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#reproducibility-rates-in-linguistic-research",
-    "title": "Reproducibility",
-    "section": "Reproducibility rates in linguistic research",
-    "text": "Reproducibility rates in linguistic research\n\n\n\n\n\n\nFigure 1: Source: Bochynska et al. (2023), p. 11 (all rights reserved)\n\n\n\n\n\n\n\n\n\nmeta-analysis of 519 randomly sampled articles from various linguistic journales\n\npre- and post-reproducibility crisis (2008/9, 2018/19) (Bochynska et al., 2023)\n\ndifferentiated between primary (collected for study) and secondary (pre-existing) data\n\n\nreported a post-RC increase in shared materials, data, and analyses\n\nbut still low rates of each\n\n\nhigher rates of secondary data sharing, presumably due to publicly available corpora\ndata shared more often than analyses, pre- and post-RC"
+    "objectID": "slides/11-osf/osf_slides.html#contributors",
+    "href": "slides/11-osf/osf_slides.html#contributors",
+    "title": "Publishing analyses + Peer code review",
+    "section": "Contributors",
+    "text": "Contributors\n\nrepository contributors are typically co-authors or collaborators for a project\nclick on the ‘Contributors’ tab (top right of the screen)\n\nclick on ‘+ Add’, find my account, and add me as a collaborator with ‘Read’ rights\nmake sure the ‘Bibliographic Contributor’ button is checked\nthis just means that I will be included as bibliographic author if this repo is ever cited\n\n\ngo back to the project page, do you see any changes?"
   },
   {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#journal-of-memory-and-language",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#journal-of-memory-and-language",
-    "title": "Reproducibility",
-    "section": "Journal of Memory and Language",
-    "text": "Journal of Memory and Language\n\nmeta-analysis of articles from JML (Laurinavichyute et al., 2022)\n\nbefore and after an Open Science Policy was introduced in 2019\n\n\n\n\n\nFigure 2: Source: Laurinavichyute et al. (2022), p. 5 (all rights reserved)\n\ncode and data availability improved\nbut reproducibility rate ranged from 34-56%, depending on criteria\nhigher rates compared to field-wide meta-analysis (Bochynska et al., 2023)"
+    "objectID": "slides/11-osf/osf_slides.html#adding-files",
+    "href": "slides/11-osf/osf_slides.html#adding-files",
+    "title": "Publishing analyses + Peer code review",
+    "section": "Adding files",
+    "text": "Adding files\n\nour purpose for creating an OSF project was to share our data and materials\n\nto do this, we navigate to the ‘Files’ tab\n\n\nrather unfortunately, we can only upload files (i.e., not entire folders)\n\nthis has the benefit of meaning our folder structure must be intentional\n\nbut the drawback that it’s quite tedious if you want to share a large project\n\n\nlet’s start by adding our data and scripts\n\nadd a folder called data\n\nand another folder called scripts or code, or whatever you prefer"
   },
   {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#findable",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#findable",
-    "title": "Reproducibility",
-    "section": "Findable",
-    "text": "Findable\n\nrefers to data and supplementary materials\n\nmaterials should have a “persistant identifier”\n\ne.g., Digital Object Identifier (DOI) for scholarly articles\n\n\n\na digital, long-term storage of data\n\n\nnot on a personal or professional website\nGitHub files don’t typically have sufficient metadata\nideally: OSF, Zenodo or some other repository\n\n\nin recent papers, an OSF link is typically provided\n\nalso: discoverable\n\ne.g., in data-specific search engines (Google’s Dataset search)"
+    "objectID": "slides/11-osf/osf_slides.html#adding-data",
+    "href": "slides/11-osf/osf_slides.html#adding-data",
+    "title": "Publishing analyses + Peer code review",
+    "section": "Adding data",
+    "text": "Adding data\n\nunder data, add the three csv files you presumably have in the same folder in your project (drag and drop them, or select the big green +)\n\ndata_lifetime_pilot.csv\ntidy_data_lifetime_pilot.csv\ntidy_data_lifetime_pilot_dictionary.csv"
   },
   {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#accessible",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#accessible",
-    "title": "Reproducibility",
-    "section": "Accessible",
-    "text": "Accessible\n\ndata (and code) should be\n\nmachine- and human-readable\navailable on a trusted repository, e.g., the OSF\nOpen Access\n\nnot behind a paywall\nnor require a login"
+    "objectID": "slides/11-osf/osf_slides.html#adding-scripts",
+    "href": "slides/11-osf/osf_slides.html#adding-scripts",
+    "title": "Publishing analyses + Peer code review",
+    "section": "Adding scripts",
+    "text": "Adding scripts\n\nunder the scripts folder add the scripts where we worked with the data:\n\nour wrangling script\nour tables script\nour data visualisation script"
   },
   {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#interoperable",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#interoperable",
-    "title": "Reproducibility",
-    "section": "Interoperable",
-    "text": "Interoperable\n\n\n\ndata (and code) should\n\nnot dependent on an operating system\nnor entirely on software/package versions\n\n\neasiest work around:\n\ndocument your software versions\nthis doesn’t automatically facilitate interoperability\nbut may help pinpoint where problems are coming from"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#reusable",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#reusable",
-    "title": "Reproducibility",
-    "section": "Reusable",
-    "text": "Reusable\n\n\n\ndata (and code) should\n\nbe reusable for future research\n\n\ndata format should be generic\n\ni.e., not tied to a specific program\nfor tabular data, I recommend .csv format\n\n\nwe can swap with ‘reproducible’ in the context of analyses"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#task-finding-data",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#task-finding-data",
-    "title": "Reproducibility",
-    "section": "Task: finding data",
-    "text": "Task: finding data\nGo to datasetsearch.research.google.com/\n\ndo a search for data related to a topic of interest to you\nwhat type of information does the search provide?\nwhat type of links?\ndo you find analysis code, or just data?\ndo the same search at osf.io\n\nand at zenodo.org/\n\nare there the same amount of hits?"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#data-and-code-neq-reproducibility",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#data-and-code-neq-reproducibility",
-    "title": "Reproducibility",
-    "section": "Data and code \\(\\neq\\) Reproducibility",
-    "text": "Data and code \\(\\neq\\) Reproducibility\n\neven including code does not guarantee reproducibility\naccess to data and code do not mean analyses are reproducible\nwhat can go wrong? Examples from Laurinavichyute et al. (2022)\n\n\n\n\nData problems\n\ninaccessible data\nincomplete data (e.g., 2/3 experiments)\n\n\nCode problems\n\nincomplete code\nerror messages\ncode rot: outdated syntax or environment\nproprietary software\n\n\n\n\n\nDocumentation problems\n\ndata difficult to interpret\nno README file/data dictionary\nunclear folder/file/variable naming convention\nmanuscript contradicts code\n\n\nUnclear terms of use\n\nno licence specification"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#share-the-code-not-just-the-data",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#share-the-code-not-just-the-data",
-    "title": "Reproducibility",
-    "section": "Share the code, not just the data",
-    "text": "Share the code, not just the data\n\nWhy?\n\nkey details are often missing from ‘Methods’ sections\n\n\nsuggestions for researchers from Laurinavichyute et al. (2022)\n\n\n\n\n\nShare data in usable form\n\nwith pre-processing code\n\n\nUse publicly accessible repositories\n\ne.g., OSF\n\n\nUse non-proprietary data formats\n\ne.g., not .xls files (Excel)\n\n\n\n\n\nProvide documentation\n\ne.g., README, data dictionaries\n\n\nShare code and data\n\nthey estimate a 38% increase in reproducibility\n\n\nTeach data management and computing skills\n\nthat’s what this course is for!"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#project-management",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#project-management",
-    "title": "Reproducibility",
-    "section": "Project management",
-    "text": "Project management\n\nfolder structure\nproject-relative file paths\nappropriate documentation\n\ne.g., README\n\n\nit’s great to map out your project structure early on\n\nbut it will grow as you go along\nreproducible principles facilitate adapting as it grows"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#literate-programming",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#literate-programming",
-    "title": "Reproducibility",
-    "section": "Literate programming",
-    "text": "Literate programming\n\nInstead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do.\n\n— Knuth (1984), p. 97\n\n\n\noriginally used to refer to writing programs\nbut also applies to analysis code\n\nespecially if we’re aiming for reproducibility\n\n\n\n\n\n\nmain concepts:\n\ncode is linear (this pre-dates Knuth, 1984)\n\ninformative but concise commenting\n\n\n\n\n\n\nmain benefits:\n\nfacilitates maintenance\nhelpful for future-you, collaborators, etc."
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#documentation",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#documentation",
-    "title": "Reproducibility",
-    "section": "Documentation",
-    "text": "Documentation\n\n\nmetadata\n\nproject README\ncodebook/data dictionary\n\n\n\nREADME should contain\n\na project description\nrelevant links\ndescription of folder structure\n\n\ncan be updated as the project develops\n\nREADME.md files in GitHub/Lab are automatically used as a project description\n\n\n.md is a plaintext document\nuses markdown syntax"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#version-control",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#version-control",
-    "title": "Reproducibility",
-    "section": "Version control",
-    "text": "Version control\n\ngit: local tracking\nuseful for the analysis and writing phases\n\nbut can be tricky for collaboration\n\n\nGitHub/GitLab: remote tracking\n\nstore your changes to your local git repository\nthen push them to your remote repository\n\n\nsafe guards against local hardware/software issues\n\nlost or damaged computer or local files\n\n\nand allows for collaboration or sharing"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#persistant-public-storage",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#persistant-public-storage",
-    "title": "Reproducibility",
-    "section": "Persistant (public) storage",
-    "text": "Persistant (public) storage\n\nGitHub/Lab are sub-optimal\n\ndeveloper-focused\ntypically lack thorough documentation/metadata\nnot very user-friendly for non-users\n\n\nOSF, Zenodo\n\nOpen Science-focused\ncan be linked to a GitHub/Lab repository\nfacilitate thorough documentation\nuser-friendly"
-  },
-  {
-    "objectID": "slides/03-reproducibility/reproducibility_slides.html#writing",
-    "href": "slides/03-reproducibility/reproducibility_slides.html#writing",
-    "title": "Reproducibility",
-    "section": "Writing",
-    "text": "Writing\n\n\ndynamic reports with Markdown syntax\n\ne.g., Rmarkdown, Quarto\nintegration of data, code, and prose\n\nfacilitates cross-referencing within document\nintegration of citation management tools\nsupports LaTeX syntax for example sentences and tables\n\n\n\n\npapaja package for APA-formatted Rmarkdown documents\n\nchallenge: collaboration\n\nnot all collaborators know these tools\ntrack changes not currently possible"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "",
+    "objectID": "slides/11-osf/osf_slides.html#section",
+    "href": "slides/11-osf/osf_slides.html#section",
+    "title": "Publishing analyses + Peer code review",
     "section": "",
-    "text": "Code\n\n\n\n\n\nPreface\nThis web-book contains slides for the 2024 summer semester course ‘Open Science Practices: Implementing a Reproducible Workflow in R’ (and other iterations) given by Daniela Palleschi at the Humboldt-Universität zu Berlin. The tools discussed in this book are specific to the R enviornment, but the concepts are universal and programming language agnostic.\nEach week’s topic is listed in the sidebar in chronological order. Three output formats are available, all with the same content:\n\nHTML page\nPDF of content\nRevealJS slides (optimally formatted)\n\nThe contents were formatted for the slide output. Tables and figures may be too large/small in formats 1 and 2. From the HTML page the other 2 formats can be viewed by clicking on their symbol under ‘Other Formats’ (right sidebar)."
+    "text": "Checklist: Share data and code\n\n\n\nAt this point, your OSF project should\n\nbe private (this is the default for a new project)\nhave me as a collaborator\ncontain the folders data/ and scripts/\n\nwhich in turn contain the 3 CSV files and 3 Quarto scripts\nideally scripts/ will also contain the 3 PDF script outputs"
   },
   {
-    "objectID": "session-info.html",
-    "href": "session-info.html",
-    "title": "Session Info",
+    "objectID": "slides/11-osf/osf_slides.html#download-osf-repo",
+    "href": "slides/11-osf/osf_slides.html#download-osf-repo",
+    "title": "Publishing analyses + Peer code review",
+    "section": "Download OSF repo",
+    "text": "Download OSF repo\n\nlet’s start by downloading our OSF repo\n\nfrom the project overview page, go to the ‘Files’ pane\nclick on ‘OSF Storage (Germany - Frankfurt)’\nClick ‘Download as zip’ button and store somewhere useful/rename as needed\n\n\n\n\n\nFigure 2: How to download an OSF repo"
+  },
+  {
+    "objectID": "slides/11-osf/osf_slides.html#reproduce-your-analyses",
+    "href": "slides/11-osf/osf_slides.html#reproduce-your-analyses",
+    "title": "Publishing analyses + Peer code review",
+    "section": "Reproduce your analyses",
+    "text": "Reproduce your analyses\n\nfirst, close all R projects you currently have open\n\nthis is because RStudio might try to open your downloaded scripts in an already open RProject, which we don’t want\n\n\nnow, navigate to the zip you just downloaded and decompress it (double-click)\n\nselect a Quarto script from scripts/\n\ntry to run the script, does it run?\nprobably not…let’s discuss why"
+  },
+  {
+    "objectID": "slides/11-osf/osf_slides.html#improving-code-reproducibility",
+    "href": "slides/11-osf/osf_slides.html#improving-code-reproducibility",
+    "title": "Publishing analyses + Peer code review",
+    "section": "Improving code reproducibility",
+    "text": "Improving code reproducibility\n\nwhat structural dependecies do our scripts have?\n\ne.g., filepaths and folder names\n\n\nconsider, for example, how we accessed the data from our scripts\n\ndid we use setwd()?\ndid we use filepaths?\nno, we used the here() package within an R project\nthis meant we used our project root directory as our working directory\n\n\nso, we should, at minimum, also include the .Rproj file at the project root directory"
+  },
+  {
+    "objectID": "slides/11-osf/osf_slides.html#reproducibility-spectrum",
+    "href": "slides/11-osf/osf_slides.html#reproducibility-spectrum",
+    "title": "Publishing analyses + Peer code review",
+    "section": "Reproducibility spectrum",
+    "text": "Reproducibility spectrum\n\nreproducibility is on a continuum, referred to as the reproducibility spectrum in Peng (2011) (Figure 3)\n\n\nlinked means “all data, metadata, and code [is] stored and linked with each other and with corresponding publications” (Peng, 2011, p. 1227)\n\n\nexecutable is not explained, and is more difficult to guarantee long-term as it depends on software versions\nbut at minimum we can assume it refers to code running on someone else’s machine\n\n\n\n\n\nFigure 3: Source: Peng (2011)"
+  },
+  {
+    "objectID": "slides/11-osf/osf_slides.html#reproducibility-iceberg",
+    "href": "slides/11-osf/osf_slides.html#reproducibility-iceberg",
+    "title": "Publishing analyses + Peer code review",
+    "section": "Reproducibility iceberg",
+    "text": "Reproducibility iceberg\n\n\n\n\n\n\nFigure 4: Source: Rodrigues (2023)\n\n\n\n\n\n\n\n\n\na more detailed description of this continuum is givin in Rodrigues (2023)’s reproducibility iceberg (Figure 4)\n\nour project is currently somewhere near the top-middle of the iceberg\nwe’re not using GitHub, with is a developer platform and useful for version control and is beyond the scope of this course\n\nGitHub and OSF serve some overlapping, but not identical, purposes\n\n\n\n\nimportantly, the iceberg explicitly mentioned the renv package\n\nthis reminds us that we should be sharing some files generating by renv"
+  },
+  {
+    "objectID": "slides/11-osf/osf_slides.html#packages",
+    "href": "slides/11-osf/osf_slides.html#packages",
+    "title": "Publishing analyses + Peer code review",
+    "section": "Packages",
+    "text": "Packages\n\nincluded the .Rproj file won’t mean that the person who downloads it will also have our packages\n\ne.g., they might not have the here package, and won’t even be able to use our code to load in the data\n\n\nas we discussed some weeks ago, this is what the renv package does\n\nwe created project library, i.e., a lockfile (renv.lock) which is a project"
+  },
+  {
+    "objectID": "slides/11-osf/osf_slides.html#section-1",
+    "href": "slides/11-osf/osf_slides.html#section-1",
+    "title": "Publishing analyses + Peer code review",
     "section": "",
-    "text": "git2r::repository()\n\nLocal:    main /Users/danielapalleschi/Documents/IdSL/Teaching/SoSe24/M.A./r4repro_SoSe2024\nRemote:   main @ origin (git@github.com:daniela-palleschi/r4repro_SoSe2024.git)\nHead:     [b033ff5] 2024-06-11: update pacman callout tip to include code examples (package management slides)\n\n\n\nsessionInfo()\n\nR version 4.4.0 (2024-04-24)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Ventura 13.2.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Berlin\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nloaded via a namespace (and not attached):\n [1] htmlwidgets_1.6.4 compiler_4.4.0    fastmap_1.2.0     cli_3.6.2        \n [5] htmltools_0.5.8.1 tools_4.4.0       rstudioapi_0.16.0 yaml_2.3.8       \n [9] rmarkdown_2.27    knitr_1.47        git2r_0.33.0      jsonlite_1.8.8   \n[13] xfun_0.44         digest_0.6.35     rlang_1.1.4       renv_1.0.7       \n[17] evaluate_0.23"
+    "text": "Checklist: Share renv.lock\n\n\nAdd the renv.lock file to your OSF project repo (in the project root directory)."
   },
   {
-    "objectID": "slides/07-tables/sheet-data_viz.html",
-    "href": "slides/07-tables/sheet-data_viz.html",
-    "title": "Data communication with tables",
+    "objectID": "slides/11-osf/osf_slides.html#auto-loaders",
+    "href": "slides/11-osf/osf_slides.html#auto-loaders",
+    "title": "Publishing analyses + Peer code review",
+    "section": "Auto-loaders",
+    "text": "Auto-loaders\n\nwe also need to include our .Rprofile file\n\nthis is our auto-loader\nwhenever we open the R project, this file will be run\n\n\nit currently contains just source(\"renv/activate.R\")\n\nthis means: when you open the R project, run the renv/activate.R file\n\n\nso, we need to include our renv/activate.R file in our OSF repo\n\nincluding these two will automatically install the relevant version of renv"
+  },
+  {
+    "objectID": "slides/11-osf/osf_slides.html#section-2",
+    "href": "slides/11-osf/osf_slides.html#section-2",
+    "title": "Publishing analyses + Peer code review",
     "section": "",
-    "text": "create a data dictionary\nproduce formatted tables with the knitr package\nproduce summary tables",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
+    "text": ".Rprofile in Finder\n\n\nSome files are usually invisible on a Mac, such as those that start with dot (like .Rprofile). This makes it difficult to simply drag and drop the .Rprofile file to the OSF. To make such files viewable in Finder, navigate to the relevant project folder and use the keyboard shortcut Ctrl + Shift + Dot. These files will then appear greyed out.\n\n\n\n\nFigure 5: Use the shortcut Ctrl + Shift + Dot to view hidden files on a Mac"
   },
   {
-    "objectID": "slides/07-tables/sheet-data_viz.html#variable-names",
-    "href": "slides/07-tables/sheet-data_viz.html#variable-names",
-    "title": "Data communication with tables",
-    "section": "3.1 Variable names",
-    "text": "3.1 Variable names\n\nwe can list the names of all variables in a dataset using names()\n\n\nnames(df_lifetime)\n\n [1] \"px\"            \"trial\"         \"region\"        \"region_n\"     \n [5] \"region_text\"   \"eye\"           \"ff\"            \"fp\"           \n [9] \"rpd\"           \"tt\"            \"fix_count\"     \"reg_in\"       \n[13] \"reg_in_count\"  \"reg_out\"       \"reg_out_count\" \"rt\"           \n[17] \"bio\"           \"critical\"      \"gender\"        \"item_id\"      \n[21] \"list\"          \"match\"         \"condition\"     \"name\"         \n[25] \"lifetime\"      \"tense\"         \"type\"          \"yes_press\"    \n[29] \"KeyPress\"      \"accept\"        \"accuracy\"      \"px_accuracy\"  \n\n\n\nbut we need to be able to put these names into a single column\n\nwhere each row contains one variable name\nand other columns contain information like description and data class\n\n\n\n3.1.1 Names to rows\n\n# From day 2 of Lisa DeBruine's [Coding Club: Creating an R Package](https://psyteachr.github.io/intro-r-pkgs/02-data.html#documentation)\n\n# create as many empty strings as we name variable names\ncoldesc &lt;- rep(\"\", ncol(df_lifetime))\n# add variable names to these empty strings\nnames(coldesc) &lt;- names(df_lifetime)\n\n\n# print as code needed to create an object\ndput(coldesc)\n\nc(px = \"\", trial = \"\", region = \"\", region_n = \"\", region_text = \"\", \neye = \"\", ff = \"\", fp = \"\", rpd = \"\", tt = \"\", fix_count = \"\", \nreg_in = \"\", reg_in_count = \"\", reg_out = \"\", reg_out_count = \"\", \nrt = \"\", bio = \"\", critical = \"\", gender = \"\", item_id = \"\", \nlist = \"\", match = \"\", condition = \"\", name = \"\", lifetime = \"\", \ntense = \"\", type = \"\", yes_press = \"\", KeyPress = \"\", accept = \"\", \naccuracy = \"\", px_accuracy = \"\")",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
+    "objectID": "slides/11-osf/osf_slides.html#readme",
+    "href": "slides/11-osf/osf_slides.html#readme",
+    "title": "Publishing analyses + Peer code review",
+    "section": "README",
+    "text": "README\n\nremember to update your README accordingly!\n\nthis can be updated as you add more to your project\n\n\nthe project README.md will ideally have information that is useful once the project is downloaded in its entirety\n\ne.g., brief info about the project/data\ndescription of the folder/file structure\nany info required for reproducibility\n\n\ne.g., anybody who downloads the project will need to run renv::restore() to restore your project library (but this will only work if they’re using the same R version!)\n\nso be sure to include that info!"
   },
   {
-    "objectID": "slides/07-tables/sheet-data_viz.html#section",
-    "href": "slides/07-tables/sheet-data_viz.html#section",
-    "title": "Data communication with tables",
-    "section": "3.2 ",
-    "text": "3.2 \n\ncopy the output of dput(coldesc) and assign it to an object\n\ntip: you can reformat the code by highlighting it and using Cmd/Ctrl+Shift+A\n\nor in the menu bar: Code &gt; Reformat Code\n\n\nreplace c() with tibble() to create a dataframe\n\nand fill in the quotations with description of the data\n\n\n\ndict_lifetime &lt;- tibble(\n  px = \"participant ID (factor)\",\n  trial = \"trial number (ordered factor)\",\n  region = \"sentence region (order factor)\",\n  region_n = \"numerical representation of sentence region (ordered factor)\",\n  region_text = \"text presented in the region (string)\",\n  eye = \"which eye was tracking: right or left (binomial)\",\n  ff = \"first-fixation times in milliseconds (continuous, values can be 0&lt;)\",\n  fp = \"first-pass reading times in milliseconds (numeric, values can be 0&lt;)\",\n  rpd = \"regression-path duration in milliseconds (numeric, values can be 0&lt;)\",\n  tt = \"total reading time in milliseconds (numeric, values can be 0&lt;)\",\n  fix_count = \"number of total fixations in the region (count)\",\n  reg_in = \"whether of a regression was made into the regions (binomial: 0 = no, 1 = yes)\",\n  reg_in_count = \"number of fixations into the region (count)\",\n  reg_out = \"whether of a regression was made out of the regions (binomial: 0 = no, 1 = yes)\",\n  reg_out_count = \"number of fixations out of the region (count)\",\n  rt = \"reaction time from critical sentence presentation to button press (continuous, values can be 0&lt;)\",\n  bio = \"lifetime biography context sentence (string)\",\n  critical = \"critical sentence (string)\",\n  gender = \"gender of stimulus subject (binomial: male, female)\",\n  item_id = \"item identification number (critical items: 1-80)\",\n  list = \"experimental list version: base list version (1-4) and whether the yes-button was coded as 4 or 5 (factor: 14, 15, 24, 25, 34, 35, 44, 45)\",\n  match = \"whether the referent-lifetime was congruent with tense\",\n  condition = \"condition: lifetime (dead, alive) + tense (PP, SF) (factor)\",\n  name = \"name of stimulis subject (string)\",\n  lifetime = \"lifetime status of stimulus subject at time of experiment (binomial: dead, alive)\",\n  tense = \"tense used in critical sentence (binomail: PP = present perfect, SF = simple future)\",\n  type = \"sentence type (factor with one level: critical)\",\n  yes_press = \"corresponding coding for the yes-button on Cedrus response box (4 = left button, 5 = right button)\",\n  KeyPress = \"key that was pressed (4 = left button, 5 = right button)\",\n  accept = \"whether the item was accepted, i.e., whether KeyPress equalled yes_press\",\n  accuracy = \"whether the acceptance was accurate (reject for a mismatch, accept for a match)\",\n  px_accuracy = \"participant's overall accuracy score\"\n)",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
+    "objectID": "slides/11-osf/osf_slides.html#reamde-renv-explanation",
+    "href": "slides/11-osf/osf_slides.html#reamde-renv-explanation",
+    "title": "Publishing analyses + Peer code review",
+    "section": "REAMDE renv explanation",
+    "text": "REAMDE renv explanation\nFor example, you could add something like this:\n\n**Reproduce analyses**: Once you open this project, `renv` will automatically be installed. After this is complete, you please run `renv::restore()` to restore the project package library. This will not affect the package versions you have already installed globally on your machine."
   },
   {
-    "objectID": "slides/07-tables/sheet-data_viz.html#section-1",
-    "href": "slides/07-tables/sheet-data_viz.html#section-1",
-    "title": "Data communication with tables",
-    "section": "3.3 ",
-    "text": "3.3 \n\nbut dict_lifetime doesn’t have the shape we want\n\neach variable name is a column name\nand its description is in the first row\n\n\n\ndict_lifetime\n\n# A tibble: 1 × 32\n  px             trial region region_n region_text eye   ff    fp    rpd   tt   \n  &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;\n1 participant I… tria… sente… numeric… text prese… whic… firs… firs… regr… tota…\n# ℹ 22 more variables: fix_count &lt;chr&gt;, reg_in &lt;chr&gt;, reg_in_count &lt;chr&gt;,\n#   reg_out &lt;chr&gt;, reg_out_count &lt;chr&gt;, rt &lt;chr&gt;, bio &lt;chr&gt;, critical &lt;chr&gt;,\n#   gender &lt;chr&gt;, item_id &lt;chr&gt;, list &lt;chr&gt;, match &lt;chr&gt;, condition &lt;chr&gt;,\n#   name &lt;chr&gt;, lifetime &lt;chr&gt;, tense &lt;chr&gt;, type &lt;chr&gt;, yes_press &lt;chr&gt;,\n#   KeyPress &lt;chr&gt;, accept &lt;chr&gt;, accuracy &lt;chr&gt;, px_accuracy &lt;chr&gt;\n\n\n\nwe want to transpose the data\n\ni.e., rotates the data so that the column names are in a row, with the descriptions in another row",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
-  },
-  {
-    "objectID": "slides/07-tables/sheet-data_viz.html#pivot_longer",
-    "href": "slides/07-tables/sheet-data_viz.html#pivot_longer",
-    "title": "Data communication with tables",
-    "section": "3.4 pivot_longer()",
-    "text": "3.4 pivot_longer()\n\ntakes wide data and makes it longer\n\nconverts headers of columns into values of a new column\ncombines the values of those columns into a new condensed column\n\ntakes a few arguments:\n\ncols: which columns do we want to combine into a single column?\nnames_to: what should we call the new column containing the previous column names?\nvalues_to: what should we call the new column containing the values from the previous columns?",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
-  },
-  {
-    "objectID": "slides/07-tables/sheet-data_viz.html#section-2",
-    "href": "slides/07-tables/sheet-data_viz.html#section-2",
-    "title": "Data communication with tables",
+    "objectID": "slides/11-osf/osf_slides.html#section-3",
+    "href": "slides/11-osf/osf_slides.html#section-3",
+    "title": "Publishing analyses + Peer code review",
     "section": "",
-    "text": "3.4.1 Pivot our data dictionary\n\nthis looks much better!\n\n\ndict_lifetime &lt;-\n  dict_lifetime |&gt; \n  pivot_longer(\n    cols = everything(),\n    names_to = \"variable\",\n    values_to = \"description\"\n  )",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
+    "text": "Checklist: Share .Rprofile and renv/activate.R\n\n\n\nYour project should now have\n\n\n.Rprofile in the project root directory\n\nrenv/activate.R in the project root directory\n\ni.e., a folder renv/ in the root directory\nand the activate.R file in this renv/ folder\n\n\na README.md file in the root directory"
   },
   {
-    "objectID": "slides/07-tables/sheet-data_viz.html#save-data-dictionary",
-    "href": "slides/07-tables/sheet-data_viz.html#save-data-dictionary",
-    "title": "Data communication with tables",
-    "section": "3.5 Save data dictionary",
-    "text": "3.5 Save data dictionary\n\nnow we can save our data dictionary just like we would any csv\n\n\nwrite_csv(dict_lifetime, here(\"data\", \"tidy_data_lifetime_pilot_dictionary.csv\"))",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
+    "objectID": "slides/11-osf/osf_slides.html#osf-repo-structure",
+    "href": "slides/11-osf/osf_slides.html#osf-repo-structure",
+    "title": "Publishing analyses + Peer code review",
+    "section": "OSF repo structure",
+    "text": "OSF repo structure\n\n\nFigure 6: Your OSF should now look like this"
   },
   {
-    "objectID": "slides/07-tables/sheet-data_viz.html#tables-as-latex-code",
-    "href": "slides/07-tables/sheet-data_viz.html#tables-as-latex-code",
-    "title": "Data communication with tables",
-    "section": "4.1 Tables as LaTeX code",
-    "text": "4.1 Tables as LaTeX code\n\nyou can add the argument \"latex\" to print LaTeX code for a table in the Console\n\nyou can then cut and paste this code into a LaTeX (or Overleaf) script\n\n\n\ndict_lifetime |&gt; \n  knitr::kable(\"latex\") \n\n\nbut be careful, if you’re rendering to HTML the table won’t be printed if you use \"latex\"\n\n\n4.1.1 Exercise\n\ninstall the knitr package (install.packages(\"knitr\"))\nprint dict_lifetime, but only for the following variables:\n\npx, trial, region_text, ff, fp, and condition\n\nuse kable() from knitr to print the table\n\n\n\n\n\n\n\n\n\n\nvariable\ndescription\n\n\n\n\npx\nparticipant ID (factor)\n\n\ntrial\ntrial number (ordered factor)\n\n\nregion_text\ntext presented in the region (string)\n\n\nff\nfirst-fixation times in milliseconds (continuous, values can be 0&lt;)\n\n\nfp\nfirst-pass reading times in milliseconds (numeric, values can be 0&lt;)\n\n\ncondition\ncondition: lifetime (dead, alive) + tense (PP, SF) (factor)",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
+    "objectID": "slides/11-osf/osf_slides.html#sharing-your-project",
+    "href": "slides/11-osf/osf_slides.html#sharing-your-project",
+    "title": "Publishing analyses + Peer code review",
+    "section": "Sharing your project",
+    "text": "Sharing your project\n\nwe need to share our project with others\n\nyour project is still private\nso you need to produce a link because the URL won’t work for non-contributors\n\n\nproduce a View-only link\n\nyou can do this in Settings (top right)\ngive an informative name (so you remember why you created this link)\n\n\nif you select Anonymize, your name will be removed from the project\n\nthis is useful for e.g., blind peer review\nbut will not remove your name from your scripts!"
   },
   {
-    "objectID": "slides/07-tables/sheet-data_viz.html#section-3",
-    "href": "slides/07-tables/sheet-data_viz.html#section-3",
-    "title": "Data communication with tables",
-    "section": "6.1 ",
-    "text": "6.1",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
+    "objectID": "slides/11-osf/osf_slides.html#swapping-project-urls",
+    "href": "slides/11-osf/osf_slides.html#swapping-project-urls",
+    "title": "Publishing analyses + Peer code review",
+    "section": "Swapping project URLs",
+    "text": "Swapping project URLs\n\ngo to Moodle and add your OSF repo URL\ngo to someone else’s OSF repo and download their project\n\ninspect the project metafiles (e.g., README)\ntry to reproduce the analyses, can you?"
   },
   {
-    "objectID": "slides/07-tables/sheet-data_viz.html#kableextrakable_styling",
-    "href": "slides/07-tables/sheet-data_viz.html#kableextrakable_styling",
-    "title": "Data communication with tables",
-    "section": "7.1 kableExtra::kable_styling()",
-    "text": "7.1 kableExtra::kable_styling()\n\nwe’ll first create a little summary table using the iris dataset which comes built-in with R\n\n\nsum_iris &lt;- iris |&gt; \n  summarise(mean = mean(Sepal.Length),\n            sd = sd(Sepal.Length),\n            n = n(),\n            .by = Species)\n\n\nand we’ll print the summary using kable_styling() (Table 1)\n\n\nsum_iris |&gt; \n  knitr::kable() |&gt; \n  kableExtra::kable_styling()\n\n\n\nTable 1: Example output of an table using the kableExtra package\n\n\n\n\n\n\n\nSpecies\nmean\nsd\nn\n\n\n\n\nsetosa\n5.006\n0.3524897\n50\n\n\nversicolor\n5.936\n0.5161711\n50\n\n\nvirginica\n6.588\n0.6358796\n50",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
-  },
-  {
-    "objectID": "slides/07-tables/sheet-data_viz.html#flextable",
-    "href": "slides/07-tables/sheet-data_viz.html#flextable",
-    "title": "Data communication with tables",
-    "section": "7.2 flextable",
-    "text": "7.2 flextable\n\nprint the same summary using flextable() (Table 2)\n\n\nsum_iris |&gt; \n  flextable::flextable()\n\n\n\nTable 2: Example output of an table using the flextable package\n\n\n\nSpeciesmeansdnsetosa5.0060.352489750versicolor5.9360.516171150virginica6.5880.635879650",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
-  },
-  {
-    "objectID": "slides/07-tables/sheet-data_viz.html#papajaapa_table",
-    "href": "slides/07-tables/sheet-data_viz.html#papajaapa_table",
-    "title": "Data communication with tables",
-    "section": "7.3 papaja::apa_table()",
-    "text": "7.3 papaja::apa_table()\n\nnow run a linear mixed model on the iris data\n\n\nlmm_iris &lt;-\n  lme4::lmer(Sepal.Width ~ Sepal.Length + Petal.Width +\n               (1|Species), data = iris)\n\n\nand print a model summary table using apa_table() (Table 3)\n\n\nlmm_iris |&gt; papaja::apa_print() |&gt; \npapaja::apa_table(caption = NULL)\n\n\n\nTable 3: Example output of an LMM using papaja package\n\n\n\n\n(#tab:tbl-lmm_iris)\n\n\nTerm\n\\(\\hat{\\beta}\\)\n95% CI\n\\(t\\)\n\n\n\n\nIntercept\n0.85\n[-0.34, 2.05]\n1.39\n\n\nSepal Length\n0.27\n[0.18, 0.36]\n5.85\n\n\nPetal Width\n0.51\n[0.28, 0.74]\n4.37",
-    "crumbs": [
-      "D. Palleschi",
-      "Data communication with tables"
-    ]
-  },
-  {
-    "objectID": "slides/07-tables/slides-data_viz.html#variable-names",
-    "href": "slides/07-tables/slides-data_viz.html#variable-names",
-    "title": "Data communication with tables",
-    "section": "Variable names",
-    "text": "Variable names\n\nwe can list the names of all variables in a dataset using names()\n\n\n\nnames(df_lifetime)\n\n\n\n [1] \"px\"            \"trial\"         \"region\"        \"region_n\"     \n [5] \"region_text\"   \"eye\"           \"ff\"            \"fp\"           \n [9] \"rpd\"           \"tt\"            \"fix_count\"     \"reg_in\"       \n[13] \"reg_in_count\"  \"reg_out\"       \"reg_out_count\" \"rt\"           \n[17] \"bio\"           \"critical\"      \"gender\"        \"item_id\"      \n[21] \"list\"          \"match\"         \"condition\"     \"name\"         \n[25] \"lifetime\"      \"tense\"         \"type\"          \"yes_press\"    \n[29] \"KeyPress\"      \"accept\"        \"accuracy\"      \"px_accuracy\"  \n\n\n\nbut we need to be able to put these names into a single column\n\nwhere each row contains one variable name\nand other columns contain information like description and data class"
-  },
-  {
-    "objectID": "slides/07-tables/slides-data_viz.html#section",
-    "href": "slides/07-tables/slides-data_viz.html#section",
-    "title": "Data communication with tables",
+    "objectID": "slides/11-osf/osf_slides.html#section-4",
+    "href": "slides/11-osf/osf_slides.html#section-4",
+    "title": "Publishing analyses + Peer code review",
     "section": "",
-    "text": "copy the output of dput(coldesc) and assign it to an object\n\ntip: you can reformat the code by highlighting it and using Cmd/Ctrl+Shift+A\n\nor in the menu bar: Code &gt; Reformat Code\n\n\n\n\nreplace c() with tibble() to create a dataframe\n\nand fill in the quotations with description of the data\n\n\n\n\ndict_lifetime &lt;- tibble(\n  px = \"participant ID (factor)\",\n  trial = \"trial number (ordered factor)\",\n  region = \"sentence region (order factor)\",\n  region_n = \"numerical representation of sentence region (ordered factor)\",\n  region_text = \"text presented in the region (string)\",\n  eye = \"which eye was tracking: right or left (binomial)\",\n  ff = \"first-fixation times in milliseconds (continuous, values can be 0&lt;)\",\n  fp = \"first-pass reading times in milliseconds (numeric, values can be 0&lt;)\",\n  rpd = \"regression-path duration in milliseconds (numeric, values can be 0&lt;)\",\n  tt = \"total reading time in milliseconds (numeric, values can be 0&lt;)\",\n  fix_count = \"number of total fixations in the region (count)\",\n  reg_in = \"whether of a regression was made into the regions (binomial: 0 = no, 1 = yes)\",\n  reg_in_count = \"number of fixations into the region (count)\",\n  reg_out = \"whether of a regression was made out of the regions (binomial: 0 = no, 1 = yes)\",\n  reg_out_count = \"number of fixations out of the region (count)\",\n  rt = \"reaction time from critical sentence presentation to button press (continuous, values can be 0&lt;)\",\n  bio = \"lifetime biography context sentence (string)\",\n  critical = \"critical sentence (string)\",\n  gender = \"gender of stimulus subject (binomial: male, female)\",\n  item_id = \"item identification number (critical items: 1-80)\",\n  list = \"experimental list version: base list version (1-4) and whether the yes-button was coded as 4 or 5 (factor: 14, 15, 24, 25, 34, 35, 44, 45)\",\n  match = \"whether the referent-lifetime was congruent with tense\",\n  condition = \"condition: lifetime (dead, alive) + tense (PP, SF) (factor)\",\n  name = \"name of stimulis subject (string)\",\n  lifetime = \"lifetime status of stimulus subject at time of experiment (binomial: dead, alive)\",\n  tense = \"tense used in critical sentence (binomail: PP = present perfect, SF = simple future)\",\n  type = \"sentence type (factor with one level: critical)\",\n  yes_press = \"corresponding coding for the yes-button on Cedrus response box (4 = left button, 5 = right button)\",\n  KeyPress = \"key that was pressed (4 = left button, 5 = right button)\",\n  accept = \"whether the item was accepted, i.e., whether KeyPress equalled yes_press\",\n  accuracy = \"whether the acceptance was accurate (reject for a mismatch, accept for a match)\",\n  px_accuracy = \"participant's overall accuracy score\"\n)"
+    "text": "Anonymising your scripts (optional)\n\n\n\nIf you have a relatively large project with your name at the beginning of multiple scripts, it can be tedious to manually remove it. And you might not be sure you actually took your name out of everything!\nThis can be used using RStudio’s Global Find:\n\npress Cmd+Shift+F\n\nin the pop-up, choose your filepath (for me: the OSF folder only) and hit enter\nthen toggle to ‘Replace’ when a tab pops up next to the Terminal\ntype in your replacement (e.g., [Anonymized for peer review]), and hit “Replace All”\n\nImportant: this will work for HTML and R/Quarto/Rmd scripts, but not for PDFs! so you might want to re-render all PDFs. As far as I can tell you have to re-render each PDF. If you’re working in a Quarto project (and not an .Rproj), then you can use quarto render subfoldername --to pdf in the Terminal to re-render only the OSF PDFs. We didn’t discuss Quarto projects in this course, however.\nAfter the manuscript is accepted, you can then reverse this step: use the Global Find to replace [Anonymized for peer review] with your name! This is why I suggest surrounding the phrase with [], it ensures you don’t accidentally replace the string ‘anonymized for peer review’ elsewhere in your files (e.g., maybe you wrote in some analysis plan “all scripts will be anonymized for peer review”, which would then be changed to “all scripts will be Daniela Palleschi” if I had replaced Anonymized for peer review with my name)."
   },
   {
-    "objectID": "slides/07-tables/slides-data_viz.html#section-1",
-    "href": "slides/07-tables/slides-data_viz.html#section-1",
-    "title": "Data communication with tables",
+    "objectID": "slides/11-osf/osf.html",
+    "href": "slides/11-osf/osf.html",
+    "title": "Publishing analyses + Peer code review",
     "section": "",
-    "text": "but dict_lifetime doesn’t have the shape we want\n\neach variable name is a column name\nand its description is in the first row\n\n\n\n\ndict_lifetime\n\n# A tibble: 1 × 32\n  px             trial region region_n region_text eye   ff    fp    rpd   tt   \n  &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;\n1 participant I… tria… sente… numeric… text prese… whic… firs… firs… regr… tota…\n# ℹ 22 more variables: fix_count &lt;chr&gt;, reg_in &lt;chr&gt;, reg_in_count &lt;chr&gt;,\n#   reg_out &lt;chr&gt;, reg_out_count &lt;chr&gt;, rt &lt;chr&gt;, bio &lt;chr&gt;, critical &lt;chr&gt;,\n#   gender &lt;chr&gt;, item_id &lt;chr&gt;, list &lt;chr&gt;, match &lt;chr&gt;, condition &lt;chr&gt;,\n#   name &lt;chr&gt;, lifetime &lt;chr&gt;, tense &lt;chr&gt;, type &lt;chr&gt;, yes_press &lt;chr&gt;,\n#   KeyPress &lt;chr&gt;, accept &lt;chr&gt;, accuracy &lt;chr&gt;, px_accuracy &lt;chr&gt;\n\n\n\nwe want to transpose the data\n\ni.e., rotates the data so that the column names are in a row, with the descriptions in another row"
-  },
-  {
-    "objectID": "slides/07-tables/slides-data_viz.html#pivot_longer",
-    "href": "slides/07-tables/slides-data_viz.html#pivot_longer",
-    "title": "Data communication with tables",
-    "section": "pivot_longer()",
-    "text": "pivot_longer()\n\ntakes wide data and makes it longer\n\nconverts headers of columns into values of a new column\ncombines the values of those columns into a new condensed column\n\n\ntakes a few arguments:\n\n\ncols: which columns do we want to combine into a single column?\n\nnames_to: what should we call the new column containing the previous column names?\n\nvalues_to: what should we call the new column containing the values from the previous columns?"
-  },
-  {
-    "objectID": "slides/07-tables/slides-data_viz.html#save-data-dictionary",
-    "href": "slides/07-tables/slides-data_viz.html#save-data-dictionary",
-    "title": "Data communication with tables",
-    "section": "Save data dictionary",
-    "text": "Save data dictionary\n\nnow we can save our data dictionary just like we would any csv\n\n\nwrite_csv(dict_lifetime, here(\"data\", \"tidy_data_lifetime_pilot_dictionary.csv\"))"
-  },
-  {
-    "objectID": "slides/07-tables/slides-data_viz.html#tables-as-latex-code",
-    "href": "slides/07-tables/slides-data_viz.html#tables-as-latex-code",
-    "title": "Data communication with tables",
-    "section": "Tables as LaTeX code",
-    "text": "Tables as LaTeX code\n\nyou can add the argument \"latex\" to print LaTeX code for a table in the Console\n\nyou can then cut and paste this code into a LaTeX (or Overleaf) script\n\n\n\n\ndict_lifetime |&gt; \n  knitr::kable(\"latex\") \n\n\nbut be careful, if you’re rendering to HTML the table won’t be printed if you use \"latex\""
-  },
-  {
-    "objectID": "slides/07-tables/slides-data_viz.html#kableextrakable_styling",
-    "href": "slides/07-tables/slides-data_viz.html#kableextrakable_styling",
-    "title": "Data communication with tables",
-    "section": "kableExtra::kable_styling()",
-    "text": "kableExtra::kable_styling()\n\nwe’ll first create a little summary table using the iris dataset which comes built-in with R\n\n\nsum_iris &lt;- iris |&gt; \n  summarise(mean = mean(Sepal.Length),\n            sd = sd(Sepal.Length),\n            n = n(),\n            .by = Species)\n\n\nand we’ll print the summary using kable_styling() (Table 1)\n\n\nsum_iris |&gt; \n  knitr::kable() |&gt; \n  kableExtra::kable_styling()\n\n\nTable 1: Example output of an table using the kableExtra package\n\n\n\n\n\nSpecies\nmean\nsd\nn\n\n\n\nsetosa\n5.006\n0.3524897\n50\n\n\nversicolor\n5.936\n0.5161711\n50\n\n\nvirginica\n6.588\n0.6358796\n50"
-  },
-  {
-    "objectID": "slides/07-tables/slides-data_viz.html#flextable",
-    "href": "slides/07-tables/slides-data_viz.html#flextable",
-    "title": "Data communication with tables",
-    "section": "flextable",
-    "text": "flextable\n\nprint the same summary using flextable() (Table 2)\n\n\nsum_iris |&gt; \n  flextable::flextable()\n\n\nTable 2: Example output of an table using the flextable package\n\n\n\n\n\n\nSpecies\nmean\nsd\nn\n\n\n\nsetosa\n5.006\n0.3524897\n50\n\n\nversicolor\n5.936\n0.5161711\n50\n\n\nvirginica\n6.588\n0.6358796\n50"
-  },
-  {
-    "objectID": "slides/07-tables/slides-data_viz.html#papajaapa_table",
-    "href": "slides/07-tables/slides-data_viz.html#papajaapa_table",
-    "title": "Data communication with tables",
-    "section": "papaja::apa_table()",
-    "text": "papaja::apa_table()\n\nnow run a linear mixed model on the iris data\n\n\nlmm_iris &lt;-\n  lme4::lmer(Sepal.Width ~ Sepal.Length + Petal.Width +\n               (1|Species), data = iris)\n\n\nand print a model summary table using apa_table() (Table 3)\n\n\nlmm_iris |&gt; papaja::apa_print() |&gt; \npapaja::apa_table(caption = NULL)\n\n\nTable 3: Example output of an LMM using papaja package\n\n\n\n(#tab:tbl-lmm_iris)\n\nTerm\n\\(\\hat{\\beta}\\)\n95% CI\n\\(t\\)\n\n\n\nIntercept\n0.85\n[-0.34, 2.05]\n1.39\n\n\nSepal Length\n0.27\n[0.18, 0.36]\n5.85\n\n\nPetal Width\n0.51\n[0.28, 0.74]\n4.37"
-  },
-  {
-    "objectID": "slides/09-packages/packages_slides.html#cran-packages",
-    "href": "slides/09-packages/packages_slides.html#cran-packages",
-    "title": "Package management",
-    "section": "CRAN packages",
-    "text": "CRAN packages\n\nthe Comprehensive R Archive Network: R’s central software repository\n\ncurrently 20,888 available!\n\n\nan archive of the most recent package versions\nfor a package to be included in the CRAN, it must go through a lot of tests and checks\n\nany updates or changes must again be reviewed before being added to CRAN\n\n\nCRAN packages can be installed using install.packages(), as we’ve been doing"
-  },
-  {
-    "objectID": "slides/09-packages/packages_slides.html#section",
-    "href": "slides/09-packages/packages_slides.html#section",
-    "title": "Package management",
-    "section": "",
-    "text": "pacman package (optional)\n\n\n\n\na package management tool\nwe’ll use the p_load() function to replace install.packages() and library() in our worksflow\n\ntakes a list of packages, and checks if each package is installed already\nif yes, the package is loaded (as with library())\nif no, the package is installed (as with install.packages()) and then loaded (as with library())\n\n\nonly works with CRAN packages (which is all we have for now anyway), although pacman has a function for developer packages (which we’ll talk about later)\n\nTo get started: install pacman (install.packages(\"pacman\")). Then, you can load in your packages using pacman::p_load(), or with a long list of library() calls like we’ve previously done (you see why I prefer p_load()!).\n\n\n\n\n\nLoading packages with `pacman::p_load()`\n\npacman::p_load(tidyverse, here, janitor)\n\n\n\n\n\n\nLoading packages with `library()`\n\nlibrary(tidyverse)\nlibrary(here)\nlibrary(janitor)\n\n\n\n\nThe additional benefit of p_load() is that, if you don’t actually have one of the packages installed it will automatically be installed and then loaded. With library() you would instead get an error message."
-  },
-  {
-    "objectID": "slides/09-packages/packages_slides.html#developer-packages",
-    "href": "slides/09-packages/packages_slides.html#developer-packages",
-    "title": "Package management",
-    "section": "Developer packages",
-    "text": "Developer packages\n\noften hosted on GitHub or GitLab, where packages are typically developed before being reviewed and added to the CRAN\n\nbenefit: you can make whatever you changes to your package that you like without having to pass a review on the CRAN\n\n\nsince CRAN packages are often developed on GH or GL, pre-release (beta) versions will often be available on a GH repo\npackages/package versions on GH cannot be installed via install.packages()\n\nwe’ll see later how to do this"
-  },
-  {
-    "objectID": "slides/09-packages/packages_slides.html#dependencies",
-    "href": "slides/09-packages/packages_slides.html#dependencies",
-    "title": "Package management",
-    "section": "Dependencies",
-    "text": "Dependencies\n\nsome packages are dependent on specific versions of other packages\n\nif so, you will be prompted during installation to install these dependencies\nbut beware: sometimes this overwrites an existing package version you already have, which can break code that was written with this older version\n\n\nthis is especially true because, as our projects are currently set up, we have one global package version on our computer\n\nso analyses we ran 3 years ago would’ve used older versions of packages\nwhen we update these packages for current analyses, this might disrupt the code from 3 years ago\n\n\nwe’ll see one (partial) solution for this problem soon"
-  },
-  {
-    "objectID": "slides/09-packages/packages_slides.html#updating-packages",
-    "href": "slides/09-packages/packages_slides.html#updating-packages",
-    "title": "Package management",
-    "section": "Updating packages",
-    "text": "Updating packages\n\nto check if a package needs updating, you can:\n\ngo to Tools &gt; Check for package updates, or\nrun update.packages()\n\n\n\neach will tell you which packages can be updated to which versions\n\nand give you the option of updating these packages"
-  },
-  {
-    "objectID": "slides/09-packages/packages_slides.html#package-library",
-    "href": "slides/09-packages/packages_slides.html#package-library",
-    "title": "Package management",
-    "section": "Package library",
-    "text": "Package library\n\nwhere do all these installed packages go?\n\na folder that contains all the packages, called a library\n\n\nto find out where this (global) package library is, run .libPaths()\n\n\n\n.libPaths()\n\n\nthe output should currently produce a single file path, something like:\n\n\n&gt; .libPaths()\n[1] \"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library\"\n\n\nthis is the location of your global package library"
-  },
-  {
-    "objectID": "slides/09-packages/packages_slides.html#package-versions-and-reproducibility",
-    "href": "slides/09-packages/packages_slides.html#package-versions-and-reproducibility",
-    "title": "Package management",
-    "section": "Package versions and reproducibility",
-    "text": "Package versions and reproducibility\n\nwe’ve seen that package versions and dependencies can easily break our existing code\nthis means that older projects that were built using previous package versions won’t be able to run if we update these packages in our global package library\n\nalso a problem in the future: our current code will depend on the package versions we’re using today\n\n\nwe need a project-relative package library that is independent of the global library\n\nwe’ll use the renv package to do this"
-  },
-  {
-    "objectID": "slides/09-packages/packages_slides.html#limits-of-renv",
-    "href": "slides/09-packages/packages_slides.html#limits-of-renv",
-    "title": "Package management",
-    "section": "Limits of renv\n",
-    "text": "Limits of renv\n\nrenv…\n\n\n…can\n\nkeep track of packages and their versions\ncreate a project-specific library per R version\nautomatically load/install these package versions\n\n\n…cannot\n\nmake a project reproducible across all computational environments\nload/install package versions that are incompatible with current R versions or computational environments\nguarantee full long-term reproduciblity"
-  },
-  {
-    "objectID": "slides/09-packages/packages_slides.html#renv-workflow",
-    "href": "slides/09-packages/packages_slides.html#renv-workflow",
-    "title": "Package management",
-    "section": "\nrenv workflow",
-    "text": "renv workflow\n\n\nFigure 1 visualises a project workflow with renv\n\nnext we’ll see how we use these functions to set-up and maintain a project-specific package library\n\n\n\nFigure 1: Source: CRAN vignette ‘Introduction to renv’ (all rights reserved)"
-  },
-  {
-    "objectID": "slides/09-packages/packages_slides.html#section-1",
-    "href": "slides/09-packages/packages_slides.html#section-1",
-    "title": "Package management",
-    "section": "",
-    "text": "you should see something like this in the Console:\n\n\n- Linking packages into the project library ... [137/137] Done!\n- Resolving missing dependencies ... \n# Installing packages --------------------------------------------------------\nThe following package(s) will be updated in the lockfile:\n\n# CRAN -----------------------------------------------------------------------\n[long list of packages and their versions]\n\nThe version of R recorded in the lockfile will be updated:\n- R               [* -&gt; 4.4.0]\n\n- Lockfile written to \"~/Documents/IdSL/Teaching/SoSe24/M.A./r4repro_student/renv.lock\".\n\nRestarting R session...\n\n- Project '~/Documents/IdSL/Teaching/SoSe24/M.A./r4repro_student' loaded. [renv 1.0.7]"
-  },
-  {
-    "objectID": "slides/09-packages/packages_slides.html#new-files",
-    "href": "slides/09-packages/packages_slides.html#new-files",
-    "title": "Package management",
-    "section": "New files",
-    "text": "New files\n\n\nrenv::init() creates three new files or directories\n\nrenv.lock\nrenv/\n.Rprofile\n\n\nexplore these files/folders and see if you can figure out what they contain"
-  },
-  {
-    "objectID": "slides/09-packages/packages_slides.html#renv.lock",
-    "href": "slides/09-packages/packages_slides.html#renv.lock",
-    "title": "Package management",
-    "section": "renv.lock",
-    "text": "renv.lock\n\ncontains metadata about the packages and their versions that you have installed\n\nthis is enough metadata to re-install these package versions on a new machine\n\n\ntwo main components:\n\n\nR: info on R version and list of repositories where packages were installed from\n\nPackages: a record per package with necessary info for re-installation"
-  },
-  {
-    "objectID": "slides/09-packages/packages_slides.html#renv-1",
-    "href": "slides/09-packages/packages_slides.html#renv-1",
-    "title": "Package management",
-    "section": "renv/",
-    "text": "renv/\n\nimportantly, contains your project-relative library/\n\nthis is instead of using the one library on your computer\n\n\nprovides us with “isolation”: the package versions used in an R Project is independent of the global library\n\nin other words, different R Projects can use different package versions\nupdating packages globally, or in one project, will not affect other project libraries"
-  },
-  {
-    "objectID": "slides/09-packages/packages_slides.html#rprofile",
-    "href": "slides/09-packages/packages_slides.html#rprofile",
-    "title": "Package management",
-    "section": ".RProfile",
-    "text": ".RProfile\n\nruns whenver you (re-)start your R Project\nat this point, should contain a single line:\n\n\nsource(\"renv/activate.R\")\n\n\nif you go to this R script, you’ll send a lot of code\n\nthis essentially loads in your project library"
-  },
-  {
-    "objectID": "slides/09-packages/packages_slides.html#project-library",
-    "href": "slides/09-packages/packages_slides.html#project-library",
-    "title": "Package management",
-    "section": "Project library",
-    "text": "Project library\n\nnow if we re-run .libPaths(), we should see our project library\n\n\n\n\nRun in the Console\n\n.libPaths()\n\n\n\n&gt; .libPaths()\n[1] \"/Users/danielapalleschi/Documents/IdSL/Teaching/SoSe24/M.A./r4repro_SoSe2024/renv/library/macos/R-4.4/aarch64-apple-darwin20\"\n[2] \"/Users/danielapalleschi/Library/Caches/org.R-project.R/R/renv/sandbox/macos/R-4.4/aarch64-apple-darwin20/f7156815\"  \n\n\n\n[1] is the local project library path\n\n[2] is the path to a global package cache that renv maintains so that you don’t repeatedly download packages to your machine for each project library\n\ne.g., if we already have ggplot2 installed globally on our machine, whenever we want to add it to a project library we don’t need to re-install it entirely from the CRAN (unless we want a different package version)"
-  },
-  {
-    "objectID": "slides/09-packages/packages_slides.html#installing-a-new-package",
-    "href": "slides/09-packages/packages_slides.html#installing-a-new-package",
-    "title": "Package management",
-    "section": "Installing a new package",
-    "text": "Installing a new package\n\nlet’s also install a package I’m confident you don’t already have on your machine (as you might’ve already worked with lme4 in other classes)\n\n[brms] for Bayesian regression models using Stan\n\n\n\n\nCodeinstall.packages(\"brms\")\nrenv::install(\"brms\")\n\n\n\nand if we want a specific package version:\n\n\nrenv::install(\"brms@2.19.0\")"
-  },
-  {
-    "objectID": "slides/09-packages/packages_slides.html#installing-developer-packages",
-    "href": "slides/09-packages/packages_slides.html#installing-developer-packages",
-    "title": "Package management",
-    "section": "Installing developer packages",
-    "text": "Installing developer packages\n\nnot all packages are available on the CRAN\n\nwe can install developer packages from GitHub or GitLab using, e.g., the install_github() function from either the remotes or devtools package (both are very common)\n\n\n\n\nremotes::install_github(\"paul-buerkner/brms\")\ndevtools::install_github(\"paul-buerkner/brms\")\n\n\n\nor we can use renv::install()\n\n\n\n# most recent version\nrenv::install(\"paul-buerkner/brms\")\n\n\n# a specific previous version, for which you'll need the commit ID\nrenv::install(\"paul-buerkner/brms@db6ddde90ba533cb3942bc5a62b03803773b9844\")"
-  },
-  {
-    "objectID": "slides/09-packages/packages_slides.html#updating-renv.lock-file",
-    "href": "slides/09-packages/packages_slides.html#updating-renv.lock-file",
-    "title": "Package management",
-    "section": "Updating renv.lock file",
-    "text": "Updating renv.lock file\n\nto update the lockfile and library, simply run:\n\n\nrenv::snapshot()\n\n\nyou’ll be given a list of changes to be made and asked if you want to proceed\n\nif not problems are mentioned, then you can go ahead"
-  },
-  {
-    "objectID": "slides/09-packages/packages.html",
-    "href": "slides/09-packages/packages.html",
-    "title": "Package management",
-    "section": "",
-    "text": "Today we will…\n\nlearn about R package repositories\nlearn how package dependencies can break code\nuse the renv package to create and maintain a project-relative package library",
+    "text": "Today we will…\n\nset-up our first OSF project\nshare necessary files to make our OSF project reproducible\nconduct a code review of our own project\nconduct a peer code review",
     "crumbs": [
       "D. Palleschi",
-      "Package management"
+      "Publishing analyses + Peer code review"
     ]
   },
   {
-    "objectID": "slides/09-packages/packages.html#cran-packages",
-    "href": "slides/09-packages/packages.html#cran-packages",
-    "title": "Package management",
-    "section": "1.1 CRAN packages",
-    "text": "1.1 CRAN packages\n\nthe Comprehensive R Archive Network: R’s central software repository\n\ncurrently 20,888 available!\n\nan archive of the most recent package versions\nfor a package to be included in the CRAN, it must go through a lot of tests and checks\n\nany updates or changes must again be reviewed before being added to CRAN\n\nCRAN packages can be installed using install.packages(), as we’ve been doing\n\n\n\n\n\n\n\npacman package (optional)\n\n\n\n\n\na package management tool\nwe’ll use the p_load() function to replace install.packages() and library() in our worksflow\n\ntakes a list of packages, and checks if each package is installed already\nif yes, the package is loaded (as with library())\nif no, the package is installed (as with install.packages()) and then loaded (as with library())\n\nonly works with CRAN packages (which is all we have for now anyway), although pacman has a function for developer packages (which we’ll talk about later)\n\nTo get started: install pacman (install.packages(\"pacman\")). Then, you can load in your packages using pacman::p_load(), or with a long list of library() calls like we’ve previously done (you see why I prefer p_load()!).\n\n\n\n\n\nLoading packages with `pacman::p_load()`\n\npacman::p_load(tidyverse, here, janitor)\n\n\n\n\n\n\nLoading packages with `library()`\n\nlibrary(tidyverse)\nlibrary(here)\nlibrary(janitor)\n\n\n\n\nThe additional benefit of p_load() is that, if you don’t actually have one of the packages installed it will automatically be installed and then loaded. With library() you would instead get an error message.",
+    "objectID": "slides/11-osf/osf.html#private-or-public",
+    "href": "slides/11-osf/osf.html#private-or-public",
+    "title": "Publishing analyses + Peer code review",
+    "section": "3.1 Private or public",
+    "text": "3.1 Private or public\n\nyou should notice near the top right corner a button ‘Make Public’\n\nthis tells you that your project is currently private\nthis means nobody can see it but you (or any collaborators you add)\n\ntypically you would make a repository public when it has been accepted for publication, or if you publish a pre-print\n\nyou can also make it public before this, but this is something to discuss with your collaborators",
     "crumbs": [
       "D. Palleschi",
-      "Package management"
+      "Publishing analyses + Peer code review"
     ]
   },
   {
-    "objectID": "slides/09-packages/packages.html#developer-packages",
-    "href": "slides/09-packages/packages.html#developer-packages",
-    "title": "Package management",
-    "section": "1.2 Developer packages",
-    "text": "1.2 Developer packages\n\noften hosted on GitHub or GitLab, where packages are typically developed before being reviewed and added to the CRAN\n\nbenefit: you can make whatever you changes to your package that you like without having to pass a review on the CRAN\n\nsince CRAN packages are often developed on GH or GL, pre-release (beta) versions will often be available on a GH repo\npackages/package versions on GH cannot be installed via install.packages()\n\nwe’ll see later how to do this",
+    "objectID": "slides/11-osf/osf.html#contributors",
+    "href": "slides/11-osf/osf.html#contributors",
+    "title": "Publishing analyses + Peer code review",
+    "section": "3.2 Contributors",
+    "text": "3.2 Contributors\n\nrepository contributors are typically co-authors or collaborators for a project\nclick on the ‘Contributors’ tab (top right of the screen)\n\nclick on ‘+ Add’, find my account, and add me as a collaborator with ‘Read’ rights\nmake sure the ‘Bibliographic Contributor’ button is checked\nthis just means that I will be included as bibliographic author if this repo is ever cited\n\ngo back to the project page, do you see any changes?",
     "crumbs": [
       "D. Palleschi",
-      "Package management"
+      "Publishing analyses + Peer code review"
     ]
   },
   {
-    "objectID": "slides/09-packages/packages.html#dependencies",
-    "href": "slides/09-packages/packages.html#dependencies",
-    "title": "Package management",
-    "section": "1.3 Dependencies",
-    "text": "1.3 Dependencies\n\nsome packages are dependent on specific versions of other packages\n\nif so, you will be prompted during installation to install these dependencies\nbut beware: sometimes this overwrites an existing package version you already have, which can break code that was written with this older version\n\nthis is especially true because, as our projects are currently set up, we have one global package version on our computer\n\nso analyses we ran 3 years ago would’ve used older versions of packages\nwhen we update these packages for current analyses, this might disrupt the code from 3 years ago\n\nwe’ll see one (partial) solution for this problem soon",
+    "objectID": "slides/11-osf/osf.html#adding-files",
+    "href": "slides/11-osf/osf.html#adding-files",
+    "title": "Publishing analyses + Peer code review",
+    "section": "3.3 Adding files",
+    "text": "3.3 Adding files\n\nour purpose for creating an OSF project was to share our data and materials\n\nto do this, we navigate to the ‘Files’ tab\n\nrather unfortunately, we can only upload files (i.e., not entire folders)\n\nthis has the benefit of meaning our folder structure must be intentional\nbut the drawback that it’s quite tedious if you want to share a large project\n\nlet’s start by adding our data and scripts\n\nadd a folder called data\nand another folder called scripts or code, or whatever you prefer",
     "crumbs": [
       "D. Palleschi",
-      "Package management"
+      "Publishing analyses + Peer code review"
     ]
   },
   {
-    "objectID": "slides/09-packages/packages.html#updating-packages",
-    "href": "slides/09-packages/packages.html#updating-packages",
-    "title": "Package management",
-    "section": "2.1 Updating packages",
-    "text": "2.1 Updating packages\n\nto check if a package needs updating, you can:\n\ngo to Tools &gt; Check for package updates, or\nrun update.packages()\n\neach will tell you which packages can be updated to which versions\n\nand give you the option of updating these packages",
+    "objectID": "slides/11-osf/osf.html#adding-data",
+    "href": "slides/11-osf/osf.html#adding-data",
+    "title": "Publishing analyses + Peer code review",
+    "section": "3.4 Adding data",
+    "text": "3.4 Adding data\n\nunder data, add the three csv files you presumably have in the same folder in your project (drag and drop them, or select the big green +)\n\ndata_lifetime_pilot.csv\ntidy_data_lifetime_pilot.csv\ntidy_data_lifetime_pilot_dictionary.csv",
     "crumbs": [
       "D. Palleschi",
-      "Package management"
+      "Publishing analyses + Peer code review"
     ]
   },
   {
-    "objectID": "slides/09-packages/packages.html#package-library",
-    "href": "slides/09-packages/packages.html#package-library",
-    "title": "Package management",
-    "section": "2.2 Package library",
-    "text": "2.2 Package library\n\nwhere do all these installed packages go?\n\na folder that contains all the packages, called a library\n\nto find out where this (global) package library is, run .libPaths()\n\n\n.libPaths()\n\n\nthe output should currently produce a single file path, something like:\n\n\n&gt; .libPaths()\n[1] \"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library\"\n\n\nthis is the location of your global package library",
+    "objectID": "slides/11-osf/osf.html#adding-scripts",
+    "href": "slides/11-osf/osf.html#adding-scripts",
+    "title": "Publishing analyses + Peer code review",
+    "section": "3.5 Adding scripts",
+    "text": "3.5 Adding scripts\n\nunder the scripts folder add the scripts where we worked with the data:\n\nour wrangling script\nour tables script\nour data visualisation script\n\n\n\n3.5.1 Adding PDF output\n\noptionally, you can also upload the PDF output produced by each script\n\nthis means that anybody viewing your project doesn’t have to download the Quarto scripts to see what was done (as they aren’t viewable in-browser)\n\n\n\n\n3.5.2 Structuring your scripts/ folder\n\nunlike the data folder, how you organise and name this folder on OSF is more flexible\n\nbecause we (likely) aren’t accessing these scripts from somewhere else in the project (unlike loading data from the data folder)\n\nyou can include them in sub-folders if you prefer\n\nthe structure of this folder is organisational, and not fundamental to reproducibility\nmore organised folders make it easier to navigate for someone not familiar with the project structure\nkeeping this structure identical to your actual project structure is also ideal for on-going larger projects, but it’s up to you\n\n\n\n\n\n\n\n\nChecklist: Share data and code\n\n\n\n\nAt this point, your OSF project should\n\nbe private (this is the default for a new project)\nhave me as a collaborator\ncontain the folders data/ and scripts/\n\nwhich in turn contain the 3 CSV files and 3 Quarto scripts\nideally scripts/ will also contain the 3 PDF script outputs",
     "crumbs": [
       "D. Palleschi",
-      "Package management"
+      "Publishing analyses + Peer code review"
     ]
   },
   {
-    "objectID": "slides/09-packages/packages.html#package-versions-and-reproducibility",
-    "href": "slides/09-packages/packages.html#package-versions-and-reproducibility",
-    "title": "Package management",
-    "section": "2.3 Package versions and reproducibility",
-    "text": "2.3 Package versions and reproducibility\n\nwe’ve seen that package versions and dependencies can easily break our existing code\nthis means that older projects that were built using previous package versions won’t be able to run if we update these packages in our global package library\n\nalso a problem in the future: our current code will depend on the package versions we’re using today\n\nwe need a project-relative package library that is independent of the global library\n\nwe’ll use the renv package to do this",
+    "objectID": "slides/11-osf/osf.html#download-osf-repo",
+    "href": "slides/11-osf/osf.html#download-osf-repo",
+    "title": "Publishing analyses + Peer code review",
+    "section": "4.1 Download OSF repo",
+    "text": "4.1 Download OSF repo\n\nlet’s start by downloading our OSF repo\n\nfrom the project overview page, go to the ‘Files’ pane\nclick on ‘OSF Storage (Germany - Frankfurt)’\nClick ‘Download as zip’ button and store somewhere useful/rename as needed\n\n\n\n\n\n\n\n\n\n\nFigure 2: How to download an OSF repo",
     "crumbs": [
       "D. Palleschi",
-      "Package management"
+      "Publishing analyses + Peer code review"
     ]
   },
   {
-    "objectID": "slides/09-packages/packages.html#limits-of-renv",
-    "href": "slides/09-packages/packages.html#limits-of-renv",
-    "title": "Package management",
-    "section": "3.1 Limits of renv",
-    "text": "3.1 Limits of renv\nrenv…\n\n\n…can\n\nkeep track of packages and their versions\ncreate a project-specific library per R version\nautomatically load/install these package versions\n\n\n…cannot\n\nmake a project reproducible across all computational environments\nload/install package versions that are incompatible with current R versions or computational environments\nguarantee full long-term reproduciblity",
+    "objectID": "slides/11-osf/osf.html#reproduce-your-analyses",
+    "href": "slides/11-osf/osf.html#reproduce-your-analyses",
+    "title": "Publishing analyses + Peer code review",
+    "section": "4.2 Reproduce your analyses",
+    "text": "4.2 Reproduce your analyses\n\nfirst, close all R projects you currently have open\n\nthis is because RStudio might try to open your downloaded scripts in an already open RProject, which we don’t want\n\nnow, navigate to the zip you just downloaded and decompress it (double-click)\n\nselect a Quarto script from scripts/\ntry to run the script, does it run?\nprobably not…let’s discuss why",
     "crumbs": [
       "D. Palleschi",
-      "Package management"
+      "Publishing analyses + Peer code review"
     ]
   },
   {
-    "objectID": "slides/09-packages/packages.html#renv-workflow",
-    "href": "slides/09-packages/packages.html#renv-workflow",
-    "title": "Package management",
-    "section": "3.2 renv workflow",
-    "text": "3.2 renv workflow\n\nFigure 1 visualises a project workflow with renv\nnext we’ll see how we use these functions to set-up and maintain a project-specific package library\n\n\n\n\n\n\n\n\n\nFigure 1: Source: CRAN vignette ‘Introduction to renv’ (all rights reserved)",
+    "objectID": "slides/11-osf/osf.html#improving-code-reproducibility",
+    "href": "slides/11-osf/osf.html#improving-code-reproducibility",
+    "title": "Publishing analyses + Peer code review",
+    "section": "5.1 Improving code reproducibility",
+    "text": "5.1 Improving code reproducibility\n\nwhat structural dependecies do our scripts have?\n\ne.g., filepaths and folder names\n\nconsider, for example, how we accessed the data from our scripts\n\ndid we use setwd()?\ndid we use filepaths?\nno, we used the here() package within an R project\nthis meant we used our project root directory as our working directory\n\nso, we should, at minimum, also include the .Rproj file at the project root directory",
     "crumbs": [
       "D. Palleschi",
-      "Package management"
+      "Publishing analyses + Peer code review"
     ]
   },
   {
-    "objectID": "slides/09-packages/packages.html#new-files",
-    "href": "slides/09-packages/packages.html#new-files",
-    "title": "Package management",
-    "section": "4.1 New files",
-    "text": "4.1 New files\n\nrenv::init() creates three new files or directories\n\nrenv.lock\nrenv/\n.Rprofile\n\nexplore these files/folders and see if you can figure out what they contain",
+    "objectID": "slides/11-osf/osf.html#reproducibility-spectrum",
+    "href": "slides/11-osf/osf.html#reproducibility-spectrum",
+    "title": "Publishing analyses + Peer code review",
+    "section": "5.2 Reproducibility spectrum",
+    "text": "5.2 Reproducibility spectrum\n\nreproducibility is on a continuum, referred to as the reproducibility spectrum in Peng (2011) (Figure 3)\n\nlinked means “all data, metadata, and code [is] stored and linked with each other and with corresponding publications” (Peng, 2011, p. 1227)\nexecutable is not explained, and is more difficult to guarantee long-term as it depends on software versions\nbut at minimum we can assume it refers to code running on someone else’s machine\n\n\n\n\n\n\n\n\n\n\nFigure 3: Source: Peng (2011)",
     "crumbs": [
       "D. Palleschi",
-      "Package management"
+      "Publishing analyses + Peer code review"
     ]
   },
   {
-    "objectID": "slides/09-packages/packages.html#renv.lock",
-    "href": "slides/09-packages/packages.html#renv.lock",
-    "title": "Package management",
-    "section": "4.2 renv.lock",
-    "text": "4.2 renv.lock\n\ncontains metadata about the packages and their versions that you have installed\n\nthis is enough metadata to re-install these package versions on a new machine\n\ntwo main components:\n\nR: info on R version and list of repositories where packages were installed from\nPackages: a record per package with necessary info for re-installation",
+    "objectID": "slides/11-osf/osf.html#reproducibility-iceberg-1",
+    "href": "slides/11-osf/osf.html#reproducibility-iceberg-1",
+    "title": "Publishing analyses + Peer code review",
+    "section": "5.3 Reproducibility iceberg",
+    "text": "5.3 Reproducibility iceberg\n\na more detailed description of this continuum is givin in Rodrigues (2023)’s reproducibility iceberg (Figure 4)\n\nour project is currently somewhere near the top-middle of the iceberg\nwe’re not using GitHub, with is a developer platform and useful for version control and is beyond the scope of this course\n\nGitHub and OSF serve some overlapping, but not identical, purposes\n\n\nimportantly, the iceberg explicitly mentioned the renv package\n\nthis reminds us that we should be sharing some files generating by renv\n\n\n\n\n\n\n\n\n\n\nFigure 4: Source: Rodrigues (2023)",
     "crumbs": [
       "D. Palleschi",
-      "Package management"
+      "Publishing analyses + Peer code review"
     ]
   },
   {
-    "objectID": "slides/09-packages/packages.html#renv-1",
-    "href": "slides/09-packages/packages.html#renv-1",
-    "title": "Package management",
-    "section": "4.3 renv/",
-    "text": "4.3 renv/\n\nimportantly, contains your project-relative library/\n\nthis is instead of using the one library on your computer\n\nprovides us with “isolation”: the package versions used in an R Project is independent of the global library\n\nin other words, different R Projects can use different package versions\nupdating packages globally, or in one project, will not affect other project libraries",
+    "objectID": "slides/11-osf/osf.html#packages",
+    "href": "slides/11-osf/osf.html#packages",
+    "title": "Publishing analyses + Peer code review",
+    "section": "5.4 Packages",
+    "text": "5.4 Packages\n\nincluded the .Rproj file won’t mean that the person who downloads it will also have our packages\n\ne.g., they might not have the here package, and won’t even be able to use our code to load in the data\n\nas we discussed some weeks ago, this is what the renv package does\n\nwe created project library, i.e., a lockfile (renv.lock) which is a project\n\n\n\n\n\n\n\n\nChecklist: Share renv.lock\n\n\n\nAdd the renv.lock file to your OSF project repo (in the project root directory).",
     "crumbs": [
       "D. Palleschi",
-      "Package management"
+      "Publishing analyses + Peer code review"
     ]
   },
   {
-    "objectID": "slides/09-packages/packages.html#rprofile",
-    "href": "slides/09-packages/packages.html#rprofile",
-    "title": "Package management",
-    "section": "4.4 .RProfile",
-    "text": "4.4 .RProfile\n\nruns whenver you (re-)start your R Project\nat this point, should contain a single line:\n\n\nsource(\"renv/activate.R\")\n\n\nif you go to this R script, you’ll send a lot of code\n\nthis essentially loads in your project library",
+    "objectID": "slides/11-osf/osf.html#auto-loaders",
+    "href": "slides/11-osf/osf.html#auto-loaders",
+    "title": "Publishing analyses + Peer code review",
+    "section": "5.5 Auto-loaders",
+    "text": "5.5 Auto-loaders\n\nwe also need to include our .Rprofile file\n\nthis is our auto-loader\nwhenever we open the R project, this file will be run\n\nit currently contains just source(\"renv/activate.R\")\n\nthis means: when you open the R project, run the renv/activate.R file\n\nso, we need to include our renv/activate.R file in our OSF repo\n\nincluding these two will automatically install the relevant version of renv\n\n\n\n\n\n\n\n\n.Rprofile in Finder\n\n\n\nSome files are usually invisible on a Mac, such as those that start with dot (like .Rprofile). This makes it difficult to simply drag and drop the .Rprofile file to the OSF. To make such files viewable in Finder, navigate to the relevant project folder and use the keyboard shortcut Ctrl + Shift + Dot. These files will then appear greyed out.\n\n\n\n\n\n\n\n\nFigure 5: Use the shortcut Ctrl + Shift + Dot to view hidden files on a Mac",
     "crumbs": [
       "D. Palleschi",
-      "Package management"
+      "Publishing analyses + Peer code review"
     ]
   },
   {
-    "objectID": "slides/09-packages/packages.html#project-library",
-    "href": "slides/09-packages/packages.html#project-library",
-    "title": "Package management",
-    "section": "4.5 Project library",
-    "text": "4.5 Project library\n\nnow if we re-run .libPaths(), we should see our project library\n\n\n\n\nRun in the Console\n\n.libPaths()\n\n\n\n&gt; .libPaths()\n[1] \"/Users/danielapalleschi/Documents/IdSL/Teaching/SoSe24/M.A./r4repro_SoSe2024/renv/library/macos/R-4.4/aarch64-apple-darwin20\"\n[2] \"/Users/danielapalleschi/Library/Caches/org.R-project.R/R/renv/sandbox/macos/R-4.4/aarch64-apple-darwin20/f7156815\"  \n\n\n[1] is the local project library path\n[2] is the path to a global package cache that renv maintains so that you don’t repeatedly download packages to your machine for each project library\n\ne.g., if we already have ggplot2 installed globally on our machine, whenever we want to add it to a project library we don’t need to re-install it entirely from the CRAN (unless we want a different package version)",
+    "objectID": "slides/11-osf/osf.html#readme",
+    "href": "slides/11-osf/osf.html#readme",
+    "title": "Publishing analyses + Peer code review",
+    "section": "5.6 README",
+    "text": "5.6 README\n\nremember to update your README accordingly!\n\nthis can be updated as you add more to your project\n\nthe project README.md will ideally have information that is useful once the project is downloaded in its entirety\n\ne.g., brief info about the project/data\ndescription of the folder/file structure\nany info required for reproducibility\n\ne.g., anybody who downloads the project will need to run renv::restore() to restore your project library (but this will only work if they’re using the same R version!)\n\nso be sure to include that info!\n\n\nFor example, you could add something like this:\n\n**Reproduce analyses**: Once you open this project, `renv` will automatically be installed. After this is complete, you please run `renv::restore()` to restore the project package library. This will not affect the package versions you have already installed globally on your machine.\n\n\n\n\n\n\n\nChecklist: Share .Rprofile and renv/activate.R\n\n\n\n\nYour project should now have\n\n.Rprofile in the project root directory\nrenv/activate.R in the project root directory\n\ni.e., a folder renv/ in the root directory\nand the activate.R file in this renv/ folder\n\na README.md file in the root directory",
     "crumbs": [
       "D. Palleschi",
-      "Package management"
+      "Publishing analyses + Peer code review"
     ]
   },
   {
-    "objectID": "slides/09-packages/packages.html#installing-a-new-package",
-    "href": "slides/09-packages/packages.html#installing-a-new-package",
-    "title": "Package management",
-    "section": "5.1 Installing a new package",
-    "text": "5.1 Installing a new package\n\nlet’s also install a package I’m confident you don’t already have on your machine (as you might’ve already worked with lme4 in other classes)\n\n[brms] for Bayesian regression models using Stan\n\n\n\n\nCode\ninstall.packages(\"brms\")\nrenv::install(\"brms\")\n\n\n\nand if we want a specific package version:\n\n\nrenv::install(\"brms@2.19.0\")",
+    "objectID": "slides/11-osf/osf.html#osf-repo-structure",
+    "href": "slides/11-osf/osf.html#osf-repo-structure",
+    "title": "Publishing analyses + Peer code review",
+    "section": "5.7 OSF repo structure",
+    "text": "5.7 OSF repo structure\n\nyour OSF project should look something like Figure 6\n\nN.B., there are more files under scripts/\n\n\n\n\n\n\n\n\n\n\nFigure 6: Your OSF should now look like this",
     "crumbs": [
       "D. Palleschi",
-      "Package management"
+      "Publishing analyses + Peer code review"
     ]
   },
   {
-    "objectID": "slides/09-packages/packages.html#installing-developer-packages",
-    "href": "slides/09-packages/packages.html#installing-developer-packages",
-    "title": "Package management",
-    "section": "5.2 Installing developer packages",
-    "text": "5.2 Installing developer packages\n\nnot all packages are available on the CRAN\n\nwe can install developer packages from GitHub or GitLab using, e.g., the install_github() function from either the remotes or devtools package (both are very common)\n\n\n\nremotes::install_github(\"paul-buerkner/brms\")\ndevtools::install_github(\"paul-buerkner/brms\")\n\n\nor we can use renv::install()\n\n\n# most recent version\nrenv::install(\"paul-buerkner/brms\")\n\n\n# a specific previous version, for which you'll need the commit ID\nrenv::install(\"paul-buerkner/brms@db6ddde90ba533cb3942bc5a62b03803773b9844\")",
+    "objectID": "slides/11-osf/osf.html#sharing-your-project",
+    "href": "slides/11-osf/osf.html#sharing-your-project",
+    "title": "Publishing analyses + Peer code review",
+    "section": "6.1 Sharing your project",
+    "text": "6.1 Sharing your project\n\nwe need to share our project with others\n\nyour project is still private\nso you need to produce a link because the URL won’t work for non-contributors\n\nproduce a View-only link\n\nyou can do this in Settings (top right)\ngive an informative name (so you remember why you created this link)\n\nif you select Anonymize, your name will be removed from the project\n\nthis is useful for e.g., blind peer review\nbut will not remove your name from your scripts!",
     "crumbs": [
       "D. Palleschi",
-      "Package management"
+      "Publishing analyses + Peer code review"
     ]
   },
   {
-    "objectID": "slides/09-packages/packages.html#updating-renv.lock-file",
-    "href": "slides/09-packages/packages.html#updating-renv.lock-file",
-    "title": "Package management",
-    "section": "6.1 Updating renv.lock file",
-    "text": "6.1 Updating renv.lock file\n\nto update the lockfile and library, simply run:\n\n\nrenv::snapshot()\n\n\nyou’ll be given a list of changes to be made and asked if you want to proceed\n\nif not problems are mentioned, then you can go ahead",
+    "objectID": "slides/11-osf/osf.html#swapping-project-urls",
+    "href": "slides/11-osf/osf.html#swapping-project-urls",
+    "title": "Publishing analyses + Peer code review",
+    "section": "6.2 Swapping project URLs",
+    "text": "6.2 Swapping project URLs\n\ngo to Moodle and add your OSF repo URL\ngo to someone else’s OSF repo and download their project\n\ninspect the project metafiles (e.g., README)\ntry to reproduce the analyses, can you?\n\n\n\n\n\n\n\n\nAnonymising your scripts (optional)\n\n\n\n\nIf you have a relatively large project with your name at the beginning of multiple scripts, it can be tedious to manually remove it. And you might not be sure you actually took your name out of everything!\nThis can be used using RStudio’s Global Find:\n\npress Cmd+Shift+F\nin the pop-up, choose your filepath (for me: the OSF folder only) and hit enter\nthen toggle to ‘Replace’ when a tab pops up next to the Terminal\ntype in your replacement (e.g., [Anonymized for peer review]), and hit “Replace All”\n\nImportant: this will work for HTML and R/Quarto/Rmd scripts, but not for PDFs! so you might want to re-render all PDFs. As far as I can tell you have to re-render each PDF. If you’re working in a Quarto project (and not an .Rproj), then you can use quarto render subfoldername --to pdf in the Terminal to re-render only the OSF PDFs. We didn’t discuss Quarto projects in this course, however.\nAfter the manuscript is accepted, you can then reverse this step: use the Global Find to replace [Anonymized for peer review] with your name! This is why I suggest surrounding the phrase with [], it ensures you don’t accidentally replace the string ‘anonymized for peer review’ elsewhere in your files (e.g., maybe you wrote in some analysis plan “all scripts will be anonymized for peer review”, which would then be changed to “all scripts will be Daniela Palleschi” if I had replaced Anonymized for peer review with my name).",
     "crumbs": [
       "D. Palleschi",
-      "Package management"
+      "Publishing analyses + Peer code review"
     ]
   },
   {
@@ -2647,8 +2988,8 @@
     "objectID": "slides/10-writing/writing.html#disclaimer",
     "href": "slides/10-writing/writing.html#disclaimer",
     "title": "Reproducible Writing",
-    "section": "0.1 Disclaimer",
-    "text": "0.1 Disclaimer\n\nthis is also a very quick-and-dirty introduction on getting started with APA-formatted manuscripts in R markdown\n\nthere are a lot of resources (e.g., E-books, blog posts, forum threads, manuals) that will address specific formatting problems or wishes you may have\nGoogle is your friend!\n\nalso, these slides were written in Quarto, and are published as HTML\n\nmuch of the syntax I’m presenting doesn’t actually work in Quarto/HTML\nbut all the raw code that I show will work in R markdown/PDF",
+    "section": "Disclaimer",
+    "text": "Disclaimer\n\nthis is also a very quick-and-dirty introduction on getting started with APA-formatted manuscripts in R markdown\n\nthere are a lot of resources (e.g., E-books, blog posts, forum threads, manuals) that will address specific formatting problems or wishes you may have\nGoogle is your friend!\n\nalso, these slides were written in Quarto, and are published as HTML\n\nmuch of the syntax I’m presenting doesn’t actually work in Quarto/HTML\nbut all the raw code that I show will work in R markdown/PDF",
     "crumbs": [
       "D. Palleschi",
       "Reproducible Writing"

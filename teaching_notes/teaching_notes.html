@@ -4842,6 +4842,12 @@ vertical-align: -.125em;
  <span class="menu-text">Reproducible Writing</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/11-osf/osf.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publishing analyses + Peer code review</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -4861,6 +4867,8 @@ vertical-align: -.125em;
   <li><a href="#week-7" id="toc-week-7" class="nav-link" data-scroll-target="#week-7">Week 7:</a></li>
   <li><a href="#week-8" id="toc-week-8" class="nav-link" data-scroll-target="#week-8">Week 8:</a></li>
   <li><a href="#week-9-package-management" id="toc-week-9-package-management" class="nav-link" data-scroll-target="#week-9-package-management">Week 9: Package management</a></li>
+  <li><a href="#week-10-writing-papaja" id="toc-week-10-writing-papaja" class="nav-link" data-scroll-target="#week-10-writing-papaja">Week 10: writing (<code>papaja</code>)</a></li>
+  <li><a href="#week-11-osf-code-review" id="toc-week-11-osf-code-review" class="nav-link" data-scroll-target="#week-11-osf-code-review">Week 11: OSF + Code Review</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -4917,6 +4925,13 @@ Figure 1
 </section>
 <section id="week-4-project-oriented-workflow-with-r-projects" class="level1">
 <h1>Week 4: Project-oriented workflow with R Projects</h1>
+<ul>
+<li>discuss Jenny Bryan’s <a href="https://speakerdeck.com/jennybc/how-to-name-files">naming things slides</a>
+<ul>
+<li>and/or her <a href="https://speakerdeck.com/jennybc/how-to-name-files-the-sequel">How to Name Files like a Normie</a></li>
+</ul></li>
+<li>reference <a href="https://djnavarro.net/slides-project-structure/#1">Danielle Navarro’s slides on project structure</a></li>
+</ul>
 </section>
 <section id="week-5-literate-programming" class="level1">
 <h1>Week 5: Literate programming</h1>
@@ -4938,6 +4953,15 @@ Figure 1
 </section>
 <section id="week-9-package-management" class="level1">
 <h1>Week 9: Package management</h1>
+</section>
+<section id="week-10-writing-papaja" class="level1">
+<h1>Week 10: writing (<code>papaja</code>)</h1>
+</section>
+<section id="week-11-osf-code-review" class="level1">
+<h1>Week 11: OSF + Code Review</h1>
+<ul>
+<li>maybe make a check list for the code review?</li>
+</ul>
 </section>
 <section id="references" class="level1">
 
@@ -5604,22 +5628,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="fu"># Week 4: Project-oriented workflow with R Projects</span></span>
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="fu"># Week 5: Literate programming</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>should also introduce modular data analysis by name <span class="co">[</span><span class="ot">mentioned in @bowers_how_2016; from @nagler_coding_1995</span><span class="co">]</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>the concept was introduced, but just name it</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="fu"># Week 6: </span></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="fu"># Week 7:</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>discuss Jenny Bryan&#39;s <span class="co">[</span><span class="ot">naming things slides</span><span class="co">](https://speakerdeck.com/jennybc/how-to-name-files)</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>and/or her <span class="co">[</span><span class="ot">How to Name Files like a Normie</span><span class="co">](https://speakerdeck.com/jennybc/how-to-name-files-the-sequel)</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>reference <span class="co">[</span><span class="ot">Danielle Navarro&#39;s slides on project structure</span><span class="co">](https://djnavarro.net/slides-project-structure/#1)</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="fu"># Week 5: Literate programming</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>should also introduce modular data analysis by name <span class="co">[</span><span class="ot">mentioned in @bowers_how_2016; from @nagler_coding_1995</span><span class="co">]</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>the concept was introduced, but just name it</span>
 <span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="fu"># Week 8:</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="fu"># Week 6: </span></span>
 <span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="fu"># Week 9: Package management</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="fu"># Week 7:</span></span>
 <span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="fu"># Week 8:</span></span>
 <span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="fu"># References</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="fu"># Week 9: Package management</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="fu"># Week 10: writing (`papaja`)</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="fu"># Week 11: OSF + Code Review</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>maybe make a check list for the code review?</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="fu"># References</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
